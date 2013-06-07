@@ -32,6 +32,6 @@
 int main(int argc, char *argv[])
 {
     @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([SIMAppDelegate class]));
+        return UIApplicationMain(argc, argv, nil, @"GHUnitIOSAppDelegate");
     }
 }

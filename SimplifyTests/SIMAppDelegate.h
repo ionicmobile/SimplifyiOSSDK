@@ -27,11 +27,8 @@
 
 #import <UIKit/UIKit.h>
 
-#import "SIMAppDelegate.h"
+@interface SIMAppDelegate : UIResponder <UIApplicationDelegate>
 
-int main(int argc, char *argv[])
-{
-    @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([SIMAppDelegate class]));
-    }
-}
+@property (strong, nonatomic) UIWindow *window;
+
+@end

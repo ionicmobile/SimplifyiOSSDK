@@ -23,6 +23,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		4D67091B1762673A00729623 /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D67091A1762673A00729623 /* GHUnitIOS.framework */; };
+		4D67091D1762675200729623 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D67091C1762675200729623 /* QuartzCore.framework */; };
 		4D98BC90176258FE004FA922 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D98BC8F176258FE004FA922 /* CoreFoundation.framework */; };
 		4D98BC96176258FE004FA922 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4D98BC94176258FE004FA922 /* InfoPlist.strings */; };
 		4D98BC9F17625D88004FA922 /* SimplifyPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D98BC9D17625D88004FA922 /* SimplifyPrivate.h */; };
@@ -38,6 +40,15 @@
 		4D98BCBD17626380004FA922 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D98BCBC17626380004FA922 /* Default-568h@2x.png */; };
 		4D98BCC1176263AD004FA922 /* Simplify.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4D98BC8E176258FE004FA922 /* Simplify.bundle */; };
 		4D98BCC2176263B6004FA922 /* libSimplify.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DDB653317623DD800871923 /* libSimplify.a */; };
+		4D98BCE61762654C004FA922 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D98BCA717626380004FA922 /* UIKit.framework */; };
+		4D98BCE71762654C004FA922 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DDB653617623DD800871923 /* Foundation.framework */; };
+		4D98BCE81762654C004FA922 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D98BCAA17626380004FA922 /* CoreGraphics.framework */; };
+		4D98BCEE1762654C004FA922 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4D98BCEC1762654C004FA922 /* InfoPlist.strings */; };
+		4D98BCF01762654C004FA922 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D98BCEF1762654C004FA922 /* main.m */; };
+		4D98BCF41762654C004FA922 /* SIMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D98BCF31762654C004FA922 /* SIMAppDelegate.m */; };
+		4D98BCF61762654C004FA922 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D98BCF51762654C004FA922 /* Default.png */; };
+		4D98BCF81762654C004FA922 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D98BCF71762654C004FA922 /* Default@2x.png */; };
+		4D98BCFA1762654C004FA922 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D98BCF91762654C004FA922 /* Default-568h@2x.png */; };
 		4DDB653717623DD800871923 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DDB653617623DD800871923 /* Foundation.framework */; };
 		4DDB653C17623DD800871923 /* Simplify.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4DDB653B17623DD800871923 /* Simplify.h */; };
 		4DDB653E17623DD800871923 /* Simplify.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDB653D17623DD800871923 /* Simplify.m */; };
@@ -75,6 +86,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4D67091A1762673A00729623 /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GHUnitIOS.framework; path = Frameworks/GHUnitIOS.framework; sourceTree = "<group>"; };
+		4D67091C1762675200729623 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4D98BC8E176258FE004FA922 /* Simplify.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Simplify.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D98BC8F176258FE004FA922 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		4D98BC93176258FE004FA922 /* SimplifyBundle-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SimplifyBundle-Info.plist"; sourceTree = "<group>"; };
@@ -94,6 +107,16 @@
 		4D98BCB817626380004FA922 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		4D98BCBA17626380004FA922 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		4D98BCBC17626380004FA922 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		4D98BCE51762654C004FA922 /* SimplifyTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimplifyTests.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D98BCEB1762654C004FA922 /* SimplifyTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SimplifyTests-Info.plist"; sourceTree = "<group>"; };
+		4D98BCED1762654C004FA922 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4D98BCEF1762654C004FA922 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		4D98BCF11762654C004FA922 /* SimplifyTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SimplifyTests-Prefix.pch"; sourceTree = "<group>"; };
+		4D98BCF21762654C004FA922 /* SIMAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SIMAppDelegate.h; sourceTree = "<group>"; };
+		4D98BCF31762654C004FA922 /* SIMAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SIMAppDelegate.m; sourceTree = "<group>"; };
+		4D98BCF51762654C004FA922 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		4D98BCF71762654C004FA922 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		4D98BCF91762654C004FA922 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		4DDB653317623DD800871923 /* libSimplify.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSimplify.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DDB653617623DD800871923 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4DDB653A17623DD800871923 /* Simplify-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Simplify-Prefix.pch"; sourceTree = "<group>"; };
@@ -117,6 +140,18 @@
 				4D98BCA817626380004FA922 /* UIKit.framework in Frameworks */,
 				4D98BCA917626380004FA922 /* Foundation.framework in Frameworks */,
 				4D98BCAB17626380004FA922 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D98BCE21762654C004FA922 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D67091D1762675200729623 /* QuartzCore.framework in Frameworks */,
+				4D98BCE61762654C004FA922 /* UIKit.framework in Frameworks */,
+				4D98BCE71762654C004FA922 /* Foundation.framework in Frameworks */,
+				4D98BCE81762654C004FA922 /* CoreGraphics.framework in Frameworks */,
+				4D67091B1762673A00729623 /* GHUnitIOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,6 +209,30 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		4D98BCE91762654C004FA922 /* SimplifyTests */ = {
+			isa = PBXGroup;
+			children = (
+				4D98BCF21762654C004FA922 /* SIMAppDelegate.h */,
+				4D98BCF31762654C004FA922 /* SIMAppDelegate.m */,
+				4D98BCEA1762654C004FA922 /* Supporting Files */,
+			);
+			path = SimplifyTests;
+			sourceTree = "<group>";
+		};
+		4D98BCEA1762654C004FA922 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4D98BCEB1762654C004FA922 /* SimplifyTests-Info.plist */,
+				4D98BCEC1762654C004FA922 /* InfoPlist.strings */,
+				4D98BCEF1762654C004FA922 /* main.m */,
+				4D98BCF11762654C004FA922 /* SimplifyTests-Prefix.pch */,
+				4D98BCF51762654C004FA922 /* Default.png */,
+				4D98BCF71762654C004FA922 /* Default@2x.png */,
+				4D98BCF91762654C004FA922 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		4DDB652A17623DD800871923 = {
 			isa = PBXGroup;
 			children = (
@@ -182,6 +241,7 @@
 				4DDB653817623DD800871923 /* Simplify */,
 				4D98BC91176258FE004FA922 /* SimplifyBundle */,
 				4D98BCAC17626380004FA922 /* SimplifyExample */,
+				4D98BCE91762654C004FA922 /* SimplifyTests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -191,6 +251,7 @@
 				4DDB653317623DD800871923 /* libSimplify.a */,
 				4D98BC8E176258FE004FA922 /* Simplify.bundle */,
 				4D98BCA617626380004FA922 /* SimplifyExample.app */,
+				4D98BCE51762654C004FA922 /* SimplifyTests.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -198,6 +259,8 @@
 		4DDB653517623DD800871923 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4D67091C1762675200729623 /* QuartzCore.framework */,
+				4D67091A1762673A00729623 /* GHUnitIOS.framework */,
 				4DDB653617623DD800871923 /* Foundation.framework */,
 				4D98BC8F176258FE004FA922 /* CoreFoundation.framework */,
 				4D98BCA717626380004FA922 /* UIKit.framework */,
@@ -275,6 +338,23 @@
 			productReference = 4D98BCA617626380004FA922 /* SimplifyExample.app */;
 			productType = "com.apple.product-type.application";
 		};
+		4D98BCE41762654C004FA922 /* SimplifyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4D98BCFB1762654C004FA922 /* Build configuration list for PBXNativeTarget "SimplifyTests" */;
+			buildPhases = (
+				4D98BCE11762654C004FA922 /* Sources */,
+				4D98BCE21762654C004FA922 /* Frameworks */,
+				4D98BCE31762654C004FA922 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SimplifyTests;
+			productName = SimplifyTests;
+			productReference = 4D98BCE51762654C004FA922 /* SimplifyTests.app */;
+			productType = "com.apple.product-type.application";
+		};
 		4DDB653217623DD800871923 /* Simplify */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4DDB654117623DD800871923 /* Build configuration list for PBXNativeTarget "Simplify" */;
@@ -319,6 +399,7 @@
 				4D98BC8317624AAB004FA922 /* SimplifyFramework */,
 				4D98BC8D176258FE004FA922 /* SimplifyBundle */,
 				4D98BCA517626380004FA922 /* SimplifyExample */,
+				4D98BCE41762654C004FA922 /* SimplifyTests */,
 			);
 		};
 /* End PBXProject section */
@@ -341,6 +422,17 @@
 				4D98BCBB17626380004FA922 /* Default@2x.png in Resources */,
 				4D98BCBD17626380004FA922 /* Default-568h@2x.png in Resources */,
 				4D98BCC1176263AD004FA922 /* Simplify.bundle in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D98BCE31762654C004FA922 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D98BCEE1762654C004FA922 /* InfoPlist.strings in Resources */,
+				4D98BCF61762654C004FA922 /* Default.png in Resources */,
+				4D98BCF81762654C004FA922 /* Default@2x.png in Resources */,
+				4D98BCFA1762654C004FA922 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,6 +484,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4D98BCE11762654C004FA922 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D98BCF01762654C004FA922 /* main.m in Sources */,
+				4D98BCF41762654C004FA922 /* SIMAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4DDB652F17623DD800871923 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -429,6 +530,14 @@
 			isa = PBXVariantGroup;
 			children = (
 				4D98BCB017626380004FA922 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		4D98BCEC1762654C004FA922 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4D98BCED1762654C004FA922 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -509,6 +618,48 @@
 				GCC_PREFIX_HEADER = "SimplifyExample/SimplifyExample-Prefix.pch";
 				INFOPLIST_FILE = "SimplifyExample/SimplifyExample-Info.plist";
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		4D98BCFC1762654C004FA922 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SimplifyTests/SimplifyTests-Prefix.pch";
+				INFOPLIST_FILE = "SimplifyTests/SimplifyTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		4D98BCFD1762654C004FA922 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SimplifyTests/SimplifyTests-Prefix.pch";
+				INFOPLIST_FILE = "SimplifyTests/SimplifyTests-Info.plist";
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -607,6 +758,7 @@
 				4D98BC8517624AAB004FA922 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4D98BC98176258FE004FA922 /* Build configuration list for PBXNativeTarget "SimplifyBundle" */ = {
 			isa = XCConfigurationList;
@@ -615,6 +767,7 @@
 				4D98BC9A176258FE004FA922 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4D98BCBE17626380004FA922 /* Build configuration list for PBXNativeTarget "SimplifyExample" */ = {
 			isa = XCConfigurationList;
@@ -623,6 +776,16 @@
 				4D98BCC017626380004FA922 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4D98BCFB1762654C004FA922 /* Build configuration list for PBXNativeTarget "SimplifyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4D98BCFC1762654C004FA922 /* Debug */,
+				4D98BCFD1762654C004FA922 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4DDB652E17623DD800871923 /* Build configuration list for PBXProject "Simplify" */ = {
 			isa = XCConfigurationList;
