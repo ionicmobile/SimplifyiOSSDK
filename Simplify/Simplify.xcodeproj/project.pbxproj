@@ -10,6 +10,7 @@
 		4DDB653717623DD800871923 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DDB653617623DD800871923 /* Foundation.framework */; };
 		4DDB653C17623DD800871923 /* Simplify.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4DDB653B17623DD800871923 /* Simplify.h */; };
 		4DDB653E17623DD800871923 /* Simplify.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDB653D17623DD800871923 /* Simplify.m */; };
+		4DDB65451762440800871923 /* Simplify.h in Headers */ = {isa = PBXBuildFile; fileRef = 4DDB653B17623DD800871923 /* Simplify.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -90,6 +91,17 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		4DDB6544176243F000871923 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4DDB65451762440800871923 /* Simplify.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		4DDB653217623DD800871923 /* Simplify */ = {
 			isa = PBXNativeTarget;
@@ -98,6 +110,8 @@
 				4DDB652F17623DD800871923 /* Sources */,
 				4DDB653017623DD800871923 /* Frameworks */,
 				4DDB653117623DD800871923 /* CopyFiles */,
+				4DDB6544176243F000871923 /* Headers */,
+				4DDB6546176244C100871923 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -134,6 +148,22 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4DDB6546176244C100871923 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\nmkdir -p \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers\"\n/bin/ln -sfh A \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/Current\"\n/bin/ln -sfh Versions/Current/Headers \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Headers\"\n/bin/ln -sfh \"Versions/Current/${PRODUCT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/${PRODUCT_NAME}\"\n/bin/cp -a \"${TARGET_BUILD_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		4DDB652F17623DD800871923 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -159,6 +189,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -173,6 +204,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRIP_STYLE = "non-global";
 			};
 			name = Debug;
 		};
@@ -188,13 +220,15 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				SDKROOT = iphoneos;
+				STRIP_STYLE = "non-global";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -207,6 +241,7 @@
 				GCC_PREFIX_HEADER = "Simplify/Simplify-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(PROJECT_NAME)Headers";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -219,6 +254,7 @@
 				GCC_PREFIX_HEADER = "Simplify/Simplify-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(PROJECT_NAME)Headers";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
