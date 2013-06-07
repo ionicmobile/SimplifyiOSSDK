@@ -25,5 +25,9 @@
  * SUCH DAMAGE.
  */
 
-#import "Simplify.h"
 
+#import <Foundation/Foundation.h>
+
+@interface SimplifyPrivate : NSObject
++(NSBundle *)frameworkBundle;
+@end

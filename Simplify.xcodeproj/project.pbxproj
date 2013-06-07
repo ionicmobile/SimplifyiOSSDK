@@ -14,6 +14,7 @@
 				4D98BC8917624AC5004FA922 /* ShellScript */,
 			);
 			dependencies = (
+				4D98BC9C17625C3D004FA922 /* PBXTargetDependency */,
 				4D98BC8817624AB7004FA922 /* PBXTargetDependency */,
 			);
 			name = SimplifyFramework;
@@ -22,6 +23,10 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		4D98BC90176258FE004FA922 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D98BC8F176258FE004FA922 /* CoreFoundation.framework */; };
+		4D98BC96176258FE004FA922 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4D98BC94176258FE004FA922 /* InfoPlist.strings */; };
+		4D98BC9F17625D88004FA922 /* SimplifyPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D98BC9D17625D88004FA922 /* SimplifyPrivate.h */; };
+		4D98BCA017625D88004FA922 /* SimplifyPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D98BC9E17625D88004FA922 /* SimplifyPrivate.m */; };
 		4DDB653717623DD800871923 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DDB653617623DD800871923 /* Foundation.framework */; };
 		4DDB653C17623DD800871923 /* Simplify.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4DDB653B17623DD800871923 /* Simplify.h */; };
 		4DDB653E17623DD800871923 /* Simplify.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDB653D17623DD800871923 /* Simplify.m */; };
@@ -35,6 +40,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 4DDB653217623DD800871923;
 			remoteInfo = Simplify;
+		};
+		4D98BC9B17625C3D004FA922 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4DDB652B17623DD800871923 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4D98BC8D176258FE004FA922;
+			remoteInfo = SimplifyBundle;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -52,6 +64,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4D98BC8E176258FE004FA922 /* Simplify.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Simplify.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D98BC8F176258FE004FA922 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		4D98BC93176258FE004FA922 /* SimplifyBundle-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SimplifyBundle-Info.plist"; sourceTree = "<group>"; };
+		4D98BC95176258FE004FA922 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4D98BC97176258FE004FA922 /* SimplifyBundle-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SimplifyBundle-Prefix.pch"; sourceTree = "<group>"; };
+		4D98BC9D17625D88004FA922 /* SimplifyPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimplifyPrivate.h; sourceTree = "<group>"; };
+		4D98BC9E17625D88004FA922 /* SimplifyPrivate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimplifyPrivate.m; sourceTree = "<group>"; };
 		4DDB653317623DD800871923 /* libSimplify.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSimplify.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DDB653617623DD800871923 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4DDB653A17623DD800871923 /* Simplify-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Simplify-Prefix.pch"; sourceTree = "<group>"; };
@@ -60,6 +79,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		4D98BC8B176258FE004FA922 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D98BC90176258FE004FA922 /* CoreFoundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4DDB653017623DD800871923 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -71,10 +98,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4D98BC91176258FE004FA922 /* SimplifyBundle */ = {
+			isa = PBXGroup;
+			children = (
+				4D98BC92176258FE004FA922 /* Supporting Files */,
+			);
+			path = SimplifyBundle;
+			sourceTree = "<group>";
+		};
+		4D98BC92176258FE004FA922 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4D98BC93176258FE004FA922 /* SimplifyBundle-Info.plist */,
+				4D98BC94176258FE004FA922 /* InfoPlist.strings */,
+				4D98BC97176258FE004FA922 /* SimplifyBundle-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		4DDB652A17623DD800871923 = {
 			isa = PBXGroup;
 			children = (
 				4DDB653817623DD800871923 /* Simplify */,
+				4D98BC91176258FE004FA922 /* SimplifyBundle */,
 				4DDB653517623DD800871923 /* Frameworks */,
 				4DDB653417623DD800871923 /* Products */,
 			);
@@ -84,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				4DDB653317623DD800871923 /* libSimplify.a */,
+				4D98BC8E176258FE004FA922 /* Simplify.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -92,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				4DDB653617623DD800871923 /* Foundation.framework */,
+				4D98BC8F176258FE004FA922 /* CoreFoundation.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -101,6 +149,8 @@
 			children = (
 				4DDB653B17623DD800871923 /* Simplify.h */,
 				4DDB653D17623DD800871923 /* Simplify.m */,
+				4D98BC9D17625D88004FA922 /* SimplifyPrivate.h */,
+				4D98BC9E17625D88004FA922 /* SimplifyPrivate.m */,
 				4DDB653917623DD800871923 /* Supporting Files */,
 			);
 			path = Simplify;
@@ -122,12 +172,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				4DDB65451762440800871923 /* Simplify.h in Headers */,
+				4D98BC9F17625D88004FA922 /* SimplifyPrivate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		4D98BC8D176258FE004FA922 /* SimplifyBundle */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4D98BC98176258FE004FA922 /* Build configuration list for PBXNativeTarget "SimplifyBundle" */;
+			buildPhases = (
+				4D98BC8A176258FE004FA922 /* Sources */,
+				4D98BC8B176258FE004FA922 /* Frameworks */,
+				4D98BC8C176258FE004FA922 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SimplifyBundle;
+			productName = SimplifyBundle;
+			productReference = 4D98BC8E176258FE004FA922 /* Simplify.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
 		4DDB653217623DD800871923 /* Simplify */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4DDB654117623DD800871923 /* Build configuration list for PBXNativeTarget "Simplify" */;
@@ -170,9 +238,21 @@
 			targets = (
 				4DDB653217623DD800871923 /* Simplify */,
 				4D98BC8317624AAB004FA922 /* SimplifyFramework */,
+				4D98BC8D176258FE004FA922 /* SimplifyBundle */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4D98BC8C176258FE004FA922 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D98BC96176258FE004FA922 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		4D98BC8917624AC5004FA922 /* ShellScript */ = {
@@ -204,11 +284,19 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		4D98BC8A176258FE004FA922 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4DDB652F17623DD800871923 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				4DDB653E17623DD800871923 /* Simplify.m in Sources */,
+				4D98BCA017625D88004FA922 /* SimplifyPrivate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,7 +308,23 @@
 			target = 4DDB653217623DD800871923 /* Simplify */;
 			targetProxy = 4D98BC8717624AB7004FA922 /* PBXContainerItemProxy */;
 		};
+		4D98BC9C17625C3D004FA922 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4D98BC8D176258FE004FA922 /* SimplifyBundle */;
+			targetProxy = 4D98BC9B17625C3D004FA922 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		4D98BC94176258FE004FA922 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4D98BC95176258FE004FA922 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		4D98BC8417624AAB004FA922 /* Debug */ = {
@@ -234,6 +338,44 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		4D98BC99176258FE004FA922 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SimplifyBundle/SimplifyBundle-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				INFOPLIST_FILE = "SimplifyBundle/SimplifyBundle-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = Simplify;
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		4D98BC9A176258FE004FA922 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SimplifyBundle/SimplifyBundle-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				INFOPLIST_FILE = "SimplifyBundle/SimplifyBundle-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = Simplify;
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;
 		};
@@ -328,6 +470,14 @@
 			buildConfigurations = (
 				4D98BC8417624AAB004FA922 /* Debug */,
 				4D98BC8517624AAB004FA922 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		4D98BC98176258FE004FA922 /* Build configuration list for PBXNativeTarget "SimplifyBundle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4D98BC99176258FE004FA922 /* Debug */,
+				4D98BC9A176258FE004FA922 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};

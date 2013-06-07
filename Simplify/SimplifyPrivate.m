@@ -25,5 +25,19 @@
  * SUCH DAMAGE.
  */
 
-#import "Simplify.h"
+#import "SimplifyPrivate.h"
 
+@implementation SimplifyPrivate
+
++(NSBundle *)frameworkBundle {
+    static NSBundle* frameworkBundle = nil;
+    static dispatch_once_t predicate;
+    dispatch_once(&predicate, ^{
+        NSString* mainBundlePath = [[NSBundle mainBundle] resourcePath];
+        NSString* frameworkBundlePath = [mainBundlePath stringByAppendingPathComponent:@"Simplify.bundle"];
+        frameworkBundle = [NSBundle bundleWithPath:frameworkBundlePath];
+    });
+    return frameworkBundle;
+}
+
+@end
