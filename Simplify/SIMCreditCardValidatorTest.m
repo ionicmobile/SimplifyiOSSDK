@@ -400,4 +400,31 @@
     GHAssertFalse(testObject.isValidCVC, nil);
 }
 
+-(void)testWhenExpirationIsSetThenItIsParsed {
+    [testObject setExpirationAsString:@"1213"];
+    GHAssertEqualObjects(testObject.formattedExpirationDate, @"12/13", nil);
+    GHAssertEqualObjects(testObject.expirationMonth, @"12", nil);
+    GHAssertEqualObjects(testObject.expirationYear, @"13", nil);
+    
+    [testObject setExpirationAsString:@"12-13"];
+    GHAssertEqualObjects(testObject.formattedExpirationDate, @"12/13", nil);
+    GHAssertEqualObjects(testObject.expirationMonth, @"12", nil);
+    GHAssertEqualObjects(testObject.expirationYear, @"13", nil);
+    
+    [testObject setExpirationAsString:@"12/13"];
+    GHAssertEqualObjects(testObject.formattedExpirationDate, @"12/13", nil);
+    GHAssertEqualObjects(testObject.expirationMonth, @"12", nil);
+    GHAssertEqualObjects(testObject.expirationYear, @"13", nil);
+}
+
+-(void)testWhenExpirationDateIsPassedThenItIsInvalid {
+    [testObject setExpirationAsString:@"12/11"];
+    GHAssertFalse(testObject.isValidExpiration, nil);
+}
+
+-(void)testWhenExpirationDateIsInTheFutureItIsValid {
+    [testObject setExpirationAsString:@"12/23"];
+    GHAssertTrue(testObject.isValidExpiration, nil);
+}
+
 @end

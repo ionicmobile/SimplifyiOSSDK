@@ -42,9 +42,15 @@ typedef enum {
 @property (nonatomic, readonly) SIMCreditCardType cardType;
 @property (nonatomic, strong, readonly) NSString* formattedCardNumber;
 @property (nonatomic, strong, readonly) NSString* formattedCVCCode;
+@property (nonatomic, strong, readonly) NSString* formattedExpirationDate;
+@property (nonatomic, strong, readonly) NSString* expirationMonth;
+@property (nonatomic, strong, readonly) NSString* expirationYear;
 @property (nonatomic, readonly) BOOL isLuhnValid;
 @property (nonatomic, readonly) BOOL isValidLength;
 @property (nonatomic, readonly) BOOL isValidCVC;
+@property (nonatomic, readonly) BOOL isValidExpiration;
+
 -(void)setCardNumberAsString:(NSString*)string;
 -(void)setCVCCodeAsString:(NSString*)string;
+-(void)setExpirationAsString:(NSString*)string;
 @end

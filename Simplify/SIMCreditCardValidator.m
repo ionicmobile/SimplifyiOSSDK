@@ -32,8 +32,12 @@
 #import "NSString+Simplify.h"
 
 @interface SIMCreditCardValidator()
+@property (nonatomic, strong, readwrite) NSString* expirationMonth;
+@property (nonatomic, strong, readwrite) NSString* expirationYear;
+
 @property (nonatomic, strong) NSString* digitsOnlyCardNumberString;
 @property (nonatomic, strong) NSString* digitsOnlyCVCNumberString;
+@property (nonatomic, strong) NSString* digitsOnlyExpirationDateString;
 @end
 
 @implementation SIMCreditCardValidator
@@ -79,6 +83,11 @@
     self.digitsOnlyCVCNumberString = [[string componentsSeparatedByCharactersInSet:nonDecimals] componentsJoinedByString:@""];
 }
 
+-(void)setExpirationAsString:(NSString*)string {
+    NSCharacterSet* nonDecimals = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+    self.digitsOnlyExpirationDateString = [[string componentsSeparatedByCharactersInSet:nonDecimals] componentsJoinedByString:@""];
+}
+
 -(NSString*)formattedCardNumber {
     switch (self.cardType) {
         case SIMCreditCardType_AmericanExpress: {
@@ -91,6 +100,33 @@
 
 -(NSString*)formattedCVCCode {
     return _digitsOnlyCVCNumberString;
+}
+
+-(NSString*)formattedExpirationDate {
+    NSMutableString* expirationDate = [NSMutableString string];
+    if ( self.expirationMonth ) {
+        [expirationDate appendString:self.expirationMonth];
+        [expirationDate appendString:@"/"];
+        if (self.expirationYear ) {
+            [expirationDate appendString:self.expirationYear];
+        }
+        return expirationDate;
+    }
+    return nil;
+}
+
+-(NSString*)expirationMonth {
+    if ( self.digitsOnlyExpirationDateString.length >= 2 ) {
+        return [self.digitsOnlyExpirationDateString substringToIndex:2];
+    }
+    return nil;
+}
+
+-(NSString*)expirationYear {
+    if ( self.digitsOnlyExpirationDateString.length >= 4 ) {
+        return [[self.digitsOnlyExpirationDateString substringFromIndex:2] substringToIndex:2];
+    }
+    return nil;
 }
 
 -(BOOL)isLuhnValid {
@@ -142,6 +178,28 @@
         default:
             return self.digitsOnlyCVCNumberString.length == 3 || self.digitsOnlyCVCNumberString.length == 4;
     }
+}
+
+-(BOOL)isValidExpiration {
+    NSTimeZone* earthsLastTimezone = [NSTimeZone timeZoneWithName:@"UTC-12:00"];
+    NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
+    NSNumber* expirationMonth = [numberFormatter numberFromString:self.expirationMonth];
+    NSNumber* expirationYear = [numberFormatter numberFromString:self.expirationYear];
+    NSDateComponents *expirationComponents = [[NSDateComponents alloc] init];
+    [expirationComponents setMonth:expirationMonth.unsignedIntValue];
+    [expirationComponents setDay:1];
+    [expirationComponents setYear:2000 + expirationYear.unsignedIntValue];
+    [expirationComponents setTimeZone:earthsLastTimezone];
+    
+    NSDateComponents* monthComponents = [[NSDateComponents alloc] init];
+    [monthComponents setMonth:1];
+    [monthComponents setTimeZone:earthsLastTimezone];
+
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDate* beginExpirationMonth = [calendar dateFromComponents:expirationComponents];
+    NSDate* justPastExpirationMonth = [calendar dateByAddingComponents:monthComponents toDate:beginExpirationMonth options:0];
+    
+    return [justPastExpirationMonth compare:[NSDate date]] == NSOrderedDescending;
 }
 
 #pragma mark - helpers
