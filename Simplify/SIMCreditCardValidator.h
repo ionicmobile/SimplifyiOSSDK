@@ -41,7 +41,10 @@ typedef enum {
 @interface SIMCreditCardValidator : NSObject
 @property (nonatomic, readonly) SIMCreditCardType cardType;
 @property (nonatomic, strong, readonly) NSString* formattedCardNumber;
+@property (nonatomic, strong, readonly) NSString* formattedCVCCode;
 @property (nonatomic, readonly) BOOL isLuhnValid;
 @property (nonatomic, readonly) BOOL isValidLength;
+@property (nonatomic, readonly) BOOL isValidCVC;
 -(void)setCardNumberAsString:(NSString*)string;
+-(void)setCVCCodeAsString:(NSString*)string;
 @end

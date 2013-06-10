@@ -32,34 +32,35 @@
 #import "NSString+Simplify.h"
 
 @interface SIMCreditCardValidator()
-@property (nonatomic, strong) NSString* digitsOnlyString;
+@property (nonatomic, strong) NSString* digitsOnlyCardNumberString;
+@property (nonatomic, strong) NSString* digitsOnlyCVCNumberString;
 @end
 
 @implementation SIMCreditCardValidator
 
 -(SIMCreditCardType)cardType {
-    if ([self.digitsOnlyString hasAnyPrefix:@[@"34",@"37"]]) {
+    if ([self.digitsOnlyCardNumberString hasAnyPrefix:@[@"34",@"37"]]) {
         return SIMCreditCardType_AmericanExpress;
-    } else if ([self.digitsOnlyString hasAnyPrefix:@[@"65",@"6011",@"644",@"645",@"646",@"647",@"648",@"649"]]) {
+    } else if ([self.digitsOnlyCardNumberString hasAnyPrefix:@[@"65",@"6011",@"644",@"645",@"646",@"647",@"648",@"649"]]) {
         return SIMCreditCardType_Discover;
-    } else if ([self.digitsOnlyString hasAnyPrefix:@[@"51",@"52",@"53",@"54",@"55"]]) {
+    } else if ([self.digitsOnlyCardNumberString hasAnyPrefix:@[@"51",@"52",@"53",@"54",@"55"]]) {
         return SIMCreditCardType_MasterCard;
-    } else if ([self.digitsOnlyString hasPrefix:@"4"]) {
+    } else if ([self.digitsOnlyCardNumberString hasPrefix:@"4"]) {
         return SIMCreditCardType_Visa;
-    } else if ([self.digitsOnlyString hasAnyPrefix:@[@"300",@"301",@"302",@"303",@"304",@"305",@"36", @"38", @"39"]]) {
+    } else if ([self.digitsOnlyCardNumberString hasAnyPrefix:@[@"300",@"301",@"302",@"303",@"304",@"305",@"36", @"38", @"39"]]) {
         return SIMCreditCardType_DinersClub;
-    } else if ([self.digitsOnlyString hasAnyPrefix:@[ @"624", @"625", @"626"]]) {
+    } else if ([self.digitsOnlyCardNumberString hasAnyPrefix:@[ @"624", @"625", @"626"]]) {
         return SIMCreditCardType_ChinaUnionPay;
     } else {
         NSNumberFormatter* formatter = [[NSNumberFormatter alloc] init];
-        if (self.digitsOnlyString.length >= 4 ) {
-            NSNumber* firstFourDigits = [formatter numberFromString:[self.digitsOnlyString substringToIndex:4]];
+        if (self.digitsOnlyCardNumberString.length >= 4 ) {
+            NSNumber* firstFourDigits = [formatter numberFromString:[self.digitsOnlyCardNumberString substringToIndex:4]];
             if ( firstFourDigits.unsignedIntegerValue >= 3528 && firstFourDigits.unsignedIntegerValue <= 3589 ) {
                 return SIMCreditCardType_JCB;
             }
         }
-        if ( self.digitsOnlyString.length >= 6 ) {
-            NSNumber* firstSixDigits = [formatter numberFromString:[self.digitsOnlyString substringToIndex:6]];
+        if ( self.digitsOnlyCardNumberString.length >= 6 ) {
+            NSNumber* firstSixDigits = [formatter numberFromString:[self.digitsOnlyCardNumberString substringToIndex:6]];
             if ( firstSixDigits.unsignedIntegerValue >= 622126 && firstSixDigits.unsignedIntegerValue <= 622925 ) {
                 return SIMCreditCardType_ChinaUnionPay;
             }
@@ -70,25 +71,34 @@
 
 -(void)setCardNumberAsString:(NSString*)string {
     NSCharacterSet* nonDecimals = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
-    self.digitsOnlyString = [[string componentsSeparatedByCharactersInSet:nonDecimals] componentsJoinedByString:@""];
+    self.digitsOnlyCardNumberString = [[string componentsSeparatedByCharactersInSet:nonDecimals] componentsJoinedByString:@""];
+}
+
+-(void)setCVCCodeAsString:(NSString*)string {
+    NSCharacterSet* nonDecimals = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+    self.digitsOnlyCVCNumberString = [[string componentsSeparatedByCharactersInSet:nonDecimals] componentsJoinedByString:@""];
 }
 
 -(NSString*)formattedCardNumber {
     switch (self.cardType) {
         case SIMCreditCardType_AmericanExpress: {
-            return [self.digitsOnlyString stringDividedByString:@" " beforeIndicies:@[ @4, @10 ]];
+            return [self.digitsOnlyCardNumberString stringDividedByString:@" " beforeIndicies:@[ @4, @10 ]];
         }
         default:
-            return [self.digitsOnlyString stringDividedByString:@" " beforeIndicies:@[ @4, @8, @12]];
+            return [self.digitsOnlyCardNumberString stringDividedByString:@" " beforeIndicies:@[ @4, @8, @12]];
     }
+}
+
+-(NSString*)formattedCVCCode {
+    return _digitsOnlyCVCNumberString;
 }
 
 -(BOOL)isLuhnValid {
     NSUInteger checksum = 0;
-    for ( NSInteger i = self.digitsOnlyString.length - 1; i >= 0;  --i ) {
-        NSUInteger value = [self valueOf:[self.digitsOnlyString characterAtIndex:i]];
+    for ( NSInteger i = self.digitsOnlyCardNumberString.length - 1; i >= 0;  --i ) {
+        NSUInteger value = [self valueOf:[self.digitsOnlyCardNumberString characterAtIndex:i]];
         NSUInteger doubleValue = value * 2;
-        if ( IS_ODD(self.digitsOnlyString.length - i) ) {
+        if ( IS_ODD(self.digitsOnlyCardNumberString.length - i) ) {
             checksum += value;
         } else if ( doubleValue <= 9 ) {
             checksum += doubleValue;
@@ -102,19 +112,35 @@
 -(BOOL)isValidLength {
     switch (self.cardType) {
         case SIMCreditCardType_AmericanExpress:
-            return self.digitsOnlyString.length == 15;
+            return self.digitsOnlyCardNumberString.length == 15;
         case SIMCreditCardType_Visa:
-            return self.digitsOnlyString.length == 13 || self.digitsOnlyString.length == 16;
+            return self.digitsOnlyCardNumberString.length == 13 || self.digitsOnlyCardNumberString.length == 16;
         case SIMCreditCardType_Discover:
         case SIMCreditCardType_MasterCard:
         case SIMCreditCardType_JCB:
-            return self.digitsOnlyString.length == 16;
+            return self.digitsOnlyCardNumberString.length == 16;
         case SIMCreditCardType_DinersClub:
-            return self.digitsOnlyString.length >= 14 && self.digitsOnlyString.length <= 16;
+            return self.digitsOnlyCardNumberString.length >= 14 && self.digitsOnlyCardNumberString.length <= 16;
         case SIMCreditCardType_ChinaUnionPay:
-            return self.digitsOnlyString.length >= 16 && self.digitsOnlyString.length <= 19;
+            return self.digitsOnlyCardNumberString.length >= 16 && self.digitsOnlyCardNumberString.length <= 19;
         default:
-            return self.digitsOnlyString.length >= 12 && self.digitsOnlyString.length <= 19;
+            return self.digitsOnlyCardNumberString.length >= 12 && self.digitsOnlyCardNumberString.length <= 19;
+    }
+}
+
+-(BOOL)isValidCVC {
+    switch (self.cardType) {
+        case SIMCreditCardType_AmericanExpress:
+            return self.digitsOnlyCVCNumberString.length == 4;
+        case SIMCreditCardType_JCB:
+        case SIMCreditCardType_MasterCard:
+        case SIMCreditCardType_Visa:
+        case SIMCreditCardType_DinersClub:
+        case SIMCreditCardType_Discover:
+        case SIMCreditCardType_ChinaUnionPay:
+            return self.digitsOnlyCVCNumberString.length == 3;
+        default:
+            return self.digitsOnlyCVCNumberString.length == 3 || self.digitsOnlyCVCNumberString.length == 4;
     }
 }
 

@@ -320,4 +320,84 @@
     GHAssertFalse(testObject.isValidLength, nil);
 }
 
+-(void)testWhenNoCardIsSetThenCVCIsInvalid {
+    GHAssertFalse(testObject.isValidCVC, nil);
+}
+
+-(void)testWhenCVCCodeIsSetAs3or4DigitsForAnUnknownCardThenItIsValid {
+    [testObject setCardNumberAsString:@"5610591081018250"]; // e.g., Austrailian Bankcard
+    [testObject setCVCCodeAsString:@"123"];
+    GHAssertTrue(testObject.isValidCVC, nil);
+    [testObject setCVCCodeAsString:@"1234"];
+    GHAssertTrue(testObject.isValidCVC, nil);
+}
+
+-(void)testWhenCVCCodeIsSetAs4DigitsAndAmexThenItIsValid {
+    [testObject setCardNumberAsString:@"378734493671000"];
+    [testObject setCVCCodeAsString:@"123"];
+    GHAssertFalse(testObject.isValidCVC, nil);
+    [testObject setCardNumberAsString:@"378734493671000"];
+    [testObject setCVCCodeAsString:@"1234"];
+    GHAssertTrue(testObject.isValidCVC, nil);
+}
+
+-(void)testWhenSpecialCharactersAreInCVCThenTheyAreIgnoredAndFormatted {
+    [testObject setCardNumberAsString:@"5610591081018250"]; // e.g., Austrailian Bankcard
+    [testObject setCVCCodeAsString:@"1-2-3"];
+    GHAssertTrue(testObject.isValidCVC, nil);
+    GHAssertEqualObjects(testObject.formattedCVCCode, @"123", nil);
+    [testObject setCardNumberAsString:@"378734493671000"];
+    [testObject setCVCCodeAsString:@"1-23-4"];
+    GHAssertTrue(testObject.isValidCVC, nil);
+    GHAssertEqualObjects(testObject.formattedCVCCode, @"1234", nil);
+}
+
+-(void)testWhenCVCCodeForJCBIs3CharactersThenItIsValid {
+    [testObject setCardNumberAsString:@"3528123412341234"];
+    [testObject setCVCCodeAsString:@"123"];
+    GHAssertTrue(testObject.isValidCVC, nil);
+    [testObject setCVCCodeAsString:@"1234"];
+    GHAssertFalse(testObject.isValidCVC, nil);
+}
+
+-(void)testWhenCVCCodeForMasterCardIs3CharactersThenItIsValid {
+    [testObject setCardNumberAsString:@"5555555555554444"];
+    [testObject setCVCCodeAsString:@"123"];
+    GHAssertTrue(testObject.isValidCVC, nil);
+    [testObject setCVCCodeAsString:@"1234"];
+    GHAssertFalse(testObject.isValidCVC, nil);
+}
+
+-(void)testWhenCVCCodeForVisaIs3CharactersThenItIsValid {
+    [testObject setCardNumberAsString:@"41111111111111111"];
+    [testObject setCVCCodeAsString:@"123"];
+    GHAssertTrue(testObject.isValidCVC, nil);
+    [testObject setCVCCodeAsString:@"1234"];
+    GHAssertFalse(testObject.isValidCVC, nil);
+}
+
+-(void)testWhenCVCCodeForDinersClubIs3CharactersThenItIsValid {
+    [testObject setCardNumberAsString:@"3000111122223333"];
+    [testObject setCVCCodeAsString:@"123"];
+    GHAssertTrue(testObject.isValidCVC, nil);
+    [testObject setCVCCodeAsString:@"1234"];
+    GHAssertFalse(testObject.isValidCVC, nil);
+}
+
+-(void)testWhenCVCCodeForDiscoverIs3CharactersThenItIsValid {
+    [testObject setCardNumberAsString:@"6500111122223333"];
+    [testObject setCVCCodeAsString:@"123"];
+    GHAssertTrue(testObject.isValidCVC, nil);
+    [testObject setCVCCodeAsString:@"1234"];
+    GHAssertFalse(testObject.isValidCVC, nil);
+}
+
+-(void)testWhenCVCCodeForUnionPayIs3CharactersThenItIsValid {
+    [testObject setCardNumberAsString:@"6221261122223333"];
+    [testObject setCVCCodeAsString:@"123"];
+    GHAssertTrue(testObject.isValidCVC, nil);
+    [testObject setCVCCodeAsString:@"1234"];
+    GHAssertFalse(testObject.isValidCVC, nil);
+}
+
 @end
