@@ -92,11 +92,13 @@
     GHAssertEquals(testObject.cardType, SIMCreditCardType_Unknown, nil);
 }
 
+// Source: http://usa.visa.com/download/merchants/cisp_what_to_do_if_compromised.pdf pg. 25
 -(void)testWhenVisaCardIsGivenThenItsTypeIsVisa {
     [testObject setCardNumberAsString:@"4"];
     GHAssertEquals(testObject.cardType, SIMCreditCardType_Visa, nil);
 }
 
+// Source: https://www209.americanexpress.com/merchant/singlevoice/pdfs/chipnpin/EMV_Terminal%20Guide.pdf pg. 34
 -(void)testWhenAmexCardIsGivenThenItsTypeIsAmex {
     [testObject setCardNumberAsString:@"34"];
     GHAssertEquals(testObject.cardType, SIMCreditCardType_AmericanExpress, nil);
@@ -104,6 +106,7 @@
     GHAssertEquals(testObject.cardType, SIMCreditCardType_AmericanExpress, nil);
 }
 
+// Source: http://www.mastercard.com/us/merchant/pdf/BM-Entire_Manual_public.pdf pg. Section 3, pg. 16
 -(void)testWhenMasterCardIsGivenThenItsTypeIsMasterCard {
     [testObject setCardNumberAsString:@"51"];
     GHAssertEquals(testObject.cardType, SIMCreditCardType_MasterCard, nil);
@@ -117,23 +120,59 @@
     GHAssertEquals(testObject.cardType, SIMCreditCardType_MasterCard, nil);
 }
 
+// Source: http://www.discovernetwork.com/value-added-reseller/images/Discover_IIN_Bulletin_Apr_2012.pdf
 -(void)testWhenDiscoverCardIsGivenThenItsTypeIsDiscover {
-    [testObject setCardNumberAsString:@"65"];
-    GHAssertEquals(testObject.cardType, SIMCreditCardType_Discover, nil);
     [testObject setCardNumberAsString:@"6011"];
     GHAssertEquals(testObject.cardType, SIMCreditCardType_Discover, nil);
-    [testObject setCardNumberAsString:@"644"];
+    for ( NSUInteger value = 644; value <= 659; ++value ) {
+        [testObject setCardNumberAsString:[NSString stringWithFormat:@"%d", value]];
+        GHAssertEquals(testObject.cardType, SIMCreditCardType_Discover, nil);
+    }
+    [testObject setCardNumberAsString:@"65"];
     GHAssertEquals(testObject.cardType, SIMCreditCardType_Discover, nil);
-    [testObject setCardNumberAsString:@"645"];
-    GHAssertEquals(testObject.cardType, SIMCreditCardType_Discover, nil);
-    [testObject setCardNumberAsString:@"646"];
-    GHAssertEquals(testObject.cardType, SIMCreditCardType_Discover, nil);
-    [testObject setCardNumberAsString:@"647"];
-    GHAssertEquals(testObject.cardType, SIMCreditCardType_Discover, nil);
-    [testObject setCardNumberAsString:@"648"];
-    GHAssertEquals(testObject.cardType, SIMCreditCardType_Discover, nil);
-    [testObject setCardNumberAsString:@"649"];
-    GHAssertEquals(testObject.cardType, SIMCreditCardType_Discover, nil);
+}
+
+// Source: http://www.discovernetwork.com/value-added-reseller/images/Discover_IIN_Bulletin_Apr_2012.pdf
+-(void)testWhenDinersClubInternationlIsGivenThenItsTypeIsDCI {
+    [testObject setCardNumberAsString:@"300"];
+    GHAssertEquals(testObject.cardType, SIMCreditCardType_DinersClub, nil);
+    [testObject setCardNumberAsString:@"301"];
+    GHAssertEquals(testObject.cardType, SIMCreditCardType_DinersClub, nil);
+    [testObject setCardNumberAsString:@"302"];
+    GHAssertEquals(testObject.cardType, SIMCreditCardType_DinersClub, nil);
+    [testObject setCardNumberAsString:@"303"];
+    GHAssertEquals(testObject.cardType, SIMCreditCardType_DinersClub, nil);
+    [testObject setCardNumberAsString:@"304"];
+    GHAssertEquals(testObject.cardType, SIMCreditCardType_DinersClub, nil);
+    [testObject setCardNumberAsString:@"305"];
+    GHAssertEquals(testObject.cardType, SIMCreditCardType_DinersClub, nil);
+    [testObject setCardNumberAsString:@"36"];
+    GHAssertEquals(testObject.cardType, SIMCreditCardType_DinersClub, nil);
+    [testObject setCardNumberAsString:@"38"];
+    GHAssertEquals(testObject.cardType, SIMCreditCardType_DinersClub, nil);
+    [testObject setCardNumberAsString:@"39"];
+}
+
+// Source: http://www.discovernetwork.com/value-added-reseller/images/Discover_IIN_Bulletin_Apr_2012.pdf
+-(void)testWhenJCBIsGivenThenItsTypeIsJCB {
+    for ( NSUInteger value = 3528; value <= 3589; ++value ) {
+        [testObject setCardNumberAsString:[NSString stringWithFormat:@"%d", value]];
+        GHAssertEquals(testObject.cardType, SIMCreditCardType_JCB, nil);
+    }
+}
+
+// Source: http://www.discovernetwork.com/value-added-reseller/images/Discover_IIN_Bulletin_Apr_2012.pdf
+-(void)testWhenChinaUnionPayIsGivenThenItsTypeIsCUP {
+    for ( NSUInteger value = 622126; value <= 622925; ++value ) {
+        [testObject setCardNumberAsString:[NSString stringWithFormat:@"%d", value]];
+        GHAssertEquals(testObject.cardType, SIMCreditCardType_ChinaUnionPay, nil);
+    }
+    [testObject setCardNumberAsString:@"624"];
+    GHAssertEquals(testObject.cardType, SIMCreditCardType_ChinaUnionPay, nil);
+    [testObject setCardNumberAsString:@"625"];
+    GHAssertEquals(testObject.cardType, SIMCreditCardType_ChinaUnionPay, nil);
+    [testObject setCardNumberAsString:@"626"];
+    GHAssertEquals(testObject.cardType, SIMCreditCardType_ChinaUnionPay, nil);
 }
 
 -(void)testWhenAmexNumberIsGivenWithSeparatorsThenItIsParsedCorrectly {

@@ -33,6 +33,9 @@ typedef enum {
     SIMCreditCardType_Visa,
     SIMCreditCardType_MasterCard,
     SIMCreditCardType_Discover,
+    SIMCreditCardType_DinersClub,
+    SIMCreditCardType_JCB,
+    SIMCreditCardType_ChinaUnionPay,
 } SIMCreditCardType;
 
 @interface SIMCreditCardValidator : NSObject

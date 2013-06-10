@@ -46,7 +46,25 @@
         return SIMCreditCardType_MasterCard;
     } else if ([self.digitsOnlyString hasPrefix:@"4"]) {
         return SIMCreditCardType_Visa;
-    } 
+    } else if ([self.digitsOnlyString hasAnyPrefix:@[@"300",@"301",@"302",@"303",@"304",@"305",@"36", @"38", @"39"]]) {
+        return SIMCreditCardType_DinersClub;
+    } else if ([self.digitsOnlyString hasAnyPrefix:@[ @"624", @"625", @"626"]]) {
+        return SIMCreditCardType_ChinaUnionPay;
+    } else {
+        NSNumberFormatter* formatter = [[NSNumberFormatter alloc] init];
+        if (self.digitsOnlyString.length >= 4 ) {
+            NSNumber* firstFourDigits = [formatter numberFromString:[self.digitsOnlyString substringToIndex:4]];
+            if ( firstFourDigits.unsignedIntegerValue >= 3528 && firstFourDigits.unsignedIntegerValue <= 3589 ) {
+                return SIMCreditCardType_JCB;
+            }
+        }
+        if ( self.digitsOnlyString.length >= 6 ) {
+            NSNumber* firstSixDigits = [formatter numberFromString:[self.digitsOnlyString substringToIndex:6]];
+            if ( firstSixDigits.unsignedIntegerValue >= 622126 && firstSixDigits.unsignedIntegerValue <= 622925 ) {
+                return SIMCreditCardType_ChinaUnionPay;
+            }
+        }
+    }
     return SIMCreditCardType_Unknown;
 }
 
@@ -63,7 +81,6 @@
         default:
             return [self.digitsOnlyString stringDividedByString:@" " beforeIndicies:@[ @4, @8, @12]];
     }
-    
 }
 
 -(BOOL)isLuhnValid {
