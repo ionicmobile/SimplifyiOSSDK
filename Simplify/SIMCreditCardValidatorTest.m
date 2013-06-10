@@ -92,13 +92,13 @@
     GHAssertEquals(testObject.cardType, SIMCreditCardType_Unknown, nil);
 }
 
-// Source: http://usa.visa.com/download/merchants/cisp_what_to_do_if_compromised.pdf pg. 25
+// Source: http://usa.visa.com/download/merchants/cisp_what_to_do_if_compromised.pdf pg. 25, Retreived June 10, 2013.
 -(void)testWhenVisaCardIsGivenThenItsTypeIsVisa {
     [testObject setCardNumberAsString:@"4"];
     GHAssertEquals(testObject.cardType, SIMCreditCardType_Visa, nil);
 }
 
-// Source: https://www209.americanexpress.com/merchant/singlevoice/pdfs/chipnpin/EMV_Terminal%20Guide.pdf pg. 34
+// Source: https://www209.americanexpress.com/merchant/singlevoice/pdfs/chipnpin/EMV_Terminal%20Guide.pdf pg. 34, Retreived June 10, 2013.
 -(void)testWhenAmexCardIsGivenThenItsTypeIsAmex {
     [testObject setCardNumberAsString:@"34"];
     GHAssertEquals(testObject.cardType, SIMCreditCardType_AmericanExpress, nil);
@@ -106,7 +106,7 @@
     GHAssertEquals(testObject.cardType, SIMCreditCardType_AmericanExpress, nil);
 }
 
-// Source: http://www.mastercard.com/us/merchant/pdf/BM-Entire_Manual_public.pdf pg. Section 3, pg. 16
+// Source: http://www.mastercard.com/us/merchant/pdf/BM-Entire_Manual_public.pdf pg. Section 3, pg. 16, Retreived June 10, 2013.
 -(void)testWhenMasterCardIsGivenThenItsTypeIsMasterCard {
     [testObject setCardNumberAsString:@"51"];
     GHAssertEquals(testObject.cardType, SIMCreditCardType_MasterCard, nil);
@@ -120,7 +120,7 @@
     GHAssertEquals(testObject.cardType, SIMCreditCardType_MasterCard, nil);
 }
 
-// Source: http://www.discovernetwork.com/value-added-reseller/images/Discover_IIN_Bulletin_Apr_2012.pdf
+// Source: http://www.discovernetwork.com/value-added-reseller/images/Discover_IIN_Bulletin_Apr_2012.pdf Retreived June 10, 2013.
 -(void)testWhenDiscoverCardIsGivenThenItsTypeIsDiscover {
     [testObject setCardNumberAsString:@"6011"];
     GHAssertEquals(testObject.cardType, SIMCreditCardType_Discover, nil);
@@ -132,7 +132,7 @@
     GHAssertEquals(testObject.cardType, SIMCreditCardType_Discover, nil);
 }
 
-// Source: http://www.discovernetwork.com/value-added-reseller/images/Discover_IIN_Bulletin_Apr_2012.pdf
+// Source: http://www.discovernetwork.com/value-added-reseller/images/Discover_IIN_Bulletin_Apr_2012.pdf Retreived June 10, 2013.
 -(void)testWhenDinersClubInternationlIsGivenThenItsTypeIsDCI {
     [testObject setCardNumberAsString:@"300"];
     GHAssertEquals(testObject.cardType, SIMCreditCardType_DinersClub, nil);
@@ -153,7 +153,7 @@
     [testObject setCardNumberAsString:@"39"];
 }
 
-// Source: http://www.discovernetwork.com/value-added-reseller/images/Discover_IIN_Bulletin_Apr_2012.pdf
+// Source: http://www.discovernetwork.com/value-added-reseller/images/Discover_IIN_Bulletin_Apr_2012.pdf Retreived June 10, 2013.
 -(void)testWhenJCBIsGivenThenItsTypeIsJCB {
     for ( NSUInteger value = 3528; value <= 3589; ++value ) {
         [testObject setCardNumberAsString:[NSString stringWithFormat:@"%d", value]];
@@ -161,7 +161,7 @@
     }
 }
 
-// Source: http://www.discovernetwork.com/value-added-reseller/images/Discover_IIN_Bulletin_Apr_2012.pdf
+// Source: http://www.discovernetwork.com/value-added-reseller/images/Discover_IIN_Bulletin_Apr_2012.pdf Retreived June 10, 2013.
 -(void)testWhenChinaUnionPayIsGivenThenItsTypeIsCUP {
     for ( NSUInteger value = 622126; value <= 622925; ++value ) {
         [testObject setCardNumberAsString:[NSString stringWithFormat:@"%d", value]];
@@ -193,6 +193,131 @@
 -(void)testWhenMasterCardNumberIsGivenThenItIsParsedCorrectly {
     [testObject setCardNumberAsString:@"5555555555554444"];
     GHAssertEqualObjects(testObject.formattedCardNumber, @"5555 5555 5555 4444", nil);
+}
+
+// Source: http://en.wikipedia.org/wiki/Bank_card_number 
+-(void)testWhenAmexCardIsEnteredWith15DigitsThenItHasValidLength {
+    [testObject setCardNumberAsString:@"37828224631000"];
+    GHAssertFalse(testObject.isValidLength, nil);
+    [testObject setCardNumberAsString:@"378282246310005"];
+    GHAssertTrue(testObject.isValidLength, nil);
+    [testObject setCardNumberAsString:@"3782822463100051"];
+    GHAssertFalse(testObject.isValidLength, nil);
+}
+
+// Source: http://en.wikipedia.org/wiki/Bank_card_number 
+-(void)testWhenVisaCardHas13Or16DigitsThenItHasValidLength {
+    [testObject setCardNumberAsString:@"411111111111"];
+    GHAssertFalse(testObject.isValidLength, nil);
+
+    [testObject setCardNumberAsString:@"4111111111111"];
+    GHAssertTrue(testObject.isValidLength, nil);
+
+    [testObject setCardNumberAsString:@"41111111111111"];
+    GHAssertFalse(testObject.isValidLength, nil);
+
+    [testObject setCardNumberAsString:@"411111111111111"];
+    GHAssertFalse(testObject.isValidLength, nil);
+    
+    [testObject setCardNumberAsString:@"4111111111111111"];
+    GHAssertTrue(testObject.isValidLength, nil);
+    
+    [testObject setCardNumberAsString:@"41111111111111111"];
+    GHAssertFalse(testObject.isValidLength, nil);
+}
+
+// Source: http://en.wikipedia.org/wiki/Bank_card_number 
+-(void)testWhenMasterCardHas16DigitsThenItHasValidLength {
+    [testObject setCardNumberAsString:@"510510510510510"];
+    GHAssertFalse(testObject.isValidLength, nil);
+
+    [testObject setCardNumberAsString:@"5105105105105100"];
+    GHAssertTrue(testObject.isValidLength, nil);
+    
+    [testObject setCardNumberAsString:@"51051051051051001"];
+    GHAssertFalse(testObject.isValidLength, nil);
+}
+
+// Source: http://en.wikipedia.org/wiki/Bank_card_number
+-(void)testWhenDiscoverHas16DigitsThenItHasValidLength {
+    [testObject setCardNumberAsString:@"601100099013942"];
+    GHAssertFalse(testObject.isValidLength, nil);
+    
+    [testObject setCardNumberAsString:@"6011000990139424"];
+    GHAssertTrue(testObject.isValidLength, nil);
+
+    [testObject setCardNumberAsString:@"60110009901394245"];
+    GHAssertFalse(testObject.isValidLength, nil);
+}
+
+// Source: http://en.wikipedia.org/wiki/Bank_card_number 
+-(void)testWhenJCBHas16DigitsThenItHasValidLength {
+    [testObject setCardNumberAsString:@"353011133330000"];
+    GHAssertFalse(testObject.isValidLength, nil);
+
+    [testObject setCardNumberAsString:@"3530111333300000"];
+    GHAssertTrue(testObject.isValidLength, nil);
+
+    [testObject setCardNumberAsString:@"35301113333000000"];
+    GHAssertFalse(testObject.isValidLength, nil);
+}
+
+// Source: http://en.wikipedia.org/wiki/Bank_card_number 
+-(void)testWhenDinersClubHas14or15or16DigitsThenItHasValidLength {
+    [testObject setCardNumberAsString:@"3056930902590"];
+    GHAssertFalse(testObject.isValidLength, nil);
+    
+    [testObject setCardNumberAsString:@"30569309025904"];
+    GHAssertTrue(testObject.isValidLength, nil);
+    
+    [testObject setCardNumberAsString:@"305693090259045"];
+    GHAssertTrue(testObject.isValidLength, nil);
+    
+    [testObject setCardNumberAsString:@"3056930902590456"];
+    GHAssertTrue(testObject.isValidLength, nil);
+    
+    [testObject setCardNumberAsString:@"30569309025904567"];
+    GHAssertFalse(testObject.isValidLength, nil);
+}
+
+// Source: http://en.wikipedia.org/wiki/Bank_card_number 
+-(void)testWhenChinaUnionPayIs16Through19DigitsThenItHasValidLength {
+    [testObject setCardNumberAsString:@"622126000000000"];
+    GHAssertFalse(testObject.isValidLength, nil);
+    [testObject setCardNumberAsString:@"6221260000000000"];
+    GHAssertTrue(testObject.isValidLength, nil);
+    [testObject setCardNumberAsString:@"62212600000000000"];
+    GHAssertTrue(testObject.isValidLength, nil);
+    [testObject setCardNumberAsString:@"622126000000000000"];
+    GHAssertTrue(testObject.isValidLength, nil);
+    [testObject setCardNumberAsString:@"6221260000000000000"];
+    GHAssertTrue(testObject.isValidLength, nil);
+    [testObject setCardNumberAsString:@"62212600000000000000"];
+    GHAssertFalse(testObject.isValidLength, nil);
+}
+
+// Source: http://en.wikipedia.org/wiki/Bank_card_number 
+-(void)testWhenCardUnknownThenLengthIsBetween12and19 {
+    [testObject setCardNumberAsString:@"56105910810"];
+    GHAssertFalse(testObject.isValidLength, nil);
+    [testObject setCardNumberAsString:@"561059108101"];
+    GHAssertTrue(testObject.isValidLength, nil);
+    [testObject setCardNumberAsString:@"5610591081018"];
+    GHAssertTrue(testObject.isValidLength, nil);
+    [testObject setCardNumberAsString:@"56105910810182"];
+    GHAssertTrue(testObject.isValidLength, nil);
+    [testObject setCardNumberAsString:@"561059108101825"];
+    GHAssertTrue(testObject.isValidLength, nil);
+    [testObject setCardNumberAsString:@"5610591081018250"]; // e.g., Austrailian Bankcard
+    GHAssertTrue(testObject.isValidLength, nil);
+    [testObject setCardNumberAsString:@"56105910810182501"];
+    GHAssertTrue(testObject.isValidLength, nil);
+    [testObject setCardNumberAsString:@"561059108101825012"];
+    GHAssertTrue(testObject.isValidLength, nil);
+    [testObject setCardNumberAsString:@"5610591081018250123"];
+    GHAssertTrue(testObject.isValidLength, nil);
+    [testObject setCardNumberAsString:@"56105910810182501234"];
+    GHAssertFalse(testObject.isValidLength, nil);
 }
 
 @end

@@ -99,6 +99,25 @@
     return ((checksum % 10) == 0);
 }
 
+-(BOOL)isValidLength {
+    switch (self.cardType) {
+        case SIMCreditCardType_AmericanExpress:
+            return self.digitsOnlyString.length == 15;
+        case SIMCreditCardType_Visa:
+            return self.digitsOnlyString.length == 13 || self.digitsOnlyString.length == 16;
+        case SIMCreditCardType_Discover:
+        case SIMCreditCardType_MasterCard:
+        case SIMCreditCardType_JCB:
+            return self.digitsOnlyString.length == 16;
+        case SIMCreditCardType_DinersClub:
+            return self.digitsOnlyString.length >= 14 && self.digitsOnlyString.length <= 16;
+        case SIMCreditCardType_ChinaUnionPay:
+            return self.digitsOnlyString.length >= 16 && self.digitsOnlyString.length <= 19;
+        default:
+            return self.digitsOnlyString.length >= 12 && self.digitsOnlyString.length <= 19;
+    }
+}
+
 #pragma mark - helpers
 
 -(NSUInteger)valueOf:(unichar)c {
