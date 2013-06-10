@@ -27,18 +27,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef enum {
-    SIMCreditCardType_Unknown,
-    SIMCreditCardType_AmericanExpress,
-    SIMCreditCardType_Visa,
-    SIMCreditCardType_MasterCard,
-    SIMCreditCardType_Discover,
-} SIMCreditCardType;
-
-@interface SIMCreditCardValidator : NSObject
-@property (nonatomic, readonly) SIMCreditCardType cardType;
-@property (nonatomic, strong, readonly) NSString* formattedCardNumber;
-@property (nonatomic, readonly) BOOL isLuhnValid;
-@property (nonatomic, readonly) BOOL isValidLength;
--(void)setCardNumberAsString:(NSString*)string;
+@interface NSString (Simplify)
+-(BOOL)hasAnyPrefix:(NSArray*)prefixes;
+-(NSString*)stringDividedByString:(NSString*)dividerString beforeIndicies:(NSArray*)indices;
 @end

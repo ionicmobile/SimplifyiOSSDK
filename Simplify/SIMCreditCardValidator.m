@@ -25,8 +25,67 @@
  * SUCH DAMAGE.
  */
 
+#define IS_EVEN(x) (!((x)%2))
+#define IS_ODD(x) (!IS_EVEN(x))
+
 #import "SIMCreditCardValidator.h"
+#import "NSString+Simplify.h"
+
+@interface SIMCreditCardValidator()
+@property (nonatomic, strong) NSString* digitsOnlyString;
+@end
 
 @implementation SIMCreditCardValidator
+
+-(SIMCreditCardType)cardType {
+    if ([self.digitsOnlyString hasAnyPrefix:@[@"34",@"37"]]) {
+        return SIMCreditCardType_AmericanExpress;
+    } else if ([self.digitsOnlyString hasAnyPrefix:@[@"65",@"6011",@"644",@"645",@"646",@"647",@"648",@"649"]]) {
+        return SIMCreditCardType_Discover;
+    } else if ([self.digitsOnlyString hasAnyPrefix:@[@"51",@"52",@"53",@"54",@"55"]]) {
+        return SIMCreditCardType_MasterCard;
+    } else if ([self.digitsOnlyString hasPrefix:@"4"]) {
+        return SIMCreditCardType_Visa;
+    } 
+    return SIMCreditCardType_Unknown;
+}
+
+-(void)setCardNumberAsString:(NSString*)string {
+    NSCharacterSet* nonDecimals = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+    self.digitsOnlyString = [[string componentsSeparatedByCharactersInSet:nonDecimals] componentsJoinedByString:@""];
+}
+
+-(NSString*)formattedCardNumber {
+    switch (self.cardType) {
+        case SIMCreditCardType_AmericanExpress: {
+            return [self.digitsOnlyString stringDividedByString:@" " beforeIndicies:@[ @4, @10 ]];
+        }
+        default:
+            return [self.digitsOnlyString stringDividedByString:@" " beforeIndicies:@[ @4, @8, @12]];
+    }
+    
+}
+
+-(BOOL)isLuhnValid {
+    NSUInteger checksum = 0;
+    for ( NSInteger i = self.digitsOnlyString.length - 1; i >= 0;  --i ) {
+        NSUInteger value = [self valueOf:[self.digitsOnlyString characterAtIndex:i]];
+        NSUInteger doubleValue = value * 2;
+        if ( IS_ODD(self.digitsOnlyString.length - i) ) {
+            checksum += value;
+        } else if ( doubleValue <= 9 ) {
+            checksum += doubleValue;
+        } else {
+            checksum += 1 + (doubleValue - 10);
+        }
+    }
+    return ((checksum % 10) == 0);
+}
+
+#pragma mark - helpers
+
+-(NSUInteger)valueOf:(unichar)c {
+    return c - '0';
+}
 
 @end

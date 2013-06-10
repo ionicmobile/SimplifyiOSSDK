@@ -26,3 +26,5 @@
  */
 
 #import <Foundation/Foundation.h>
+
+#import <Simplify/SIMCreditCardValidator.h>

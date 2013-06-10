@@ -25,20 +25,29 @@
  * SUCH DAMAGE.
  */
 
-#import <Foundation/Foundation.h>
+#import "NSString+Simplify.h"
 
-typedef enum {
-    SIMCreditCardType_Unknown,
-    SIMCreditCardType_AmericanExpress,
-    SIMCreditCardType_Visa,
-    SIMCreditCardType_MasterCard,
-    SIMCreditCardType_Discover,
-} SIMCreditCardType;
+@implementation NSString (Simplify)
 
-@interface SIMCreditCardValidator : NSObject
-@property (nonatomic, readonly) SIMCreditCardType cardType;
-@property (nonatomic, strong, readonly) NSString* formattedCardNumber;
-@property (nonatomic, readonly) BOOL isLuhnValid;
-@property (nonatomic, readonly) BOOL isValidLength;
--(void)setCardNumberAsString:(NSString*)string;
+-(BOOL)hasAnyPrefix:(NSArray*)prefixes {
+    for (NSString* prefix in prefixes ) {
+        if ( [self hasPrefix:prefix] ) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+-(NSString*)stringDividedByString:(NSString*)dividerString beforeIndicies:(NSArray*)indices {
+    NSMutableString* newString = [NSMutableString string];
+    for ( NSUInteger index = 0; index < self.length; ++index ) {
+        unichar character = [self characterAtIndex:index];
+        if ( [indices containsObject:@(index)] ) {
+            [newString appendString:dividerString];
+        }
+        [newString appendString:[NSString stringWithCharacters:&character length:1]];
+    }
+    return newString;
+}
+
 @end

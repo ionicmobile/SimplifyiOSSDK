@@ -32,6 +32,15 @@
 		4D67092C17626BAE00729623 /* SIMAbstractAsyncTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D67092917626BAD00729623 /* SIMAbstractAsyncTestCase.m */; };
 		4D67092D17626BAE00729623 /* SIMAbstractTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D67092B17626BAE00729623 /* SIMAbstractTestCase.m */; };
 		4D67092F17626C5B00729623 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D67092E17626C5B00729623 /* libOCMock.a */; };
+		4D67094C17626D8300729623 /* SIMCreditCardValidatorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D67094B17626D8300729623 /* SIMCreditCardValidatorTest.m */; };
+		4D67095017662A4400729623 /* NSString+Simplify.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D67094E17662A4400729623 /* NSString+Simplify.h */; };
+		4D67095117662A4400729623 /* NSString+Simplify.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D67094F17662A4400729623 /* NSString+Simplify.m */; };
+		4D67095217662A4400729623 /* NSString+Simplify.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D67094F17662A4400729623 /* NSString+Simplify.m */; };
+		4D67095317662A4400729623 /* NSString+Simplify.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D67094F17662A4400729623 /* NSString+Simplify.m */; };
+		4D67095417662A5A00729623 /* Simplify.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDB653D17623DD800871923 /* Simplify.m */; };
+		4D67095517662A5B00729623 /* Simplify.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDB653D17623DD800871923 /* Simplify.m */; };
+		4D67095617662A5D00729623 /* SimplifyPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D98BC9E17625D88004FA922 /* SimplifyPrivate.m */; };
+		4D67095717662A5E00729623 /* SimplifyPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D98BC9E17625D88004FA922 /* SimplifyPrivate.m */; };
 		4D98BC90176258FE004FA922 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D98BC8F176258FE004FA922 /* CoreFoundation.framework */; };
 		4D98BC96176258FE004FA922 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4D98BC94176258FE004FA922 /* InfoPlist.strings */; };
 		4D98BC9F17625D88004FA922 /* SimplifyPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D98BC9D17625D88004FA922 /* SimplifyPrivate.h */; };
@@ -108,6 +117,9 @@
 		4D67094717626C9900729623 /* OCMock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMock.h; sourceTree = "<group>"; };
 		4D67094817626C9900729623 /* OCMockObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMockObject.h; sourceTree = "<group>"; };
 		4D67094917626C9900729623 /* OCMockRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMockRecorder.h; sourceTree = "<group>"; };
+		4D67094B17626D8300729623 /* SIMCreditCardValidatorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMCreditCardValidatorTest.m; sourceTree = "<group>"; };
+		4D67094E17662A4400729623 /* NSString+Simplify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Simplify.h"; sourceTree = "<group>"; };
+		4D67094F17662A4400729623 /* NSString+Simplify.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Simplify.m"; sourceTree = "<group>"; };
 		4D98BC8E176258FE004FA922 /* Simplify.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Simplify.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D98BC8F176258FE004FA922 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		4D98BC93176258FE004FA922 /* SimplifyBundle-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SimplifyBundle-Info.plist"; sourceTree = "<group>"; };
@@ -201,6 +213,7 @@
 		4D6709251762690F00729623 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				4D67094D17662A1600729623 /* Categories */,
 				4DDB653B17623DD800871923 /* Simplify.h */,
 				4DDB653D17623DD800871923 /* Simplify.m */,
 				4D98BC9D17625D88004FA922 /* SimplifyPrivate.h */,
@@ -212,6 +225,7 @@
 		4D6709261762694900729623 /* Test */ = {
 			isa = PBXGroup;
 			children = (
+				4D67094B17626D8300729623 /* SIMCreditCardValidatorTest.m */,
 			);
 			name = Test;
 			sourceTree = "<group>";
@@ -228,6 +242,15 @@
 			);
 			name = OCMock;
 			path = Frameworks/OCMock;
+			sourceTree = "<group>";
+		};
+		4D67094D17662A1600729623 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				4D67094E17662A4400729623 /* NSString+Simplify.h */,
+				4D67094F17662A4400729623 /* NSString+Simplify.m */,
+			);
+			name = Categories;
 			sourceTree = "<group>";
 		};
 		4D98BC91176258FE004FA922 /* SimplifyBundle */ = {
@@ -366,6 +389,7 @@
 				4DDB65451762440800871923 /* Simplify.h in Headers */,
 				4D98BC9F17625D88004FA922 /* SimplifyPrivate.h in Headers */,
 				4D6709201762687800729623 /* SIMCreditCardValidator.h in Headers */,
+				4D67095017662A4400729623 /* NSString+Simplify.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -550,6 +574,9 @@
 				4D98BCB317626380004FA922 /* main.m in Sources */,
 				4D98BCB717626380004FA922 /* SIMAppDelegate.m in Sources */,
 				4D6709221762687800729623 /* SIMCreditCardValidator.m in Sources */,
+				4D67095217662A4400729623 /* NSString+Simplify.m in Sources */,
+				4D67095417662A5A00729623 /* Simplify.m in Sources */,
+				4D67095617662A5D00729623 /* SimplifyPrivate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -562,6 +589,10 @@
 				4D6709231762687800729623 /* SIMCreditCardValidator.m in Sources */,
 				4D67092C17626BAE00729623 /* SIMAbstractAsyncTestCase.m in Sources */,
 				4D67092D17626BAE00729623 /* SIMAbstractTestCase.m in Sources */,
+				4D67094C17626D8300729623 /* SIMCreditCardValidatorTest.m in Sources */,
+				4D67095317662A4400729623 /* NSString+Simplify.m in Sources */,
+				4D67095517662A5B00729623 /* Simplify.m in Sources */,
+				4D67095717662A5E00729623 /* SimplifyPrivate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -572,6 +603,7 @@
 				4DDB653E17623DD800871923 /* Simplify.m in Sources */,
 				4D98BCA017625D88004FA922 /* SimplifyPrivate.m in Sources */,
 				4D6709211762687800729623 /* SIMCreditCardValidator.m in Sources */,
+				4D67095117662A4400729623 /* NSString+Simplify.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
