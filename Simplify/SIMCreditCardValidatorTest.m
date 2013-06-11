@@ -34,6 +34,8 @@
     SIMCreditCardValidator* testObject;
     id mockLuhnValidator;
     id mockTimeProvider;
+    BOOL yes;
+    BOOL no;
 }
 @end
 
@@ -44,20 +46,35 @@
     mockLuhnValidator = [OCMockObject mockForClass:SIMLuhnValidator.class];
     mockTimeProvider = [OCMockObject mockForClass:SIMCurrentTimeProvider.class];
     testObject = [[SIMCreditCardValidator alloc] initWithLuhnValidator:mockLuhnValidator timeProvider:mockTimeProvider];
+    yes = YES;
 }
 
-//-(void)testWhenFormattedLuhnNumberIsSubmittedThenIsIsValid {
-//    [testObject setCardNumberAsString:@"378282246310005"];
-//    GHAssertTrue([testObject isLuhnValid], nil);
-//    [testObject setCardNumberAsString:@"3782-822463-10005"];
-//    GHAssertTrue([testObject isLuhnValid], nil);
-//    [testObject setCardNumberAsString:@"3714-496353-98431"];
-//    GHAssertTrue([testObject isLuhnValid], nil);
-//    [testObject setCardNumberAsString:@"3782 822463 10005"];
-//    GHAssertTrue([testObject isLuhnValid], nil);
-//    [testObject setCardNumberAsString:@"3714 496353 98431"];
-//    GHAssertTrue([testObject isLuhnValid], nil);
-//}
+-(void)testWhenFormattedLuhnNumberIsSubmittedThenIsIsValid {
+    [[[mockLuhnValidator expect] andReturnValue:OCMOCK_VALUE(yes)] isValid:@"378282246310005"];
+    [testObject setCardNumberAsString:@"378282246310005"];
+    [testObject isValidCardNumber];
+    [mockLuhnValidator verify];
+    
+    [[[mockLuhnValidator expect] andReturnValue:OCMOCK_VALUE(yes)] isValid:@"378282246310005"];
+    [testObject setCardNumberAsString:@"3782-822463-10005"];
+    [testObject isValidCardNumber];
+    [mockLuhnValidator verify];
+
+    [[[mockLuhnValidator expect] andReturnValue:OCMOCK_VALUE(yes)] isValid:@"371449635398431"];
+    [testObject setCardNumberAsString:@"3714-496353-98431"];
+    [testObject isValidCardNumber];
+    [mockLuhnValidator verify];
+
+    [[[mockLuhnValidator expect] andReturnValue:OCMOCK_VALUE(yes)] isValid:@"378282246310005"];
+    [testObject setCardNumberAsString:@"3782 822463 10005"];
+    [testObject isValidCardNumber];
+    [mockLuhnValidator verify];
+
+    [[[mockLuhnValidator expect] andReturnValue:OCMOCK_VALUE(yes)] isValid:@"371449635398431"];
+    [testObject setCardNumberAsString:@"3714 496353 98431"];
+    [testObject isValidCardNumber];
+    [mockLuhnValidator verify];
+}
 
 -(void)testWhenUnknownCardIsEncounteredThenItsTypeIsUnknown {
     [testObject setCardNumberAsString:@"1"];
@@ -167,129 +184,215 @@
     GHAssertEqualObjects(testObject.formattedCardNumber, @"5555 5555 5555 4444", nil);
 }
 
+-(void)testWhenNoCardNumberIsSetThenCardNumberIsInvalid {
+    [[[mockLuhnValidator stub] andReturnValue:OCMOCK_VALUE(no)] isValid:OCMOCK_ANY];
+    GHAssertFalse(testObject.isValidCardNumber, nil);
+}
+
 // Source: http://en.wikipedia.org/wiki/Bank_card_number 
 -(void)testWhenAmexCardIsEnteredWith15DigitsThenItHasValidLength {
+    mockLuhnValidator = [OCMockObject mockForClass:SIMLuhnValidator.class];
+    testObject = [[SIMCreditCardValidator alloc] initWithLuhnValidator:mockLuhnValidator timeProvider:mockTimeProvider];
+    [[[mockLuhnValidator stub] andReturnValue:OCMOCK_VALUE(yes)] isValid:OCMOCK_ANY];
     [testObject setCardNumberAsString:@"37828224631000"];
-    GHAssertFalse(testObject.isValidCardNumberLength, nil);
+    GHAssertFalse(testObject.isValidCardNumber, nil);
     [testObject setCardNumberAsString:@"378282246310005"];
-    GHAssertTrue(testObject.isValidCardNumberLength, nil);
+    GHAssertTrue(testObject.isValidCardNumber, nil);
     [testObject setCardNumberAsString:@"3782822463100051"];
-    GHAssertFalse(testObject.isValidCardNumberLength, nil);
+    GHAssertFalse(testObject.isValidCardNumber, nil);
+    
+    mockLuhnValidator = [OCMockObject mockForClass:SIMLuhnValidator.class];
+    testObject = [[SIMCreditCardValidator alloc] initWithLuhnValidator:mockLuhnValidator timeProvider:mockTimeProvider];
+    [[[mockLuhnValidator stub] andReturnValue:OCMOCK_VALUE(no)] isValid:OCMOCK_ANY];
+    [testObject setCardNumberAsString:@"378282246310005"];
+    GHAssertFalse(testObject.isValidCardNumber, nil);
 }
 
 // Source: http://en.wikipedia.org/wiki/Bank_card_number 
 -(void)testWhenVisaCardHas13Or16DigitsThenItHasValidLength {
+    mockLuhnValidator = [OCMockObject mockForClass:SIMLuhnValidator.class];
+    testObject = [[SIMCreditCardValidator alloc] initWithLuhnValidator:mockLuhnValidator timeProvider:mockTimeProvider];
+    [[[mockLuhnValidator stub] andReturnValue:OCMOCK_VALUE(yes)] isValid:OCMOCK_ANY];
+
     [testObject setCardNumberAsString:@"411111111111"];
-    GHAssertFalse(testObject.isValidCardNumberLength, nil);
+    GHAssertFalse(testObject.isValidCardNumber, nil);
 
     [testObject setCardNumberAsString:@"4111111111111"];
-    GHAssertTrue(testObject.isValidCardNumberLength, nil);
+    GHAssertTrue(testObject.isValidCardNumber, nil);
 
     [testObject setCardNumberAsString:@"41111111111111"];
-    GHAssertFalse(testObject.isValidCardNumberLength, nil);
+    GHAssertFalse(testObject.isValidCardNumber, nil);
 
     [testObject setCardNumberAsString:@"411111111111111"];
-    GHAssertFalse(testObject.isValidCardNumberLength, nil);
+    GHAssertFalse(testObject.isValidCardNumber, nil);
     
     [testObject setCardNumberAsString:@"4111111111111111"];
-    GHAssertTrue(testObject.isValidCardNumberLength, nil);
+    GHAssertTrue(testObject.isValidCardNumber, nil);
     
     [testObject setCardNumberAsString:@"41111111111111111"];
-    GHAssertFalse(testObject.isValidCardNumberLength, nil);
+    GHAssertFalse(testObject.isValidCardNumber, nil);
+    
+    mockLuhnValidator = [OCMockObject mockForClass:SIMLuhnValidator.class];
+    testObject = [[SIMCreditCardValidator alloc] initWithLuhnValidator:mockLuhnValidator timeProvider:mockTimeProvider];
+    [[[mockLuhnValidator stub] andReturnValue:OCMOCK_VALUE(no)] isValid:OCMOCK_ANY];
+    [testObject setCardNumberAsString:@"4111111111111111"];
+    GHAssertFalse(testObject.isValidCardNumber, nil);
 }
 
 // Source: http://en.wikipedia.org/wiki/Bank_card_number 
 -(void)testWhenMasterCardHas16DigitsThenItHasValidLength {
+    mockLuhnValidator = [OCMockObject mockForClass:SIMLuhnValidator.class];
+    testObject = [[SIMCreditCardValidator alloc] initWithLuhnValidator:mockLuhnValidator timeProvider:mockTimeProvider];
+    [[[mockLuhnValidator stub] andReturnValue:OCMOCK_VALUE(yes)] isValid:OCMOCK_ANY];
+
     [testObject setCardNumberAsString:@"510510510510510"];
-    GHAssertFalse(testObject.isValidCardNumberLength, nil);
+    GHAssertFalse(testObject.isValidCardNumber, nil);
 
     [testObject setCardNumberAsString:@"5105105105105100"];
-    GHAssertTrue(testObject.isValidCardNumberLength, nil);
+    GHAssertTrue(testObject.isValidCardNumber, nil);
     
     [testObject setCardNumberAsString:@"51051051051051001"];
-    GHAssertFalse(testObject.isValidCardNumberLength, nil);
+    GHAssertFalse(testObject.isValidCardNumber, nil);
+    
+    mockLuhnValidator = [OCMockObject mockForClass:SIMLuhnValidator.class];
+    testObject = [[SIMCreditCardValidator alloc] initWithLuhnValidator:mockLuhnValidator timeProvider:mockTimeProvider];
+    [[[mockLuhnValidator stub] andReturnValue:OCMOCK_VALUE(no)] isValid:OCMOCK_ANY];
+    [testObject setCardNumberAsString:@"5105105105105100"];
+    GHAssertFalse(testObject.isValidCardNumber, nil);
 }
 
 // Source: http://en.wikipedia.org/wiki/Bank_card_number
 -(void)testWhenDiscoverHas16DigitsThenItHasValidLength {
+    mockLuhnValidator = [OCMockObject mockForClass:SIMLuhnValidator.class];
+    testObject = [[SIMCreditCardValidator alloc] initWithLuhnValidator:mockLuhnValidator timeProvider:mockTimeProvider];
+    [[[mockLuhnValidator stub] andReturnValue:OCMOCK_VALUE(yes)] isValid:OCMOCK_ANY];
+
     [testObject setCardNumberAsString:@"601100099013942"];
-    GHAssertFalse(testObject.isValidCardNumberLength, nil);
+    GHAssertFalse(testObject.isValidCardNumber, nil);
     
     [testObject setCardNumberAsString:@"6011000990139424"];
-    GHAssertTrue(testObject.isValidCardNumberLength, nil);
+    GHAssertTrue(testObject.isValidCardNumber, nil);
 
     [testObject setCardNumberAsString:@"60110009901394245"];
-    GHAssertFalse(testObject.isValidCardNumberLength, nil);
+    GHAssertFalse(testObject.isValidCardNumber, nil);
+    
+    mockLuhnValidator = [OCMockObject mockForClass:SIMLuhnValidator.class];
+    testObject = [[SIMCreditCardValidator alloc] initWithLuhnValidator:mockLuhnValidator timeProvider:mockTimeProvider];
+    [[[mockLuhnValidator stub] andReturnValue:OCMOCK_VALUE(no)] isValid:OCMOCK_ANY];
+    [testObject setCardNumberAsString:@"5105105105105100"];
+    GHAssertFalse(testObject.isValidCardNumber, nil);
 }
 
 // Source: http://en.wikipedia.org/wiki/Bank_card_number 
 -(void)testWhenJCBHas16DigitsThenItHasValidLength {
+    mockLuhnValidator = [OCMockObject mockForClass:SIMLuhnValidator.class];
+    testObject = [[SIMCreditCardValidator alloc] initWithLuhnValidator:mockLuhnValidator timeProvider:mockTimeProvider];
+    [[[mockLuhnValidator stub] andReturnValue:OCMOCK_VALUE(yes)] isValid:OCMOCK_ANY];
+
     [testObject setCardNumberAsString:@"353011133330000"];
-    GHAssertFalse(testObject.isValidCardNumberLength, nil);
+    GHAssertFalse(testObject.isValidCardNumber, nil);
 
     [testObject setCardNumberAsString:@"3530111333300000"];
-    GHAssertTrue(testObject.isValidCardNumberLength, nil);
+    GHAssertTrue(testObject.isValidCardNumber, nil);
 
     [testObject setCardNumberAsString:@"35301113333000000"];
-    GHAssertFalse(testObject.isValidCardNumberLength, nil);
+    GHAssertFalse(testObject.isValidCardNumber, nil);
+    
+    mockLuhnValidator = [OCMockObject mockForClass:SIMLuhnValidator.class];
+    testObject = [[SIMCreditCardValidator alloc] initWithLuhnValidator:mockLuhnValidator timeProvider:mockTimeProvider];
+    [[[mockLuhnValidator stub] andReturnValue:OCMOCK_VALUE(no)] isValid:OCMOCK_ANY];
+    [testObject setCardNumberAsString:@"3530111333300000"];
+    GHAssertFalse(testObject.isValidCardNumber, nil);
 }
 
 // Source: http://en.wikipedia.org/wiki/Bank_card_number 
 -(void)testWhenDinersClubHas14or15or16DigitsThenItHasValidLength {
+    mockLuhnValidator = [OCMockObject mockForClass:SIMLuhnValidator.class];
+    testObject = [[SIMCreditCardValidator alloc] initWithLuhnValidator:mockLuhnValidator timeProvider:mockTimeProvider];
+    [[[mockLuhnValidator stub] andReturnValue:OCMOCK_VALUE(yes)] isValid:OCMOCK_ANY];
+
     [testObject setCardNumberAsString:@"3056930902590"];
-    GHAssertFalse(testObject.isValidCardNumberLength, nil);
+    GHAssertFalse(testObject.isValidCardNumber, nil);
     
     [testObject setCardNumberAsString:@"30569309025904"];
-    GHAssertTrue(testObject.isValidCardNumberLength, nil);
+    GHAssertTrue(testObject.isValidCardNumber, nil);
     
     [testObject setCardNumberAsString:@"305693090259045"];
-    GHAssertTrue(testObject.isValidCardNumberLength, nil);
+    GHAssertTrue(testObject.isValidCardNumber, nil);
     
     [testObject setCardNumberAsString:@"3056930902590456"];
-    GHAssertTrue(testObject.isValidCardNumberLength, nil);
+    GHAssertTrue(testObject.isValidCardNumber, nil);
     
     [testObject setCardNumberAsString:@"30569309025904567"];
-    GHAssertFalse(testObject.isValidCardNumberLength, nil);
+    GHAssertFalse(testObject.isValidCardNumber, nil);
+    
+    mockLuhnValidator = [OCMockObject mockForClass:SIMLuhnValidator.class];
+    testObject = [[SIMCreditCardValidator alloc] initWithLuhnValidator:mockLuhnValidator timeProvider:mockTimeProvider];
+    [[[mockLuhnValidator stub] andReturnValue:OCMOCK_VALUE(no)] isValid:OCMOCK_ANY];
+    [testObject setCardNumberAsString:@"305693090259045"];
+    GHAssertFalse(testObject.isValidCardNumber, nil);
 }
 
 // Source: http://en.wikipedia.org/wiki/Bank_card_number 
 -(void)testWhenChinaUnionPayIs16Through19DigitsThenItHasValidLength {
+    
+    // China Union Pay does not use Luhn Validation
+    mockLuhnValidator = [OCMockObject mockForClass:SIMLuhnValidator.class];
+    testObject = [[SIMCreditCardValidator alloc] initWithLuhnValidator:mockLuhnValidator timeProvider:mockTimeProvider];
+    [[[mockLuhnValidator stub] andReturnValue:OCMOCK_VALUE(no)] isValid:OCMOCK_ANY];
+
     [testObject setCardNumberAsString:@"622126000000000"];
-    GHAssertFalse(testObject.isValidCardNumberLength, nil);
+    GHAssertFalse(testObject.isValidCardNumber, nil);
     [testObject setCardNumberAsString:@"6221260000000000"];
-    GHAssertTrue(testObject.isValidCardNumberLength, nil);
+    GHAssertTrue(testObject.isValidCardNumber, nil);
     [testObject setCardNumberAsString:@"62212600000000000"];
-    GHAssertTrue(testObject.isValidCardNumberLength, nil);
+    GHAssertTrue(testObject.isValidCardNumber, nil);
     [testObject setCardNumberAsString:@"622126000000000000"];
-    GHAssertTrue(testObject.isValidCardNumberLength, nil);
+    GHAssertTrue(testObject.isValidCardNumber, nil);
     [testObject setCardNumberAsString:@"6221260000000000000"];
-    GHAssertTrue(testObject.isValidCardNumberLength, nil);
+    GHAssertTrue(testObject.isValidCardNumber, nil);
     [testObject setCardNumberAsString:@"62212600000000000000"];
-    GHAssertFalse(testObject.isValidCardNumberLength, nil);
+    GHAssertFalse(testObject.isValidCardNumber, nil);
+    
+    mockLuhnValidator = [OCMockObject mockForClass:SIMLuhnValidator.class];
+    testObject = [[SIMCreditCardValidator alloc] initWithLuhnValidator:mockLuhnValidator timeProvider:mockTimeProvider];
+    [[[mockLuhnValidator stub] andReturnValue:OCMOCK_VALUE(yes)] isValid:OCMOCK_ANY];
+    [testObject setCardNumberAsString:@"6221260000000000"];
+    GHAssertTrue(testObject.isValidCardNumber, nil);
 }
 
 // Source: http://en.wikipedia.org/wiki/Bank_card_number 
 -(void)testWhenCardUnknownThenLengthIsBetween12and19 {
+    mockLuhnValidator = [OCMockObject mockForClass:SIMLuhnValidator.class];
+    testObject = [[SIMCreditCardValidator alloc] initWithLuhnValidator:mockLuhnValidator timeProvider:mockTimeProvider];
+    [[[mockLuhnValidator stub] andReturnValue:OCMOCK_VALUE(yes)] isValid:OCMOCK_ANY];
+
     [testObject setCardNumberAsString:@"56105910810"];
-    GHAssertFalse(testObject.isValidCardNumberLength, nil);
+    GHAssertFalse(testObject.isValidCardNumber, nil);
     [testObject setCardNumberAsString:@"561059108101"];
-    GHAssertTrue(testObject.isValidCardNumberLength, nil);
+    GHAssertTrue(testObject.isValidCardNumber, nil);
     [testObject setCardNumberAsString:@"5610591081018"];
-    GHAssertTrue(testObject.isValidCardNumberLength, nil);
+    GHAssertTrue(testObject.isValidCardNumber, nil);
     [testObject setCardNumberAsString:@"56105910810182"];
-    GHAssertTrue(testObject.isValidCardNumberLength, nil);
+    GHAssertTrue(testObject.isValidCardNumber, nil);
     [testObject setCardNumberAsString:@"561059108101825"];
-    GHAssertTrue(testObject.isValidCardNumberLength, nil);
+    GHAssertTrue(testObject.isValidCardNumber, nil);
     [testObject setCardNumberAsString:@"5610591081018250"]; // e.g., Austrailian Bankcard
-    GHAssertTrue(testObject.isValidCardNumberLength, nil);
+    GHAssertTrue(testObject.isValidCardNumber, nil);
     [testObject setCardNumberAsString:@"56105910810182501"];
-    GHAssertTrue(testObject.isValidCardNumberLength, nil);
+    GHAssertTrue(testObject.isValidCardNumber, nil);
     [testObject setCardNumberAsString:@"561059108101825012"];
-    GHAssertTrue(testObject.isValidCardNumberLength, nil);
+    GHAssertTrue(testObject.isValidCardNumber, nil);
     [testObject setCardNumberAsString:@"5610591081018250123"];
-    GHAssertTrue(testObject.isValidCardNumberLength, nil);
+    GHAssertTrue(testObject.isValidCardNumber, nil);
     [testObject setCardNumberAsString:@"56105910810182501234"];
-    GHAssertFalse(testObject.isValidCardNumberLength, nil);
+    GHAssertFalse(testObject.isValidCardNumber, nil);
+    
+    mockLuhnValidator = [OCMockObject mockForClass:SIMLuhnValidator.class];
+    testObject = [[SIMCreditCardValidator alloc] initWithLuhnValidator:mockLuhnValidator timeProvider:mockTimeProvider];
+    [[[mockLuhnValidator stub] andReturnValue:OCMOCK_VALUE(yes)] isValid:OCMOCK_ANY];
+    [testObject setCardNumberAsString:@"561059108101"];
+    GHAssertTrue(testObject.isValidCardNumber, nil);
 }
 
 -(void)testWhenNoCardIsSetThenCVCIsInvalid {

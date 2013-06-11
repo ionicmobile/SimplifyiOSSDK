@@ -47,8 +47,7 @@ typedef enum {
 @property (nonatomic, strong, readonly) NSString* formattedExpirationDate;
 @property (nonatomic, strong, readonly) NSString* expirationMonth;
 @property (nonatomic, strong, readonly) NSString* expirationYear;
-
-@property (nonatomic, readonly) BOOL isValidCardNumberLength;
+@property (nonatomic, readonly) BOOL isValidCardNumber;
 @property (nonatomic, readonly) BOOL isValidCVC;
 @property (nonatomic, readonly) BOOL isExpired;
 

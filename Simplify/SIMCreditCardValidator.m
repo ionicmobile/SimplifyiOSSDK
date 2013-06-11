@@ -139,23 +139,36 @@
     return nil;
 }
 
--(BOOL)isValidCardNumberLength {
+-(BOOL)isValid {
+    return NO;
+}
+
+-(BOOL)isValidCardNumber {
+    BOOL validLuhn = [self.luhnValidator isValid:self.digitsOnlyCardNumberString] || self.cardType == SIMCreditCardType_ChinaUnionPay;
+    BOOL validLength = self.digitsOnlyCardNumberString != nil;
     switch (self.cardType) {
         case SIMCreditCardType_AmericanExpress:
-            return self.digitsOnlyCardNumberString.length == 15;
+            validLength = self.digitsOnlyCardNumberString.length == 15;
+            break;
         case SIMCreditCardType_Visa:
-            return self.digitsOnlyCardNumberString.length == 13 || self.digitsOnlyCardNumberString.length == 16;
+            validLength = self.digitsOnlyCardNumberString.length == 13 || self.digitsOnlyCardNumberString.length == 16;
+            break;
         case SIMCreditCardType_Discover:
         case SIMCreditCardType_MasterCard:
         case SIMCreditCardType_JCB:
-            return self.digitsOnlyCardNumberString.length == 16;
+            validLength = self.digitsOnlyCardNumberString.length == 16;
+            break;
         case SIMCreditCardType_DinersClub:
-            return self.digitsOnlyCardNumberString.length >= 14 && self.digitsOnlyCardNumberString.length <= 16;
+            validLength = self.digitsOnlyCardNumberString.length >= 14 && self.digitsOnlyCardNumberString.length <= 16;
+            break;
         case SIMCreditCardType_ChinaUnionPay:
-            return self.digitsOnlyCardNumberString.length >= 16 && self.digitsOnlyCardNumberString.length <= 19;
+            validLength = self.digitsOnlyCardNumberString.length >= 16 && self.digitsOnlyCardNumberString.length <= 19;
+            break;
         default:
-            return self.digitsOnlyCardNumberString.length >= 12 && self.digitsOnlyCardNumberString.length <= 19;
+            validLength = self.digitsOnlyCardNumberString.length >= 12 && self.digitsOnlyCardNumberString.length <= 19;
+            break;
     }
+    return validLength && validLuhn;
 }
 
 -(BOOL)isValidCVC {
