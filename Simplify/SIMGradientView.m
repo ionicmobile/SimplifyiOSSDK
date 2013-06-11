@@ -25,12 +25,21 @@
  * SUCH DAMAGE.
  */
 
+#import "SIMGradientView.h"
+#import <QuartzCore/QuartzCore.h>
 
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
+@interface SIMGradientView()
 
-@interface SimplifyPrivate : NSObject
-+(UIFont*)fontOfSize:(CGFloat)size;
-+(UIFont*)boldFontOfSize:(CGFloat)size;
-+(NSBundle*)frameworkBundle;
+@end
+
+@implementation SIMGradientView
+
++ (Class)layerClass {
+	return [CAGradientLayer class];
+}
+
+- (CAGradientLayer *)gradientLayer {
+	return (CAGradientLayer *)self.layer;
+}
+
 @end

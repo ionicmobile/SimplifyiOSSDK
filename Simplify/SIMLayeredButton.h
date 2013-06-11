@@ -25,12 +25,8 @@
  * SUCH DAMAGE.
  */
 
-
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
 
-@interface SimplifyPrivate : NSObject
-+(UIFont*)fontOfSize:(CGFloat)size;
-+(UIFont*)boldFontOfSize:(CGFloat)size;
-+(NSBundle*)frameworkBundle;
+@interface SIMLayeredButton : UIButton
+
 @end

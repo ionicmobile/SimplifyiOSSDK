@@ -23,12 +23,10 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		4D49D82B176766D90046E638 /* SIMLuhnValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D49D829176766D90046E638 /* SIMLuhnValidator.h */; };
+		4D49D82B176766D90046E638 /* SIMLuhnValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D49D829176766D90046E638 /* SIMLuhnValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4D49D82C176766D90046E638 /* SIMLuhnValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D82A176766D90046E638 /* SIMLuhnValidator.m */; };
 		4D49D82D176766D90046E638 /* SIMLuhnValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D82A176766D90046E638 /* SIMLuhnValidator.m */; };
 		4D49D82E176766D90046E638 /* SIMLuhnValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D82A176766D90046E638 /* SIMLuhnValidator.m */; };
-		4D49D8321767671C0046E638 /* SIMLuhnValidatorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D8301767671C0046E638 /* SIMLuhnValidatorTest.m */; };
-		4D49D8331767671C0046E638 /* SIMLuhnValidatorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D8301767671C0046E638 /* SIMLuhnValidatorTest.m */; };
 		4D49D8341767671C0046E638 /* SIMLuhnValidatorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D8301767671C0046E638 /* SIMLuhnValidatorTest.m */; };
 		4D49D83717676D9F0046E638 /* SIMCurrentTimeProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D49D83517676D9F0046E638 /* SIMCurrentTimeProvider.h */; };
 		4D49D83817676D9F0046E638 /* SIMCurrentTimeProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D83617676D9F0046E638 /* SIMCurrentTimeProvider.m */; };
@@ -42,6 +40,40 @@
 		4D49D849176788F10046E638 /* jcb_32.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D49D840176788F10046E638 /* jcb_32.png */; };
 		4D49D84B176788F10046E638 /* mastercard_32.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D49D842176788F10046E638 /* mastercard_32.png */; };
 		4D49D84C176788F10046E638 /* visa_32.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D49D843176788F10046E638 /* visa_32.png */; };
+		4D49D8501767A1EF0046E638 /* SIMCreditCardEntryView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D49D84E1767A1EF0046E638 /* SIMCreditCardEntryView.h */; };
+		4D49D8511767A1EF0046E638 /* SIMCreditCardEntryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D84F1767A1EF0046E638 /* SIMCreditCardEntryView.m */; };
+		4D49D8521767A1EF0046E638 /* SIMCreditCardEntryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D84F1767A1EF0046E638 /* SIMCreditCardEntryView.m */; };
+		4D49D8531767A1EF0046E638 /* SIMCreditCardEntryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D84F1767A1EF0046E638 /* SIMCreditCardEntryView.m */; };
+		4D49D8561767A63D0046E638 /* UIView+Additions.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D49D8541767A63D0046E638 /* UIView+Additions.h */; };
+		4D49D8571767A63D0046E638 /* UIView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D8551767A63D0046E638 /* UIView+Additions.m */; };
+		4D49D8581767A63D0046E638 /* UIView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D8551767A63D0046E638 /* UIView+Additions.m */; };
+		4D49D8591767A63D0046E638 /* UIView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D8551767A63D0046E638 /* UIView+Additions.m */; };
+		4D49D85D1767AC3B0046E638 /* SIMCreditCardEntryViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D49D85B1767AC3B0046E638 /* SIMCreditCardEntryViewController.h */; };
+		4D49D85E1767AC3B0046E638 /* SIMCreditCardEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D85C1767AC3B0046E638 /* SIMCreditCardEntryViewController.m */; };
+		4D49D85F1767AC3B0046E638 /* SIMCreditCardEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D85C1767AC3B0046E638 /* SIMCreditCardEntryViewController.m */; };
+		4D49D8601767AC3B0046E638 /* SIMCreditCardEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D85C1767AC3B0046E638 /* SIMCreditCardEntryViewController.m */; };
+		4D49D8651767BB1E0046E638 /* Simplify.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4D98BC8E176258FE004FA922 /* Simplify.bundle */; };
+		4D49D8681767BE750046E638 /* UIColor+Additions.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D49D8661767BE750046E638 /* UIColor+Additions.h */; };
+		4D49D8691767BE750046E638 /* UIColor+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D8671767BE750046E638 /* UIColor+Additions.m */; };
+		4D49D86A1767BE750046E638 /* UIColor+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D8671767BE750046E638 /* UIColor+Additions.m */; };
+		4D49D86B1767BE750046E638 /* UIColor+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D8671767BE750046E638 /* UIColor+Additions.m */; };
+		4D49D8721767C5840046E638 /* SIMGradientView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D49D86C1767C5840046E638 /* SIMGradientView.h */; };
+		4D49D8731767C5840046E638 /* SIMGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D86D1767C5840046E638 /* SIMGradientView.m */; };
+		4D49D8741767C5840046E638 /* SIMGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D86D1767C5840046E638 /* SIMGradientView.m */; };
+		4D49D8751767C5840046E638 /* SIMGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D86D1767C5840046E638 /* SIMGradientView.m */; };
+		4D49D8761767C5840046E638 /* SIMHighlightView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D49D86E1767C5840046E638 /* SIMHighlightView.h */; };
+		4D49D8771767C5840046E638 /* SIMHighlightView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D86F1767C5840046E638 /* SIMHighlightView.m */; };
+		4D49D8781767C5840046E638 /* SIMHighlightView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D86F1767C5840046E638 /* SIMHighlightView.m */; };
+		4D49D8791767C5840046E638 /* SIMHighlightView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D86F1767C5840046E638 /* SIMHighlightView.m */; };
+		4D49D87A1767C5840046E638 /* SIMLayeredButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D49D8701767C5840046E638 /* SIMLayeredButton.h */; };
+		4D49D87B1767C5840046E638 /* SIMLayeredButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D8711767C5840046E638 /* SIMLayeredButton.m */; };
+		4D49D87C1767C5840046E638 /* SIMLayeredButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D8711767C5840046E638 /* SIMLayeredButton.m */; };
+		4D49D87D1767C5840046E638 /* SIMLayeredButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D8711767C5840046E638 /* SIMLayeredButton.m */; };
+		4D49D8801767C82A0046E638 /* SIMShapeView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D49D87E1767C82A0046E638 /* SIMShapeView.h */; };
+		4D49D8811767C82A0046E638 /* SIMShapeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D87F1767C82A0046E638 /* SIMShapeView.m */; };
+		4D49D8821767C82A0046E638 /* SIMShapeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D87F1767C82A0046E638 /* SIMShapeView.m */; };
+		4D49D8831767C82A0046E638 /* SIMShapeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D87F1767C82A0046E638 /* SIMShapeView.m */; };
+		4D49D8841767C8BE0046E638 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D67091C1762675200729623 /* QuartzCore.framework */; };
 		4D67091B1762673A00729623 /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D67091A1762673A00729623 /* GHUnitIOS.framework */; };
 		4D67091D1762675200729623 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D67091C1762675200729623 /* QuartzCore.framework */; };
 		4D6709201762687800729623 /* SIMCreditCardValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D67091E1762687800729623 /* SIMCreditCardValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -83,8 +115,6 @@
 		4D98BCB917626380004FA922 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D98BCB817626380004FA922 /* Default.png */; };
 		4D98BCBB17626380004FA922 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D98BCBA17626380004FA922 /* Default@2x.png */; };
 		4D98BCBD17626380004FA922 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D98BCBC17626380004FA922 /* Default-568h@2x.png */; };
-		4D98BCC1176263AD004FA922 /* Simplify.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4D98BC8E176258FE004FA922 /* Simplify.bundle */; };
-		4D98BCC2176263B6004FA922 /* libSimplify.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DDB653317623DD800871923 /* libSimplify.a */; };
 		4D98BCE61762654C004FA922 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D98BCA717626380004FA922 /* UIKit.framework */; };
 		4D98BCE71762654C004FA922 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DDB653617623DD800871923 /* Foundation.framework */; };
 		4D98BCE81762654C004FA922 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D98BCAA17626380004FA922 /* CoreGraphics.framework */; };
@@ -101,6 +131,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		4D49D8631767BB030046E638 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4DDB652B17623DD800871923 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4D98BC8D176258FE004FA922;
+			remoteInfo = SimplifyBundle;
+		};
 		4D98BC8717624AB7004FA922 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4DDB652B17623DD800871923 /* Project object */;
@@ -144,6 +181,22 @@
 		4D49D840176788F10046E638 /* jcb_32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = jcb_32.png; path = CardIcons/jcb_32.png; sourceTree = "<group>"; };
 		4D49D842176788F10046E638 /* mastercard_32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mastercard_32.png; path = CardIcons/mastercard_32.png; sourceTree = "<group>"; };
 		4D49D843176788F10046E638 /* visa_32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = visa_32.png; path = CardIcons/visa_32.png; sourceTree = "<group>"; };
+		4D49D84E1767A1EF0046E638 /* SIMCreditCardEntryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMCreditCardEntryView.h; sourceTree = "<group>"; };
+		4D49D84F1767A1EF0046E638 /* SIMCreditCardEntryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMCreditCardEntryView.m; sourceTree = "<group>"; };
+		4D49D8541767A63D0046E638 /* UIView+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Additions.h"; sourceTree = "<group>"; };
+		4D49D8551767A63D0046E638 /* UIView+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Additions.m"; sourceTree = "<group>"; };
+		4D49D85B1767AC3B0046E638 /* SIMCreditCardEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMCreditCardEntryViewController.h; sourceTree = "<group>"; };
+		4D49D85C1767AC3B0046E638 /* SIMCreditCardEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMCreditCardEntryViewController.m; sourceTree = "<group>"; };
+		4D49D8661767BE750046E638 /* UIColor+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Additions.h"; sourceTree = "<group>"; };
+		4D49D8671767BE750046E638 /* UIColor+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Additions.m"; sourceTree = "<group>"; };
+		4D49D86C1767C5840046E638 /* SIMGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMGradientView.h; sourceTree = "<group>"; };
+		4D49D86D1767C5840046E638 /* SIMGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMGradientView.m; sourceTree = "<group>"; };
+		4D49D86E1767C5840046E638 /* SIMHighlightView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMHighlightView.h; sourceTree = "<group>"; };
+		4D49D86F1767C5840046E638 /* SIMHighlightView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMHighlightView.m; sourceTree = "<group>"; };
+		4D49D8701767C5840046E638 /* SIMLayeredButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMLayeredButton.h; sourceTree = "<group>"; };
+		4D49D8711767C5840046E638 /* SIMLayeredButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMLayeredButton.m; sourceTree = "<group>"; };
+		4D49D87E1767C82A0046E638 /* SIMShapeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMShapeView.h; sourceTree = "<group>"; };
+		4D49D87F1767C82A0046E638 /* SIMShapeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMShapeView.m; sourceTree = "<group>"; };
 		4D67091A1762673A00729623 /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GHUnitIOS.framework; path = Frameworks/GHUnitIOS.framework; sourceTree = "<group>"; };
 		4D67091C1762675200729623 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4D67091E1762687800729623 /* SIMCreditCardValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMCreditCardValidator.h; sourceTree = "<group>"; };
@@ -224,6 +277,7 @@
 				4D98BCA817626380004FA922 /* UIKit.framework in Frameworks */,
 				4D98BCA917626380004FA922 /* Foundation.framework in Frameworks */,
 				4D98BCAB17626380004FA922 /* CoreGraphics.framework in Frameworks */,
+				4D49D8841767C8BE0046E638 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,13 +299,38 @@
 			buildActionMask = 2147483647;
 			files = (
 				4DDB653717623DD800871923 /* Foundation.framework in Frameworks */,
-				4D98BCC2176263B6004FA922 /* libSimplify.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4D49D84D1767A1C50046E638 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4D49D87E1767C82A0046E638 /* SIMShapeView.h */,
+				4D49D87F1767C82A0046E638 /* SIMShapeView.m */,
+				4D49D86C1767C5840046E638 /* SIMGradientView.h */,
+				4D49D86D1767C5840046E638 /* SIMGradientView.m */,
+				4D49D86E1767C5840046E638 /* SIMHighlightView.h */,
+				4D49D86F1767C5840046E638 /* SIMHighlightView.m */,
+				4D49D8701767C5840046E638 /* SIMLayeredButton.h */,
+				4D49D8711767C5840046E638 /* SIMLayeredButton.m */,
+				4D49D84E1767A1EF0046E638 /* SIMCreditCardEntryView.h */,
+				4D49D84F1767A1EF0046E638 /* SIMCreditCardEntryView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		4D49D85A1767AC150046E638 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4D49D85B1767AC3B0046E638 /* SIMCreditCardEntryViewController.h */,
+				4D49D85C1767AC3B0046E638 /* SIMCreditCardEntryViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
 		4D6709241762690300729623 /* Validation */ = {
 			isa = PBXGroup;
 			children = (
@@ -260,8 +339,6 @@
 				4D67091F1762687800729623 /* SIMCreditCardValidator.m */,
 				4D49D829176766D90046E638 /* SIMLuhnValidator.h */,
 				4D49D82A176766D90046E638 /* SIMLuhnValidator.m */,
-				4D49D83517676D9F0046E638 /* SIMCurrentTimeProvider.h */,
-				4D49D83617676D9F0046E638 /* SIMCurrentTimeProvider.m */,
 			);
 			name = Validation;
 			sourceTree = "<group>";
@@ -274,6 +351,8 @@
 				4DDB653D17623DD800871923 /* Simplify.m */,
 				4D98BC9D17625D88004FA922 /* SimplifyPrivate.h */,
 				4D98BC9E17625D88004FA922 /* SimplifyPrivate.m */,
+				4D49D83517676D9F0046E638 /* SIMCurrentTimeProvider.h */,
+				4D49D83617676D9F0046E638 /* SIMCurrentTimeProvider.m */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -304,6 +383,10 @@
 		4D67094D17662A1600729623 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				4D49D8661767BE750046E638 /* UIColor+Additions.h */,
+				4D49D8671767BE750046E638 /* UIColor+Additions.m */,
+				4D49D8541767A63D0046E638 /* UIView+Additions.h */,
+				4D49D8551767A63D0046E638 /* UIView+Additions.m */,
 				4D67094E17662A4400729623 /* NSString+Simplify.h */,
 				4D67094F17662A4400729623 /* NSString+Simplify.m */,
 			);
@@ -448,8 +531,10 @@
 			isa = PBXGroup;
 			children = (
 				4D6709251762690F00729623 /* Common */,
-				4D6709241762690300729623 /* Validation */,
+				4D49D85A1767AC150046E638 /* Controllers */,
 				4DDB653917623DD800871923 /* Supporting Files */,
+				4D6709241762690300729623 /* Validation */,
+				4D49D84D1767A1C50046E638 /* Views */,
 			);
 			path = Simplify;
 			sourceTree = "<group>";
@@ -475,6 +560,14 @@
 				4D67095017662A4400729623 /* NSString+Simplify.h in Headers */,
 				4D49D82B176766D90046E638 /* SIMLuhnValidator.h in Headers */,
 				4D49D83717676D9F0046E638 /* SIMCurrentTimeProvider.h in Headers */,
+				4D49D8501767A1EF0046E638 /* SIMCreditCardEntryView.h in Headers */,
+				4D49D8561767A63D0046E638 /* UIView+Additions.h in Headers */,
+				4D49D85D1767AC3B0046E638 /* SIMCreditCardEntryViewController.h in Headers */,
+				4D49D8681767BE750046E638 /* UIColor+Additions.h in Headers */,
+				4D49D8721767C5840046E638 /* SIMGradientView.h in Headers */,
+				4D49D8761767C5840046E638 /* SIMHighlightView.h in Headers */,
+				4D49D87A1767C5840046E638 /* SIMLayeredButton.h in Headers */,
+				4D49D8801767C82A0046E638 /* SIMShapeView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -509,6 +602,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				4D49D8641767BB030046E638 /* PBXTargetDependency */,
 			);
 			name = SimplifyExample;
 			productName = SimplifyExample;
@@ -612,11 +706,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D49D8651767BB1E0046E638 /* Simplify.bundle in Resources */,
 				4D98BCB117626380004FA922 /* InfoPlist.strings in Resources */,
 				4D98BCB917626380004FA922 /* Default.png in Resources */,
 				4D98BCBB17626380004FA922 /* Default@2x.png in Resources */,
 				4D98BCBD17626380004FA922 /* Default-568h@2x.png in Resources */,
-				4D98BCC1176263AD004FA922 /* Simplify.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -681,8 +775,15 @@
 				4D67095417662A5A00729623 /* Simplify.m in Sources */,
 				4D67095617662A5D00729623 /* SimplifyPrivate.m in Sources */,
 				4D49D82D176766D90046E638 /* SIMLuhnValidator.m in Sources */,
-				4D49D8331767671C0046E638 /* SIMLuhnValidatorTest.m in Sources */,
 				4D49D83917676D9F0046E638 /* SIMCurrentTimeProvider.m in Sources */,
+				4D49D8521767A1EF0046E638 /* SIMCreditCardEntryView.m in Sources */,
+				4D49D8581767A63D0046E638 /* UIView+Additions.m in Sources */,
+				4D49D85F1767AC3B0046E638 /* SIMCreditCardEntryViewController.m in Sources */,
+				4D49D86A1767BE750046E638 /* UIColor+Additions.m in Sources */,
+				4D49D8741767C5840046E638 /* SIMGradientView.m in Sources */,
+				4D49D8781767C5840046E638 /* SIMHighlightView.m in Sources */,
+				4D49D87C1767C5840046E638 /* SIMLayeredButton.m in Sources */,
+				4D49D8821767C82A0046E638 /* SIMShapeView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -702,6 +803,14 @@
 				4D49D82E176766D90046E638 /* SIMLuhnValidator.m in Sources */,
 				4D49D8341767671C0046E638 /* SIMLuhnValidatorTest.m in Sources */,
 				4D49D83A17676D9F0046E638 /* SIMCurrentTimeProvider.m in Sources */,
+				4D49D8531767A1EF0046E638 /* SIMCreditCardEntryView.m in Sources */,
+				4D49D8591767A63D0046E638 /* UIView+Additions.m in Sources */,
+				4D49D8601767AC3B0046E638 /* SIMCreditCardEntryViewController.m in Sources */,
+				4D49D86B1767BE750046E638 /* UIColor+Additions.m in Sources */,
+				4D49D8751767C5840046E638 /* SIMGradientView.m in Sources */,
+				4D49D8791767C5840046E638 /* SIMHighlightView.m in Sources */,
+				4D49D87D1767C5840046E638 /* SIMLayeredButton.m in Sources */,
+				4D49D8831767C82A0046E638 /* SIMShapeView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -714,14 +823,26 @@
 				4D6709211762687800729623 /* SIMCreditCardValidator.m in Sources */,
 				4D67095117662A4400729623 /* NSString+Simplify.m in Sources */,
 				4D49D82C176766D90046E638 /* SIMLuhnValidator.m in Sources */,
-				4D49D8321767671C0046E638 /* SIMLuhnValidatorTest.m in Sources */,
 				4D49D83817676D9F0046E638 /* SIMCurrentTimeProvider.m in Sources */,
+				4D49D8511767A1EF0046E638 /* SIMCreditCardEntryView.m in Sources */,
+				4D49D8571767A63D0046E638 /* UIView+Additions.m in Sources */,
+				4D49D85E1767AC3B0046E638 /* SIMCreditCardEntryViewController.m in Sources */,
+				4D49D8691767BE750046E638 /* UIColor+Additions.m in Sources */,
+				4D49D8731767C5840046E638 /* SIMGradientView.m in Sources */,
+				4D49D8771767C5840046E638 /* SIMHighlightView.m in Sources */,
+				4D49D87B1767C5840046E638 /* SIMLayeredButton.m in Sources */,
+				4D49D8811767C82A0046E638 /* SIMShapeView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		4D49D8641767BB030046E638 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4D98BC8D176258FE004FA922 /* SimplifyBundle */;
+			targetProxy = 4D49D8631767BB030046E638 /* PBXContainerItemProxy */;
+		};
 		4D98BC8817624AB7004FA922 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 4DDB653217623DD800871923 /* Simplify */;
@@ -779,7 +900,6 @@
 		4D98BC99176258FE004FA922 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -788,8 +908,8 @@
 				INFOPLIST_FILE = "SimplifyBundle/SimplifyBundle-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = Simplify;
-				SDKROOT = macosx;
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Debug;
@@ -797,7 +917,6 @@
 		4D98BC9A176258FE004FA922 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -808,8 +927,8 @@
 				INFOPLIST_FILE = "SimplifyBundle/SimplifyBundle-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = Simplify;
-				SDKROOT = macosx;
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;

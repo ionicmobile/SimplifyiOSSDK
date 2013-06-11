@@ -25,12 +25,11 @@
  * SUCH DAMAGE.
  */
 
-
-#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 
-@interface SimplifyPrivate : NSObject
-+(UIFont*)fontOfSize:(CGFloat)size;
-+(UIFont*)boldFontOfSize:(CGFloat)size;
-+(NSBundle*)frameworkBundle;
+@interface SIMShapeView : UIView
+
+@property (nonatomic, readonly, strong) CAShapeLayer *shapeLayer;
+
 @end

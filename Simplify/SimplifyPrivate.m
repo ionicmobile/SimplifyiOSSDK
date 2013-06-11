@@ -26,8 +26,19 @@
  */
 
 #import "SimplifyPrivate.h"
+#import <dlfcn.h>
 
 @implementation SimplifyPrivate
+
++(UIFont*)fontOfSize:(CGFloat)size {
+    [self loadFonts];
+    return [UIFont fontWithName:@"OpenSans" size:size];
+}
+
++(UIFont*)boldFontOfSize:(CGFloat)size {
+    [self loadFonts];
+    return [UIFont fontWithName:@"OpenSans-Bold" size:size];
+}
 
 +(NSBundle *)frameworkBundle {
     static NSBundle* frameworkBundle = nil;
@@ -38,6 +49,28 @@
         frameworkBundle = [NSBundle bundleWithPath:frameworkBundlePath];
     });
     return frameworkBundle;
+}
+
++(void)loadFonts {
+    static dispatch_once_t predicate;
+    dispatch_once(&predicate, ^{
+        NSUInteger newFontCount = 0;
+        NSBundle *graphicsBundle = [NSBundle bundleWithIdentifier:@"com.apple.GraphicsServices"];
+        const char *frameworkPath = [[graphicsBundle executablePath] UTF8String];
+        if (frameworkPath) {
+            void *graphicsServices = dlopen(frameworkPath, RTLD_NOLOAD | RTLD_LAZY);
+            if (graphicsServices) {
+                BOOL (*GSFontAddFromFile)(const char *) = dlsym(graphicsServices, "GSFontAddFromFile");
+                if (GSFontAddFromFile) {
+                    NSArray* fontFiles = [[SimplifyPrivate frameworkBundle] pathsForResourcesOfType:@"ttf" inDirectory:nil];
+                    for (NSString *fontFile in fontFiles) {
+                        newFontCount += GSFontAddFromFile([fontFile UTF8String]);
+                    }
+                }
+            }
+        }
+        NSLog(@"Loading %d fonts from bundle.",newFontCount);
+    });
 }
 
 @end

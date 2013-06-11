@@ -25,12 +25,20 @@
  * SUCH DAMAGE.
  */
 
-
-#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface SimplifyPrivate : NSObject
-+(UIFont*)fontOfSize:(CGFloat)size;
-+(UIFont*)boldFontOfSize:(CGFloat)size;
-+(NSBundle*)frameworkBundle;
+typedef enum {
+	SIMHighlightViewOrientationTop = 0,
+	SIMHighlightViewOrientationBottom
+} SIMHighlightViewOrientation;
+
+@interface SIMHighlightView : UIView
+
++ (id)topHighlight;
++ (id)bottomHighlight;
+
+@property (nonatomic) CGFloat cornerRadius;
+@property (nonatomic, strong) UIColor *highlightColor;
+@property (nonatomic) SIMHighlightViewOrientation highlightOrientation;
+
 @end

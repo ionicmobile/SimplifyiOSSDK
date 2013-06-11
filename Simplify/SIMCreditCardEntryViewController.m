@@ -25,12 +25,28 @@
  * SUCH DAMAGE.
  */
 
+#import "SIMCreditCardEntryViewController.h"
+#import "SIMCreditCardEntryView.h"
+#import "SIMCreditCardValidator.h"
 
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
+@interface SIMCreditCardEntryViewController()
+@property (nonatomic, strong) SIMCreditCardValidator* validator;
+@end
 
-@interface SimplifyPrivate : NSObject
-+(UIFont*)fontOfSize:(CGFloat)size;
-+(UIFont*)boldFontOfSize:(CGFloat)size;
-+(NSBundle*)frameworkBundle;
+@implementation SIMCreditCardEntryViewController
+
+-(id)init {
+    self = [super init];
+    if ( self ) {
+        
+    }
+    return self;
+}
+
+-(void)loadView {
+    [super loadView];
+    SIMCreditCardEntryView* creditCardEntryView = [[SIMCreditCardEntryView alloc] initWithFrame:self.view.bounds];
+    [self.view addSubview:creditCardEntryView];
+}
+
 @end

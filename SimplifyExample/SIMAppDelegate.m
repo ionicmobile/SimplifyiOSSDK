@@ -26,12 +26,14 @@
  */
 
 #import "SIMAppDelegate.h"
+#import "SIMCreditCardEntryViewController.h"
 
 @implementation SIMAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
+    self.window.rootViewController = [[SIMCreditCardEntryViewController alloc] init];
     [self.window makeKeyAndVisible];
     return YES;
 }

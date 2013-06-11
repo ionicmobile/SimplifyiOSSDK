@@ -25,12 +25,20 @@
  * SUCH DAMAGE.
  */
 
+#import "SIMShapeView.h"
 
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
+@interface SIMShapeView()
 
-@interface SimplifyPrivate : NSObject
-+(UIFont*)fontOfSize:(CGFloat)size;
-+(UIFont*)boldFontOfSize:(CGFloat)size;
-+(NSBundle*)frameworkBundle;
+@end
+
+@implementation SIMShapeView
+
++ (Class)layerClass {
+	return [CAShapeLayer class];
+}
+
+- (CAShapeLayer *)shapeLayer {
+	return (CAShapeLayer *)self.layer;
+}
+
 @end

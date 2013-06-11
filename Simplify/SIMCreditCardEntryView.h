@@ -25,12 +25,15 @@
  * SUCH DAMAGE.
  */
 
-
-#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "SIMCreditCardValidator.h"
 
-@interface SimplifyPrivate : NSObject
-+(UIFont*)fontOfSize:(CGFloat)size;
-+(UIFont*)boldFontOfSize:(CGFloat)size;
-+(NSBundle*)frameworkBundle;
+#define SIMCreditCardEntryViewCardNumberChanged @"SIMCreditCardEntryViewCardNumberChanged"
+#define SIMCreditCardEntryViewCVCNumberChanged @"SIMCreditCardEntryViewCVCNumberChanged"
+#define SIMCreditCardEntryViewExpirationChanged @"SIMCreditCardEntryViewExpirationChanged"
+
+@interface SIMCreditCardEntryView : UIView
+-(void)setCardNumber:(NSString*)cardNumber;
+-(void)setCardType:(SIMCreditCardType)cardType;
+-(void)setCVCCode:(NSString*)cvcCode;
 @end

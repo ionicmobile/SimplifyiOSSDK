@@ -25,12 +25,11 @@
  * SUCH DAMAGE.
  */
 
-
-#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 
-@interface SimplifyPrivate : NSObject
-+(UIFont*)fontOfSize:(CGFloat)size;
-+(UIFont*)boldFontOfSize:(CGFloat)size;
-+(NSBundle*)frameworkBundle;
+@interface SIMGradientView : UIView
+
+@property (nonatomic, readonly, strong) CAGradientLayer *gradientLayer;
+
 @end
