@@ -25,36 +25,34 @@
  * SUCH DAMAGE.
  */
 
-#import <Foundation/Foundation.h>
+#define IS_EVEN(x) (!((x)%2))
+#define IS_ODD(x) (!IS_EVEN(x))
+
 #import "SIMLuhnValidator.h"
-#import "SIMCurrentTimeProvider.h"
 
-typedef enum {
-    SIMCreditCardType_Unknown,
-    SIMCreditCardType_AmericanExpress,
-    SIMCreditCardType_Visa,
-    SIMCreditCardType_MasterCard,
-    SIMCreditCardType_Discover,
-    SIMCreditCardType_DinersClub,
-    SIMCreditCardType_JCB,
-    SIMCreditCardType_ChinaUnionPay,
-} SIMCreditCardType;
+@implementation SIMLuhnValidator
 
-@interface SIMCreditCardValidator : NSObject
-@property (nonatomic, readonly) SIMCreditCardType cardType;
-@property (nonatomic, strong, readonly) NSString* formattedCardNumber;
-@property (nonatomic, strong, readonly) NSString* formattedCVCCode;
-@property (nonatomic, strong, readonly) NSString* formattedExpirationDate;
-@property (nonatomic, strong, readonly) NSString* expirationMonth;
-@property (nonatomic, strong, readonly) NSString* expirationYear;
+-(BOOL)isValid:(NSString*)numberAsString {
+    NSUInteger checksum = 0;
+    for ( NSInteger i = numberAsString.length - 1; i >= 0;  --i ) {
+        NSUInteger value = [self valueOf:[numberAsString characterAtIndex:i]];
+        NSUInteger doubleValue = value * 2;
+        if ( IS_ODD(numberAsString.length - i) ) {
+            checksum += value;
+        } else if ( doubleValue <= 9 ) {
+            checksum += doubleValue;
+        } else {
+            checksum += 1 + (doubleValue - 10);
+        }
+    }
+    return ((checksum % 10) == 0);
+}
 
-@property (nonatomic, readonly) BOOL isValidCardNumberLength;
-@property (nonatomic, readonly) BOOL isValidCVC;
-@property (nonatomic, readonly) BOOL isExpired;
+#pragma mark - helpers
 
--(id)initWithLuhnValidator:(SIMLuhnValidator*)luhnValidator timeProvider:(SIMCurrentTimeProvider*)timeProvider;
--(void)setCardNumberAsString:(NSString*)string;
--(void)setCVCCodeAsString:(NSString*)string;
--(void)setExpirationAsString:(NSString*)string;
+-(NSUInteger)valueOf:(unichar)c {
+    return c - '0';
+}
+
 
 @end

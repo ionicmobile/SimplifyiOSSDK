@@ -25,13 +25,14 @@
  * SUCH DAMAGE.
  */
 
-#define IS_EVEN(x) (!((x)%2))
-#define IS_ODD(x) (!IS_EVEN(x))
 
 #import "SIMCreditCardValidator.h"
 #import "NSString+Simplify.h"
 
 @interface SIMCreditCardValidator()
+@property (nonatomic, strong) SIMLuhnValidator* luhnValidator;
+@property (nonatomic, strong) SIMCurrentTimeProvider* timeProvider;
+
 @property (nonatomic, strong, readwrite) NSString* expirationMonth;
 @property (nonatomic, strong, readwrite) NSString* expirationYear;
 
@@ -41,6 +42,15 @@
 @end
 
 @implementation SIMCreditCardValidator
+
+-(id)initWithLuhnValidator:(SIMLuhnValidator*)luhnValidator timeProvider:(SIMCurrentTimeProvider*)timeProvider {
+    self = [super init];
+    if ( self ) {
+        self.luhnValidator = luhnValidator;
+        self.timeProvider = timeProvider;
+    }
+    return self;
+}
 
 -(SIMCreditCardType)cardType {
     if ([self.digitsOnlyCardNumberString hasAnyPrefix:@[@"34",@"37"]]) {
@@ -129,23 +139,7 @@
     return nil;
 }
 
--(BOOL)isLuhnValid {
-    NSUInteger checksum = 0;
-    for ( NSInteger i = self.digitsOnlyCardNumberString.length - 1; i >= 0;  --i ) {
-        NSUInteger value = [self valueOf:[self.digitsOnlyCardNumberString characterAtIndex:i]];
-        NSUInteger doubleValue = value * 2;
-        if ( IS_ODD(self.digitsOnlyCardNumberString.length - i) ) {
-            checksum += value;
-        } else if ( doubleValue <= 9 ) {
-            checksum += doubleValue;
-        } else {
-            checksum += 1 + (doubleValue - 10);
-        }
-    }
-    return ((checksum % 10) == 0);
-}
-
--(BOOL)isValidLength {
+-(BOOL)isValidCardNumberLength {
     switch (self.cardType) {
         case SIMCreditCardType_AmericanExpress:
             return self.digitsOnlyCardNumberString.length == 15;
@@ -180,7 +174,7 @@
     }
 }
 
--(BOOL)isValidExpiration {
+-(BOOL)isExpired {
     NSTimeZone* earthsLastTimezone = [NSTimeZone timeZoneWithName:@"UTC-12:00"];
     NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
     NSNumber* expirationMonth = [numberFormatter numberFromString:self.expirationMonth];
@@ -199,13 +193,9 @@
     NSDate* beginExpirationMonth = [calendar dateFromComponents:expirationComponents];
     NSDate* justPastExpirationMonth = [calendar dateByAddingComponents:monthComponents toDate:beginExpirationMonth options:0];
     
-    return [justPastExpirationMonth compare:[NSDate date]] == NSOrderedDescending;
+    NSDate* currentTime = self.timeProvider.currentTime;
+    return [justPastExpirationMonth compare:currentTime] == NSOrderedAscending || [justPastExpirationMonth compare:currentTime] == NSOrderedSame;
 }
 
-#pragma mark - helpers
-
--(NSUInteger)valueOf:(unichar)c {
-    return c - '0';
-}
 
 @end

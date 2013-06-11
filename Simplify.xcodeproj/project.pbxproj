@@ -23,6 +23,17 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		4D49D82B176766D90046E638 /* SIMLuhnValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D49D829176766D90046E638 /* SIMLuhnValidator.h */; };
+		4D49D82C176766D90046E638 /* SIMLuhnValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D82A176766D90046E638 /* SIMLuhnValidator.m */; };
+		4D49D82D176766D90046E638 /* SIMLuhnValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D82A176766D90046E638 /* SIMLuhnValidator.m */; };
+		4D49D82E176766D90046E638 /* SIMLuhnValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D82A176766D90046E638 /* SIMLuhnValidator.m */; };
+		4D49D8321767671C0046E638 /* SIMLuhnValidatorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D8301767671C0046E638 /* SIMLuhnValidatorTest.m */; };
+		4D49D8331767671C0046E638 /* SIMLuhnValidatorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D8301767671C0046E638 /* SIMLuhnValidatorTest.m */; };
+		4D49D8341767671C0046E638 /* SIMLuhnValidatorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D8301767671C0046E638 /* SIMLuhnValidatorTest.m */; };
+		4D49D83717676D9F0046E638 /* SIMCurrentTimeProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D49D83517676D9F0046E638 /* SIMCurrentTimeProvider.h */; };
+		4D49D83817676D9F0046E638 /* SIMCurrentTimeProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D83617676D9F0046E638 /* SIMCurrentTimeProvider.m */; };
+		4D49D83917676D9F0046E638 /* SIMCurrentTimeProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D83617676D9F0046E638 /* SIMCurrentTimeProvider.m */; };
+		4D49D83A17676D9F0046E638 /* SIMCurrentTimeProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D83617676D9F0046E638 /* SIMCurrentTimeProvider.m */; };
 		4D67091B1762673A00729623 /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D67091A1762673A00729623 /* GHUnitIOS.framework */; };
 		4D67091D1762675200729623 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D67091C1762675200729623 /* QuartzCore.framework */; };
 		4D6709201762687800729623 /* SIMCreditCardValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D67091E1762687800729623 /* SIMCreditCardValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -112,6 +123,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4D49D829176766D90046E638 /* SIMLuhnValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMLuhnValidator.h; sourceTree = "<group>"; };
+		4D49D82A176766D90046E638 /* SIMLuhnValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMLuhnValidator.m; sourceTree = "<group>"; };
+		4D49D8301767671C0046E638 /* SIMLuhnValidatorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMLuhnValidatorTest.m; sourceTree = "<group>"; };
+		4D49D83517676D9F0046E638 /* SIMCurrentTimeProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMCurrentTimeProvider.h; sourceTree = "<group>"; };
+		4D49D83617676D9F0046E638 /* SIMCurrentTimeProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMCurrentTimeProvider.m; sourceTree = "<group>"; };
 		4D67091A1762673A00729623 /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GHUnitIOS.framework; path = Frameworks/GHUnitIOS.framework; sourceTree = "<group>"; };
 		4D67091C1762675200729623 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4D67091E1762687800729623 /* SIMCreditCardValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMCreditCardValidator.h; sourceTree = "<group>"; };
@@ -226,6 +242,10 @@
 				4D6709261762694900729623 /* Test */,
 				4D67091E1762687800729623 /* SIMCreditCardValidator.h */,
 				4D67091F1762687800729623 /* SIMCreditCardValidator.m */,
+				4D49D829176766D90046E638 /* SIMLuhnValidator.h */,
+				4D49D82A176766D90046E638 /* SIMLuhnValidator.m */,
+				4D49D83517676D9F0046E638 /* SIMCurrentTimeProvider.h */,
+				4D49D83617676D9F0046E638 /* SIMCurrentTimeProvider.m */,
 			);
 			name = Validation;
 			sourceTree = "<group>";
@@ -246,6 +266,7 @@
 			isa = PBXGroup;
 			children = (
 				4D67094B17626D8300729623 /* SIMCreditCardValidatorTest.m */,
+				4D49D8301767671C0046E638 /* SIMLuhnValidatorTest.m */,
 			);
 			name = Test;
 			sourceTree = "<group>";
@@ -428,6 +449,8 @@
 				4D98BC9F17625D88004FA922 /* SimplifyPrivate.h in Headers */,
 				4D6709201762687800729623 /* SIMCreditCardValidator.h in Headers */,
 				4D67095017662A4400729623 /* NSString+Simplify.h in Headers */,
+				4D49D82B176766D90046E638 /* SIMLuhnValidator.h in Headers */,
+				4D49D83717676D9F0046E638 /* SIMCurrentTimeProvider.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -625,6 +648,9 @@
 				4D67095217662A4400729623 /* NSString+Simplify.m in Sources */,
 				4D67095417662A5A00729623 /* Simplify.m in Sources */,
 				4D67095617662A5D00729623 /* SimplifyPrivate.m in Sources */,
+				4D49D82D176766D90046E638 /* SIMLuhnValidator.m in Sources */,
+				4D49D8331767671C0046E638 /* SIMLuhnValidatorTest.m in Sources */,
+				4D49D83917676D9F0046E638 /* SIMCurrentTimeProvider.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -641,6 +667,9 @@
 				4D67095317662A4400729623 /* NSString+Simplify.m in Sources */,
 				4D67095517662A5B00729623 /* Simplify.m in Sources */,
 				4D67095717662A5E00729623 /* SimplifyPrivate.m in Sources */,
+				4D49D82E176766D90046E638 /* SIMLuhnValidator.m in Sources */,
+				4D49D8341767671C0046E638 /* SIMLuhnValidatorTest.m in Sources */,
+				4D49D83A17676D9F0046E638 /* SIMCurrentTimeProvider.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -652,6 +681,9 @@
 				4D98BCA017625D88004FA922 /* SimplifyPrivate.m in Sources */,
 				4D6709211762687800729623 /* SIMCreditCardValidator.m in Sources */,
 				4D67095117662A4400729623 /* NSString+Simplify.m in Sources */,
+				4D49D82C176766D90046E638 /* SIMLuhnValidator.m in Sources */,
+				4D49D8321767671C0046E638 /* SIMLuhnValidatorTest.m in Sources */,
+				4D49D83817676D9F0046E638 /* SIMCurrentTimeProvider.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

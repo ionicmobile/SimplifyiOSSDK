@@ -27,9 +27,13 @@
 
 #import "SIMAbstractTestCase.h"
 #import "SIMCreditCardValidator.h"
+#import "SIMLuhnValidator.h"
+#import "SIMCurrentTimeProvider.h"
 
 @interface SIMCreditCardValidatorTest : SIMAbstractTestCase {
     SIMCreditCardValidator* testObject;
+    id mockLuhnValidator;
+    id mockTimeProvider;
 }
 @end
 
@@ -37,55 +41,23 @@
 
 -(void)setUp {
     [super setUp];
-    testObject = [[SIMCreditCardValidator alloc] init];
+    mockLuhnValidator = [OCMockObject mockForClass:SIMLuhnValidator.class];
+    mockTimeProvider = [OCMockObject mockForClass:SIMCurrentTimeProvider.class];
+    testObject = [[SIMCreditCardValidator alloc] initWithLuhnValidator:mockLuhnValidator timeProvider:mockTimeProvider];
 }
 
--(void)testWhenNonLuhnNumberIsSubmittedThenItIsInvalid {
-    [testObject setCardNumberAsString:@"79927398710"];
-    GHAssertFalse([testObject isLuhnValid], nil);
-    [testObject setCardNumberAsString:@"79927398711"];
-    GHAssertFalse([testObject isLuhnValid], nil);
-    [testObject setCardNumberAsString:@"79927398712"];
-    GHAssertFalse([testObject isLuhnValid], nil);
-    [testObject setCardNumberAsString:@"79927398714"];
-    GHAssertFalse([testObject isLuhnValid], nil);
-    [testObject setCardNumberAsString:@"79927398715"];
-    GHAssertFalse([testObject isLuhnValid], nil);
-    [testObject setCardNumberAsString:@"79927398716"];
-    GHAssertFalse([testObject isLuhnValid], nil);
-    [testObject setCardNumberAsString:@"79927398717"];
-    GHAssertFalse([testObject isLuhnValid], nil);
-    [testObject setCardNumberAsString:@"79927398718"];
-    GHAssertFalse([testObject isLuhnValid], nil);
-    [testObject setCardNumberAsString:@"79927398719"];
-    GHAssertFalse([testObject isLuhnValid], nil);
-}
-
--(void)testWhenLuhnNumberIsSubmittedThenIsIsValid {
-    [testObject setCardNumberAsString:@"378282246310005"];
-    GHAssertTrue([testObject isLuhnValid], nil);
-    [testObject setCardNumberAsString:@"378282246310005"];
-    GHAssertTrue([testObject isLuhnValid], nil);
-    [testObject setCardNumberAsString:@"371449635398431"];
-    GHAssertTrue([testObject isLuhnValid], nil);
-    [testObject setCardNumberAsString:@"378282246310005"];
-    GHAssertTrue([testObject isLuhnValid], nil);
-    [testObject setCardNumberAsString:@"371449635398431"];
-    GHAssertTrue([testObject isLuhnValid], nil);
-}
-
--(void)testWhenFormattedLuhnNumberIsSubmittedThenIsIsValid {
-    [testObject setCardNumberAsString:@"378282246310005"];
-    GHAssertTrue([testObject isLuhnValid], nil);
-    [testObject setCardNumberAsString:@"3782-822463-10005"];
-    GHAssertTrue([testObject isLuhnValid], nil);
-    [testObject setCardNumberAsString:@"3714-496353-98431"];
-    GHAssertTrue([testObject isLuhnValid], nil);
-    [testObject setCardNumberAsString:@"3782 822463 10005"];
-    GHAssertTrue([testObject isLuhnValid], nil);
-    [testObject setCardNumberAsString:@"3714 496353 98431"];
-    GHAssertTrue([testObject isLuhnValid], nil);
-}
+//-(void)testWhenFormattedLuhnNumberIsSubmittedThenIsIsValid {
+//    [testObject setCardNumberAsString:@"378282246310005"];
+//    GHAssertTrue([testObject isLuhnValid], nil);
+//    [testObject setCardNumberAsString:@"3782-822463-10005"];
+//    GHAssertTrue([testObject isLuhnValid], nil);
+//    [testObject setCardNumberAsString:@"3714-496353-98431"];
+//    GHAssertTrue([testObject isLuhnValid], nil);
+//    [testObject setCardNumberAsString:@"3782 822463 10005"];
+//    GHAssertTrue([testObject isLuhnValid], nil);
+//    [testObject setCardNumberAsString:@"3714 496353 98431"];
+//    GHAssertTrue([testObject isLuhnValid], nil);
+//}
 
 -(void)testWhenUnknownCardIsEncounteredThenItsTypeIsUnknown {
     [testObject setCardNumberAsString:@"1"];
@@ -198,126 +170,126 @@
 // Source: http://en.wikipedia.org/wiki/Bank_card_number 
 -(void)testWhenAmexCardIsEnteredWith15DigitsThenItHasValidLength {
     [testObject setCardNumberAsString:@"37828224631000"];
-    GHAssertFalse(testObject.isValidLength, nil);
+    GHAssertFalse(testObject.isValidCardNumberLength, nil);
     [testObject setCardNumberAsString:@"378282246310005"];
-    GHAssertTrue(testObject.isValidLength, nil);
+    GHAssertTrue(testObject.isValidCardNumberLength, nil);
     [testObject setCardNumberAsString:@"3782822463100051"];
-    GHAssertFalse(testObject.isValidLength, nil);
+    GHAssertFalse(testObject.isValidCardNumberLength, nil);
 }
 
 // Source: http://en.wikipedia.org/wiki/Bank_card_number 
 -(void)testWhenVisaCardHas13Or16DigitsThenItHasValidLength {
     [testObject setCardNumberAsString:@"411111111111"];
-    GHAssertFalse(testObject.isValidLength, nil);
+    GHAssertFalse(testObject.isValidCardNumberLength, nil);
 
     [testObject setCardNumberAsString:@"4111111111111"];
-    GHAssertTrue(testObject.isValidLength, nil);
+    GHAssertTrue(testObject.isValidCardNumberLength, nil);
 
     [testObject setCardNumberAsString:@"41111111111111"];
-    GHAssertFalse(testObject.isValidLength, nil);
+    GHAssertFalse(testObject.isValidCardNumberLength, nil);
 
     [testObject setCardNumberAsString:@"411111111111111"];
-    GHAssertFalse(testObject.isValidLength, nil);
+    GHAssertFalse(testObject.isValidCardNumberLength, nil);
     
     [testObject setCardNumberAsString:@"4111111111111111"];
-    GHAssertTrue(testObject.isValidLength, nil);
+    GHAssertTrue(testObject.isValidCardNumberLength, nil);
     
     [testObject setCardNumberAsString:@"41111111111111111"];
-    GHAssertFalse(testObject.isValidLength, nil);
+    GHAssertFalse(testObject.isValidCardNumberLength, nil);
 }
 
 // Source: http://en.wikipedia.org/wiki/Bank_card_number 
 -(void)testWhenMasterCardHas16DigitsThenItHasValidLength {
     [testObject setCardNumberAsString:@"510510510510510"];
-    GHAssertFalse(testObject.isValidLength, nil);
+    GHAssertFalse(testObject.isValidCardNumberLength, nil);
 
     [testObject setCardNumberAsString:@"5105105105105100"];
-    GHAssertTrue(testObject.isValidLength, nil);
+    GHAssertTrue(testObject.isValidCardNumberLength, nil);
     
     [testObject setCardNumberAsString:@"51051051051051001"];
-    GHAssertFalse(testObject.isValidLength, nil);
+    GHAssertFalse(testObject.isValidCardNumberLength, nil);
 }
 
 // Source: http://en.wikipedia.org/wiki/Bank_card_number
 -(void)testWhenDiscoverHas16DigitsThenItHasValidLength {
     [testObject setCardNumberAsString:@"601100099013942"];
-    GHAssertFalse(testObject.isValidLength, nil);
+    GHAssertFalse(testObject.isValidCardNumberLength, nil);
     
     [testObject setCardNumberAsString:@"6011000990139424"];
-    GHAssertTrue(testObject.isValidLength, nil);
+    GHAssertTrue(testObject.isValidCardNumberLength, nil);
 
     [testObject setCardNumberAsString:@"60110009901394245"];
-    GHAssertFalse(testObject.isValidLength, nil);
+    GHAssertFalse(testObject.isValidCardNumberLength, nil);
 }
 
 // Source: http://en.wikipedia.org/wiki/Bank_card_number 
 -(void)testWhenJCBHas16DigitsThenItHasValidLength {
     [testObject setCardNumberAsString:@"353011133330000"];
-    GHAssertFalse(testObject.isValidLength, nil);
+    GHAssertFalse(testObject.isValidCardNumberLength, nil);
 
     [testObject setCardNumberAsString:@"3530111333300000"];
-    GHAssertTrue(testObject.isValidLength, nil);
+    GHAssertTrue(testObject.isValidCardNumberLength, nil);
 
     [testObject setCardNumberAsString:@"35301113333000000"];
-    GHAssertFalse(testObject.isValidLength, nil);
+    GHAssertFalse(testObject.isValidCardNumberLength, nil);
 }
 
 // Source: http://en.wikipedia.org/wiki/Bank_card_number 
 -(void)testWhenDinersClubHas14or15or16DigitsThenItHasValidLength {
     [testObject setCardNumberAsString:@"3056930902590"];
-    GHAssertFalse(testObject.isValidLength, nil);
+    GHAssertFalse(testObject.isValidCardNumberLength, nil);
     
     [testObject setCardNumberAsString:@"30569309025904"];
-    GHAssertTrue(testObject.isValidLength, nil);
+    GHAssertTrue(testObject.isValidCardNumberLength, nil);
     
     [testObject setCardNumberAsString:@"305693090259045"];
-    GHAssertTrue(testObject.isValidLength, nil);
+    GHAssertTrue(testObject.isValidCardNumberLength, nil);
     
     [testObject setCardNumberAsString:@"3056930902590456"];
-    GHAssertTrue(testObject.isValidLength, nil);
+    GHAssertTrue(testObject.isValidCardNumberLength, nil);
     
     [testObject setCardNumberAsString:@"30569309025904567"];
-    GHAssertFalse(testObject.isValidLength, nil);
+    GHAssertFalse(testObject.isValidCardNumberLength, nil);
 }
 
 // Source: http://en.wikipedia.org/wiki/Bank_card_number 
 -(void)testWhenChinaUnionPayIs16Through19DigitsThenItHasValidLength {
     [testObject setCardNumberAsString:@"622126000000000"];
-    GHAssertFalse(testObject.isValidLength, nil);
+    GHAssertFalse(testObject.isValidCardNumberLength, nil);
     [testObject setCardNumberAsString:@"6221260000000000"];
-    GHAssertTrue(testObject.isValidLength, nil);
+    GHAssertTrue(testObject.isValidCardNumberLength, nil);
     [testObject setCardNumberAsString:@"62212600000000000"];
-    GHAssertTrue(testObject.isValidLength, nil);
+    GHAssertTrue(testObject.isValidCardNumberLength, nil);
     [testObject setCardNumberAsString:@"622126000000000000"];
-    GHAssertTrue(testObject.isValidLength, nil);
+    GHAssertTrue(testObject.isValidCardNumberLength, nil);
     [testObject setCardNumberAsString:@"6221260000000000000"];
-    GHAssertTrue(testObject.isValidLength, nil);
+    GHAssertTrue(testObject.isValidCardNumberLength, nil);
     [testObject setCardNumberAsString:@"62212600000000000000"];
-    GHAssertFalse(testObject.isValidLength, nil);
+    GHAssertFalse(testObject.isValidCardNumberLength, nil);
 }
 
 // Source: http://en.wikipedia.org/wiki/Bank_card_number 
 -(void)testWhenCardUnknownThenLengthIsBetween12and19 {
     [testObject setCardNumberAsString:@"56105910810"];
-    GHAssertFalse(testObject.isValidLength, nil);
+    GHAssertFalse(testObject.isValidCardNumberLength, nil);
     [testObject setCardNumberAsString:@"561059108101"];
-    GHAssertTrue(testObject.isValidLength, nil);
+    GHAssertTrue(testObject.isValidCardNumberLength, nil);
     [testObject setCardNumberAsString:@"5610591081018"];
-    GHAssertTrue(testObject.isValidLength, nil);
+    GHAssertTrue(testObject.isValidCardNumberLength, nil);
     [testObject setCardNumberAsString:@"56105910810182"];
-    GHAssertTrue(testObject.isValidLength, nil);
+    GHAssertTrue(testObject.isValidCardNumberLength, nil);
     [testObject setCardNumberAsString:@"561059108101825"];
-    GHAssertTrue(testObject.isValidLength, nil);
+    GHAssertTrue(testObject.isValidCardNumberLength, nil);
     [testObject setCardNumberAsString:@"5610591081018250"]; // e.g., Austrailian Bankcard
-    GHAssertTrue(testObject.isValidLength, nil);
+    GHAssertTrue(testObject.isValidCardNumberLength, nil);
     [testObject setCardNumberAsString:@"56105910810182501"];
-    GHAssertTrue(testObject.isValidLength, nil);
+    GHAssertTrue(testObject.isValidCardNumberLength, nil);
     [testObject setCardNumberAsString:@"561059108101825012"];
-    GHAssertTrue(testObject.isValidLength, nil);
+    GHAssertTrue(testObject.isValidCardNumberLength, nil);
     [testObject setCardNumberAsString:@"5610591081018250123"];
-    GHAssertTrue(testObject.isValidLength, nil);
+    GHAssertTrue(testObject.isValidCardNumberLength, nil);
     [testObject setCardNumberAsString:@"56105910810182501234"];
-    GHAssertFalse(testObject.isValidLength, nil);
+    GHAssertFalse(testObject.isValidCardNumberLength, nil);
 }
 
 -(void)testWhenNoCardIsSetThenCVCIsInvalid {
@@ -417,14 +389,40 @@
     GHAssertEqualObjects(testObject.expirationYear, @"13", nil);
 }
 
--(void)testWhenExpirationDateIsPassedThenItIsInvalid {
+-(void)testWhenExpirationDateIsInTheFutureItIsValid  {
+    NSTimeZone* earthsLastTimezone = [NSTimeZone timeZoneWithName:@"UTC-12:00"];
+    NSDateComponents* components = [[NSDateComponents alloc] init];
+    [components setMonth:1];
+    [components setDay:1];
+    [components setYear:2012];
+    [components setTimeZone:earthsLastTimezone];
+    
+    NSCalendar* calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDate* firstMomentOf2012ForLastTimeZone = [calendar dateFromComponents:components];
+    
+    [[[mockTimeProvider expect] andReturn:firstMomentOf2012ForLastTimeZone] currentTime];
     [testObject setExpirationAsString:@"12/11"];
-    GHAssertFalse(testObject.isValidExpiration, nil);
+    GHAssertTrue(testObject.isExpired, nil);
+    [mockTimeProvider verify];
 }
 
--(void)testWhenExpirationDateIsInTheFutureItIsValid {
-    [testObject setExpirationAsString:@"12/23"];
-    GHAssertTrue(testObject.isValidExpiration, nil);
+-(void)testWhenExpirationDateIsNotPassedThenItIsNotExpired {
+    NSTimeZone* earthsLastTimezone = [NSTimeZone timeZoneWithName:@"UTC-12:00"];
+    NSDateComponents* components = [[NSDateComponents alloc] init];
+    [components setMonth:12];
+    [components setDay:31];
+    [components setYear:2011];
+    [components setHour:23];
+    [components setMinute:59];
+    [components setSecond:59];
+    [components setTimeZone:earthsLastTimezone];
+    
+    NSCalendar* calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDate* lastMomentOf2011ForLastTimeZone = [calendar dateFromComponents:components];
+    [[[mockTimeProvider expect] andReturn:lastMomentOf2011ForLastTimeZone] currentTime];
+    [testObject setExpirationAsString:@"12/11"];
+    GHAssertFalse(testObject.isExpired, nil);
+    [mockTimeProvider verify];
 }
 
 @end
