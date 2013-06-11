@@ -33,8 +33,8 @@
 #import "SIMLayeredButton.h"
 
 @interface SIMCreditCardEntryView()
-@property (nonatomic, strong) UILabel* creditCardNumberLabel;
 @property (nonatomic, strong) UIImageView* cardImageView;
+@property (nonatomic, strong) UILabel* creditCardNumberLabel;
 @property (nonatomic, strong) UITextField* creditCardNumberTextField;
 @property (nonatomic, strong) UILabel* CVCNumberLabel;
 @property (nonatomic, strong) UITextField* CVCNumberTextField;
@@ -54,17 +54,21 @@
         creditCardNumberLabel.text = @"Card No.";
         creditCardNumberLabel.font = [SimplifyPrivate fontOfSize:14.0f];
         
-        UIImageView* cardImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+        UIImageView* cardImageView = [[UIImageView alloc] initWithImage:[SimplifyPrivate imageNamed:@"card_back_32"]];
         
         UITextField* creditCardNumberTextField = [[UITextField alloc] initWithFrame:CGRectZero];
-        creditCardNumberTextField.leftView = cardImageView;
+        creditCardNumberTextField.leftView = [UIView paddedViewWithView:cardImageView andPadding:CGSizeMake(15, 0)];
+        creditCardNumberTextField.leftViewMode = UITextFieldViewModeAlways;
         creditCardNumberTextField.layer.borderColor = [UIColor simplifyBorderColor].CGColor;
         creditCardNumberTextField.layer.borderWidth = 1.0f;
         creditCardNumberTextField.layer.masksToBounds = YES;
-         
+        creditCardNumberTextField.keyboardType = UIKeyboardTypeNumberPad;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ccChanged) name:UITextFieldTextDidChangeNotification object:creditCardNumberTextField];
+        
         UILabel* CVCNumberLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         CVCNumberLabel.text = @"CVC No.";
         CVCNumberLabel.font = [SimplifyPrivate fontOfSize:14.0f];
+
         
         UITextField* CVCNumberTextField = [[UITextField alloc] initWithFrame:CGRectZero];
         CVCNumberTextField.borderStyle = UITextBorderStyleLine;
@@ -72,7 +76,9 @@
         CVCNumberTextField.layer.borderColor = [UIColor simplifyBorderColor].CGColor;
         CVCNumberTextField.layer.borderWidth = 1.0f;
         CVCNumberTextField.layer.masksToBounds = YES;
-
+        CVCNumberTextField.keyboardType = UIKeyboardTypeNumberPad;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cvcChanged) name:UITextFieldTextDidChangeNotification object:CVCNumberTextField];
+        
         UILabel* expirationDateLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         expirationDateLabel.text = @"Expiration Date";
         expirationDateLabel.font = [SimplifyPrivate fontOfSize:14.0f];
@@ -83,6 +89,8 @@
         expirationDateTextField.layer.borderColor = [UIColor simplifyBorderColor].CGColor;
         expirationDateTextField.layer.borderWidth = 1.0f;
         expirationDateTextField.layer.masksToBounds = YES;
+        expirationDateTextField.keyboardType = UIKeyboardTypeNumberPad;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(expiryChanged) name:UITextFieldTextDidChangeNotification object:expirationDateTextField];
 
         SIMLayeredButton* button = [[SIMLayeredButton alloc] init];
         [button setTitle:@"Make Charge" forState:UIControlStateNormal];
@@ -90,6 +98,7 @@
         button.titleLabel.shadowColor = [UIColor blackColor];
         button.titleLabel.shadowOffset = CGSizeMake(0, -1);
         
+        self.cardImageView = cardImageView;
         self.creditCardNumberLabel = creditCardNumberLabel;
         self.creditCardNumberTextField = creditCardNumberTextField;
         self.CVCNumberLabel = CVCNumberLabel;
@@ -107,6 +116,10 @@
         [self addSubview:button];
     }
     return self;
+}
+
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(void)layoutSubviews {
@@ -128,35 +141,35 @@
 }
 
 -(void)setCardNumber:(NSString*)cardNumber {
-    
+    self.creditCardNumberTextField.text = cardNumber;
     [self setNeedsLayout];
 }
 
 -(void)setCardType:(SIMCreditCardType)cardType {
     switch (cardType) {
         case SIMCreditCardType_AmericanExpress:
-            self.cardImageView.image = [UIImage imageNamed:@"american_express_32"];
+            self.cardImageView.image = [SimplifyPrivate imageNamed:@"american_express_32"];
             break;
         case SIMCreditCardType_ChinaUnionPay:
-            self.cardImageView.image = [UIImage imageNamed:@"china_union_pay_32"];
+            self.cardImageView.image = [SimplifyPrivate imageNamed:@"china_union_pay_32"];
             break;
         case SIMCreditCardType_DinersClub:
-            self.cardImageView.image = [UIImage imageNamed:@"diners_club_32"];
+            self.cardImageView.image = [SimplifyPrivate imageNamed:@"diners_club_32"];
             break;
         case SIMCreditCardType_Discover:
-            self.cardImageView.image = [UIImage imageNamed:@"discover_32"];
+            self.cardImageView.image = [SimplifyPrivate imageNamed:@"discover_32"];
             break;
         case SIMCreditCardType_JCB:
-            self.cardImageView.image = [UIImage imageNamed:@"jcb_32"];
+            self.cardImageView.image = [SimplifyPrivate imageNamed:@"jcb_32"];
             break;
         case SIMCreditCardType_MasterCard:
-            self.cardImageView.image = [UIImage imageNamed:@"mastercard_32"];
+            self.cardImageView.image = [SimplifyPrivate imageNamed:@"mastercard_32"];
             break;
         case SIMCreditCardType_Visa:
-            self.cardImageView.image = [UIImage imageNamed:@"visa_32"];
+            self.cardImageView.image = [SimplifyPrivate imageNamed:@"visa_32"];
             break;
         case SIMCreditCardType_Unknown:
-            self.cardImageView.image = [UIImage imageNamed:@"card_back_32"];
+            self.cardImageView.image = [SimplifyPrivate imageNamed:@"card_back_32"];
         default:
             break;            
     }
@@ -164,8 +177,40 @@
 }
 
 -(void)setCVCCode:(NSString*)cvcCode {
- 
+    self.CVCNumberTextField.text = cvcCode;
     [self setNeedsLayout];
+}
+
+-(void)setExpirationDate:(NSString*)expiration {
+    self.expirationDateTextField.text = expiration;
+    [self setNeedsLayout];
+}
+
+-(void)setButtonEnabled:(BOOL)enabled {
+    self.button.enabled = enabled;
+}
+
+#pragma mark - helpers
+
+-(void)ccChanged {
+    NSString* cc = self.creditCardNumberTextField.text ? self.creditCardNumberTextField.text : @"";
+    [[NSNotificationCenter defaultCenter] postNotificationName:SIMCreditCardEntryViewCardNumberChanged object:self userInfo:@{
+        SIMCreditCardEntryViewCardNumberKey : cc
+     }];
+}
+
+-(void)cvcChanged {
+    NSString* cvc = self.CVCNumberTextField.text ? self.CVCNumberTextField.text : @"";
+    [[NSNotificationCenter defaultCenter] postNotificationName:SIMCreditCardEntryViewCVCNumberChanged object:self userInfo:@{
+        SIMCreditCardEntryViewCVCNumberKey : cvc
+     }];
+}
+
+-(void)expiryChanged {
+    NSString* expiry = self.expirationDateTextField.text ? self.expirationDateTextField.text : @"";
+    [[NSNotificationCenter defaultCenter] postNotificationName:SIMCreditCardEntryViewExpirationChanged object:self userInfo:@{
+        SIMCreditCardEntryViewExpirationKey : expiry
+     }];
 }
 
 @end

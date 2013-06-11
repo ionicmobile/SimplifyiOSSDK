@@ -33,4 +33,5 @@
 +(UIFont*)fontOfSize:(CGFloat)size;
 +(UIFont*)boldFontOfSize:(CGFloat)size;
 +(NSBundle*)frameworkBundle;
++(UIImage*)imageNamed:(NSString*)name;
 @end

@@ -116,8 +116,8 @@
     NSMutableString* expirationDate = [NSMutableString string];
     if ( self.expirationMonth ) {
         [expirationDate appendString:self.expirationMonth];
-        [expirationDate appendString:@"/"];
         if (self.expirationYear ) {
+            [expirationDate appendString:@"/"];
             [expirationDate appendString:self.expirationYear];
         }
         return expirationDate;
@@ -128,6 +128,8 @@
 -(NSString*)expirationMonth {
     if ( self.digitsOnlyExpirationDateString.length >= 2 ) {
         return [self.digitsOnlyExpirationDateString substringToIndex:2];
+    } else if (self.digitsOnlyExpirationDateString.length >= 1 ) {
+        return [self.digitsOnlyExpirationDateString substringToIndex:1];
     }
     return nil;
 }
@@ -135,6 +137,8 @@
 -(NSString*)expirationYear {
     if ( self.digitsOnlyExpirationDateString.length >= 4 ) {
         return [[self.digitsOnlyExpirationDateString substringFromIndex:2] substringToIndex:2];
+    } else if (self.digitsOnlyExpirationDateString.length >= 3 ) {
+        return [[self.digitsOnlyExpirationDateString substringFromIndex:2] substringToIndex:1];
     }
     return nil;
 }

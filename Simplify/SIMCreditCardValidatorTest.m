@@ -475,6 +475,21 @@
     GHAssertFalse(testObject.isValidCVC, nil);
 }
 
+-(void)testWhenPartialMonthIsUsedInExpirationDateMonthIsReturned {
+    [testObject setExpirationAsString:@"1"];
+    GHAssertEqualObjects(testObject.formattedExpirationDate, @"1", nil);
+    GHAssertEqualObjects(testObject.expirationMonth, @"1", nil);
+    GHAssertNil(testObject.expirationYear, nil);
+
+}
+
+-(void)testWhenPartialMonthIsUsedInExpirationDateYearIsReturned {
+    [testObject setExpirationAsString:@"11/0"];
+    GHAssertEqualObjects(testObject.formattedExpirationDate, @"11/0", nil);
+    GHAssertEqualObjects(testObject.expirationMonth, @"11", nil);
+    GHAssertEqualObjects(testObject.expirationYear, @"0", nil);
+}
+
 -(void)testWhenExpirationIsSetThenItIsParsed {
     [testObject setExpirationAsString:@"1213"];
     GHAssertEqualObjects(testObject.formattedExpirationDate, @"12/13", nil);

@@ -51,6 +51,11 @@
     return frameworkBundle;
 }
 
++(UIImage*)imageNamed:(NSString*)name {
+    NSString *fileName = [[SimplifyPrivate frameworkBundle] pathForResource:name ofType:@"png"];
+    return [UIImage imageWithContentsOfFile:fileName];
+}
+
 +(void)loadFonts {
     static dispatch_once_t predicate;
     dispatch_once(&predicate, ^{

@@ -28,25 +28,51 @@
 #import "SIMCreditCardEntryViewController.h"
 #import "SIMCreditCardEntryView.h"
 #import "SIMCreditCardValidator.h"
+#import "SIMCurrentTimeProvider.h"
+#import "SIMLuhnValidator.h"
 
 @interface SIMCreditCardEntryViewController()
-@property (nonatomic, strong) SIMCreditCardValidator* validator;
+@property (nonatomic, strong) SIMCreditCardValidator* ccValidator;
+@property (nonatomic, strong) SIMCreditCardEntryView* ccEntryView;
 @end
 
 @implementation SIMCreditCardEntryViewController
 
--(id)init {
-    self = [super init];
-    if ( self ) {
-        
-    }
-    return self;
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
 -(void)loadView {
     [super loadView];
-    SIMCreditCardEntryView* creditCardEntryView = [[SIMCreditCardEntryView alloc] initWithFrame:self.view.bounds];
-    [self.view addSubview:creditCardEntryView];
+    SIMLuhnValidator* luhnValidator = [[SIMLuhnValidator alloc] init];
+    SIMCurrentTimeProvider* timeProvider = [[SIMCurrentTimeProvider alloc] init];
+    SIMCreditCardValidator* ccValidator = [[SIMCreditCardValidator alloc] initWithLuhnValidator:luhnValidator timeProvider:timeProvider];
+    SIMCreditCardEntryView* ccEntryView = [[SIMCreditCardEntryView alloc] initWithFrame:self.view.bounds];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ccChanged:) name:SIMCreditCardEntryViewCardNumberChanged object:ccEntryView];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cvcChanged:) name:SIMCreditCardEntryViewCVCNumberChanged object:ccEntryView];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(expiryChanged:) name:SIMCreditCardEntryViewExpirationChanged object:ccEntryView];
+    
+    self.ccValidator = ccValidator;
+    self.ccEntryView = ccEntryView;
+    
+    [self.view addSubview:ccEntryView];
+}
+
+-(void)ccChanged:(NSNotification*)notification {
+    [self.ccValidator setCardNumberAsString:notification.userInfo[SIMCreditCardEntryViewCardNumberKey]];
+    [self.ccEntryView setCardNumber:self.ccValidator.formattedCardNumber];
+    [self.ccEntryView setCardType:self.ccValidator.cardType];
+}
+
+-(void)cvcChanged:(NSNotification*)notification {
+    [self.ccValidator setCVCCodeAsString:notification.userInfo[SIMCreditCardEntryViewCVCNumberKey]];
+    [self.ccEntryView setCVCCode:self.ccValidator.formattedCVCCode];
+}
+
+-(void)expiryChanged:(NSNotification*)notification {
+    [self.ccValidator setExpirationAsString:notification.userInfo[SIMCreditCardEntryViewExpirationKey]];
+    [self.ccEntryView setExpirationDate:self.ccValidator.formattedExpirationDate];
+
 }
 
 @end

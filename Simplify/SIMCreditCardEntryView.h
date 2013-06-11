@@ -32,8 +32,14 @@
 #define SIMCreditCardEntryViewCVCNumberChanged @"SIMCreditCardEntryViewCVCNumberChanged"
 #define SIMCreditCardEntryViewExpirationChanged @"SIMCreditCardEntryViewExpirationChanged"
 
+#define SIMCreditCardEntryViewCardNumberKey @"SIMCreditCardEntryViewCardNumberKey"
+#define SIMCreditCardEntryViewCVCNumberKey @"SIMCreditCardEntryViewCVCNumberKey"
+#define SIMCreditCardEntryViewExpirationKey @"SIMCreditCardEntryViewExpirationKey"
+
 @interface SIMCreditCardEntryView : UIView
 -(void)setCardNumber:(NSString*)cardNumber;
 -(void)setCardType:(SIMCreditCardType)cardType;
 -(void)setCVCCode:(NSString*)cvcCode;
+-(void)setExpirationDate:(NSString*)expiration;
+-(void)setButtonEnabled:(BOOL)enabled;
 @end
