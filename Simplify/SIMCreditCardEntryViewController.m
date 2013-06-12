@@ -80,18 +80,18 @@
 
 -(void)ccChanged:(NSNotification*)notification {
     [self.ccValidator setCardNumberAsString:notification.userInfo[SIMCreditCardEntryViewCardNumberKey]];
-    [self.ccEntryView setCardNumber:self.ccValidator.formattedCardNumber isValid:self.ccValidator.isValidCardNumber isMaximumLength:self.ccValidator.isMaximumCVCLength];
+    [self.ccEntryView setCardNumber:self.ccValidator.formattedCardNumber isValid:self.ccValidator.isValidCardNumber isMaximumLength:self.ccValidator.isMaximumCardNumberLength];
     [self.ccEntryView setCardType:self.ccValidator.cardType];
 }
 
 -(void)cvcChanged:(NSNotification*)notification {
     [self.ccValidator setCVCCodeAsString:notification.userInfo[SIMCreditCardEntryViewCVCNumberKey]];
-    [self.ccEntryView setCVCCode:self.ccValidator.formattedCVCCode];
+    [self.ccEntryView setCVCCode:self.ccValidator.formattedCVCCode isValid:self.ccValidator.isValidCVC isMaximumLength:self.ccValidator.isMaximumCVCLength];
 }
 
 -(void)expiryChanged:(NSNotification*)notification {
     [self.ccValidator setExpirationAsString:notification.userInfo[SIMCreditCardEntryViewExpirationKey]];
-    [self.ccEntryView setExpirationDate:self.ccValidator.formattedExpirationDate];
+    [self.ccEntryView setExpirationDate:self.ccValidator.formattedExpirationDate isValid:!self.ccValidator.isExpired];
 	
 }
 

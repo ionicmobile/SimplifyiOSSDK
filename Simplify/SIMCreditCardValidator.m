@@ -86,19 +86,13 @@
 -(void)setCardNumberAsString:(NSString*)string {
     NSCharacterSet* nonDecimals = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
     self.digitsOnlyCardNumberString = [[string componentsSeparatedByCharactersInSet:nonDecimals] componentsJoinedByString:@""];
-    if ( self.digitsOnlyCardNumberString.length > self.maximumCardNumberLength) {
-        NSMutableString* digitsOnly = [self.digitsOnlyCardNumberString mutableCopy];
-        self.digitsOnlyCardNumberString = [digitsOnly substringToIndex:self.maximumCardNumberLength];
-    }
+    self.digitsOnlyCardNumberString = [self.digitsOnlyCardNumberString safeSubstringByTrimmingToLength:self.maximumCardNumberLength];
 }
 
 -(void)setCVCCodeAsString:(NSString*)string {
     NSCharacterSet* nonDecimals = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
     self.digitsOnlyCVCNumberString = [[string componentsSeparatedByCharactersInSet:nonDecimals] componentsJoinedByString:@""];
-    if ( self.digitsOnlyCVCNumberString.length > self.maximumCVCLength) {
-        NSMutableString* digitsOnly = [self.digitsOnlyCVCNumberString mutableCopy];
-        self.digitsOnlyCVCNumberString = [digitsOnly substringToIndex:self.maximumCVCLength];
-    }
+    self.digitsOnlyCVCNumberString = [self.digitsOnlyCVCNumberString safeSubstringByTrimmingToLength:self.maximumCVCLength];
 }
 
 -(void)setExpirationAsString:(NSString*)string {
@@ -124,9 +118,9 @@
     NSMutableString* expirationDate = [NSMutableString string];
     if ( self.expirationMonth ) {
         [expirationDate appendString:self.expirationMonth];
-        if (self.expirationYear ) {
+        if (self.fourDigitExpirationYear ) {
             [expirationDate appendString:@"/"];
-            [expirationDate appendString:self.expirationYear];
+            [expirationDate appendString:self.fourDigitExpirationYear];
         }
         return expirationDate;
     }
@@ -134,70 +128,26 @@
 }
 
 -(NSString*)expirationMonth {
-    if ( self.digitsOnlyExpirationDateString.length >= 2 ) {
-        return [self.digitsOnlyExpirationDateString substringToIndex:2];
-    } else if (self.digitsOnlyExpirationDateString.length >= 1 ) {
-        return [self.digitsOnlyExpirationDateString substringToIndex:1];
+    return [self.digitsOnlyExpirationDateString safeSubstringByTrimmingToLength:2];
+}
+
+-(NSString*)fourDigitExpirationYear {
+    NSString* firstTwoDigits = [self.digitsOnlyExpirationDateString safeSubstringFromIndex:2 toIndex:4];
+    if ( [firstTwoDigits isEqual:@"20"] ) {
+        return [self.digitsOnlyExpirationDateString safeSubstringFromIndex:2 toIndex:6];
     }
-    return nil;
+    return firstTwoDigits;
 }
 
 -(NSString*)expirationYear {
-    if ( self.digitsOnlyExpirationDateString.length >= 4 ) {
-        return [[self.digitsOnlyExpirationDateString substringFromIndex:2] substringToIndex:2];
-    } else if (self.digitsOnlyExpirationDateString.length >= 3 ) {
-        return [[self.digitsOnlyExpirationDateString substringFromIndex:2] substringToIndex:1];
+    NSString* firstTwoDigits = [self.digitsOnlyExpirationDateString safeSubstringFromIndex:2 toIndex:4];
+    if ( [firstTwoDigits isEqual:@"20"] ) {
+        if ( self.digitsOnlyExpirationDateString.length == 5 ) {
+            return [NSString stringWithFormat:@"%c0", [self.digitsOnlyExpirationDateString characterAtIndex:4]];
+        }
+        return [self.digitsOnlyExpirationDateString safeSubstringFromIndex:4 toIndex:6];
     }
-    return nil;
-}
-
--(BOOL)isValid {
-    return NO;
-}
-
--(NSArray*)validCardNumberLengths {
-    switch (self.cardType) {
-        case SIMCreditCardType_AmericanExpress:
-            return @[ @15 ];
-        case SIMCreditCardType_Visa:
-            return @[ @13, @16 ];
-        case SIMCreditCardType_Discover:
-        case SIMCreditCardType_MasterCard:
-        case SIMCreditCardType_JCB:
-            return @[ @16 ];
-        case SIMCreditCardType_DinersClub:
-            return @[ @14, @15, @16 ];
-        case SIMCreditCardType_ChinaUnionPay:
-            return @[ @16, @17, @18, @19];
-        default:
-            break;
-    }
-    return @[@12, @13, @14, @15, @16, @17, @18, @19];
-}
-
--(NSArray*)validCVCLengths {
-    switch (self.cardType) {
-        case SIMCreditCardType_AmericanExpress:
-            return @[ @4 ];
-        case SIMCreditCardType_JCB:
-        case SIMCreditCardType_MasterCard:
-        case SIMCreditCardType_Visa:
-        case SIMCreditCardType_DinersClub:
-        case SIMCreditCardType_Discover:
-        case SIMCreditCardType_ChinaUnionPay:
-            return @[ @3 ];
-        default:
-            break;
-    }
-    return @[ @3, @4 ];
-}
-
--(NSUInteger)maximumCardNumberLength {
-    return [self.validCardNumberLengths.lastObject unsignedIntegerValue];
-}
-
--(NSUInteger)maximumCVCLength {
-    return [self.validCVCLengths.lastObject unsignedIntegerValue];
+    return firstTwoDigits;
 }
 
 -(BOOL)isValidCardNumberLength {
@@ -243,5 +193,51 @@
     return [justPastExpirationMonth compare:currentTime] == NSOrderedAscending || [justPastExpirationMonth compare:currentTime] == NSOrderedSame;
 }
 
+#pragma mark - helpers
+
+-(NSArray*)validCVCLengths {
+    switch (self.cardType) {
+        case SIMCreditCardType_AmericanExpress:
+            return @[ @4 ];
+        case SIMCreditCardType_JCB:
+        case SIMCreditCardType_MasterCard:
+        case SIMCreditCardType_Visa:
+        case SIMCreditCardType_DinersClub:
+        case SIMCreditCardType_Discover:
+        case SIMCreditCardType_ChinaUnionPay:
+            return @[ @3 ];
+        default:
+            break;
+    }
+    return @[ @3, @4 ];
+}
+
+-(NSUInteger)maximumCVCLength {
+    return [self.validCVCLengths.lastObject unsignedIntegerValue];
+}
+
+-(NSArray*)validCardNumberLengths {
+    switch (self.cardType) {
+        case SIMCreditCardType_AmericanExpress:
+            return @[ @15 ];
+        case SIMCreditCardType_Visa:
+            return @[ @13, @16 ];
+        case SIMCreditCardType_Discover:
+        case SIMCreditCardType_MasterCard:
+        case SIMCreditCardType_JCB:
+            return @[ @16 ];
+        case SIMCreditCardType_DinersClub:
+            return @[ @14, @15, @16 ];
+        case SIMCreditCardType_ChinaUnionPay:
+            return @[ @16, @17, @18, @19];
+        default:
+            break;
+    }
+    return @[@12, @13, @14, @15, @16, @17, @18, @19];
+}
+
+-(NSUInteger)maximumCardNumberLength {
+    return [self.validCardNumberLengths.lastObject unsignedIntegerValue];
+}
 
 @end

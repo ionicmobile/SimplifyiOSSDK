@@ -50,4 +50,20 @@
     return newString;
 }
 
+-(NSString*)safeSubstringByTrimmingToLength:(NSUInteger)length {
+    if ( self.length > length) {
+        NSMutableString* mutableSelf = [self mutableCopy];
+        return [mutableSelf substringToIndex:length];
+    }
+    return self;
+}
+
+-(NSString*)safeSubstringFromIndex:(NSUInteger)beginIndex toIndex:(NSUInteger)endIndex {
+    NSString* substring = [self safeSubstringByTrimmingToLength:endIndex];
+    if (  beginIndex < substring.length ) {
+        return [substring substringFromIndex:beginIndex];
+    }
+    return nil;
+}
+
 @end

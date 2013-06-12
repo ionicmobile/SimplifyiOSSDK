@@ -642,6 +642,27 @@
     GHAssertEqualObjects(testObject.expirationYear, @"13", nil);
 }
 
+-(void)testWhenEnteringTwoDigitExpirationYearThenItIsConstrained {
+    [testObject setExpirationAsString:@"12191"];
+    GHAssertEqualObjects(testObject.formattedExpirationDate, @"12/19", nil);
+    GHAssertEqualObjects(testObject.expirationMonth, @"12", nil);
+    GHAssertEqualObjects(testObject.expirationYear, @"19", nil);
+}
+
+-(void)testWhenEnteringFourDigitExpirationYearThenItIsConstrained {
+    [testObject setExpirationAsString:@"12201"];
+    GHAssertEqualObjects(testObject.formattedExpirationDate, @"12/201", nil);
+    GHAssertEqualObjects(testObject.expirationMonth, @"12", nil);
+    GHAssertEqualObjects(testObject.expirationYear, @"10", nil);
+}
+
+-(void)testWhenEnteringFourDigitExpirationYearThenTheYearIsCorrect {
+    [testObject setExpirationAsString:@"122012"];
+    GHAssertEqualObjects(testObject.formattedExpirationDate, @"12/2012", nil);
+    GHAssertEqualObjects(testObject.expirationMonth, @"12", nil);
+    GHAssertEqualObjects(testObject.expirationYear, @"12", nil);
+}
+
 -(void)testWhenExpirationDateIsFirstExpiredMomentThenItIsExpired  {
     NSTimeZone* earthsLastTimezone = [NSTimeZone timeZoneWithName:@"UTC-12:00"];
     NSDateComponents* components = [[NSDateComponents alloc] init];

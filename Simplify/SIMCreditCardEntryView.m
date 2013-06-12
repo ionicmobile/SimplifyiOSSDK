@@ -140,14 +140,16 @@
 }
 
 -(void)setCardNumber:(NSString*)cardNumber isValid:(BOOL)valid isMaximumLength:(BOOL)maximumLength {
-    self.creditCardNumberTextField.text = cardNumber;
+    if ( ![self.creditCardNumberTextField.text isEqual:cardNumber]) {
+        self.creditCardNumberTextField.text = cardNumber;
+    }
     if ( maximumLength && valid ) {
         self.creditCardNumberTextField.backgroundColor = [UIColor colorWithHexString:@"ccffcc"];
         [self.CVCNumberTextField becomeFirstResponder];
     } else if ( maximumLength && !valid ) {
         self.creditCardNumberTextField.backgroundColor = [UIColor colorWithHexString:@"ffcccc"];
     } else {
-        self.backgroundColor = [UIColor clearColor];
+        self.creditCardNumberTextField.backgroundColor = [UIColor clearColor];
     }
     [self setNeedsLayout];
 }
@@ -183,13 +185,32 @@
     [self setNeedsLayout];
 }
 
--(void)setCVCCode:(NSString*)cvcCode {
-    self.CVCNumberTextField.text = cvcCode;
+-(void)setCVCCode:(NSString*)cvcCode isValid:(BOOL)valid isMaximumLength:(BOOL)maximumLength {
+    if ( ![self.CVCNumberTextField.text isEqual:cvcCode]) {
+        self.CVCNumberTextField.text = cvcCode;
+    }
+    if ( maximumLength && valid ) {
+        self.CVCNumberTextField.backgroundColor = [UIColor colorWithHexString:@"ccffcc"];
+        [self.expirationDateTextField becomeFirstResponder];
+    } else if ( maximumLength && !valid ) {
+        self.CVCNumberTextField.backgroundColor = [UIColor colorWithHexString:@"ffcccc"];
+    } else {
+        self.CVCNumberTextField.backgroundColor = [UIColor clearColor];
+    }
     [self setNeedsLayout];
 }
 
--(void)setExpirationDate:(NSString*)expiration {
-    self.expirationDateTextField.text = expiration;
+-(void)setExpirationDate:(NSString*)expiration isValid:(BOOL)valid {
+    if ( ![self.expirationDateTextField.text isEqual:expiration]) {
+        self.expirationDateTextField.text = expiration;
+    }
+    if ( valid ) {
+        self.expirationDateTextField.backgroundColor = [UIColor colorWithHexString:@"ccffcc"];
+    } else if ( self.expirationDateTextField.text.length > 0 ) {
+        self.expirationDateTextField.backgroundColor = [UIColor colorWithHexString:@"ffcccc"];
+    } else {
+        self.expirationDateTextField.backgroundColor = [UIColor clearColor];
+    }
     [self setNeedsLayout];
 }
 

@@ -40,7 +40,7 @@
 @interface SIMCreditCardEntryView : UIView
 -(void)setCardNumber:(NSString*)cardNumber isValid:(BOOL)valid isMaximumLength:(BOOL)maximumLength;
 -(void)setCardType:(SIMCreditCardType)cardType;
--(void)setCVCCode:(NSString*)cvcCode;
--(void)setExpirationDate:(NSString*)expiration;
+-(void)setCVCCode:(NSString*)cvcCode isValid:(BOOL)valid isMaximumLength:(BOOL)maximumLength;
+-(void)setExpirationDate:(NSString*)expiration isValid:(BOOL)valid;
 -(void)setButtonEnabled:(BOOL)enabled;
 @end
