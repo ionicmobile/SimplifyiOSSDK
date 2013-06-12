@@ -127,6 +127,8 @@
 		4DDFADDB1767D90F0030CCD5 /* SIMLuhnValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D82A176766D90046E638 /* SIMLuhnValidator.m */; };
 		4DDFADDD1767DC000030CCD5 /* SIMLuhnValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D82A176766D90046E638 /* SIMLuhnValidator.m */; };
 		4DDFADE01767DC420030CCD5 /* SIMCreditCardEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D85C1767AC3B0046E638 /* SIMCreditCardEntryViewController.m */; };
+		74A6EC701768C3C80025F307 /* SIMCreditCardNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19FC71F2316AF9B7318C56 /* SIMCreditCardNetwork.m */; };
+		74A6EC711768C3CD0025F307 /* SIMCardToken.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19F5E3C27389C64E973CC4 /* SIMCardToken.m */; };
 		74F8D8E21767CB21006FB417 /* SIMCreditCardNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19FC71F2316AF9B7318C56 /* SIMCreditCardNetwork.m */; };
 		AA19F4BB3414FC5DC3E38145 /* SIMCardToken.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19F5E3C27389C64E973CC4 /* SIMCardToken.m */; };
 		AA19F52917C58865A4340EAF /* SIMCreditCardNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19FA3D69C077E0D7ED6446 /* SIMCreditCardNetwork.h */; };
@@ -819,6 +821,8 @@
 				4D412DA91767D779002A20D7 /* SIMCreditCardValidator.m in Sources */,
 				4DDFADDD1767DC000030CCD5 /* SIMLuhnValidator.m in Sources */,
 				4DDFADE01767DC420030CCD5 /* SIMCreditCardEntryViewController.m in Sources */,
+				74A6EC701768C3C80025F307 /* SIMCreditCardNetwork.m in Sources */,
+				74A6EC711768C3CD0025F307 /* SIMCardToken.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

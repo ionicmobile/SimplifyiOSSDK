@@ -95,6 +95,7 @@
         button.titleLabel.font = [SimplifyPrivate boldFontOfSize:18.0f];
         button.titleLabel.shadowColor = [UIColor blackColor];
         button.titleLabel.shadowOffset = CGSizeMake(0, -1);
+		[button addTarget:self action:@selector(doneButtonTapped) forControlEvents:UIControlEventTouchUpInside];
         
         self.titleLabel = titleLabel;
         self.cardImageView = cardImageView;
@@ -132,6 +133,10 @@
     self.expirationDateTextField.frame = CGRectMake(CGRectGetMaxX(self.CVCNumberTextField.frame) + innerMarginX, CGRectGetMaxY(self.creditCardNumberTextField.frame) + innerMarginY, (self.bounds.size.width - innerMarginX - 2 * outerMarginX)/2,textFieldHeight);
     
     [self.button centerHorizonallyAtY:CGRectGetMaxY(self.expirationDateTextField.frame) + innerMarginY inBounds:self.bounds withSize:CGSizeMake(self.bounds.size.width - 2 * outerMarginX, 50)];
+}
+
+-(void)doneButtonTapped {
+	[[NSNotificationCenter defaultCenter] postNotificationName:SIMCreditCardEntryViewDoneButtonTapped object:self];
 }
 
 -(void)setCardNumber:(NSString*)cardNumber isValid:(BOOL)valid isMaximumLength:(BOOL)maximumLength {

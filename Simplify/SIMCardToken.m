@@ -70,4 +70,8 @@
 	return cardToken;
 }
 
+- (NSString *)description {
+	return [NSString stringWithFormat:@"%@ %@ %@ %@ %@ %@ %@ %@ %@ %@ %@, %@, %@", self.token, self.last4, [self.expMonth description], [self.expYear description], self.type, [self.dateCreated description], self.name, self.addressLine1, self.addressLine2, self.addressCity, self.addressState, self.addressZip, self.addressCountry];
+}
+
 @end

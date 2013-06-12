@@ -28,6 +28,7 @@
 #import <UIKit/UIKit.h>
 #import "SIMCreditCardValidator.h"
 
+#define SIMCreditCardEntryViewDoneButtonTapped @"SIMCreditCardEntryViewDoneButtonTapped"
 #define SIMCreditCardEntryViewCardNumberChanged @"SIMCreditCardEntryViewCardNumberChanged"
 #define SIMCreditCardEntryViewCVCNumberChanged @"SIMCreditCardEntryViewCVCNumberChanged"
 #define SIMCreditCardEntryViewExpirationChanged @"SIMCreditCardEntryViewExpirationChanged"
