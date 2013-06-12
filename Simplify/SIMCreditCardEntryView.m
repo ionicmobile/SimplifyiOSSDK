@@ -31,6 +31,7 @@
 #import "SIMCreditCardEntryView.h"
 #import "SimplifyPrivate.h"
 #import "SIMLayeredButton.h"
+#import "SIMTextField.h"
 
 @interface SIMCreditCardEntryView()
 @property (nonatomic, strong) UILabel* titleLabel;
@@ -55,7 +56,7 @@
         
         UIImageView* cardImageView = [[UIImageView alloc] initWithImage:[SimplifyPrivate imageNamed:@"card_back_32"]];
         
-        UITextField* creditCardNumberTextField = [[UITextField alloc] initWithFrame:CGRectZero];
+        SIMTextField* creditCardNumberTextField = [[SIMTextField alloc] initWithFrame:CGRectZero];
         creditCardNumberTextField.leftView = [UIView paddedViewWithView:cardImageView andPadding:CGSizeMake(15, 0)];
         creditCardNumberTextField.leftViewMode = UITextFieldViewModeAlways;
         creditCardNumberTextField.layer.borderColor = [UIColor simplifyBorderColor].CGColor;
@@ -63,10 +64,13 @@
         creditCardNumberTextField.layer.masksToBounds = YES;
         creditCardNumberTextField.placeholder = @"Credit Card Number";
         creditCardNumberTextField.keyboardType = UIKeyboardTypeNumberPad;
+        creditCardNumberTextField.font = [SimplifyPrivate fontOfSize:16.0f];
+        creditCardNumberTextField.textOffset = CGSizeMake(60, 2);
+        creditCardNumberTextField.textColor = [UIColor colorWithHexString:@"4a4a4a"];
         [creditCardNumberTextField becomeFirstResponder];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ccChanged) name:UITextFieldTextDidChangeNotification object:creditCardNumberTextField];
         
-        UITextField* CVCNumberTextField = [[UITextField alloc] initWithFrame:CGRectZero];
+        SIMTextField* CVCNumberTextField = [[SIMTextField alloc] initWithFrame:CGRectZero];
         CVCNumberTextField.borderStyle = UITextBorderStyleLine;
         CVCNumberTextField.leftView = [UIView paddedViewWithView:[[UIView alloc] init] andPadding:CGSizeMake(7, 0)];
         CVCNumberTextField.leftViewMode = UITextFieldViewModeAlways;
@@ -76,9 +80,12 @@
         CVCNumberTextField.layer.masksToBounds = YES;
         CVCNumberTextField.placeholder = @"CVC Code";
         CVCNumberTextField.keyboardType = UIKeyboardTypeNumberPad;
+        CVCNumberTextField.font = [SimplifyPrivate fontOfSize:16.0f];
+        CVCNumberTextField.textOffset = CGSizeMake(10, 2);
+        CVCNumberTextField.textColor = [UIColor colorWithHexString:@"4a4a4a"];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cvcChanged) name:UITextFieldTextDidChangeNotification object:CVCNumberTextField];
 
-        UITextField* expirationDateTextField = [[UITextField alloc] initWithFrame:CGRectZero];
+        SIMTextField* expirationDateTextField = [[SIMTextField alloc] initWithFrame:CGRectZero];
         expirationDateTextField.leftView = [UIView paddedViewWithView:[[UIView alloc] init] andPadding:CGSizeMake(7, 0)];
         expirationDateTextField.leftViewMode = UITextFieldViewModeAlways;
         expirationDateTextField.borderStyle = UITextBorderStyleLine;
@@ -87,7 +94,10 @@
         expirationDateTextField.layer.borderWidth = 1.0f;
         expirationDateTextField.layer.masksToBounds = YES;
         expirationDateTextField.keyboardType = UIKeyboardTypeNumberPad;
-        expirationDateTextField.placeholder = @" MM/YY";
+        expirationDateTextField.placeholder = @"MM/YY";
+        expirationDateTextField.font = [SimplifyPrivate fontOfSize:16.0f];
+        expirationDateTextField.textOffset = CGSizeMake(10, 2);
+        expirationDateTextField.textColor = [UIColor colorWithHexString:@"4a4a4a"];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(expiryChanged) name:UITextFieldTextDidChangeNotification object:expirationDateTextField];
 
         SIMLayeredButton* button = [[SIMLayeredButton alloc] init];
@@ -132,7 +142,7 @@
     
     self.expirationDateTextField.frame = CGRectMake(CGRectGetMaxX(self.CVCNumberTextField.frame) + innerMarginX, CGRectGetMaxY(self.creditCardNumberTextField.frame) + innerMarginY, (self.bounds.size.width - innerMarginX - 2 * outerMarginX)/2,textFieldHeight);
     
-    [self.button centerHorizonallyAtY:CGRectGetMaxY(self.expirationDateTextField.frame) + innerMarginY inBounds:self.bounds withSize:CGSizeMake(self.bounds.size.width - 2 * outerMarginX, 50)];
+    [self.button centerHorizonallyAtY:CGRectGetMaxY(self.expirationDateTextField.frame) + innerMarginY inBounds:self.bounds withSize:CGSizeMake(self.bounds.size.width - 2 * outerMarginX, 40)];
 }
 
 -(void)doneButtonTapped {
