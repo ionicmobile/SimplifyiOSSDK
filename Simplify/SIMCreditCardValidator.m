@@ -86,6 +86,10 @@
 -(void)setCardNumberAsString:(NSString*)string {
     NSCharacterSet* nonDecimals = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
     self.digitsOnlyCardNumberString = [[string componentsSeparatedByCharactersInSet:nonDecimals] componentsJoinedByString:@""];
+    if ( self.digitsOnlyCardNumberString.length > self.maximumCardLength) {
+        NSMutableString* digitsOnly = [self.digitsOnlyCardNumberString mutableCopy];
+        self.digitsOnlyCardNumberString = [digitsOnly substringToIndex:self.maximumCardLength];
+    }
 }
 
 -(void)setCVCCodeAsString:(NSString*)string {
@@ -104,7 +108,7 @@
             return [self.digitsOnlyCardNumberString stringDividedByString:@" " beforeIndicies:@[ @4, @10 ]];
         }
         default:
-            return [self.digitsOnlyCardNumberString stringDividedByString:@" " beforeIndicies:@[ @4, @8, @12]];
+            return [self.digitsOnlyCardNumberString stringDividedByString:@" " beforeIndicies:@[ @4, @8, @12, @16]];
     }
 }
 
@@ -147,32 +151,40 @@
     return NO;
 }
 
--(BOOL)isValidCardNumber {
-    BOOL validLuhn = [self.luhnValidator isValid:self.digitsOnlyCardNumberString] || self.cardType == SIMCreditCardType_ChinaUnionPay;
-    BOOL validLength = self.digitsOnlyCardNumberString != nil;
+-(NSArray*)validCardNumberLengths {
     switch (self.cardType) {
         case SIMCreditCardType_AmericanExpress:
-            validLength = self.digitsOnlyCardNumberString.length == 15;
-            break;
+            return @[ @15 ];
         case SIMCreditCardType_Visa:
-            validLength = self.digitsOnlyCardNumberString.length == 13 || self.digitsOnlyCardNumberString.length == 16;
-            break;
+            return @[ @13, @16 ];
         case SIMCreditCardType_Discover:
         case SIMCreditCardType_MasterCard:
         case SIMCreditCardType_JCB:
-            validLength = self.digitsOnlyCardNumberString.length == 16;
-            break;
+            return @[ @16 ];
         case SIMCreditCardType_DinersClub:
-            validLength = self.digitsOnlyCardNumberString.length >= 14 && self.digitsOnlyCardNumberString.length <= 16;
-            break;
+            return @[ @14, @15, @16 ];
         case SIMCreditCardType_ChinaUnionPay:
-            validLength = self.digitsOnlyCardNumberString.length >= 16 && self.digitsOnlyCardNumberString.length <= 19;
-            break;
+            return @[ @16, @17, @18, @19];
         default:
-            validLength = self.digitsOnlyCardNumberString.length >= 12 && self.digitsOnlyCardNumberString.length <= 19;
             break;
     }
-    return validLength && validLuhn;
+    return @[@12, @13, @14, @15, @16, @17, @18, @19];
+}
+
+-(NSUInteger)maximumCardLength {
+    return [self.validCardNumberLengths.lastObject unsignedIntegerValue];
+}
+
+-(BOOL)isValidCardNumberLength {
+    return [self.validCardNumberLengths containsObject:@(self.digitsOnlyCardNumberString.length)];
+}
+
+-(BOOL)isMaximumCardLength {
+    return [self.validCardNumberLengths.lastObject isEqual:@(self.digitsOnlyCardNumberString.length)];
+}
+
+-(BOOL)isValidCardNumber {
+    return self.isValidCardNumberLength && ([self.luhnValidator isValid:self.digitsOnlyCardNumberString] || self.cardType == SIMCreditCardType_ChinaUnionPay);
 }
 
 -(BOOL)isValidCVC {

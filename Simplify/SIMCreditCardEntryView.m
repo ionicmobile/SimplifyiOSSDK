@@ -33,12 +33,10 @@
 #import "SIMLayeredButton.h"
 
 @interface SIMCreditCardEntryView()
+@property (nonatomic, strong) UILabel* titleLabel;
 @property (nonatomic, strong) UIImageView* cardImageView;
-@property (nonatomic, strong) UILabel* creditCardNumberLabel;
 @property (nonatomic, strong) UITextField* creditCardNumberTextField;
-@property (nonatomic, strong) UILabel* CVCNumberLabel;
 @property (nonatomic, strong) UITextField* CVCNumberTextField;
-@property (nonatomic, strong) UILabel* expirationDateLabel;
 @property (nonatomic, strong) UITextField* expirationDateTextField;
 @property (nonatomic, strong) UIButton* button;
 @end
@@ -50,9 +48,10 @@
     if ( self ) {
         self.backgroundColor = [UIColor whiteColor];
         
-        UILabel* creditCardNumberLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        creditCardNumberLabel.text = @"Card No.";
-        creditCardNumberLabel.font = [SimplifyPrivate fontOfSize:14.0f];
+        UILabel* titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        titleLabel.font = [SimplifyPrivate boldFontOfSize:26.0f];
+        titleLabel.text = @"Payment Details";
+        titleLabel.textColor = [UIColor colorWithHexString:@"4a4a4a"];
         
         UIImageView* cardImageView = [[UIImageView alloc] initWithImage:[SimplifyPrivate imageNamed:@"card_back_32"]];
         
@@ -62,56 +61,51 @@
         creditCardNumberTextField.layer.borderColor = [UIColor simplifyBorderColor].CGColor;
         creditCardNumberTextField.layer.borderWidth = 1.0f;
         creditCardNumberTextField.layer.masksToBounds = YES;
+        creditCardNumberTextField.placeholder = @"Credit Card Number";
         creditCardNumberTextField.keyboardType = UIKeyboardTypeNumberPad;
+        [creditCardNumberTextField becomeFirstResponder];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ccChanged) name:UITextFieldTextDidChangeNotification object:creditCardNumberTextField];
-        
-        UILabel* CVCNumberLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        CVCNumberLabel.text = @"CVC No.";
-        CVCNumberLabel.font = [SimplifyPrivate fontOfSize:14.0f];
-
         
         UITextField* CVCNumberTextField = [[UITextField alloc] initWithFrame:CGRectZero];
         CVCNumberTextField.borderStyle = UITextBorderStyleLine;
+        CVCNumberTextField.leftView = [UIView paddedViewWithView:[[UIView alloc] init] andPadding:CGSizeMake(7, 0)];
+        CVCNumberTextField.leftViewMode = UITextFieldViewModeAlways;
         CVCNumberTextField.layer.borderColor = [UIColor simplifyBorderColor].CGColor;
         CVCNumberTextField.layer.borderColor = [UIColor simplifyBorderColor].CGColor;
         CVCNumberTextField.layer.borderWidth = 1.0f;
         CVCNumberTextField.layer.masksToBounds = YES;
+        CVCNumberTextField.placeholder = @"CVC Code";
         CVCNumberTextField.keyboardType = UIKeyboardTypeNumberPad;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cvcChanged) name:UITextFieldTextDidChangeNotification object:CVCNumberTextField];
-        
-        UILabel* expirationDateLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        expirationDateLabel.text = @"Expiration Date";
-        expirationDateLabel.font = [SimplifyPrivate fontOfSize:14.0f];
 
         UITextField* expirationDateTextField = [[UITextField alloc] initWithFrame:CGRectZero];
+        expirationDateTextField.leftView = [UIView paddedViewWithView:[[UIView alloc] init] andPadding:CGSizeMake(7, 0)];
+        expirationDateTextField.leftViewMode = UITextFieldViewModeAlways;
         expirationDateTextField.borderStyle = UITextBorderStyleLine;
         expirationDateTextField.layer.borderColor = [UIColor simplifyBorderColor].CGColor;
         expirationDateTextField.layer.borderColor = [UIColor simplifyBorderColor].CGColor;
         expirationDateTextField.layer.borderWidth = 1.0f;
         expirationDateTextField.layer.masksToBounds = YES;
         expirationDateTextField.keyboardType = UIKeyboardTypeNumberPad;
+        expirationDateTextField.placeholder = @" Expiration";
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(expiryChanged) name:UITextFieldTextDidChangeNotification object:expirationDateTextField];
 
         SIMLayeredButton* button = [[SIMLayeredButton alloc] init];
-        [button setTitle:@"Make Charge" forState:UIControlStateNormal];
+        [button setTitle:@"Done" forState:UIControlStateNormal];
         button.titleLabel.font = [SimplifyPrivate boldFontOfSize:18.0f];
         button.titleLabel.shadowColor = [UIColor blackColor];
         button.titleLabel.shadowOffset = CGSizeMake(0, -1);
         
+        self.titleLabel = titleLabel;
         self.cardImageView = cardImageView;
-        self.creditCardNumberLabel = creditCardNumberLabel;
         self.creditCardNumberTextField = creditCardNumberTextField;
-        self.CVCNumberLabel = CVCNumberLabel;
         self.CVCNumberTextField = CVCNumberTextField;
-        self.expirationDateLabel = expirationDateLabel;
         self.expirationDateTextField = expirationDateTextField;
         self.button = button;
         
-        [self addSubview:creditCardNumberLabel];
+        [self addSubview:titleLabel];
         [self addSubview:creditCardNumberTextField];
-        [self addSubview:CVCNumberLabel];
         [self addSubview:CVCNumberTextField];
-        [self addSubview:expirationDateLabel];
         [self addSubview:expirationDateTextField];
         [self addSubview:button];
     }
@@ -128,20 +122,28 @@
     CGFloat innerMarginY = 10.0;
     CGFloat outerMarginX = 20.0;
     CGFloat innerMarginX = 5.0;
-    [self.creditCardNumberLabel setFrameAtOriginThatFitsUnbounded:CGPointMake(outerMarginX, innerMarginY + 3)];
-    self.creditCardNumberTextField.frame = CGRectMake(CGRectGetMaxX(self.creditCardNumberLabel.frame) + innerMarginX, innerMarginY,  self.bounds.size.width - CGRectGetWidth(self.creditCardNumberLabel.frame) - innerMarginX - 2 * outerMarginX, textFieldHeight);
     
-    [self.CVCNumberLabel setFrameAtOriginThatFitsUnbounded:CGPointMake(outerMarginX, CGRectGetMaxY(self.creditCardNumberTextField.frame) + innerMarginY + 3)];
-    self.CVCNumberTextField.frame = CGRectMake(CGRectGetMaxX(self.CVCNumberLabel.frame) + innerMarginX, CGRectGetMaxY(self.creditCardNumberTextField.frame) + innerMarginY, self.bounds.size.width - CGRectGetWidth(self.CVCNumberLabel.frame) - innerMarginX - 2 * outerMarginX,textFieldHeight);
+    [self.titleLabel setFrameAtOriginThatFitsUnbounded:CGPointMake(outerMarginX - 4.0f, 20.0f)];
     
-    [self.expirationDateLabel setFrameAtOriginThatFitsUnbounded:CGPointMake(outerMarginX, CGRectGetMaxY(self.CVCNumberTextField.frame) + innerMarginY + 3)];
-    self.expirationDateTextField.frame = CGRectMake(CGRectGetMaxX(self.expirationDateLabel.frame) + innerMarginX, CGRectGetMaxY(self.CVCNumberTextField.frame) + innerMarginY, self.bounds.size.width - CGRectGetWidth(self.expirationDateLabel.frame) - innerMarginX - 2* outerMarginX,textFieldHeight);
+    self.creditCardNumberTextField.frame = CGRectMake(outerMarginX, innerMarginY + CGRectGetMaxY(self.titleLabel.frame),  self.bounds.size.width - 2 * outerMarginX, textFieldHeight);
     
-    [self.button centerHorizonallyAtY:CGRectGetMaxY(self.expirationDateTextField.frame) + innerMarginY inBounds:self.bounds withSize:CGSizeMake(200, 50)];
+    self.CVCNumberTextField.frame = CGRectMake(outerMarginX, CGRectGetMaxY(self.creditCardNumberTextField.frame) + innerMarginY, (self.bounds.size.width - innerMarginX - 2 * outerMarginX)/2,textFieldHeight);
+    
+    self.expirationDateTextField.frame = CGRectMake(CGRectGetMaxX(self.CVCNumberTextField.frame) + innerMarginX, CGRectGetMaxY(self.creditCardNumberTextField.frame) + innerMarginY, (self.bounds.size.width - innerMarginX - 2 * outerMarginX)/2,textFieldHeight);
+    
+    [self.button centerHorizonallyAtY:CGRectGetMaxY(self.expirationDateTextField.frame) + innerMarginY inBounds:self.bounds withSize:CGSizeMake(self.bounds.size.width - 2 * outerMarginX, 50)];
 }
 
--(void)setCardNumber:(NSString*)cardNumber {
+-(void)setCardNumber:(NSString*)cardNumber isValid:(BOOL)valid isMaximumLength:(BOOL)maximumLength {
     self.creditCardNumberTextField.text = cardNumber;
+    if ( maximumLength && valid ) {
+        self.creditCardNumberTextField.backgroundColor = [UIColor colorWithHexString:@"ccffcc"];
+        [self.CVCNumberTextField becomeFirstResponder];
+    } else if ( maximumLength && !valid ) {
+        self.creditCardNumberTextField.backgroundColor = [UIColor colorWithHexString:@"ffcccc"];
+    } else {
+        self.backgroundColor = [UIColor clearColor];
+    }
     [self setNeedsLayout];
 }
 

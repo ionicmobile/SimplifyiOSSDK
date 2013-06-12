@@ -37,7 +37,7 @@
 #define SIMCreditCardEntryViewExpirationKey @"SIMCreditCardEntryViewExpirationKey"
 
 @interface SIMCreditCardEntryView : UIView
--(void)setCardNumber:(NSString*)cardNumber;
+-(void)setCardNumber:(NSString*)cardNumber isValid:(BOOL)valid isMaximumLength:(BOOL)maximumLength;
 -(void)setCardType:(SIMCreditCardType)cardType;
 -(void)setCVCCode:(NSString*)cvcCode;
 -(void)setExpirationDate:(NSString*)expiration;

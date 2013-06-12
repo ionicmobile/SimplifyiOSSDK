@@ -48,7 +48,9 @@ typedef enum {
 @property (nonatomic, strong, readonly) NSString* expirationMonth;
 @property (nonatomic, strong, readonly) NSString* expirationYear;
 @property (nonatomic, readonly) BOOL isValidCardNumber;
+@property (nonatomic, readonly) BOOL isMaximumCardLength;
 @property (nonatomic, readonly) BOOL isValidCVC;
+@property (nonatomic, readonly) BOOL isMaximumCVCLength;
 @property (nonatomic, readonly) BOOL isExpired;
 
 -(id)initWithLuhnValidator:(SIMLuhnValidator*)luhnValidator timeProvider:(SIMCurrentTimeProvider*)timeProvider;

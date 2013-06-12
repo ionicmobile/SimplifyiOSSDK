@@ -187,6 +187,7 @@
 -(void)testWhenNoCardNumberIsSetThenCardNumberIsInvalid {
     [[[mockLuhnValidator stub] andReturnValue:OCMOCK_VALUE(no)] isValid:OCMOCK_ANY];
     GHAssertFalse(testObject.isValidCardNumber, nil);
+    GHAssertFalse(testObject.isMaximumCardLength, nil);
 }
 
 // Source: http://en.wikipedia.org/wiki/Bank_card_number 
@@ -196,11 +197,17 @@
     [[[mockLuhnValidator stub] andReturnValue:OCMOCK_VALUE(yes)] isValid:OCMOCK_ANY];
     [testObject setCardNumberAsString:@"37828224631000"];
     GHAssertFalse(testObject.isValidCardNumber, nil);
+    GHAssertFalse(testObject.isMaximumCardLength, nil);
+    
     [testObject setCardNumberAsString:@"378282246310005"];
     GHAssertTrue(testObject.isValidCardNumber, nil);
-    [testObject setCardNumberAsString:@"3782822463100051"];
-    GHAssertFalse(testObject.isValidCardNumber, nil);
+    GHAssertTrue(testObject.isMaximumCardLength, nil);
     
+    [testObject setCardNumberAsString:@"3782822463100051"];
+    GHAssertEqualObjects(testObject.formattedCardNumber, @"3782 822463 10005", nil);
+    GHAssertTrue(testObject.isValidCardNumber, nil);
+    GHAssertTrue(testObject.isMaximumCardLength, nil);
+
     mockLuhnValidator = [OCMockObject mockForClass:SIMLuhnValidator.class];
     testObject = [[SIMCreditCardValidator alloc] initWithLuhnValidator:mockLuhnValidator timeProvider:mockTimeProvider];
     [[[mockLuhnValidator stub] andReturnValue:OCMOCK_VALUE(no)] isValid:OCMOCK_ANY];
@@ -216,21 +223,28 @@
 
     [testObject setCardNumberAsString:@"411111111111"];
     GHAssertFalse(testObject.isValidCardNumber, nil);
+    GHAssertFalse(testObject.isMaximumCardLength, nil);
 
     [testObject setCardNumberAsString:@"4111111111111"];
     GHAssertTrue(testObject.isValidCardNumber, nil);
+    GHAssertFalse(testObject.isMaximumCardLength, nil);
 
     [testObject setCardNumberAsString:@"41111111111111"];
     GHAssertFalse(testObject.isValidCardNumber, nil);
+    GHAssertFalse(testObject.isMaximumCardLength, nil);
 
     [testObject setCardNumberAsString:@"411111111111111"];
     GHAssertFalse(testObject.isValidCardNumber, nil);
-    
+    GHAssertFalse(testObject.isMaximumCardLength, nil);
+
     [testObject setCardNumberAsString:@"4111111111111111"];
     GHAssertTrue(testObject.isValidCardNumber, nil);
+    GHAssertTrue(testObject.isMaximumCardLength, nil);
     
     [testObject setCardNumberAsString:@"41111111111111111"];
-    GHAssertFalse(testObject.isValidCardNumber, nil);
+    GHAssertEqualObjects(testObject.formattedCardNumber, @"4111 1111 1111 1111", nil);
+    GHAssertTrue(testObject.isValidCardNumber, nil);
+    GHAssertTrue(testObject.isMaximumCardLength, nil);
     
     mockLuhnValidator = [OCMockObject mockForClass:SIMLuhnValidator.class];
     testObject = [[SIMCreditCardValidator alloc] initWithLuhnValidator:mockLuhnValidator timeProvider:mockTimeProvider];
@@ -247,13 +261,17 @@
 
     [testObject setCardNumberAsString:@"510510510510510"];
     GHAssertFalse(testObject.isValidCardNumber, nil);
+    GHAssertFalse(testObject.isMaximumCardLength, nil);
 
     [testObject setCardNumberAsString:@"5105105105105100"];
     GHAssertTrue(testObject.isValidCardNumber, nil);
-    
+    GHAssertTrue(testObject.isMaximumCardLength, nil);
+
     [testObject setCardNumberAsString:@"51051051051051001"];
-    GHAssertFalse(testObject.isValidCardNumber, nil);
-    
+    GHAssertEqualObjects(testObject.formattedCardNumber, @"5105 1051 0510 5100", nil);
+    GHAssertTrue(testObject.isValidCardNumber, nil);
+    GHAssertTrue(testObject.isMaximumCardLength, nil);
+
     mockLuhnValidator = [OCMockObject mockForClass:SIMLuhnValidator.class];
     testObject = [[SIMCreditCardValidator alloc] initWithLuhnValidator:mockLuhnValidator timeProvider:mockTimeProvider];
     [[[mockLuhnValidator stub] andReturnValue:OCMOCK_VALUE(no)] isValid:OCMOCK_ANY];
@@ -269,17 +287,21 @@
 
     [testObject setCardNumberAsString:@"601100099013942"];
     GHAssertFalse(testObject.isValidCardNumber, nil);
-    
+    GHAssertFalse(testObject.isMaximumCardLength, nil);
+
     [testObject setCardNumberAsString:@"6011000990139424"];
     GHAssertTrue(testObject.isValidCardNumber, nil);
+    GHAssertTrue(testObject.isMaximumCardLength, nil);
 
     [testObject setCardNumberAsString:@"60110009901394245"];
-    GHAssertFalse(testObject.isValidCardNumber, nil);
+    GHAssertEqualObjects(testObject.formattedCardNumber, @"6011 0009 9013 9424", nil);
+    GHAssertTrue(testObject.isValidCardNumber, nil);
+    GHAssertTrue(testObject.isMaximumCardLength, nil);
     
     mockLuhnValidator = [OCMockObject mockForClass:SIMLuhnValidator.class];
     testObject = [[SIMCreditCardValidator alloc] initWithLuhnValidator:mockLuhnValidator timeProvider:mockTimeProvider];
     [[[mockLuhnValidator stub] andReturnValue:OCMOCK_VALUE(no)] isValid:OCMOCK_ANY];
-    [testObject setCardNumberAsString:@"5105105105105100"];
+    [testObject setCardNumberAsString:@"601100099013942"];
     GHAssertFalse(testObject.isValidCardNumber, nil);
 }
 
@@ -291,13 +313,17 @@
 
     [testObject setCardNumberAsString:@"353011133330000"];
     GHAssertFalse(testObject.isValidCardNumber, nil);
+    GHAssertFalse(testObject.isMaximumCardLength, nil);
 
     [testObject setCardNumberAsString:@"3530111333300000"];
     GHAssertTrue(testObject.isValidCardNumber, nil);
+    GHAssertTrue(testObject.isMaximumCardLength, nil);
 
     [testObject setCardNumberAsString:@"35301113333000000"];
-    GHAssertFalse(testObject.isValidCardNumber, nil);
-    
+    GHAssertEqualObjects(testObject.formattedCardNumber, @"3530 1113 3330 0000", nil);
+    GHAssertTrue(testObject.isValidCardNumber, nil);
+    GHAssertTrue(testObject.isMaximumCardLength, nil);
+
     mockLuhnValidator = [OCMockObject mockForClass:SIMLuhnValidator.class];
     testObject = [[SIMCreditCardValidator alloc] initWithLuhnValidator:mockLuhnValidator timeProvider:mockTimeProvider];
     [[[mockLuhnValidator stub] andReturnValue:OCMOCK_VALUE(no)] isValid:OCMOCK_ANY];
@@ -313,19 +339,25 @@
 
     [testObject setCardNumberAsString:@"3056930902590"];
     GHAssertFalse(testObject.isValidCardNumber, nil);
-    
+    GHAssertFalse(testObject.isMaximumCardLength, nil);
+
     [testObject setCardNumberAsString:@"30569309025904"];
     GHAssertTrue(testObject.isValidCardNumber, nil);
-    
+    GHAssertFalse(testObject.isMaximumCardLength, nil);
+
     [testObject setCardNumberAsString:@"305693090259045"];
     GHAssertTrue(testObject.isValidCardNumber, nil);
-    
+    GHAssertFalse(testObject.isMaximumCardLength, nil);
+
     [testObject setCardNumberAsString:@"3056930902590456"];
     GHAssertTrue(testObject.isValidCardNumber, nil);
-    
+    GHAssertTrue(testObject.isMaximumCardLength, nil);
+
     [testObject setCardNumberAsString:@"30569309025904567"];
-    GHAssertFalse(testObject.isValidCardNumber, nil);
-    
+    GHAssertEqualObjects(testObject.formattedCardNumber, @"3056 9309 0259 0456", nil);
+    GHAssertTrue(testObject.isValidCardNumber, nil);
+    GHAssertTrue(testObject.isMaximumCardLength, nil);
+
     mockLuhnValidator = [OCMockObject mockForClass:SIMLuhnValidator.class];
     testObject = [[SIMCreditCardValidator alloc] initWithLuhnValidator:mockLuhnValidator timeProvider:mockTimeProvider];
     [[[mockLuhnValidator stub] andReturnValue:OCMOCK_VALUE(no)] isValid:OCMOCK_ANY];
@@ -343,16 +375,28 @@
 
     [testObject setCardNumberAsString:@"622126000000000"];
     GHAssertFalse(testObject.isValidCardNumber, nil);
+    GHAssertFalse(testObject.isMaximumCardLength, nil);
+
     [testObject setCardNumberAsString:@"6221260000000000"];
     GHAssertTrue(testObject.isValidCardNumber, nil);
+    GHAssertFalse(testObject.isMaximumCardLength, nil);
+
     [testObject setCardNumberAsString:@"62212600000000000"];
     GHAssertTrue(testObject.isValidCardNumber, nil);
+    GHAssertFalse(testObject.isMaximumCardLength, nil);
+
     [testObject setCardNumberAsString:@"622126000000000000"];
     GHAssertTrue(testObject.isValidCardNumber, nil);
+    GHAssertFalse(testObject.isMaximumCardLength, nil);
+
     [testObject setCardNumberAsString:@"6221260000000000000"];
     GHAssertTrue(testObject.isValidCardNumber, nil);
+    GHAssertTrue(testObject.isMaximumCardLength, nil);
+
     [testObject setCardNumberAsString:@"62212600000000000000"];
-    GHAssertFalse(testObject.isValidCardNumber, nil);
+    GHAssertEqualObjects(testObject.formattedCardNumber, @"6221 2600 0000 0000 000", nil);
+    GHAssertTrue(testObject.isValidCardNumber, nil);
+    GHAssertTrue(testObject.isMaximumCardLength, nil);
     
     mockLuhnValidator = [OCMockObject mockForClass:SIMLuhnValidator.class];
     testObject = [[SIMCreditCardValidator alloc] initWithLuhnValidator:mockLuhnValidator timeProvider:mockTimeProvider];
@@ -369,24 +413,44 @@
 
     [testObject setCardNumberAsString:@"56105910810"];
     GHAssertFalse(testObject.isValidCardNumber, nil);
+    GHAssertFalse(testObject.isMaximumCardLength, nil);
+
     [testObject setCardNumberAsString:@"561059108101"];
     GHAssertTrue(testObject.isValidCardNumber, nil);
+    GHAssertFalse(testObject.isMaximumCardLength, nil);
+
     [testObject setCardNumberAsString:@"5610591081018"];
     GHAssertTrue(testObject.isValidCardNumber, nil);
+    GHAssertFalse(testObject.isMaximumCardLength, nil);
+
     [testObject setCardNumberAsString:@"56105910810182"];
     GHAssertTrue(testObject.isValidCardNumber, nil);
+    GHAssertFalse(testObject.isMaximumCardLength, nil);
+
     [testObject setCardNumberAsString:@"561059108101825"];
     GHAssertTrue(testObject.isValidCardNumber, nil);
+    GHAssertFalse(testObject.isMaximumCardLength, nil);
+
     [testObject setCardNumberAsString:@"5610591081018250"]; // e.g., Austrailian Bankcard
     GHAssertTrue(testObject.isValidCardNumber, nil);
+    GHAssertFalse(testObject.isMaximumCardLength, nil);
+
     [testObject setCardNumberAsString:@"56105910810182501"];
     GHAssertTrue(testObject.isValidCardNumber, nil);
+    GHAssertFalse(testObject.isMaximumCardLength, nil);
+
     [testObject setCardNumberAsString:@"561059108101825012"];
     GHAssertTrue(testObject.isValidCardNumber, nil);
+    GHAssertFalse(testObject.isMaximumCardLength, nil);
+
     [testObject setCardNumberAsString:@"5610591081018250123"];
     GHAssertTrue(testObject.isValidCardNumber, nil);
+    GHAssertTrue(testObject.isMaximumCardLength, nil);
+
     [testObject setCardNumberAsString:@"56105910810182501234"];
-    GHAssertFalse(testObject.isValidCardNumber, nil);
+    GHAssertEqualObjects(testObject.formattedCardNumber, @"5610 5910 8101 8250 123", nil);
+    GHAssertTrue(testObject.isValidCardNumber, nil);
+    GHAssertTrue(testObject.isMaximumCardLength, nil);
     
     mockLuhnValidator = [OCMockObject mockForClass:SIMLuhnValidator.class];
     testObject = [[SIMCreditCardValidator alloc] initWithLuhnValidator:mockLuhnValidator timeProvider:mockTimeProvider];
