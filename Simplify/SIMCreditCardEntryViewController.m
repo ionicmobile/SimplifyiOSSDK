@@ -80,7 +80,7 @@
 
 -(void)ccChanged:(NSNotification*)notification {
     [self.ccValidator setCardNumberAsString:notification.userInfo[SIMCreditCardEntryViewCardNumberKey]];
-    [self.ccEntryView setCardNumber:self.ccValidator.formattedCardNumber isValid:self.ccValidator.isValidCardNumber isMaximumLength:self.ccValidator.isMaximumCardLength];
+    [self.ccEntryView setCardNumber:self.ccValidator.formattedCardNumber isValid:self.ccValidator.isValidCardNumber isMaximumLength:self.ccValidator.isMaximumCVCLength];
     [self.ccEntryView setCardType:self.ccValidator.cardType];
 }
 

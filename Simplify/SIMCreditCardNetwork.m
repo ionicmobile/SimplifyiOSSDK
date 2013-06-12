@@ -24,9 +24,9 @@ NSString *kSimplifyCommerceDefaultAPIBaseLiveUrl = @"https://sandbox.simplify.co
 	[parameters appendFormat:@"&%@=%@", [self urlEncoded:@"card[cvc]"], cvc];
 	[parameters appendFormat:@"&%@=%@", [self urlEncoded:@"card[name]"], [self urlEncoded:cardNumber]];
 	url = [NSURL URLWithString:[[url absoluteString] stringByAppendingString:parameters]];
-
+	
 	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:0];
-
+	
 	[request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
 	[request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
 	
@@ -35,24 +35,25 @@ NSString *kSimplifyCommerceDefaultAPIBaseLiveUrl = @"https://sandbox.simplify.co
 	
 	// As POST, add JSON to body
 //	request.HTTPMethod = @"POST";
-//	NSDictionary *requestJson = @{
-//		@"key" : publicKey,
-//		@"card[number]" : cardNumber,
-//		@"card[expMonth]" : expirationMonth,
-//		@"card[expYear]" : expirationYear,
-//		@"card[cvc]" : cvc,
-//		@"card[name]" : @"John Doe",
-//	};
+//	NSDictionary *requestJson = @{@"key" : publicKey,
+//								@"card[number]" : cardNumber,
+//								@"card[expMonth]" : expirationMonth,
+//								@"card[expYear]" : expirationYear,
+//								@"card[cvc]" : cvc,
+//								@"card[name]" : @"John Doe",
+//								};
 //	request.HTTPBody = [NSJSONSerialization dataWithJSONObject:requestJson options:0 error:error];
 	
 	if (!*error) {
 		NSHTTPURLResponse *response = nil;
 		NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:error];
 		if (!*error) {
-			if (!*error && response.statusCode >= 200 && response.statusCode < 300) {
+			if (response.statusCode >= 200 && response.statusCode < 300) {
 				NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:error];
 				NSLog(@"json: %@", json);
 				cardToken = [SIMCardToken cardTokenFromDictionary:json];
+			} else {
+				NSLog(@"statusCode: %i", response.statusCode);
 			}
 		}
 	}
