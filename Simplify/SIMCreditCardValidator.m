@@ -98,6 +98,12 @@
 -(void)setExpirationAsString:(NSString*)string {
     NSCharacterSet* nonDecimals = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
     self.digitsOnlyExpirationDateString = [[string componentsSeparatedByCharactersInSet:nonDecimals] componentsJoinedByString:@""];
+    if ( string.length ) {
+        NSUInteger firstDigit = [self valueOf:[string characterAtIndex:0]];
+        if ( firstDigit > 1 && firstDigit <= 9 ) {
+            self.digitsOnlyExpirationDateString = [NSString stringWithFormat:@"0%@", self.digitsOnlyExpirationDateString];
+        }
+    }
 }
 
 -(NSString*)formattedCardNumber {
@@ -128,7 +134,11 @@
 }
 
 -(NSString*)expirationMonth {
-    return [self.digitsOnlyExpirationDateString safeSubstringByTrimmingToLength:2];
+    NSString* month = [self.digitsOnlyExpirationDateString safeSubstringByTrimmingToLength:2];
+    if (month.length > 0 ) {
+        return month;
+    }
+    return nil;
 }
 
 -(NSString*)fourDigitExpirationYear {
@@ -239,5 +249,11 @@
 -(NSUInteger)maximumCardNumberLength {
     return [self.validCardNumberLengths.lastObject unsignedIntegerValue];
 }
+
+-(NSUInteger)valueOf:(unichar)c {
+    return c - '0';
+}
+
+
 
 @end

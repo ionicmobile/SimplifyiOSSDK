@@ -87,7 +87,7 @@
         expirationDateTextField.layer.borderWidth = 1.0f;
         expirationDateTextField.layer.masksToBounds = YES;
         expirationDateTextField.keyboardType = UIKeyboardTypeNumberPad;
-        expirationDateTextField.placeholder = @" Expiration";
+        expirationDateTextField.placeholder = @" MM/YY";
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(expiryChanged) name:UITextFieldTextDidChangeNotification object:expirationDateTextField];
 
         SIMLayeredButton* button = [[SIMLayeredButton alloc] init];

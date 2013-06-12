@@ -663,6 +663,27 @@
     GHAssertEqualObjects(testObject.expirationYear, @"12", nil);
 }
 
+-(void)testWhenTheFirstDigitForTheExpirationDateIsNot1ThenAZeroIsInserted {
+    [testObject setExpirationAsString:@"2"];
+    GHAssertEqualObjects(testObject.formattedExpirationDate, @"02", nil);
+    GHAssertEqualObjects(testObject.expirationMonth, @"02", nil);
+    GHAssertNil(testObject.expirationYear, nil);
+}
+
+-(void)testWhenTheSecondDigitIsEnteredForFebruaryThatAZeroIsNotInserted {
+    [testObject setExpirationAsString:@"2"];
+    [testObject setExpirationAsString:@"24"];
+    GHAssertEqualObjects(testObject.formattedExpirationDate, @"02/4", nil);
+    GHAssertEqualObjects(testObject.expirationMonth, @"02", nil);
+    GHAssertEqualObjects(testObject.expirationYear, @"4", nil);
+}
+
+-(void)testWhenExpirationIsSetAsEmptyThenMonthAndYearAreNil {
+    [testObject setExpirationAsString:@""];
+    GHAssertNil(testObject.expirationMonth, nil);
+    GHAssertNil(testObject.expirationYear, nil);
+}
+
 -(void)testWhenExpirationDateIsFirstExpiredMomentThenItIsExpired  {
     NSTimeZone* earthsLastTimezone = [NSTimeZone timeZoneWithName:@"UTC-12:00"];
     NSDateComponents* components = [[NSDateComponents alloc] init];
