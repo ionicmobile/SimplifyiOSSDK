@@ -1,30 +1,3 @@
-/*
- * Copyright (c) 2013, MasterCard International Incorporated
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- * Redistributions of source code must retain the above copyright notice, this list of
- * conditions and the following disclaimer.
- * Redistributions in binary form must reproduce the above copyright notice, this list of
- * conditions and the following disclaimer in the documentation and/or other materials
- * provided with the distribution.
- * Neither the name of the MasterCard International Incorporated nor the names of its
- * contributors may be used to endorse or promote products derived from this software
- * without specific prior written permission.
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
- * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
- * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
- * TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
- * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
- * IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
- * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- */
-
 #import "SIMAbstractTestCase.h"
 #import "SIMCreditCardValidator.h"
 #import "SIMLuhnValidator.h"
@@ -54,7 +27,7 @@
     [testObject setCardNumberAsString:@"378282246310005"];
     [testObject isValidCardNumber];
     [mockLuhnValidator verify];
-    
+
     [[[mockLuhnValidator expect] andReturnValue:OCMOCK_VALUE(yes)] isValid:@"378282246310005"];
     [testObject setCardNumberAsString:@"3782-822463-10005"];
     [testObject isValidCardNumber];
@@ -190,7 +163,7 @@
     GHAssertFalse(testObject.isMaximumCardNumberLength, nil);
 }
 
-// Source: http://en.wikipedia.org/wiki/Bank_card_number 
+// Source: http://en.wikipedia.org/wiki/Bank_card_number
 -(void)testWhenAmexCardIsEnteredWith15DigitsThenItHasValidLength {
     mockLuhnValidator = [OCMockObject mockForClass:SIMLuhnValidator.class];
     testObject = [[SIMCreditCardValidator alloc] initWithLuhnValidator:mockLuhnValidator timeProvider:mockTimeProvider];
@@ -198,11 +171,11 @@
     [testObject setCardNumberAsString:@"37828224631000"];
     GHAssertFalse(testObject.isValidCardNumber, nil);
     GHAssertFalse(testObject.isMaximumCardNumberLength, nil);
-    
+
     [testObject setCardNumberAsString:@"378282246310005"];
     GHAssertTrue(testObject.isValidCardNumber, nil);
     GHAssertTrue(testObject.isMaximumCardNumberLength, nil);
-    
+
     [testObject setCardNumberAsString:@"3782822463100051"];
     GHAssertEqualObjects(testObject.formattedCardNumber, @"3782 822463 10005", nil);
     GHAssertTrue(testObject.isValidCardNumber, nil);
@@ -215,7 +188,7 @@
     GHAssertFalse(testObject.isValidCardNumber, nil);
 }
 
-// Source: http://en.wikipedia.org/wiki/Bank_card_number 
+// Source: http://en.wikipedia.org/wiki/Bank_card_number
 -(void)testWhenVisaCardHas13Or16DigitsThenItHasValidLength {
     mockLuhnValidator = [OCMockObject mockForClass:SIMLuhnValidator.class];
     testObject = [[SIMCreditCardValidator alloc] initWithLuhnValidator:mockLuhnValidator timeProvider:mockTimeProvider];
@@ -240,12 +213,12 @@
     [testObject setCardNumberAsString:@"4111111111111111"];
     GHAssertTrue(testObject.isValidCardNumber, nil);
     GHAssertTrue(testObject.isMaximumCardNumberLength, nil);
-    
+
     [testObject setCardNumberAsString:@"41111111111111111"];
     GHAssertEqualObjects(testObject.formattedCardNumber, @"4111 1111 1111 1111", nil);
     GHAssertTrue(testObject.isValidCardNumber, nil);
     GHAssertTrue(testObject.isMaximumCardNumberLength, nil);
-    
+
     mockLuhnValidator = [OCMockObject mockForClass:SIMLuhnValidator.class];
     testObject = [[SIMCreditCardValidator alloc] initWithLuhnValidator:mockLuhnValidator timeProvider:mockTimeProvider];
     [[[mockLuhnValidator stub] andReturnValue:OCMOCK_VALUE(no)] isValid:OCMOCK_ANY];
@@ -253,7 +226,7 @@
     GHAssertFalse(testObject.isValidCardNumber, nil);
 }
 
-// Source: http://en.wikipedia.org/wiki/Bank_card_number 
+// Source: http://en.wikipedia.org/wiki/Bank_card_number
 -(void)testWhenMasterCardHas16DigitsThenItHasValidLength {
     mockLuhnValidator = [OCMockObject mockForClass:SIMLuhnValidator.class];
     testObject = [[SIMCreditCardValidator alloc] initWithLuhnValidator:mockLuhnValidator timeProvider:mockTimeProvider];
@@ -297,7 +270,7 @@
     GHAssertEqualObjects(testObject.formattedCardNumber, @"6011 0009 9013 9424", nil);
     GHAssertTrue(testObject.isValidCardNumber, nil);
     GHAssertTrue(testObject.isMaximumCardNumberLength, nil);
-    
+
     mockLuhnValidator = [OCMockObject mockForClass:SIMLuhnValidator.class];
     testObject = [[SIMCreditCardValidator alloc] initWithLuhnValidator:mockLuhnValidator timeProvider:mockTimeProvider];
     [[[mockLuhnValidator stub] andReturnValue:OCMOCK_VALUE(no)] isValid:OCMOCK_ANY];
@@ -305,7 +278,7 @@
     GHAssertFalse(testObject.isValidCardNumber, nil);
 }
 
-// Source: http://en.wikipedia.org/wiki/Bank_card_number 
+// Source: http://en.wikipedia.org/wiki/Bank_card_number
 -(void)testWhenJCBHas16DigitsThenItHasValidLength {
     mockLuhnValidator = [OCMockObject mockForClass:SIMLuhnValidator.class];
     testObject = [[SIMCreditCardValidator alloc] initWithLuhnValidator:mockLuhnValidator timeProvider:mockTimeProvider];
@@ -331,7 +304,7 @@
     GHAssertFalse(testObject.isValidCardNumber, nil);
 }
 
-// Source: http://en.wikipedia.org/wiki/Bank_card_number 
+// Source: http://en.wikipedia.org/wiki/Bank_card_number
 -(void)testWhenDinersClubHas14or15or16DigitsThenItHasValidLength {
     mockLuhnValidator = [OCMockObject mockForClass:SIMLuhnValidator.class];
     testObject = [[SIMCreditCardValidator alloc] initWithLuhnValidator:mockLuhnValidator timeProvider:mockTimeProvider];
@@ -365,9 +338,9 @@
     GHAssertFalse(testObject.isValidCardNumber, nil);
 }
 
-// Source: http://en.wikipedia.org/wiki/Bank_card_number 
+// Source: http://en.wikipedia.org/wiki/Bank_card_number
 -(void)testWhenChinaUnionPayIs16Through19DigitsThenItHasValidLength {
-    
+
     // China Union Pay does not use Luhn Validation
     mockLuhnValidator = [OCMockObject mockForClass:SIMLuhnValidator.class];
     testObject = [[SIMCreditCardValidator alloc] initWithLuhnValidator:mockLuhnValidator timeProvider:mockTimeProvider];
@@ -397,7 +370,7 @@
     GHAssertEqualObjects(testObject.formattedCardNumber, @"6221 2600 0000 0000 000", nil);
     GHAssertTrue(testObject.isValidCardNumber, nil);
     GHAssertTrue(testObject.isMaximumCardNumberLength, nil);
-    
+
     mockLuhnValidator = [OCMockObject mockForClass:SIMLuhnValidator.class];
     testObject = [[SIMCreditCardValidator alloc] initWithLuhnValidator:mockLuhnValidator timeProvider:mockTimeProvider];
     [[[mockLuhnValidator stub] andReturnValue:OCMOCK_VALUE(yes)] isValid:OCMOCK_ANY];
@@ -405,7 +378,7 @@
     GHAssertTrue(testObject.isValidCardNumber, nil);
 }
 
-// Source: http://en.wikipedia.org/wiki/Bank_card_number 
+// Source: http://en.wikipedia.org/wiki/Bank_card_number
 -(void)testWhenCardUnknownThenLengthIsBetween12and19 {
     mockLuhnValidator = [OCMockObject mockForClass:SIMLuhnValidator.class];
     testObject = [[SIMCreditCardValidator alloc] initWithLuhnValidator:mockLuhnValidator timeProvider:mockTimeProvider];
@@ -451,7 +424,7 @@
     GHAssertEqualObjects(testObject.formattedCardNumber, @"5610 5910 8101 8250 123", nil);
     GHAssertTrue(testObject.isValidCardNumber, nil);
     GHAssertTrue(testObject.isMaximumCardNumberLength, nil);
-    
+
     mockLuhnValidator = [OCMockObject mockForClass:SIMLuhnValidator.class];
     testObject = [[SIMCreditCardValidator alloc] initWithLuhnValidator:mockLuhnValidator timeProvider:mockTimeProvider];
     [[[mockLuhnValidator stub] andReturnValue:OCMOCK_VALUE(yes)] isValid:OCMOCK_ANY];
@@ -468,11 +441,11 @@
     [testObject setCVCCodeAsString:@"123"];
     GHAssertTrue(testObject.isValidCVC, nil);
     GHAssertFalse(testObject.isMaximumCVCLength, nil);
-    
+
     [testObject setCVCCodeAsString:@"1234"];
     GHAssertTrue(testObject.isValidCVC, nil);
     GHAssertTrue(testObject.isMaximumCVCLength, nil);
-    
+
     [testObject setCVCCodeAsString:@"12345"];
     GHAssertEqualObjects(testObject.formattedCVCCode, @"1234", nil);
     GHAssertTrue(testObject.isValidCVC, nil);
@@ -502,7 +475,7 @@
     [testObject setCVCCodeAsString:@"1-2-3"];
     GHAssertTrue(testObject.isValidCVC, nil);
     GHAssertEqualObjects(testObject.formattedCVCCode, @"123", nil);
-    
+
     [testObject setCardNumberAsString:@"378734493671000"];
     [testObject setCVCCodeAsString:@"1-23 4"];
     GHAssertTrue(testObject.isValidCVC, nil);
@@ -519,7 +492,7 @@
     [testObject setCVCCodeAsString:@"123"];
     GHAssertTrue(testObject.isValidCVC, nil);
     GHAssertTrue(testObject.isMaximumCVCLength, nil);
-    
+
     [testObject setCVCCodeAsString:@"1234"];
     GHAssertEqualObjects(testObject.formattedCVCCode, @"123", nil);
     GHAssertTrue(testObject.isValidCVC, nil);
@@ -528,15 +501,15 @@
 
 -(void)testWhenCVCCodeForMasterCardIs3CharactersThenItIsValid {
     [testObject setCardNumberAsString:@"5555555555554444"];
-    
+
     [testObject setCVCCodeAsString:@"12"];
     GHAssertFalse(testObject.isValidCVC, nil);
     GHAssertFalse(testObject.isMaximumCVCLength, nil);
-    
+
     [testObject setCVCCodeAsString:@"123"];
     GHAssertTrue(testObject.isValidCVC, nil);
     GHAssertTrue(testObject.isMaximumCVCLength, nil);
-    
+
     [testObject setCVCCodeAsString:@"1234"];
     GHAssertEqualObjects(testObject.formattedCVCCode, @"123", nil);
     GHAssertTrue(testObject.isValidCVC, nil);
@@ -545,15 +518,15 @@
 
 -(void)testWhenCVCCodeForVisaIs3CharactersThenItIsValid {
     [testObject setCardNumberAsString:@"41111111111111111"];
-    
+
     [testObject setCVCCodeAsString:@"12"];
     GHAssertFalse(testObject.isValidCVC, nil);
     GHAssertFalse(testObject.isMaximumCVCLength, nil);
-    
+
     [testObject setCVCCodeAsString:@"123"];
     GHAssertTrue(testObject.isValidCVC, nil);
     GHAssertTrue(testObject.isMaximumCVCLength, nil);
-    
+
     [testObject setCVCCodeAsString:@"1234"];
     GHAssertEqualObjects(testObject.formattedCVCCode, @"123", nil);
     GHAssertTrue(testObject.isValidCVC, nil);
@@ -566,11 +539,11 @@
     [testObject setCVCCodeAsString:@"12"];
     GHAssertFalse(testObject.isValidCVC, nil);
     GHAssertFalse(testObject.isMaximumCVCLength, nil);
-    
+
     [testObject setCVCCodeAsString:@"123"];
     GHAssertTrue(testObject.isValidCVC, nil);
     GHAssertTrue(testObject.isMaximumCVCLength, nil);
-    
+
     [testObject setCVCCodeAsString:@"1234"];
     GHAssertEqualObjects(testObject.formattedCVCCode, @"123", nil);
     GHAssertTrue(testObject.isValidCVC, nil);
@@ -579,15 +552,15 @@
 
 -(void)testWhenCVCCodeForDiscoverIs3CharactersThenItIsValid {
     [testObject setCardNumberAsString:@"6500111122223333"];
-    
+
     [testObject setCVCCodeAsString:@"12"];
     GHAssertFalse(testObject.isValidCVC, nil);
     GHAssertFalse(testObject.isMaximumCVCLength, nil);
-    
+
     [testObject setCVCCodeAsString:@"123"];
     GHAssertTrue(testObject.isValidCVC, nil);
     GHAssertTrue(testObject.isMaximumCVCLength, nil);
-    
+
     [testObject setCVCCodeAsString:@"1234"];
     GHAssertEqualObjects(testObject.formattedCVCCode, @"123", nil);
     GHAssertTrue(testObject.isValidCVC, nil);
@@ -596,15 +569,15 @@
 
 -(void)testWhenCVCCodeForUnionPayIs3CharactersThenItIsValid {
     [testObject setCardNumberAsString:@"6221261122223333"];
-    
+
     [testObject setCVCCodeAsString:@"12"];
     GHAssertFalse(testObject.isValidCVC, nil);
     GHAssertFalse(testObject.isMaximumCVCLength, nil);
-    
+
     [testObject setCVCCodeAsString:@"123"];
     GHAssertTrue(testObject.isValidCVC, nil);
     GHAssertTrue(testObject.isMaximumCVCLength, nil);
-    
+
     [testObject setCVCCodeAsString:@"1234"];
     GHAssertEqualObjects(testObject.formattedCVCCode, @"123", nil);
     GHAssertTrue(testObject.isValidCVC, nil);
@@ -630,12 +603,12 @@
     GHAssertEqualObjects(testObject.formattedExpirationDate, @"12/13", nil);
     GHAssertEqualObjects(testObject.expirationMonth, @"12", nil);
     GHAssertEqualObjects(testObject.expirationYear, @"13", nil);
-    
+
     [testObject setExpirationAsString:@"12-13"];
     GHAssertEqualObjects(testObject.formattedExpirationDate, @"12/13", nil);
     GHAssertEqualObjects(testObject.expirationMonth, @"12", nil);
     GHAssertEqualObjects(testObject.expirationYear, @"13", nil);
-    
+
     [testObject setExpirationAsString:@"12/13"];
     GHAssertEqualObjects(testObject.formattedExpirationDate, @"12/13", nil);
     GHAssertEqualObjects(testObject.expirationMonth, @"12", nil);
@@ -691,10 +664,10 @@
     [components setDay:1];
     [components setYear:2012];
     [components setTimeZone:earthsLastTimezone];
-    
+
     NSCalendar* calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDate* firstMomentOf2012ForLastTimeZone = [calendar dateFromComponents:components];
-    
+
     [[[mockTimeProvider expect] andReturn:firstMomentOf2012ForLastTimeZone] currentTime];
     [testObject setExpirationAsString:@"12/11"];
     GHAssertTrue(testObject.isExpired, nil);
@@ -711,10 +684,10 @@
     [components setMinute:0];
     [components setSecond:1];
     [components setTimeZone:earthsLastTimezone];
-    
+
     NSCalendar* calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDate* secondMomentOf2012ForLastTimeZone = [calendar dateFromComponents:components];
-    
+
     [[[mockTimeProvider expect] andReturn:secondMomentOf2012ForLastTimeZone] currentTime];
     [testObject setExpirationAsString:@"12/11"];
     GHAssertTrue(testObject.isExpired, nil);
@@ -731,7 +704,7 @@
     [components setMinute:59];
     [components setSecond:59];
     [components setTimeZone:earthsLastTimezone];
-    
+
     NSCalendar* calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDate* lastMomentOf2011ForLastTimeZone = [calendar dateFromComponents:components];
     [[[mockTimeProvider expect] andReturn:lastMomentOf2011ForLastTimeZone] currentTime];

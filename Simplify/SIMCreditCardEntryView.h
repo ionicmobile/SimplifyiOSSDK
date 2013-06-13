@@ -1,18 +1,19 @@
 #import <UIKit/UIKit.h>
-#import "SIMCreditCardValidator.h"
+#import "SIMTextInputState.h"
+#import "SIMCreditCardType.h"
 
 @protocol SIMCreditCardEntryViewDelegate
--(void)cardNumberChanged:(NSString*)cardNumber;
--(void)cvcNumberChanged:(NSString*)cvcNumber;
--(void)expirationDateChanged:(NSString*)expirationDate;
--(void)doneButtonTapped;
+-(void)creditCardNumberInput:(NSString*)input;
+-(void)cvcNumberInput:(NSString*)input;
+-(void)expirationDateInput:(NSString*)input;
+-(void)sendCreditCardButtonTapped;
 @end
 
 @interface SIMCreditCardEntryView : UIView
 @property (nonatomic, weak) id<SIMCreditCardEntryViewDelegate> delegate;
--(void)setCardNumber:(NSString*)cardNumber isValid:(BOOL)valid isMaximumLength:(BOOL)maximumLength;
 -(void)setCardType:(SIMCreditCardType)cardType;
--(void)setCVCCode:(NSString*)cvcCode isValid:(BOOL)valid isMaximumLength:(BOOL)maximumLength;
--(void)setExpirationDate:(NSString*)expiration isValid:(BOOL)valid;
--(void)setButtonEnabled:(BOOL)enabled;
+-(void)setCardNumberDisplayedText:(NSString*)displayedText textInputState:(SIMTextInputState)textInputState;
+-(void)setCVCNumberDisplayedText:(NSString*)displayedText textInputState:(SIMTextInputState)textInputState;
+-(void)setExpirationDateDisplayedText:(NSString*)displayedText textInputState:(SIMTextInputState)textInputState;
+-(void)setSendCreditCardButtonEnabled:(BOOL)enabled;
 @end
