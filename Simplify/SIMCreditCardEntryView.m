@@ -1,30 +1,3 @@
-/*
- * Copyright (c) 2013, MasterCard International Incorporated
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification, are
- * permitted provided that the following conditions are met:
- *
- * Redistributions of source code must retain the above copyright notice, this list of
- * conditions and the following disclaimer.
- * Redistributions in binary form must reproduce the above copyright notice, this list of
- * conditions and the following disclaimer in the documentation and/or other materials
- * provided with the distribution.
- * Neither the name of the MasterCard International Incorporated nor the names of its
- * contributors may be used to endorse or promote products derived from this software
- * without specific prior written permission.
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
- * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
- * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
- * TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
- * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
- * IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
- * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- */
-
 #import <QuartzCore/QuartzCore.h>
 #import "UIView+Additions.h"
 #import "UIColor+Additions.h"
@@ -45,17 +18,16 @@
 @implementation SIMCreditCardEntryView
 
 -(id)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if ( self ) {
+    if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor whiteColor];
-        
+
         UILabel* titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         titleLabel.font = [SimplifyPrivate boldFontOfSize:26.0f];
         titleLabel.text = @"Payment Details";
         titleLabel.textColor = [UIColor colorWithHexString:@"4a4a4a"];
-        
+
         UIImageView* cardImageView = [[UIImageView alloc] initWithImage:[SimplifyPrivate imageNamed:@"card_back_32"]];
-        
+
         SIMTextField* creditCardNumberTextField = [[SIMTextField alloc] initWithFrame:CGRectZero];
         creditCardNumberTextField.leftView = [UIView paddedViewWithView:cardImageView andPadding:CGSizeMake(15, 0)];
         creditCardNumberTextField.leftViewMode = UITextFieldViewModeAlways;
@@ -67,9 +39,10 @@
         creditCardNumberTextField.font = [SimplifyPrivate fontOfSize:16.0f];
         creditCardNumberTextField.textOffset = CGSizeMake(60, 2);
         creditCardNumberTextField.textColor = [UIColor colorWithHexString:@"4a4a4a"];
+	    creditCardNumberTextField.text = @"";
         [creditCardNumberTextField becomeFirstResponder];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ccChanged) name:UITextFieldTextDidChangeNotification object:creditCardNumberTextField];
-        
+
         SIMTextField* CVCNumberTextField = [[SIMTextField alloc] initWithFrame:CGRectZero];
         CVCNumberTextField.borderStyle = UITextBorderStyleLine;
         CVCNumberTextField.leftView = [UIView paddedViewWithView:[[UIView alloc] init] andPadding:CGSizeMake(7, 0)];
@@ -83,6 +56,7 @@
         CVCNumberTextField.font = [SimplifyPrivate fontOfSize:16.0f];
         CVCNumberTextField.textOffset = CGSizeMake(10, 2);
         CVCNumberTextField.textColor = [UIColor colorWithHexString:@"4a4a4a"];
+	    CVCNumberTextField.text = @"";
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cvcChanged) name:UITextFieldTextDidChangeNotification object:CVCNumberTextField];
 
         SIMTextField* expirationDateTextField = [[SIMTextField alloc] initWithFrame:CGRectZero];
@@ -98,6 +72,7 @@
         expirationDateTextField.font = [SimplifyPrivate fontOfSize:16.0f];
         expirationDateTextField.textOffset = CGSizeMake(10, 2);
         expirationDateTextField.textColor = [UIColor colorWithHexString:@"4a4a4a"];
+	    expirationDateTextField.text = @"";
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(expiryChanged) name:UITextFieldTextDidChangeNotification object:expirationDateTextField];
 
         SIMLayeredButton* button = [[SIMLayeredButton alloc] init];
@@ -106,14 +81,14 @@
         button.titleLabel.shadowColor = [UIColor blackColor];
         button.titleLabel.shadowOffset = CGSizeMake(0, -1);
 		[button addTarget:self action:@selector(doneButtonTapped) forControlEvents:UIControlEventTouchUpInside];
-        
+
         self.titleLabel = titleLabel;
         self.cardImageView = cardImageView;
         self.creditCardNumberTextField = creditCardNumberTextField;
         self.CVCNumberTextField = CVCNumberTextField;
         self.expirationDateTextField = expirationDateTextField;
         self.button = button;
-        
+
         [self addSubview:titleLabel];
         [self addSubview:creditCardNumberTextField];
         [self addSubview:CVCNumberTextField];
@@ -133,20 +108,16 @@
     CGFloat innerMarginY = 10.0;
     CGFloat outerMarginX = 20.0;
     CGFloat innerMarginX = 5.0;
-    
-    [self.titleLabel setFrameAtOriginThatFitsUnbounded:CGPointMake(outerMarginX - 4.0f, 20.0f)];
-    
-    self.creditCardNumberTextField.frame = CGRectMake(outerMarginX, innerMarginY + CGRectGetMaxY(self.titleLabel.frame),  self.bounds.size.width - 2 * outerMarginX, textFieldHeight);
-    
-    self.CVCNumberTextField.frame = CGRectMake(outerMarginX, CGRectGetMaxY(self.creditCardNumberTextField.frame) + innerMarginY, (self.bounds.size.width - innerMarginX - 2 * outerMarginX)/2,textFieldHeight);
-    
-    self.expirationDateTextField.frame = CGRectMake(CGRectGetMaxX(self.CVCNumberTextField.frame) + innerMarginX, CGRectGetMaxY(self.creditCardNumberTextField.frame) + innerMarginY, (self.bounds.size.width - innerMarginX - 2 * outerMarginX)/2,textFieldHeight);
-    
-    [self.button centerHorizonallyAtY:CGRectGetMaxY(self.expirationDateTextField.frame) + innerMarginY inBounds:self.bounds withSize:CGSizeMake(self.bounds.size.width - 2 * outerMarginX, 40)];
-}
 
--(void)doneButtonTapped {
-	[[NSNotificationCenter defaultCenter] postNotificationName:SIMCreditCardEntryViewDoneButtonTapped object:self];
+    [self.titleLabel setFrameAtOriginThatFitsUnbounded:CGPointMake(outerMarginX - 4.0f, 20.0f)];
+
+    self.creditCardNumberTextField.frame = CGRectMake(outerMarginX, innerMarginY + CGRectGetMaxY(self.titleLabel.frame),  self.bounds.size.width - 2 * outerMarginX, textFieldHeight);
+
+    self.CVCNumberTextField.frame = CGRectMake(outerMarginX, CGRectGetMaxY(self.creditCardNumberTextField.frame) + innerMarginY, (self.bounds.size.width - innerMarginX - 2 * outerMarginX)/2,textFieldHeight);
+
+    self.expirationDateTextField.frame = CGRectMake(CGRectGetMaxX(self.CVCNumberTextField.frame) + innerMarginX, CGRectGetMaxY(self.creditCardNumberTextField.frame) + innerMarginY, (self.bounds.size.width - innerMarginX - 2 * outerMarginX)/2,textFieldHeight);
+
+    [self.button centerHorizonallyAtY:CGRectGetMaxY(self.expirationDateTextField.frame) + innerMarginY inBounds:self.bounds withSize:CGSizeMake(self.bounds.size.width - 2 * outerMarginX, 40)];
 }
 
 -(void)setCardNumber:(NSString*)cardNumber isValid:(BOOL)valid isMaximumLength:(BOOL)maximumLength {
@@ -190,7 +161,7 @@
         case SIMCreditCardType_Unknown:
             self.cardImageView.image = [SimplifyPrivate imageNamed:@"card_back_32"];
         default:
-            break;            
+            break;
     }
     [self setNeedsLayout];
 }
@@ -228,27 +199,23 @@
     self.button.enabled = enabled;
 }
 
-#pragma mark - helpers
+#pragma mark - Delegate callbacks
 
 -(void)ccChanged {
-    NSString* cc = self.creditCardNumberTextField.text ? self.creditCardNumberTextField.text : @"";
-    [[NSNotificationCenter defaultCenter] postNotificationName:SIMCreditCardEntryViewCardNumberChanged object:self userInfo:@{
-        SIMCreditCardEntryViewCardNumberKey : cc
-     }];
+	[self.delegate cardNumberChanged:self.creditCardNumberTextField.text];
 }
 
 -(void)cvcChanged {
-    NSString* cvc = self.CVCNumberTextField.text ? self.CVCNumberTextField.text : @"";
-    [[NSNotificationCenter defaultCenter] postNotificationName:SIMCreditCardEntryViewCVCNumberChanged object:self userInfo:@{
-        SIMCreditCardEntryViewCVCNumberKey : cvc
-     }];
+	[self.delegate cvcNumberChanged:self.CVCNumberTextField.text];
 }
 
 -(void)expiryChanged {
-    NSString* expiry = self.expirationDateTextField.text ? self.expirationDateTextField.text : @"";
-    [[NSNotificationCenter defaultCenter] postNotificationName:SIMCreditCardEntryViewExpirationChanged object:self userInfo:@{
-        SIMCreditCardEntryViewExpirationKey : expiry
-     }];
+	[self.delegate expirationDateChanged:self.expirationDateTextField.text];
 }
+
+-(void)doneButtonTapped {
+	[self.delegate doneButtonTapped];
+}
+
 
 @end
