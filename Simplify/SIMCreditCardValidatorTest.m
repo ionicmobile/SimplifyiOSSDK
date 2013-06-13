@@ -22,7 +22,7 @@
     yes = YES;
 }
 
--(void)testWhenFormattedLuhnNumberIsSubmittedThenIsIsValid {
+-(void)testWhenFormattedLuhnNumberIsSubmittedThenIsValid {
     [[[mockLuhnValidator expect] andReturnValue:OCMOCK_VALUE(yes)] isValid:@"378282246310005"];
     [testObject setCardNumberAsString:@"378282246310005"];
     [testObject isValidCardNumber];

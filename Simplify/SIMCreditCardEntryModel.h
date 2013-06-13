@@ -5,25 +5,30 @@
 #define SIMCreditCardEntryModelCreditCardNumberChanged @"SIMCreditCardEntryModelCreditCardNumberChanged"
 #define SIMCreditCardEntryModelCVCNumberChanged @"SIMCreditCardEntryModelCVCNumberChanged"
 #define SIMCreditCardEntryModelExpirationDateChanged @"SIMCreditCardEntryModelExpirationDateChanged"
-#define SIMCreditCardEntryModelDoneEnabledChanged @"SIMCreditCardEntryModelDoneEnabledChanged"
 
 @interface SIMCreditCardEntryModel : NSObject
 
 - (id)initWithCreditCardNetwork:(SIMCreditCardNetwork *)creditCardNetwork
             creditCardValidator:(SIMCreditCardValidator *)creditCardValidator;
 
+// View Display Information
+- (SIMCreditCardType)creditCardType;
+
 - (NSString *)creditCardNumberDisplay;
 - (SIMTextInputState)creditCardNumberInputState;
+
 - (NSString *)cvcNumberDisplay;
 - (SIMTextInputState)cvcNumberInputState;
+
 - (NSString *)expirationDateDisplay;
 - (SIMTextInputState)expirationDateInputState;
 
--(void)creditCardNumberInput:(NSString *)input;
--(void)cvcNumberInput:(NSString *)input;
--(void)expirationDateInput:(NSString *)input;
+- (BOOL)canSendCreditCard;
 
--(BOOL)doneEnabled;
--(void)sendCreditCard;
+// View Input methods
+- (void)creditCardNumberInput:(NSString *)input;
+- (void)cvcNumberInput:(NSString *)input;
+- (void)expirationDateInput:(NSString *)input;
+- (void)sendCreditCard;
 
 @end

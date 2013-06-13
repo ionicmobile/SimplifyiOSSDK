@@ -1,4 +1,3 @@
-#import <Foundation/Foundation.h>
 #import "SIMLuhnValidator.h"
 #import "SIMCurrentTimeProvider.h"
 #import "SIMCreditCardType.h"

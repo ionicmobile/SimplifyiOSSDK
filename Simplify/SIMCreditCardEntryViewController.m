@@ -23,14 +23,17 @@
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(creditCardNumberDisplayChanged) name:SIMCreditCardEntryModelCreditCardNumberChanged object:model];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cvcNumberDisplayChanged) name:SIMCreditCardEntryModelCVCNumberChanged object:model];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(expirationDateDisplayChanged) name:SIMCreditCardEntryModelExpirationDateChanged object:model];
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doneEnabledChanged) name:SIMCreditCardEntryModelDoneEnabledChanged object:model];
 		self.internalView = view;
 	}
 	return self;
 }
 
+- (void)dealloc {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 -(void)loadView {
-    [super loadView];
+	[super loadView];
 	self.internalView.frame = self.view.bounds;
 	[self.view addSubview:self.internalView];
 	self.internalView.delegate = self;
@@ -40,21 +43,14 @@
 
 -(void)creditCardNumberInput:(NSString*)input {
 	[self.model creditCardNumberInput:input];
-//	[self.ccValidator setCardNumberAsString:input];
-//	[self.ccEntryView setCardNumber:self.ccValidator.formattedCardNumber isValid:self.ccValidator.isValidCardNumber isMaximumLength:self.ccValidator.isMaximumCardNumberLength];
-//	[self.ccEntryView setCardType:self.ccValidator.cardType];
 }
 
 -(void)cvcNumberInput:(NSString*)input {
 	[self.model cvcNumberInput:input];
-//	[self.ccValidator setCVCCodeAsString:input];
-//	[self.ccEntryView setCVCCode:self.ccValidator.formattedCVCCode isValid:self.ccValidator.isValidCVC isMaximumLength:self.ccValidator.isMaximumCVCLength];
 }
 
 -(void)expirationDateInput:(NSString*)input {
 	[self.model expirationDateInput:input];
-//	[self.ccValidator setExpirationAsString:input];
-//	[self.ccEntryView setExpirationDate:self.ccValidator.formattedExpirationDate isValid:!self.ccValidator.isExpired];
 }
 
 -(void)sendCreditCardButtonTapped {
@@ -64,31 +60,22 @@
 #pragma mark - SIMCreditCardEntryModel notifications
 
 -(void)creditCardNumberDisplayChanged {
-	[self.internalView setExpirationDateDisplayedText:self.model.creditCardNumberDisplay
-	                                   textInputState:self.model.creditCardNumberInputState];
+	[self.internalView setCardNumberDisplayedText:self.model.creditCardNumberDisplay
+	                               textInputState:self.model.creditCardNumberInputState];
+	[self.internalView setCardType:self.model.creditCardType];
+	[self.internalView setSendCreditCardButtonEnabled:self.model.canSendCreditCard];
 }
 
 -(void)cvcNumberDisplayChanged {
-	[self.internalView setExpirationDateDisplayedText:self.model.cvcNumberDisplay
-	                                   textInputState:self.model.cvcNumberInputState];
+	[self.internalView setCVCNumberDisplayedText:self.model.cvcNumberDisplay
+	                              textInputState:self.model.cvcNumberInputState];
+	[self.internalView setSendCreditCardButtonEnabled:self.model.canSendCreditCard];
 }
 
 -(void)expirationDateDisplayChanged {
 	[self.internalView setExpirationDateDisplayedText:self.model.expirationDateDisplay
 	                                   textInputState:self.model.expirationDateInputState];
+	[self.internalView setSendCreditCardButtonEnabled:self.model.canSendCreditCard];
 }
-
--(void)doneEnabledChanged {
-	[self.internalView setSendCreditCardButtonEnabled:self.model.doneEnabled];
-}
-
-//	NSError *error = nil;
-//	NSString *unformattedCardNumber = [self.ccValidator.formattedCardNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
-//	SIMCardToken *cardToken = [self.creditCardNetwork createCardTokenWithExpirationMonth:self.ccValidator.expirationMonth
-//	                                                                      expirationYear:self.ccValidator.expirationYear
-//				                                                              cardNumber:unformattedCardNumber
-//							                                                         cvc:self.ccValidator.formattedCVCCode
-//							                                                       error:&error];
-//	NSLog(@"Card Token: %@", cardToken);
 
 @end

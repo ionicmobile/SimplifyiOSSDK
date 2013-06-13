@@ -75,8 +75,8 @@
 		expirationDateTextField.text = @"";
 		expirationDateTextField.delegate = self;
 
-		SIMLayeredButton*sendCreditCardButton = [[SIMLayeredButton alloc] init];
-		[sendCreditCardButton setTitle:@"Done" forState:UIControlStateNormal];
+		SIMLayeredButton* sendCreditCardButton = [[SIMLayeredButton alloc] init];
+		[sendCreditCardButton setTitle:@"Send Card" forState:UIControlStateNormal];
 		sendCreditCardButton.titleLabel.font = [SimplifyPrivate boldFontOfSize:18.0f];
 		sendCreditCardButton.titleLabel.shadowColor = [UIColor blackColor];
 		sendCreditCardButton.titleLabel.shadowOffset = CGSizeMake(0, -1);
@@ -162,13 +162,13 @@
 	[self setTextField:self.expirationDateTextField inputState:textInputState];
 }
 
-- (void)setTextField:(SIMTextField *)textField inputState:(SIMTextInputState)inputState {
+- (void)setTextField:(UITextField *)textField inputState:(SIMTextInputState)inputState {
 	switch (inputState) {
 	case SIMTextInputStateBad:
-		textField.backgroundColor = [UIColor colorWithHexString:@"ccffcc"];
+		textField.backgroundColor = [UIColor colorWithHexString:@"ffcccc"];
 		break;
 	case SIMTextInputStateGood:
-		textField.backgroundColor = [UIColor colorWithHexString:@"ffcccc"];
+		textField.backgroundColor = [UIColor colorWithHexString:@"ccffcc"];
 		break;
 	case SIMTextInputStateNormal:
 	default:
@@ -176,50 +176,6 @@
 		break;
 	}
 }
-
-//-(void)setCardNumber:(NSString*)cardNumber isValid:(BOOL)valid isMaximumLength:(BOOL)maximumLength {
-//	if ( ![self.creditCardNumberTextField.text isEqual:cardNumber]) {
-//		self.creditCardNumberTextField.text = cardNumber;
-//	}
-//	if ( maximumLength && valid ) {
-//		self.creditCardNumberTextField.backgroundColor = [UIColor colorWithHexString:@"ccffcc"];
-//		[self.CVCNumberTextField becomeFirstResponder];
-//	} else if ( maximumLength && !valid ) {
-//		self.creditCardNumberTextField.backgroundColor = [UIColor colorWithHexString:@"ffcccc"];
-//	} else {
-//		self.creditCardNumberTextField.backgroundColor = [UIColor clearColor];
-//	}
-//	[self setNeedsLayout];
-//}
-
-//-(void)setCVCCode:(NSString*)cvcCode isValid:(BOOL)valid isMaximumLength:(BOOL)maximumLength {
-//	if ( ![self.CVCNumberTextField.text isEqual:cvcCode]) {
-//		self.CVCNumberTextField.text = cvcCode;
-//	}
-//	if ( maximumLength && valid ) {
-//		self.CVCNumberTextField.backgroundColor = [UIColor colorWithHexString:@"ccffcc"];
-//		[self.expirationDateTextField becomeFirstResponder];
-//	} else if ( maximumLength && !valid ) {
-//		self.CVCNumberTextField.backgroundColor = [UIColor colorWithHexString:@"ffcccc"];
-//	} else {
-//		self.CVCNumberTextField.backgroundColor = [UIColor clearColor];
-//	}
-//	[self setNeedsLayout];
-//}
-//
-//-(void)setExpirationDate:(NSString*)expiration isValid:(BOOL)valid {
-//	if ( ![self.expirationDateTextField.text isEqual:expiration]) {
-//		self.expirationDateTextField.text = expiration;
-//	}
-//	if ( valid ) {
-//		self.expirationDateTextField.backgroundColor = [UIColor colorWithHexString:@"ccffcc"];
-//	} else if ( self.expirationDateTextField.text.length > 0 ) {
-//		self.expirationDateTextField.backgroundColor = [UIColor colorWithHexString:@"ffcccc"];
-//	} else {
-//		self.expirationDateTextField.backgroundColor = [UIColor clearColor];
-//	}
-//	[self setNeedsLayout];
-//}
 
 -(void)setSendCreditCardButtonEnabled:(BOOL)enabled {
 	self.sendCreditCardButton.enabled = enabled;
