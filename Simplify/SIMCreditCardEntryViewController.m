@@ -71,11 +71,7 @@
 																			  cardNumber:unformattedCardNumber
 																					 cvc:self.ccValidator.formattedCVCCode
 																				   error:&error];
-	if (error) {
-		NSLog(@"network error: %@", error);
-	} else {
-		NSLog(@"Card Token: %@", cardToken);
-	}
+	NSLog(@"Card Token: %@", cardToken);
 }
 
 -(void)ccChanged:(NSNotification*)notification {

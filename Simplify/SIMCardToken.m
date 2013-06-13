@@ -65,13 +65,17 @@
 	cardToken.addressCountry = dictionary[@"card"][@"addressCountry"];
 	cardToken.expMonth = dictionary[@"card"][@"expMonth"];
 	cardToken.expYear = dictionary[@"card"][@"expYear"];
-//	NSString *date = [dictionary[@"card"][@"dateCreated"] description];
-//	cardToken.dateCreated = [[NSDate alloc] initWithTimeIntervalSince1970:[date longLongValue] / 1000];
+	NSString *date = [dictionary[@"card"][@"dateCreated"] description];
+	cardToken.dateCreated = [[NSDate alloc] initWithTimeIntervalSince1970:[date longLongValue] / 1000];
 	return cardToken;
 }
 
 - (NSString *)description {
-	return [NSString stringWithFormat:@"%@ %@ %@ %@ %@ %@ %@ %@ %@ %@ %@, %@, %@", self.token, self.last4, [self.expMonth description], [self.expYear description], self.type, [self.dateCreated description], self.name, self.addressLine1, self.addressLine2, self.addressCity, self.addressState, self.addressZip, self.addressCountry];
+	return [NSString stringWithFormat:@"tokenId:%@\nlast4 digits:%@ expMonth:%@ expYear:%@\ncardType:%@ dateCreated:%@\nAddress\n%@\n%@\n%@\n%@, %@ %@\n%@",
+			self.token,
+			self.last4, [self.expMonth description], [self.expYear description],
+			self.type, [self.dateCreated description],
+			self.name ? self.name : @"", self.addressLine1 ? self.addressLine1 : @"", self.addressLine2 ? self.addressLine2 : @"", self.addressCity ? self.addressCity : @"", self.addressState ? self.addressState : @"", self.addressZip ? self.addressZip : @"", self.addressCountry ? self.addressCountry : @""];
 }
 
 @end

@@ -10,7 +10,6 @@
 
 
 - (void)testFromDictionary_BuildsObjectFromDictionaryCorrectly {
-	NSDate *date = [NSDate date];
 	NSDictionary *cardDictionary = @{
 			@"name" : @"myCard",
 			@"type" : @"someType",
@@ -23,25 +22,26 @@
 			@"addressCountry" : @"USA",
 			@"expMonth" : @"02",
 			@"expYear" : @"15",
-			@"dateCreated" : date
+			@"dateCreated" : @"1371130986562"
 	};
 	NSDictionary *dictionary = @{@"id" : @"myCardTokenId", @"card" : cardDictionary};
 
 	testObject = [SIMCardToken cardTokenFromDictionary:dictionary];
 
-	GHAssertEqualStrings(@"myCardTokenId", testObject.token, nil);
-	GHAssertEqualStrings(@"myCard", testObject.name, nil);
-	GHAssertEqualStrings(@"someType", testObject.type, nil);
-	GHAssertEqualStrings(@"1234", testObject.last4, nil);
-	GHAssertEqualStrings(@"100 Happy Drive", testObject.addressLine1, nil);
-	GHAssertEqualStrings(@"Apartment A", testObject.addressLine2, nil);
-	GHAssertEqualStrings(@"Saint Louis", testObject.addressCity, nil);
-	GHAssertEqualStrings(@"Missouri", testObject.addressState, nil);
-	GHAssertEqualStrings(@"63333", testObject.addressZip, nil);
-	GHAssertEqualStrings(@"USA", testObject.addressCountry, nil);
-	GHAssertEqualStrings(@"02", testObject.expMonth, nil);
-	GHAssertEqualStrings(@"15", testObject.expYear, nil);
-//	GHAssertEqualObjects(date, testObject.dateCreated, nil);
+	GHAssertEqualStrings(testObject.token, @"myCardTokenId", nil);
+	GHAssertEqualStrings(testObject.name, @"myCard", nil);
+	GHAssertEqualStrings(testObject.type, @"someType", nil);
+	GHAssertEqualStrings(testObject.last4, @"1234", nil);
+	GHAssertEqualStrings(testObject.addressLine1, @"100 Happy Drive", nil);
+	GHAssertEqualStrings(testObject.addressLine2, @"Apartment A", nil);
+	GHAssertEqualStrings(testObject.addressCity, @"Saint Louis", nil);
+	GHAssertEqualStrings(testObject.addressState, @"Missouri", nil);
+	GHAssertEqualStrings(testObject.addressZip, @"63333", nil);
+	GHAssertEqualStrings(testObject.addressCountry, @"USA", nil);
+	GHAssertEqualStrings(testObject.expMonth, @"02", nil);
+	GHAssertEqualStrings(testObject.expYear, @"15", nil);
+	NSDate *date = [NSDate dateWithTimeIntervalSince1970:1371130986562 / 1000];
+	GHAssertEqualObjects(testObject.dateCreated, date, nil);
 }
 
 @end
