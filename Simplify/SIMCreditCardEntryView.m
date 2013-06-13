@@ -7,12 +7,12 @@
 #import "SIMTextField.h"
 
 @interface SIMCreditCardEntryView() <UITextFieldDelegate>
-@property (nonatomic, strong) UILabel* titleLabel;
-@property (nonatomic, strong) UIImageView* cardImageView;
-@property (nonatomic, strong) UITextField* creditCardNumberTextField;
-@property (nonatomic, strong) UITextField* CVCNumberTextField;
-@property (nonatomic, strong) UITextField* expirationDateTextField;
-@property (nonatomic, strong) UIButton* sendCreditCardButton;
+@property (nonatomic) UILabel* titleLabel;
+@property (nonatomic) UIImageView* cardImageView;
+@property (nonatomic) UITextField* creditCardNumberTextField;
+@property (nonatomic) UITextField* CVCNumberTextField;
+@property (nonatomic) UITextField* expirationDateTextField;
+@property (nonatomic) UIButton* sendCreditCardButton;
 @end
 
 @implementation SIMCreditCardEntryView
