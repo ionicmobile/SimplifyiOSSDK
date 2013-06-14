@@ -1,6 +1,7 @@
 #import <UIKit/UIKit.h>
 #import "SIMTextInputState.h"
 #import "SIMCreditCardType.h"
+#import "SIMAddressEntryView.h"
 
 @protocol SIMCreditCardEntryViewDelegate
 -(void)creditCardNumberInput:(NSString*)input;
@@ -11,6 +12,7 @@
 
 @interface SIMCreditCardEntryView : UIView
 @property (nonatomic, weak) id<SIMCreditCardEntryViewDelegate> delegate;
+- (id)initWithAddressEntryView:(SIMAddressEntryView*)addressEntryView;
 -(void)setCardType:(SIMCreditCardType)cardType;
 -(void)setCardNumberDisplayedText:(NSString*)displayedText textInputState:(SIMTextInputState)textInputState;
 -(void)setCVCNumberDisplayedText:(NSString*)displayedText textInputState:(SIMTextInputState)textInputState;

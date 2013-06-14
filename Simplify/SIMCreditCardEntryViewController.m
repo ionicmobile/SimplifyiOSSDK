@@ -13,7 +13,8 @@
 	SIMCurrentTimeProvider *timeProvider = [[SIMCurrentTimeProvider alloc] init];
 	SIMCreditCardValidator *creditCardValidator = [[SIMCreditCardValidator alloc] initWithLuhnValidator:luhnValidator timeProvider:timeProvider];
 	SIMCreditCardEntryModel *model = [[SIMCreditCardEntryModel alloc] initWithCreditCardNetwork:creditCardNetwork creditCardValidator:creditCardValidator];
-	SIMCreditCardEntryView *view = [[SIMCreditCardEntryView alloc] init];
+	SIMAddressEntryView *addressEntryView = [[SIMAddressEntryView alloc] init];
+	SIMCreditCardEntryView *view = [[SIMCreditCardEntryView alloc] initWithAddressEntryView:addressEntryView];
 	return [self initWithModel:model view:view];
 }
 
@@ -32,7 +33,7 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
--(void)loadView {
+- (void)loadView {
 	[super loadView];
 	self.internalView.frame = self.view.bounds;
 	[self.view addSubview:self.internalView];

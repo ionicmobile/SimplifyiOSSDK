@@ -1,12 +1,12 @@
-#import <QuartzCore/QuartzCore.h>
 #import "UIView+Additions.h"
 #import "UIColor+Additions.h"
 #import "SIMCreditCardEntryView.h"
 #import "SimplifyPrivate.h"
 #import "SIMLayeredButton.h"
-#import "SIMTextField.h"
+#import "SIMTextFieldFactory.h"
 
 @interface SIMCreditCardEntryView() <UITextFieldDelegate>
+@property (nonatomic) SIMAddressEntryView *addressEntryView;
 @property (nonatomic) UILabel* titleLabel;
 @property (nonatomic) UIImageView* cardImageView;
 @property (nonatomic) UITextField* creditCardNumberTextField;
@@ -17,8 +17,12 @@
 
 @implementation SIMCreditCardEntryView
 
--(id)initWithFrame:(CGRect)frame {
-	if (self = [super initWithFrame:frame]) {
+- (id)init {
+	return [self initWithAddressEntryView:nil];
+}
+
+- (id)initWithAddressEntryView:(SIMAddressEntryView*)addressEntryView {
+	if (self = [super init]) {
 		self.backgroundColor = [UIColor whiteColor];
 
 		UILabel* titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -28,51 +32,17 @@
 
 		UIImageView* cardImageView = [[UIImageView alloc] initWithImage:[SimplifyPrivate imageNamed:@"card_back_32"]];
 
-		SIMTextField* creditCardNumberTextField = [[SIMTextField alloc] initWithFrame:CGRectZero];
+		SIMTextFieldFactory* factory = [[SIMTextFieldFactory alloc] init];
+
+		SIMTextField* creditCardNumberTextField = [factory createTextFieldWithPlaceholderText:@"Credit Card Number" keyboardType:UIKeyboardTypeNumberPad];
 		creditCardNumberTextField.leftView = [UIView paddedViewWithView:cardImageView andPadding:CGSizeMake(15, 0)];
-		creditCardNumberTextField.leftViewMode = UITextFieldViewModeAlways;
-		creditCardNumberTextField.layer.borderColor = [UIColor simplifyBorderColor].CGColor;
-		creditCardNumberTextField.layer.borderWidth = 1.0f;
-		creditCardNumberTextField.layer.masksToBounds = YES;
-		creditCardNumberTextField.placeholder = @"Credit Card Number";
-		creditCardNumberTextField.keyboardType = UIKeyboardTypeNumberPad;
-		creditCardNumberTextField.font = [SimplifyPrivate fontOfSize:16.0f];
-		creditCardNumberTextField.textOffset = CGSizeMake(60, 2);
-		creditCardNumberTextField.textColor = [UIColor colorWithHexString:@"4a4a4a"];
-		creditCardNumberTextField.text = @"";
 		[creditCardNumberTextField becomeFirstResponder];
 		creditCardNumberTextField.delegate = self;
 
-		SIMTextField* CVCNumberTextField = [[SIMTextField alloc] initWithFrame:CGRectZero];
-		CVCNumberTextField.borderStyle = UITextBorderStyleLine;
-		CVCNumberTextField.leftView = [UIView paddedViewWithView:[[UIView alloc] init] andPadding:CGSizeMake(7, 0)];
-		CVCNumberTextField.leftViewMode = UITextFieldViewModeAlways;
-		CVCNumberTextField.layer.borderColor = [UIColor simplifyBorderColor].CGColor;
-		CVCNumberTextField.layer.borderColor = [UIColor simplifyBorderColor].CGColor;
-		CVCNumberTextField.layer.borderWidth = 1.0f;
-		CVCNumberTextField.layer.masksToBounds = YES;
-		CVCNumberTextField.placeholder = @"CVC Code";
-		CVCNumberTextField.keyboardType = UIKeyboardTypeNumberPad;
-		CVCNumberTextField.font = [SimplifyPrivate fontOfSize:16.0f];
-		CVCNumberTextField.textOffset = CGSizeMake(10, 2);
-		CVCNumberTextField.textColor = [UIColor colorWithHexString:@"4a4a4a"];
-		CVCNumberTextField.text = @"";
+		SIMTextField* CVCNumberTextField = [factory createTextFieldWithPlaceholderText:@"CVC Code" keyboardType:UIKeyboardTypeNumberPad];
 		CVCNumberTextField.delegate = self;
 
-		SIMTextField* expirationDateTextField = [[SIMTextField alloc] initWithFrame:CGRectZero];
-		expirationDateTextField.leftView = [UIView paddedViewWithView:[[UIView alloc] init] andPadding:CGSizeMake(7, 0)];
-		expirationDateTextField.leftViewMode = UITextFieldViewModeAlways;
-		expirationDateTextField.borderStyle = UITextBorderStyleLine;
-		expirationDateTextField.layer.borderColor = [UIColor simplifyBorderColor].CGColor;
-		expirationDateTextField.layer.borderColor = [UIColor simplifyBorderColor].CGColor;
-		expirationDateTextField.layer.borderWidth = 1.0f;
-		expirationDateTextField.layer.masksToBounds = YES;
-		expirationDateTextField.keyboardType = UIKeyboardTypeNumberPad;
-		expirationDateTextField.placeholder = @"MM/YY";
-		expirationDateTextField.font = [SimplifyPrivate fontOfSize:16.0f];
-		expirationDateTextField.textOffset = CGSizeMake(10, 2);
-		expirationDateTextField.textColor = [UIColor colorWithHexString:@"4a4a4a"];
-		expirationDateTextField.text = @"";
+		SIMTextField* expirationDateTextField = [factory createTextFieldWithPlaceholderText:@"MM/YY" keyboardType:UIKeyboardTypeNumberPad];
 		expirationDateTextField.delegate = self;
 
 		SIMLayeredButton* sendCreditCardButton = [[SIMLayeredButton alloc] init];
@@ -88,6 +58,11 @@
 		self.CVCNumberTextField = CVCNumberTextField;
 		self.expirationDateTextField = expirationDateTextField;
 		self.sendCreditCardButton = sendCreditCardButton;
+
+		if (addressEntryView) {
+			[self addSubview:addressEntryView];
+			self.addressEntryView = addressEntryView;
+		}
 
 		[self addSubview:titleLabel];
 		[self addSubview:creditCardNumberTextField];
@@ -113,7 +88,13 @@
 
 	self.expirationDateTextField.frame = CGRectMake(CGRectGetMaxX(self.CVCNumberTextField.frame) + innerMarginX, CGRectGetMaxY(self.creditCardNumberTextField.frame) + innerMarginY, (self.bounds.size.width - innerMarginX - 2 * outerMarginX)/2,textFieldHeight);
 
-	[self.sendCreditCardButton centerHorizonallyAtY:CGRectGetMaxY(self.expirationDateTextField.frame) + innerMarginY inBounds:self.bounds withSize:CGSizeMake(self.bounds.size.width - 2 * outerMarginX, 40)];
+	CGFloat nextY = CGRectGetMaxY(self.expirationDateTextField.frame) + innerMarginY;
+	if (self.addressEntryView) {
+		CGSize addressEntrySize = [self.addressEntryView sizeThatFits:self.bounds.size];
+		self.addressEntryView.frame = CGRectMake(0, nextY, CGRectGetWidth(self.bounds), addressEntrySize.height);
+		nextY = CGRectGetMaxY(self.addressEntryView.frame) + innerMarginY;
+	}
+	[self.sendCreditCardButton centerHorizonallyAtY:nextY inBounds:self.bounds withSize:CGSizeMake(self.bounds.size.width - 2 * outerMarginX, 40)];
 }
 
 -(void)setCardType:(SIMCreditCardType)cardType {
