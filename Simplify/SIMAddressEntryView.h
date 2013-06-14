@@ -2,6 +2,7 @@
 #import "SIMTextInputState.h"
 #import "SIMTextField.h"
 
+// NOTE: we currently assume a US address.
 @interface SIMAddressEntryView : UIView
 @property (nonatomic, readonly) SIMTextField* nameTextField;
 @property (nonatomic, readonly) SIMTextField* line1TextField;

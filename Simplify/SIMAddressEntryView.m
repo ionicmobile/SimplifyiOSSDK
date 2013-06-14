@@ -14,7 +14,6 @@
 @property (nonatomic, readwrite) SIMTextField* cityTextField;
 @property (nonatomic, readwrite) SIMTextField* stateTextField;
 @property (nonatomic, readwrite) SIMTextField* zipTextField;
-@property (nonatomic, readwrite) SIMTextField* countryTextField;
 @end
 
 @implementation SIMAddressEntryView
@@ -30,30 +29,55 @@
 		SIMTextFieldFactory* factory = [[SIMTextFieldFactory alloc] init];
 
 		SIMTextField* nameTextField = [factory createTextFieldWithPlaceholderText:@"Full Name" keyboardType:UIKeyboardTypeDefault];
+		SIMTextField* line1TextField = [factory createTextFieldWithPlaceholderText:@"Address Line 1" keyboardType:UIKeyboardTypeDefault];
+		SIMTextField* line2TextField = [factory createTextFieldWithPlaceholderText:@"Address Line 2" keyboardType:UIKeyboardTypeDefault];
+		SIMTextField* cityTextField = [factory createTextFieldWithPlaceholderText:@"City" keyboardType:UIKeyboardTypeDefault];
+		SIMTextField* stateTextField = [factory createTextFieldWithPlaceholderText:@"ST" keyboardType:UIKeyboardTypeAlphabet];
+		SIMTextField* zipTextField = [factory createTextFieldWithPlaceholderText:@"Zip" keyboardType:UIKeyboardTypeNumberPad];
 
 		[self addSubview:addressLabel];
 		[self addSubview:nameTextField];
+		[self addSubview:line1TextField];
+		[self addSubview:line2TextField];
+		[self addSubview:cityTextField];
+		[self addSubview:stateTextField];
+		[self addSubview:zipTextField];
 
 		self.addressLabel = addressLabel;
 		self.nameTextField = nameTextField;
+		self.line1TextField = line1TextField;
+		self.line2TextField = line2TextField;
+		self.cityTextField = cityTextField;
+		self.stateTextField = stateTextField;
+		self.zipTextField = zipTextField;
 	}
 	return self;
 }
 
--(void)layoutSubviews {
+#define TextFieldHeight 30.0
+#define InnerMarginY 10.0
+
+- (void)layoutSubviews {
 	[super layoutSubviews];
-	CGFloat textFieldHeight = 30.0f;
-	CGFloat innerMarginY = 10.0;
 	CGFloat outerMarginX = 20.0;
 	CGFloat innerMarginX = 5.0;
 
 	[self.addressLabel setFrameAtOriginThatFitsUnbounded:CGPointMake(outerMarginX - 4.0f, 0.0f)];
 
-	self.nameTextField.frame = CGRectMake(outerMarginX, innerMarginY + CGRectGetMaxY(self.addressLabel.frame),  self.bounds.size.width - 2 * outerMarginX, textFieldHeight);
+	CGFloat fullWidth = self.bounds.size.width - 2 * outerMarginX;
+
+	self.nameTextField.frame = CGRectMake(outerMarginX, InnerMarginY + CGRectGetMaxY(self.addressLabel.frame),  fullWidth, TextFieldHeight);
+	self.line1TextField.frame = CGRectMake(outerMarginX, InnerMarginY + CGRectGetMaxY(self.nameTextField.frame),  fullWidth, TextFieldHeight);
+	self.line2TextField.frame = CGRectMake(outerMarginX, InnerMarginY + CGRectGetMaxY(self.line1TextField.frame),  fullWidth, TextFieldHeight);
+	CGFloat cityStateZipYOffset = InnerMarginY + CGRectGetMaxY(self.line2TextField.frame);
+	self.cityTextField.frame = CGRectMake(outerMarginX, cityStateZipYOffset, floorf(fullWidth * 0.6), TextFieldHeight);
+	self.stateTextField.frame = CGRectMake(CGRectGetMaxX(self.cityTextField.frame), cityStateZipYOffset, floorf(fullWidth * 0.15), TextFieldHeight);
+	self.zipTextField.frame = CGRectMake(CGRectGetMaxX(self.stateTextField.frame), cityStateZipYOffset, floorf(fullWidth * 0.25), TextFieldHeight);
 }
 
 - (CGSize)sizeThatFits:(CGSize)size {
-	return CGSizeMake(size.width, 80.0);
+	CGFloat textFieldCount = 4.0;
+	return CGSizeMake(size.width, 30.0 + TextFieldHeight * textFieldCount + InnerMarginY * (textFieldCount + 1));
 }
 
 @end

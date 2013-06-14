@@ -25,7 +25,7 @@
 	if (self = [super init]) {
 		self.backgroundColor = [UIColor whiteColor];
 
-		UILabel* titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+		UILabel* titleLabel = [[UILabel alloc] init];
 		titleLabel.font = [SimplifyPrivate boldFontOfSize:26.0f];
 		titleLabel.text = @"Payment Details";
 		titleLabel.textColor = [UIColor colorWithHexString:@"4a4a4a"];
