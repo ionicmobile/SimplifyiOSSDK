@@ -1,9 +1,13 @@
-#import <UIKit/UIKit.h>
+@protocol SIMModelDrivenTextFieldProtocol;
+#import "UIColor+Additions.h"
+
+#define SIMTextColorNormal [UIColor clearColor]
+#define SIMTextColorBad [UIColor colorWithHexString:@"ffcccc"]
+#define SIMTextColorGood [UIColor colorWithHexString:@"ccffcc"]
 
 @protocol SIMTextFieldModelProtocol<NSObject>
-- (void)attachToTextField:(UITextField *)textField;
 @optional
-- (void)textField:(UITextField *)textField input:(NSString *)input;
+- (void)textField:(id<SIMModelDrivenTextFieldProtocol>)textField input:(NSString *)input;
 @end
 
 @interface SIMTextFieldModel : NSObject<SIMTextFieldModelProtocol>

@@ -1,25 +1,27 @@
 #import "SIMCreditCardEntryViewController.h"
+#import "SIMAddressEntryModel.h"
 
 @interface SIMCreditCardEntryViewController() <SIMCreditCardEntryViewDelegate>
 @property (nonatomic) SIMCreditCardEntryModel *model;
 @property (nonatomic) SIMCreditCardEntryView *internalView;
+@property (nonatomic) SIMAddressEntryModel *addressModel;
 @end
 
 @implementation SIMCreditCardEntryViewController
 
 - (id)init {
-	SIMCreditCardNetwork *creditCardNetwork = [[SIMCreditCardNetwork alloc] init];
-	SIMLuhnValidator *luhnValidator = [[SIMLuhnValidator alloc] init];
-	SIMCurrentTimeProvider *timeProvider = [[SIMCurrentTimeProvider alloc] init];
-	SIMCreditCardValidator *creditCardValidator = [[SIMCreditCardValidator alloc] initWithLuhnValidator:luhnValidator timeProvider:timeProvider];
-	SIMCreditCardEntryModel *model = [[SIMCreditCardEntryModel alloc] initWithCreditCardNetwork:creditCardNetwork creditCardValidator:creditCardValidator];
-	SIMAddressEntryView *addressEntryView = [[SIMAddressEntryView alloc] init];
-	SIMCreditCardEntryView *view = [[SIMCreditCardEntryView alloc] initWithAddressEntryView:addressEntryView];
-	return [self initWithModel:model view:view];
-}
-
-- (id)initWithModel:(SIMCreditCardEntryModel *)model view:(SIMCreditCardEntryView *)view {
 	if (self = [super init]) {
+		SIMCreditCardNetwork *creditCardNetwork = [[SIMCreditCardNetwork alloc] init];
+		SIMLuhnValidator *luhnValidator = [[SIMLuhnValidator alloc] init];
+		SIMCurrentTimeProvider *timeProvider = [[SIMCurrentTimeProvider alloc] init];
+		SIMCreditCardValidator *creditCardValidator = [[SIMCreditCardValidator alloc] initWithLuhnValidator:luhnValidator timeProvider:timeProvider];
+		SIMCreditCardEntryModel *model = [[SIMCreditCardEntryModel alloc] initWithCreditCardNetwork:creditCardNetwork creditCardValidator:creditCardValidator];
+		SIMAddressEntryView *addressEntryView = [[SIMAddressEntryView alloc] init];
+		SIMAddressEntryModel *addressEntryModel = [[SIMAddressEntryModel alloc] init];
+		addressEntryView.nameTextField.model = addressEntryModel.nameModel;
+
+		SIMCreditCardEntryView *view = [[SIMCreditCardEntryView alloc] initWithAddressEntryView:addressEntryView];
+
 		self.model = model;
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(creditCardNumberDisplayChanged) name:SIMCreditCardEntryModelCreditCardNumberChanged object:model];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cvcNumberDisplayChanged) name:SIMCreditCardEntryModelCVCNumberChanged object:model];

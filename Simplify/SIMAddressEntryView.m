@@ -8,12 +8,12 @@
 
 @interface SIMAddressEntryView ()
 @property (nonatomic) UILabel* addressLabel;
-@property (nonatomic, readwrite) SIMTextField* nameTextField;
-@property (nonatomic, readwrite) SIMTextField* line1TextField;
-@property (nonatomic, readwrite) SIMTextField* line2TextField;
-@property (nonatomic, readwrite) SIMTextField* cityTextField;
-@property (nonatomic, readwrite) SIMTextField* stateTextField;
-@property (nonatomic, readwrite) SIMTextField* zipTextField;
+@property (nonatomic, readwrite) SIMModelDrivenTextField* nameTextField;
+@property (nonatomic, readwrite) SIMModelDrivenTextField* line1TextField;
+@property (nonatomic, readwrite) SIMModelDrivenTextField* line2TextField;
+@property (nonatomic, readwrite) SIMModelDrivenTextField* cityTextField;
+@property (nonatomic, readwrite) SIMModelDrivenTextField* stateTextField;
+@property (nonatomic, readwrite) SIMModelDrivenTextField* zipTextField;
 @end
 
 @implementation SIMAddressEntryView
@@ -28,12 +28,12 @@
 
 		SIMTextFieldFactory* factory = [[SIMTextFieldFactory alloc] init];
 
-		SIMTextField* nameTextField = [factory createTextFieldWithPlaceholderText:@"Full Name" keyboardType:UIKeyboardTypeDefault];
-		SIMTextField* line1TextField = [factory createTextFieldWithPlaceholderText:@"Address Line 1" keyboardType:UIKeyboardTypeDefault];
-		SIMTextField* line2TextField = [factory createTextFieldWithPlaceholderText:@"Address Line 2" keyboardType:UIKeyboardTypeDefault];
-		SIMTextField* cityTextField = [factory createTextFieldWithPlaceholderText:@"City" keyboardType:UIKeyboardTypeDefault];
-		SIMTextField* stateTextField = [factory createTextFieldWithPlaceholderText:@"ST" keyboardType:UIKeyboardTypeAlphabet];
-		SIMTextField* zipTextField = [factory createTextFieldWithPlaceholderText:@"Zip" keyboardType:UIKeyboardTypeNumberPad];
+		SIMModelDrivenTextField* nameTextField = [factory createModelDrivenTextFieldWithPlaceholderText:@"Full Name" keyboardType:UIKeyboardTypeDefault];
+		SIMModelDrivenTextField* line1TextField = [factory createModelDrivenTextFieldWithPlaceholderText:@"Address Line 1" keyboardType:UIKeyboardTypeDefault];
+		SIMModelDrivenTextField* line2TextField = [factory createModelDrivenTextFieldWithPlaceholderText:@"Address Line 2" keyboardType:UIKeyboardTypeDefault];
+		SIMModelDrivenTextField* cityTextField = [factory createModelDrivenTextFieldWithPlaceholderText:@"City" keyboardType:UIKeyboardTypeDefault];
+		SIMModelDrivenTextField* stateTextField = [factory createModelDrivenTextFieldWithPlaceholderText:@"ST" keyboardType:UIKeyboardTypeAlphabet];
+		SIMModelDrivenTextField* zipTextField = [factory createModelDrivenTextFieldWithPlaceholderText:@"Zip" keyboardType:UIKeyboardTypeNumberPad];
 
 		[self addSubview:addressLabel];
 		[self addSubview:nameTextField];
