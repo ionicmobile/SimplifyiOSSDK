@@ -1,10 +1,12 @@
 #import "SIMTextRequiredTextFieldModel.h"
+#import "SIMModelDrivenTextFieldProtocol.h"
 
 @implementation SIMTextRequiredTextFieldModel
 
-- (void)textField:(UITextField *)textField input:(NSString *)input {
-	textField.text = input;
-	textField.backgroundColor = input.length ? SIMTextColorGood : SIMTextColorNormal;
+- (void)textField:(id<SIMModelDrivenTextFieldProtocol>)textField input:(NSString *)input {
+	[textField setText:input];
+	UIColor* backgroundColor = input.length ? SIMTextColorGood : SIMTextColorNormal;
+	[textField setBackgroundColor:backgroundColor];
 }
 
 @end
