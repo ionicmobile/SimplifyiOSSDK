@@ -36,6 +36,7 @@
 
 		SIMTextField* creditCardNumberTextField = [factory createTextFieldWithPlaceholderText:@"Credit Card Number" keyboardType:UIKeyboardTypeNumberPad];
 		creditCardNumberTextField.leftView = [UIView paddedViewWithView:cardImageView andPadding:CGSizeMake(15, 0)];
+		creditCardNumberTextField.textOffset = CGSizeMake(60, 2);
 		[creditCardNumberTextField becomeFirstResponder];
 		creditCardNumberTextField.delegate = self;
 
