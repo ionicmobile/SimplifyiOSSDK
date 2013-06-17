@@ -8,7 +8,8 @@
 
 @implementation SIMCreditCardTextFieldModel
 
-- (id)initWithLuhnValidator:(SIMLuhnValidator*)luhnValidator {
+- (id)initWithLuhnValidator:(SIMLuhnValidator*)luhnValidator
+    creditCardTypeValidator:(SIMCreditCardTypeValidator*)creditCardTypeValidator {
 	if (self = [super init]) {
 		self.luhnValidator = luhnValidator;
 	}

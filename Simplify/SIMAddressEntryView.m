@@ -12,7 +12,7 @@
 @property (nonatomic, readwrite) SIMModelDrivenTextField* line1TextField;
 @property (nonatomic, readwrite) SIMModelDrivenTextField* line2TextField;
 @property (nonatomic, readwrite) SIMModelDrivenTextField* cityTextField;
-@property (nonatomic, readwrite) SIMModelDrivenTextField* stateTextField;
+@property (nonatomic, readwrite) SIMTextFieldWithPickerView* stateTextField;
 @property (nonatomic, readwrite) SIMModelDrivenTextField* zipTextField;
 @end
 
@@ -32,7 +32,7 @@
 		SIMModelDrivenTextField* line1TextField = [factory createModelDrivenTextFieldWithPlaceholderText:@"Address Line 1" keyboardType:UIKeyboardTypeDefault];
 		SIMModelDrivenTextField* line2TextField = [factory createModelDrivenTextFieldWithPlaceholderText:@"Address Line 2" keyboardType:UIKeyboardTypeDefault];
 		SIMModelDrivenTextField* cityTextField = [factory createModelDrivenTextFieldWithPlaceholderText:@"City" keyboardType:UIKeyboardTypeDefault];
-		SIMModelDrivenTextField* stateTextField = [factory createModelDrivenTextFieldWithPlaceholderText:@"ST" keyboardType:UIKeyboardTypeAlphabet];
+		SIMTextFieldWithPickerView* stateTextField = [factory createTextFieldWithPickerViewAndPlaceholderText:@"ST" keyboardType:UIKeyboardTypeAlphabet];
 		SIMModelDrivenTextField* zipTextField = [factory createModelDrivenTextFieldWithPlaceholderText:@"Zip" keyboardType:UIKeyboardTypeNumberPad];
 
 		[self addSubview:addressLabel];

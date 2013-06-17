@@ -9,12 +9,28 @@
 
 - (SIMTextField*)createTextFieldWithPlaceholderText:(NSString *)placeholderText
                                        keyboardType:(UIKeyboardType)keyboardType {
-	return [self createModelDrivenTextFieldWithPlaceholderText:placeholderText keyboardType:keyboardType];
+	SIMTextField*textField = [[SIMTextField alloc] init];
+	[self setValuesForSIMTextField:textField usingKeyboardType:keyboardType placeholderText:placeholderText];
+	return textField;
 }
 
 - (SIMModelDrivenTextField*)createModelDrivenTextFieldWithPlaceholderText:(NSString *)placeholderText
                                                              keyboardType:(UIKeyboardType)keyboardType {
 	SIMModelDrivenTextField*textField = [[SIMModelDrivenTextField alloc] init];
+	[self setValuesForSIMTextField:textField usingKeyboardType:keyboardType placeholderText:placeholderText];
+	return textField;
+}
+
+- (SIMTextFieldWithPickerView*)createTextFieldWithPickerViewAndPlaceholderText:(NSString *)placeholderText
+																  keyboardType:(UIKeyboardType)keyboardType {
+	SIMTextFieldWithPickerView*textField = [[SIMTextFieldWithPickerView alloc] init];
+	[self setValuesForSIMTextField:textField usingKeyboardType:keyboardType placeholderText:placeholderText];
+	return textField;
+}
+
+- (void)setValuesForSIMTextField:(SIMTextField *)textField
+			   usingKeyboardType:(UIKeyboardType)keyboardType
+				 placeholderText:(NSString *)placeholderText {
 	textField.leftView = [UIView paddedViewWithView:[[UIView alloc] init] andPadding:CGSizeMake(7, 0)];
 	textField.leftViewMode = UITextFieldViewModeAlways;
 	textField.borderStyle = UITextBorderStyleLine;
@@ -27,7 +43,7 @@
 	textField.textOffset = CGSizeMake(10, 2);
 	textField.textColor = [UIColor colorWithHexString:@"4a4a4a"];
 	textField.text = @"";
-	return textField;
 }
+
 
 @end
