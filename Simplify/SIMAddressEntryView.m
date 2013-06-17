@@ -60,7 +60,6 @@
 - (void)layoutSubviews {
 	[super layoutSubviews];
 	CGFloat outerMarginX = 20.0;
-	CGFloat innerMarginX = 5.0;
 
 	[self.addressLabel setFrameAtOriginThatFitsUnbounded:CGPointMake(outerMarginX - 4.0f, 0.0f)];
 
@@ -70,8 +69,8 @@
 	self.line1TextField.frame = CGRectMake(outerMarginX, InnerMarginY + CGRectGetMaxY(self.nameTextField.frame),  fullWidth, TextFieldHeight);
 	self.line2TextField.frame = CGRectMake(outerMarginX, InnerMarginY + CGRectGetMaxY(self.line1TextField.frame),  fullWidth, TextFieldHeight);
 	CGFloat cityStateZipYOffset = InnerMarginY + CGRectGetMaxY(self.line2TextField.frame);
-	self.cityTextField.frame = CGRectMake(outerMarginX, cityStateZipYOffset, floorf(fullWidth * 0.6), TextFieldHeight);
-	self.stateTextField.frame = CGRectMake(CGRectGetMaxX(self.cityTextField.frame), cityStateZipYOffset, floorf(fullWidth * 0.15), TextFieldHeight);
+	self.cityTextField.frame = CGRectMake(outerMarginX, cityStateZipYOffset, floorf(fullWidth * 0.55), TextFieldHeight);
+	self.stateTextField.frame = CGRectMake(CGRectGetMaxX(self.cityTextField.frame), cityStateZipYOffset, floorf(fullWidth * 0.2), TextFieldHeight);
 	self.zipTextField.frame = CGRectMake(CGRectGetMaxX(self.stateTextField.frame), cityStateZipYOffset, floorf(fullWidth * 0.25), TextFieldHeight);
 }
 

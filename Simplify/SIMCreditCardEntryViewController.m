@@ -1,5 +1,7 @@
 #import "SIMCreditCardEntryViewController.h"
 #import "SIMAddressEntryModel.h"
+#import "SIMCreditCardEntryModel.h"
+#import "SIMCreditCardEntryView.h"
 
 @interface SIMCreditCardEntryViewController() <SIMCreditCardEntryViewDelegate>
 @property (nonatomic) SIMCreditCardEntryModel *model;
@@ -19,6 +21,7 @@
 		SIMAddressEntryView *addressEntryView = [[SIMAddressEntryView alloc] init];
 		SIMAddressEntryModel *addressEntryModel = [[SIMAddressEntryModel alloc] init];
 		addressEntryView.nameTextField.model = addressEntryModel.nameModel;
+		addressEntryView.stateTextField.model = addressEntryModel.stateModel;
 
 		SIMCreditCardEntryView *view = [[SIMCreditCardEntryView alloc] initWithAddressEntryView:addressEntryView];
 
