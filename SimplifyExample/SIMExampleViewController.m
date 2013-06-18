@@ -73,7 +73,7 @@
 	
 	CGFloat startY = CGRectGetMaxY(self.showButton2.frame) + 20.0;
 	CGRect infoFrame = CGRectMake(0, startY, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds) - startY);
-	self.infoView = [[SIMCreditCardTokenInformationView alloc] initWithFrame:infoFrame creditCardToken:creditCardToken];
+	self.infoView = [[SIMCreditCardTokenInformationView alloc] initWithFrame:CGRectInset(infoFrame, 10.0, 0.0) creditCardToken:creditCardToken];
 	self.infoView.backgroundColor = UIColor.clearColor;
 	[self.view addSubview:self.infoView];
 }
