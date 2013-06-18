@@ -3,20 +3,12 @@
 #import "UIColor+Additions.h"
 #import "SimplifyPrivate.h"
 #import "UIView+Additions.h"
-#import "SIMModelDrivenTextField.h"
 
 @implementation SIMTextFieldFactory
 
 - (SIMTextField*)createTextFieldWithPlaceholderText:(NSString *)placeholderText
                                        keyboardType:(UIKeyboardType)keyboardType {
 	SIMTextField*textField = [[SIMTextField alloc] init];
-	[self setValuesForSIMTextField:textField usingKeyboardType:keyboardType placeholderText:placeholderText];
-	return textField;
-}
-
-- (SIMModelDrivenTextField*)createModelDrivenTextFieldWithPlaceholderText:(NSString *)placeholderText
-                                                             keyboardType:(UIKeyboardType)keyboardType {
-	SIMModelDrivenTextField*textField = [[SIMModelDrivenTextField alloc] init];
 	[self setValuesForSIMTextField:textField usingKeyboardType:keyboardType placeholderText:placeholderText];
 	return textField;
 }

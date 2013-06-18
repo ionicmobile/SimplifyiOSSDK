@@ -20,7 +20,7 @@
 		SIMCreditCardEntryModel *model = [[SIMCreditCardEntryModel alloc] initWithCreditCardNetwork:creditCardNetwork creditCardValidator:creditCardValidator];
 		SIMAddressEntryView *addressEntryView = [[SIMAddressEntryView alloc] init];
 		SIMAddressEntryModel *addressEntryModel = [[SIMAddressEntryModel alloc] init];
-		addressEntryView.nameTextField.model = addressEntryModel.nameModel;
+		addressEntryView.stateTextField.options = addressEntryModel.stateOptions;
 
 		SIMCreditCardEntryView *view = [[SIMCreditCardEntryView alloc] initWithAddressEntryView:addressEntryView];
 

@@ -82,4 +82,18 @@
 	}
 }
 
+- (void)testStateForControl_ForSIMAddressEntryControlName_ReturnsBadStateForNoText {
+	SIMTextFieldState *result = [testObject stateForControl:SIMAddressEntryControlName withInput:@""];
+	
+	GHAssertEqualStrings(result.text, @"", nil);
+	GHAssertEquals(result.inputState, SIMTextInputStateNormal, nil);
+}
+
+- (void)testStateForControl_ForSIMAddressEntryControlName_ReturnsGoodStateForAnyText {
+	SIMTextFieldState *result = [testObject stateForControl:SIMAddressEntryControlName withInput:@"a"];
+	
+	GHAssertEqualStrings(result.text, @"a", nil);
+	GHAssertEquals(result.inputState, SIMTextInputStateGood, nil);
+}
+
 @end

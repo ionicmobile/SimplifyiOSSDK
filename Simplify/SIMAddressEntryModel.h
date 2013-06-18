@@ -1,8 +1,8 @@
-#import "SIMTextRequiredTextFieldModel.h"
-#import "SIMStateTextFieldModel.h"
+#import "SIMTextFieldState.h"
+#import "SIMAddressEntryControl.h"
 
 @interface SIMAddressEntryModel : NSObject
-@property (nonatomic, readonly) SIMTextRequiredTextFieldModel *nameModel;
-@property (nonatomic, readonly) SIMStateTextFieldModel *stateModel;
 @property (nonatomic, readonly) NSDictionary *stateOptions;
+
+- (SIMTextFieldState*)stateForControl:(SIMAddressEntryControl)control withInput:(NSString *)input;
 @end

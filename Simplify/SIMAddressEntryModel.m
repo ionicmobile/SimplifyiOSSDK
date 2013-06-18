@@ -1,8 +1,6 @@
 #import "SIMAddressEntryModel.h"
 
 @interface SIMAddressEntryModel ()
-@property (nonatomic, readwrite) SIMTextRequiredTextFieldModel *nameModel;
-@property (nonatomic, readwrite) SIMStateTextFieldModel *stateModel;
 @property (nonatomic, readwrite) NSDictionary *stateOptions;
 @end
 
@@ -10,8 +8,6 @@
 
 - (id)init {
 	if (self = [super init]) {
-		self.nameModel = [[SIMTextRequiredTextFieldModel alloc] init];
-		self.stateModel = [[SIMStateTextFieldModel alloc] init];
 		self.stateOptions = @{
 			@"Alabama":@"AL",
 			@"Alaska":@"AK",
@@ -66,6 +62,14 @@
 
 	}
 	return self;
+}
+
+- (SIMTextFieldState*)stateForControl:(SIMAddressEntryControl)control withInput:(NSString *)input {
+	if ([input isEqualToString:@""]) {
+		return [[SIMTextFieldState alloc] initWithText:input inputState:SIMTextInputStateNormal];
+	} else {
+		return [[SIMTextFieldState alloc] initWithText:input inputState:SIMTextInputStateGood];
+	}
 }
 
 @end
