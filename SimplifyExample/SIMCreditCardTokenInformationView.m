@@ -5,18 +5,24 @@
 
 - (id)initWithFrame:(CGRect)frame creditCardToken:(SIMCreditCardToken *)creditCardToken {
 	if (self = [super initWithFrame:frame]) {
-		CGFloat midX = CGRectGetMidX(frame);
-		UILabel* tokenLabel = [[UILabel alloc] init];
-		tokenLabel.font = [UIFont boldSystemFontOfSize:26.0f];
-		tokenLabel.text = @"Token Information";
-		tokenLabel.textColor = [UIColor colorWithHexString:@"4a4a4a"];
-		tokenLabel.backgroundColor = UIColor.clearColor;
-		[tokenLabel sizeToFit];
-		tokenLabel.frame = CGRectMake(midX - CGRectGetWidth(tokenLabel.frame) / 2, 0, CGRectGetWidth(tokenLabel.frame), CGRectGetHeight(tokenLabel.frame));
+		UILabel *titleLabel = [self createLabelWithSize:26.0f text:@"Token Information" yOffset:0.0];
+		UILabel *idLabel = [self createLabelWithSize:14.0f text:[NSString stringWithFormat:@"Id:%@", creditCardToken.token] yOffset:CGRectGetMaxY(titleLabel.frame) + 6.0];
 
-		[self addSubview:tokenLabel];
+		[self addSubview:titleLabel];
+		[self addSubview:idLabel];
 	}
 	return self;
+}
+
+- (UILabel *)createLabelWithSize:(CGFloat)size text:(NSString *)text yOffset:(CGFloat)yOffset {
+	UILabel* label = [[UILabel alloc] init];
+	label.font = [UIFont boldSystemFontOfSize:size];
+	label.text = text;
+	label.textColor = [UIColor colorWithHexString:@"4a4a4a"];
+	label.backgroundColor = UIColor.clearColor;
+	[label sizeToFit];
+	label.frame = CGRectMake(CGRectGetMidX(self.frame) - CGRectGetWidth(label.frame) / 2, yOffset, CGRectGetWidth(label.frame), CGRectGetHeight(label.frame));
+	return label;
 }
 
 @end
