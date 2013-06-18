@@ -1,34 +1,24 @@
 #import "SIMCreditCardNetwork.h"
 #import "SIMCreditCardValidator.h"
-#import "SIMTextInputState.h"
-
-#define SIMCreditCardEntryModelCreditCardNumberChanged @"SIMCreditCardEntryModelCreditCardNumberChanged"
-#define SIMCreditCardEntryModelCVCNumberChanged @"SIMCreditCardEntryModelCVCNumberChanged"
-#define SIMCreditCardEntryModelExpirationDateChanged @"SIMCreditCardEntryModelExpirationDateChanged"
+#import "SIMTextFieldState.h"
 
 @interface SIMCreditCardEntryModel : NSObject
+
+typedef enum {
+	SIMCreditCardEntryControlCreditCardNumber,
+	SIMCreditCardEntryControlCVCNumber,
+	SIMCreditCardEntryControlExpirationDate
+} SIMCreditCardEntryControl;
 
 - (id)initWithCreditCardNetwork:(SIMCreditCardNetwork *)creditCardNetwork
             creditCardValidator:(SIMCreditCardValidator *)creditCardValidator;
 
-// View Display Information
+- (SIMTextFieldState*)stateForControl:(SIMCreditCardEntryControl)control withInput:(NSString *)input;
+
 - (SIMCreditCardType)creditCardType;
-
-- (NSString *)creditCardNumberDisplay;
-- (SIMTextInputState)creditCardNumberInputState;
-
-- (NSString *)cvcNumberDisplay;
-- (SIMTextInputState)cvcNumberInputState;
-
-- (NSString *)expirationDateDisplay;
-- (SIMTextInputState)expirationDateInputState;
 
 - (BOOL)canSendCreditCard;
 
-// View Input methods
-- (void)creditCardNumberInput:(NSString *)input;
-- (void)cvcNumberInput:(NSString *)input;
-- (void)expirationDateInput:(NSString *)input;
 - (void)sendCreditCard;
 
 @end

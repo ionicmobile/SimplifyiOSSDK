@@ -5,10 +5,6 @@
 	id creditCardNetwork;
 	id creditCardValidator;
 	SIMCreditCardEntryModel *testObject;
-
-	int creditCardNumberDisplayChangedNotification;
-	int cvcNumberDisplayChangedNotification;
-	int expirationDateDisplayChangedNotification;
 }
 @end
 
@@ -19,29 +15,11 @@
 	creditCardNetwork = [OCMockObject niceMockForClass:SIMCreditCardNetwork.class];
 	creditCardValidator = [OCMockObject niceMockForClass:SIMCreditCardValidator.class];
 	testObject = [[SIMCreditCardEntryModel alloc] initWithCreditCardNetwork:creditCardNetwork creditCardValidator:creditCardValidator];
-
-	creditCardNumberDisplayChangedNotification = 0;
-	cvcNumberDisplayChangedNotification = 0;
-	expirationDateDisplayChangedNotification = 0;
-
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(creditCardNumberDisplayChanged) name:SIMCreditCardEntryModelCreditCardNumberChanged object:testObject];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cvcNumberDisplayChanged) name:SIMCreditCardEntryModelCVCNumberChanged object:testObject];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(expirationDateDisplayChanged) name:SIMCreditCardEntryModelExpirationDateChanged object:testObject];
 }
 
 - (void)tearDown {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[super tearDown];
-}
-
-- (void)creditCardNumberDisplayChanged {
-	creditCardNumberDisplayChangedNotification++;
-}
-- (void)cvcNumberDisplayChanged {
-	cvcNumberDisplayChangedNotification++;
-}
-- (void)expirationDateDisplayChanged {
-	expirationDateDisplayChangedNotification++;
 }
 
 - (void)testCreditCardType_DelegatesToValidator {
@@ -50,117 +28,131 @@
 	GHAssertEquals(testObject.creditCardType, SIMCreditCardType_ChinaUnionPay, nil);
 }
 
-- (void)testSetCreditCardNumberInput_PostsNotification_SetsCardNumberOnValidator {
-	NSString *creditCardNumberInput = @"111122223333";
-	NSString *expectedFormattedText = @"1111 2222 3333 ";
-	GHAssertEquals(creditCardNumberDisplayChangedNotification, 0, nil);
+- (void)testStateForControl_WhereControlIsCreditCardNumber_SetsCardNumberOnValidatorAndReturnsFormattedText {
+	NSString *input = @"111122223333";
+	NSString *expectedText = @"1111 2222 3333 ";
 	[[[creditCardValidator expect] andDo:^(NSInvocation *invocation) {
-		[[[creditCardValidator stub] andReturn:expectedFormattedText] formattedCardNumber];
-	}] setCardNumberAsString:creditCardNumberInput];
+		[[[creditCardValidator stub] andReturn:expectedText] formattedCardNumber];
+	}] setCardNumberAsString:input];
 
-	[testObject creditCardNumberInput:creditCardNumberInput];
+	SIMTextFieldState *result = [testObject stateForControl:SIMCreditCardEntryControlCreditCardNumber withInput:input];
 
 	[creditCardValidator verify];
-	GHAssertEquals(creditCardNumberDisplayChangedNotification, 1, nil);
-	GHAssertEqualStrings(testObject.creditCardNumberDisplay, expectedFormattedText, nil);
+	GHAssertEqualStrings(result.text, expectedText, nil);
 }
 
 - (void)testCreditCardNumberInputState_IsBad_WhenMaxLengthAndInvalid {
 	[[[creditCardValidator stub] andReturnValue:@YES] isMaximumCardNumberLength];
 	[[[creditCardValidator stub] andReturnValue:@NO] isValidCardNumber];
 
-	GHAssertEquals(testObject.creditCardNumberInputState, SIMTextInputStateBad, nil);
+	SIMTextFieldState *result = [testObject stateForControl:SIMCreditCardEntryControlCreditCardNumber withInput:@""];
+	
+	GHAssertEquals(result.inputState, SIMTextInputStateBad, nil);
 }
 
 - (void)testCreditCardNumberInputState_IsNormal_WhenNotMaxLengthAndValid {
 	[[[creditCardValidator stub] andReturnValue:@NO] isMaximumCardNumberLength];
 	[[[creditCardValidator stub] andReturnValue:@YES] isValidCardNumber];
 
-	GHAssertEquals(testObject.creditCardNumberInputState, SIMTextInputStateNormal, nil);
+	SIMTextFieldState *result = [testObject stateForControl:SIMCreditCardEntryControlCreditCardNumber withInput:@""];
+	
+	GHAssertEquals(result.inputState, SIMTextInputStateNormal, nil);
 }
 
 - (void)testCreditCardNumberInputState_IsNormal_WhenNotMaxLengthAndInvalid {
 	[[[creditCardValidator stub] andReturnValue:@NO] isMaximumCardNumberLength];
 	[[[creditCardValidator stub] andReturnValue:@NO] isValidCardNumber];
 
-	GHAssertEquals(testObject.creditCardNumberInputState, SIMTextInputStateNormal, nil);
+	SIMTextFieldState *result = [testObject stateForControl:SIMCreditCardEntryControlCreditCardNumber withInput:@""];
+	
+	GHAssertEquals(result.inputState, SIMTextInputStateNormal, nil);
 }
 
 - (void)testCreditCardNumberInputState_IsGood_WhenMaxLengthAndValid {
 	[[[creditCardValidator stub] andReturnValue:@YES] isMaximumCardNumberLength];
 	[[[creditCardValidator stub] andReturnValue:@YES] isValidCardNumber];
 
-	GHAssertEquals(testObject.creditCardNumberInputState, SIMTextInputStateGood, nil);
+	SIMTextFieldState *result = [testObject stateForControl:SIMCreditCardEntryControlCreditCardNumber withInput:@""];
+	
+	GHAssertEquals(result.inputState, SIMTextInputStateGood, nil);
 }
 
-- (void)testSetCVCNumberInput_PostsNotification_SetsCVCOnValidator {
+- (void)testStateForControl_WhereControlIsCVCNumber_SetsCardNumberOnValidatorAndReturnsFormattedText {
 	NSString *input = @"123";
-	NSString *expectedFormattedText = @"123";
-	GHAssertEquals(cvcNumberDisplayChangedNotification, 0, nil);
+	NSString *expectedText = @"abc";
 	[[[creditCardValidator expect] andDo:^(NSInvocation *invocation) {
-		[[[creditCardValidator stub] andReturn:expectedFormattedText] formattedCVCCode];
+		[[[creditCardValidator stub] andReturn:expectedText] formattedCVCCode];
 	}] setCVCCodeAsString:input];
-
-	[testObject cvcNumberInput:input];
-
+	
+	SIMTextFieldState *result = [testObject stateForControl:SIMCreditCardEntryControlCVCNumber withInput:input];
+	
 	[creditCardValidator verify];
-	GHAssertEquals(cvcNumberDisplayChangedNotification, 1, nil);
-	GHAssertEqualStrings(testObject.cvcNumberDisplay, expectedFormattedText, nil);
+	GHAssertEqualStrings(result.text, expectedText, nil);
 }
 
 - (void)testCVCNumberInputState_IsBad_WhenMaxLengthAndInvalid {
 	[[[creditCardValidator stub] andReturnValue:@YES] isMaximumCVCLength];
 	[[[creditCardValidator stub] andReturnValue:@NO] isValidCVC];
 
-	GHAssertEquals(testObject.cvcNumberInputState, SIMTextInputStateBad, nil);
+	SIMTextFieldState *result = [testObject stateForControl:SIMCreditCardEntryControlCVCNumber withInput:@""];
+	
+	GHAssertEquals(result.inputState, SIMTextInputStateBad, nil);
 }
 
 - (void)testCVCNumberInputState_IsNormal_WhenNotMaxLengthAndValid {
 	[[[creditCardValidator stub] andReturnValue:@NO] isMaximumCVCLength];
 	[[[creditCardValidator stub] andReturnValue:@YES] isValidCVC];
 
-	GHAssertEquals(testObject.cvcNumberInputState, SIMTextInputStateNormal, nil);
+	SIMTextFieldState *result = [testObject stateForControl:SIMCreditCardEntryControlCVCNumber withInput:@""];
+	
+	GHAssertEquals(result.inputState, SIMTextInputStateNormal, nil);
 }
 
 - (void)testCVCNumberInputState_IsNormal_WhenNotMaxLengthAndInvalid {
 	[[[creditCardValidator stub] andReturnValue:@NO] isMaximumCVCLength];
 	[[[creditCardValidator stub] andReturnValue:@NO] isValidCVC];
 
-	GHAssertEquals(testObject.cvcNumberInputState, SIMTextInputStateNormal, nil);
+	SIMTextFieldState *result = [testObject stateForControl:SIMCreditCardEntryControlCVCNumber withInput:@""];
+	
+	GHAssertEquals(result.inputState, SIMTextInputStateNormal, nil);
 }
 
 - (void)testCVCNumberInputState_IsGood_WhenMaxLengthAndValid {
 	[[[creditCardValidator stub] andReturnValue:@YES] isMaximumCVCLength];
 	[[[creditCardValidator stub] andReturnValue:@YES] isValidCVC];
 
-	GHAssertEquals(testObject.cvcNumberInputState, SIMTextInputStateGood, nil);
+	SIMTextFieldState *result = [testObject stateForControl:SIMCreditCardEntryControlCVCNumber withInput:@""];
+	
+	GHAssertEquals(result.inputState, SIMTextInputStateGood, nil);
 }
 
-- (void)testSetExpirationDateInput_PostsNotification_SetsExpirationDateOnValidator {
+- (void)testStateForControl_WhereControlIsExpirationDate_SetsCardNumberOnValidatorAndReturnsFormattedText {
 	NSString *input = @"12/12";
-	NSString *expectedFormattedText = @"12/12";
-	GHAssertEquals(expirationDateDisplayChangedNotification, 0, nil);
+	NSString *expectedText = @"12/12";
 	[[[creditCardValidator expect] andDo:^(NSInvocation *invocation) {
-		[[[creditCardValidator stub] andReturn:expectedFormattedText] formattedExpirationDate];
+		[[[creditCardValidator stub] andReturn:expectedText] formattedExpirationDate];
 	}] setExpirationAsString:input];
 
-	[testObject expirationDateInput:input];
+	SIMTextFieldState *result = [testObject stateForControl:SIMCreditCardEntryControlExpirationDate withInput:input];
 
 	[creditCardValidator verify];
-	GHAssertEquals(expirationDateDisplayChangedNotification, 1, nil);
-	GHAssertEqualStrings(testObject.expirationDateDisplay, expectedFormattedText, nil);
+	GHAssertEqualStrings(result.text, expectedText, nil);
 }
 
 - (void)testExpirationDateInputState_IsGood_WhenNotExpired {
 	[[[creditCardValidator stub] andReturnValue:@NO] isExpired];
 
-	GHAssertEquals(testObject.expirationDateInputState, SIMTextInputStateGood, nil);
+	SIMTextFieldState *result = [testObject stateForControl:SIMCreditCardEntryControlExpirationDate withInput:@""];
+
+	GHAssertEquals(result.inputState, SIMTextInputStateGood, nil);
 }
 
 - (void)testExpirationDateInputState_IsBad_WhenExpired {
 	[[[creditCardValidator stub] andReturnValue:@YES] isExpired];
 
-	GHAssertEquals(testObject.expirationDateInputState, SIMTextInputStateBad, nil);
+	SIMTextFieldState *result = [testObject stateForControl:SIMCreditCardEntryControlExpirationDate withInput:@""];
+	
+	GHAssertEquals(result.inputState, SIMTextInputStateBad, nil);
 }
 
 - (void)testCanSendCreditCard_ReturnsYES_IfEverythingIsValid {

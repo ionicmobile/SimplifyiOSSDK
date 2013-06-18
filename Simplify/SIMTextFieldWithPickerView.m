@@ -11,6 +11,7 @@
 		UIPickerView *pickerView = [[UIPickerView alloc] init];
 		pickerView.dataSource = self;
 		pickerView.delegate = self;
+		pickerView.showsSelectionIndicator = YES;
 		self.inputView = pickerView;
     }
     return self;

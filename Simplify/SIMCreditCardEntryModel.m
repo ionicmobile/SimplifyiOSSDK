@@ -16,6 +16,27 @@
 	return self;
 }
 
+- (SIMTextFieldState*)stateForControl:(SIMCreditCardEntryControl)control withInput:(NSString *)input {
+	SIMTextFieldState *result = nil;
+	switch (control) {
+		case SIMCreditCardEntryControlCreditCardNumber:
+			[self.creditCardValidator setCardNumberAsString:input];
+			result = [[SIMTextFieldState alloc] initWithText:self.creditCardValidator.formattedCardNumber inputState:[self creditCardNumberInputState]];
+			break;
+		case SIMCreditCardEntryControlCVCNumber:
+			[self.creditCardValidator setCVCCodeAsString:input];
+			result = [[SIMTextFieldState alloc] initWithText:self.creditCardValidator.formattedCVCCode inputState:[self cvcNumberInputState]];
+			break;
+		case SIMCreditCardEntryControlExpirationDate:
+			[self.creditCardValidator setExpirationAsString:input];
+			result = [[SIMTextFieldState alloc] initWithText:self.creditCardValidator.formattedExpirationDate inputState:[self expirationDateInputState]];
+			break;
+		default:
+			break;
+	}
+	return result;
+}
+
 - (SIMCreditCardType)creditCardType {
 	return self.creditCardValidator.cardType;
 }
@@ -54,17 +75,17 @@
 
 -(void)creditCardNumberInput:(NSString *)input {
 	[self.creditCardValidator setCardNumberAsString:input];
-	[[NSNotificationCenter defaultCenter] postNotificationName:SIMCreditCardEntryModelCreditCardNumberChanged object:self];
+//	[[NSNotificationCenter defaultCenter] postNotificationName:SIMCreditCardEntryModelCreditCardNumberChanged object:self];
 }
 
 -(void)cvcNumberInput:(NSString *)input {
 	[self.creditCardValidator setCVCCodeAsString:input];
-	[[NSNotificationCenter defaultCenter] postNotificationName:SIMCreditCardEntryModelCVCNumberChanged object:self];
+//	[[NSNotificationCenter defaultCenter] postNotificationName:SIMCreditCardEntryModelCVCNumberChanged object:self];
 }
 
 -(void)expirationDateInput:(NSString *)input {
 	[self.creditCardValidator setExpirationAsString:input];
-	[[NSNotificationCenter defaultCenter] postNotificationName:SIMCreditCardEntryModelExpirationDateChanged object:self];
+//	[[NSNotificationCenter defaultCenter] postNotificationName:SIMCreditCardEntryModelExpirationDateChanged object:self];
 }
 
 -(void)sendCreditCard {
