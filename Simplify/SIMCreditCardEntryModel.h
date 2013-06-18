@@ -1,19 +1,14 @@
 #import "SIMCreditCardNetwork.h"
 #import "SIMCreditCardValidator.h"
 #import "SIMTextFieldState.h"
+#import "SIMCreditCardEntryControl.h"
 
 @interface SIMCreditCardEntryModel : NSObject
-
-typedef enum {
-	SIMCreditCardEntryControlCreditCardNumber,
-	SIMCreditCardEntryControlCVCNumber,
-	SIMCreditCardEntryControlExpirationDate
-} SIMCreditCardEntryControl;
 
 - (id)initWithCreditCardNetwork:(SIMCreditCardNetwork *)creditCardNetwork
             creditCardValidator:(SIMCreditCardValidator *)creditCardValidator;
 
-- (SIMTextFieldState*)stateForControl:(SIMCreditCardEntryControl)control withInput:(NSString *)input;
+- (SIMTextFieldState *)stateForControl:(SIMCreditCardEntryControl)control withInput:(NSString *)input;
 
 - (SIMCreditCardType)creditCardType;
 

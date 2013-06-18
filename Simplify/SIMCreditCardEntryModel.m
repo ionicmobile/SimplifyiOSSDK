@@ -16,7 +16,7 @@
 	return self;
 }
 
-- (SIMTextFieldState*)stateForControl:(SIMCreditCardEntryControl)control withInput:(NSString *)input {
+- (SIMTextFieldState *)stateForControl:(SIMCreditCardEntryControl)control withInput:(NSString *)input {
 	SIMTextFieldState *result = nil;
 	switch (control) {
 		case SIMCreditCardEntryControlCreditCardNumber:
@@ -81,6 +81,12 @@
 																				expirationYear:expirationYear
 																					cardNumber:creditCardNumber
 																						   cvc:cvcNumber
+																						  name:nil
+																				  addressLine1:nil
+																				  addressLine2:nil
+																						  city:nil
+																						 state:nil
+																						   zip:nil
 																						 error:&error];
 	return cardToken;
 }

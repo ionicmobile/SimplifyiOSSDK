@@ -1,0 +1,12 @@
+
+typedef enum {
+	SIMCreditCardEntryControlCreditCardNumber = 1,
+	SIMCreditCardEntryControlCVCNumber,
+	SIMCreditCardEntryControlExpirationDate,
+	
+	SIMCreditCardEntryControlAddressName,
+	SIMCreditCardEntryControlAddressLine1,
+	SIMCreditCardEntryControlAddressLine2,
+	SIMCreditCardEntryControlAddressCity,
+	SIMCreditCardEntryControlAddressZip
+} SIMCreditCardEntryControl;

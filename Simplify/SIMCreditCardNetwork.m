@@ -8,10 +8,16 @@ NSString *kSimplifyCommerceDefaultAPIBaseLiveUrl = @"https://sandbox.simplify.co
 @implementation SIMCreditCardNetwork
 
 - (SIMCreditCardToken *)createCardTokenWithExpirationMonth:(NSString *)expirationMonth
-                                      expirationYear:(NSString *)expirationYear
-			                              cardNumber:(NSString *)cardNumber
-						                         cvc:(NSString *)cvc
-						                       error:(NSError **)error {
+											expirationYear:(NSString *)expirationYear
+												cardNumber:(NSString *)cardNumber
+													   cvc:(NSString *)cvc
+													  name:(NSString *)name
+											  addressLine1:(NSString *)addressLine1
+											  addressLine2:(NSString *)addressLine2
+													  city:(NSString *)city
+													 state:(NSString *)state
+													   zip:(NSString *)zip
+													 error:(NSError **)error {
 	NSString *publicKey = @"sbpb_OTY1YmI4N2UtYTJiOS00ZWUzLTliMGItZTFmYzQ2OTRmYmQ3";
 	SIMCreditCardToken *cardToken = nil;
 	
@@ -22,7 +28,26 @@ NSString *kSimplifyCommerceDefaultAPIBaseLiveUrl = @"https://sandbox.simplify.co
 	[parameters appendFormat:@"&%@=%@", [self urlEncoded:@"card[expMonth]"], expirationMonth];
 	[parameters appendFormat:@"&%@=%@", [self urlEncoded:@"card[expYear]"], expirationYear];
 	[parameters appendFormat:@"&%@=%@", [self urlEncoded:@"card[cvc]"], cvc];
-	[parameters appendFormat:@"&%@=%@", [self urlEncoded:@"card[name]"], [self urlEncoded:cardNumber]];
+	if (name.length) {
+		[parameters appendFormat:@"&%@=%@", [self urlEncoded:@"card[name]"], name];
+	}
+	if (addressLine1.length) {
+		[parameters appendFormat:@"&%@=%@", [self urlEncoded:@"card[addressLine1]"], addressLine1];
+	}
+	if (addressLine2.length) {
+		[parameters appendFormat:@"&%@=%@", [self urlEncoded:@"card[addressLine2]"], addressLine2];
+	}
+	if (city.length) {
+		[parameters appendFormat:@"&%@=%@", [self urlEncoded:@"card[addressCity]"], city];
+	}
+	if (state.length) {
+		[parameters appendFormat:@"&%@=%@", [self urlEncoded:@"card[addressState]"], state];
+	}
+	if (zip.length) {
+		[parameters appendFormat:@"&%@=%@", [self urlEncoded:@"card[addressZip]"], zip];
+	}
+	[parameters appendFormat:@"&%@=%@", [self urlEncoded:@"card[country]"], @"USA"];
+
 	url = [NSURL URLWithString:[[url absoluteString] stringByAppendingString:parameters]];
 	
 	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:0];

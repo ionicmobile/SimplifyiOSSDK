@@ -64,7 +64,7 @@
 	return self;
 }
 
-- (SIMTextFieldState*)stateForControl:(SIMAddressEntryControl)control withInput:(NSString *)input {
+- (SIMTextFieldState *)stateForControl:(SIMCreditCardEntryControl)control withInput:(NSString *)input {
 	if ([input isEqualToString:@""]) {
 		return [[SIMTextFieldState alloc] initWithText:input inputState:SIMTextInputStateNormal];
 	} else {

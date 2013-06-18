@@ -129,21 +129,6 @@
 	[self setNeedsLayout];
 }
 
--(void)setCardNumberDisplayedText:(NSString*)displayedText textInputState:(SIMTextInputState)textInputState {
-	self.creditCardNumberTextField.text = displayedText;
-	[self setTextField:self.creditCardNumberTextField inputState:textInputState];
-}
-
--(void)setCVCNumberDisplayedText:(NSString*)displayedText textInputState:(SIMTextInputState)textInputState {
-	self.CVCNumberTextField.text = displayedText;
-	[self setTextField:self.CVCNumberTextField inputState:textInputState];
-}
-
--(void)setExpirationDateDisplayedText:(NSString*)displayedText textInputState:(SIMTextInputState)textInputState {
-	self.expirationDateTextField.text = displayedText;
-	[self setTextField:self.expirationDateTextField inputState:textInputState];
-}
-
 - (void)setTextField:(UITextField *)textField inputState:(SIMTextInputState)inputState {
 	switch (inputState) {
 	case SIMTextInputStateBad:
@@ -159,20 +144,44 @@
 	}
 }
 
--(void)setSendCreditCardButtonEnabled:(BOOL)enabled {
+- (void)setTextFieldState:(SIMTextFieldState *)textFieldState forControl:(SIMCreditCardEntryControl)control {
+	switch (control) {
+		case SIMCreditCardEntryControlCreditCardNumber:
+			self.creditCardNumberTextField.text = textFieldState.text;
+			[self setTextField:self.creditCardNumberTextField inputState:textFieldState.inputState];
+			break;
+		case SIMCreditCardEntryControlCVCNumber:
+			self.CVCNumberTextField.text = textFieldState.text;
+			[self setTextField:self.CVCNumberTextField inputState:textFieldState.inputState];
+			break;
+		case SIMCreditCardEntryControlExpirationDate:
+			self.expirationDateTextField.text = textFieldState.text;
+			[self setTextField:self.expirationDateTextField inputState:textFieldState.inputState];
+			break;
+		default:
+			break;
+	}
+}
+
+- (void)setSendCreditCardButtonEnabled:(BOOL)enabled {
 	self.sendCreditCardButton.enabled = enabled;
 }
 
 #pragma mark - Delegate callbacks
 
--(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)replacementString {
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)replacementString {
 	NSString *resultString = [textField.text stringByReplacingCharactersInRange:range withString:replacementString];
+	SIMCreditCardEntryControl control = 0;
 	if (textField == self.creditCardNumberTextField) {
-		[self.delegate creditCardNumberInput:resultString];
+		control = SIMCreditCardEntryControlCreditCardNumber;
 	} else if (textField == self.CVCNumberTextField) {
-		[self.delegate cvcNumberInput:resultString];
+		control = SIMCreditCardEntryControlCVCNumber;
 	} else if (textField == self.expirationDateTextField) {
-		[self.delegate expirationDateInput:resultString];
+		control = SIMCreditCardEntryControlExpirationDate;
+	}
+	
+	if (control) {
+		[self.delegate control:control setInput:resultString];
 	}
 	return NO;
 }

@@ -47,21 +47,9 @@
 
 #pragma mark - SIMCreditCardEntryViewDelegate Methods
 
-- (void)creditCardNumberInput:(NSString*)input {
-	SIMTextFieldState *resultState = [self.model stateForControl:SIMCreditCardEntryControlCreditCardNumber withInput:input];
-	[self.internalView setCardNumberDisplayedText:resultState.text textInputState:resultState.inputState];
-	[self updateCardTypeAndCreditCardButtonEnabled];
-}
-
--(void)cvcNumberInput:(NSString*)input {
-	SIMTextFieldState *resultState = [self.model stateForControl:SIMCreditCardEntryControlCVCNumber withInput:input];
-	[self.internalView setCVCNumberDisplayedText:resultState.text textInputState:resultState.inputState];
-	[self updateCardTypeAndCreditCardButtonEnabled];
-}
-
--(void)expirationDateInput:(NSString*)input {
-	SIMTextFieldState *resultState = [self.model stateForControl:SIMCreditCardEntryControlExpirationDate withInput:input];
-	[self.internalView setExpirationDateDisplayedText:resultState.text textInputState:resultState.inputState];
+- (void)control:(SIMCreditCardEntryControl)control setInput:(NSString *)input {
+	SIMTextFieldState *textFieldState = [self.model stateForControl:control withInput:input];
+	[self.internalView setTextFieldState:textFieldState forControl:control];
 	[self updateCardTypeAndCreditCardButtonEnabled];
 }
 
