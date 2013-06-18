@@ -1,8 +1,8 @@
 #import "SIMAbstractTestCase.h"
-#import "SIMCardToken.h"
+#import "SIMCreditCardToken.h"
 
 @interface SIMCardTokenTest : SIMAbstractTestCase {
-	SIMCardToken* testObject;
+	SIMCreditCardToken* testObject;
 }
 @end
 
@@ -26,7 +26,7 @@
 	};
 	NSDictionary *dictionary = @{@"id" : @"myCardTokenId", @"card" : cardDictionary};
 
-	testObject = [SIMCardToken cardTokenFromDictionary:dictionary];
+	testObject = [SIMCreditCardToken cardTokenFromDictionary:dictionary];
 
 	GHAssertEqualStrings(testObject.token, @"myCardTokenId", nil);
 	GHAssertEqualStrings(testObject.name, @"myCard", nil);

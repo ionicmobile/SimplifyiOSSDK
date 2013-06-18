@@ -1,6 +1,6 @@
-#import "SIMCardToken.h"
+#import "SIMCreditCardToken.h"
 
-@interface SIMCardToken ()
+@interface SIMCreditCardToken ()
 
 @property (nonatomic, readwrite) NSString *token;
 @property (nonatomic, readwrite) NSString *name;
@@ -18,7 +18,7 @@
 
 @end
 
-@implementation SIMCardToken
+@implementation SIMCreditCardToken
 
 - (id)initWithToken:(NSString *)token
                name:(NSString *)name
@@ -51,8 +51,8 @@
 	return self;
 }
 
-+ (SIMCardToken *)cardTokenFromDictionary:(NSDictionary *)dictionary {
-	SIMCardToken *cardToken = [[SIMCardToken alloc] init];
++ (SIMCreditCardToken *)cardTokenFromDictionary:(NSDictionary *)dictionary {
+	SIMCreditCardToken *cardToken = [[SIMCreditCardToken alloc] init];
 	cardToken.token = dictionary[@"id"];
 	cardToken.name = dictionary[@"card"][@"name"];
 	cardToken.type = dictionary[@"card"][@"type"];

@@ -7,13 +7,13 @@ NSString *kSimplifyCommerceDefaultAPIBaseLiveUrl = @"https://sandbox.simplify.co
 
 @implementation SIMCreditCardNetwork
 
-- (SIMCardToken *)createCardTokenWithExpirationMonth:(NSString *)expirationMonth
+- (SIMCreditCardToken *)createCardTokenWithExpirationMonth:(NSString *)expirationMonth
                                       expirationYear:(NSString *)expirationYear
 			                              cardNumber:(NSString *)cardNumber
 						                         cvc:(NSString *)cvc
 						                       error:(NSError **)error {
 	NSString *publicKey = @"sbpb_OTY1YmI4N2UtYTJiOS00ZWUzLTliMGItZTFmYzQ2OTRmYmQ3";
-	SIMCardToken *cardToken = nil;
+	SIMCreditCardToken *cardToken = nil;
 	
 	NSURL *url = [[[NSURL alloc] initWithString:kSimplifyCommerceDefaultAPIBaseLiveUrl] URLByAppendingPathComponent:@"payment/cardToken"];
 	// As GET, add parameters to URL
@@ -51,7 +51,7 @@ NSString *kSimplifyCommerceDefaultAPIBaseLiveUrl = @"https://sandbox.simplify.co
 			if (response.statusCode >= 200 && response.statusCode < 300) {
 				NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:error];
 				NSLog(@"json: %@", json);
-				cardToken = [SIMCardToken cardTokenFromDictionary:json];
+				cardToken = [SIMCreditCardToken cardTokenFromDictionary:json];
 			} else {
 				NSLog(@"statusCode: %i", response.statusCode);
 			}

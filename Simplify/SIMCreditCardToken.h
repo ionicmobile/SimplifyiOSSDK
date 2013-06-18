@@ -1,4 +1,4 @@
-@interface SIMCardToken : NSObject
+@interface SIMCreditCardToken : NSObject
 
 @property (nonatomic, readonly) NSString *token;
 @property (nonatomic, readonly) NSString *name;
@@ -28,6 +28,6 @@
 			expYear:(NSNumber *)expYear
 		dateCreated:(NSDate *)dateCreated;
 
-+ (SIMCardToken *)cardTokenFromDictionary:(NSDictionary *)dictionary;
++ (SIMCreditCardToken *)cardTokenFromDictionary:(NSDictionary *)dictionary;
 
 @end

@@ -67,39 +67,22 @@
 
 - (BOOL)canSendCreditCard {
 	return  self.creditCardNumberInputState == SIMTextInputStateGood &&
-			self.cvcNumberInputState == SIMTextInputStateGood &&
-			self.expirationDateInputState == SIMTextInputStateGood;
+	self.cvcNumberInputState == SIMTextInputStateGood &&
+	self.expirationDateInputState == SIMTextInputStateGood;
 }
 
-#pragma mark - View Input
-
--(void)creditCardNumberInput:(NSString *)input {
-	[self.creditCardValidator setCardNumberAsString:input];
-//	[[NSNotificationCenter defaultCenter] postNotificationName:SIMCreditCardEntryModelCreditCardNumberChanged object:self];
-}
-
--(void)cvcNumberInput:(NSString *)input {
-	[self.creditCardValidator setCVCCodeAsString:input];
-//	[[NSNotificationCenter defaultCenter] postNotificationName:SIMCreditCardEntryModelCVCNumberChanged object:self];
-}
-
--(void)expirationDateInput:(NSString *)input {
-	[self.creditCardValidator setExpirationAsString:input];
-//	[[NSNotificationCenter defaultCenter] postNotificationName:SIMCreditCardEntryModelExpirationDateChanged object:self];
-}
-
--(void)sendCreditCard {
+- (SIMCreditCardToken *)sendForCreditCardToken {
 	NSError *error = nil;
 	NSString *creditCardNumber = [self.creditCardValidator.formattedCardNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
 	NSString *expirationMonth = self.creditCardValidator.expirationMonth;
 	NSString *expirationYear = self.creditCardValidator.expirationYear;
 	NSString *cvcNumber = self.creditCardValidator.formattedCVCCode;
-	SIMCardToken *cardToken = [self.creditCardNetwork createCardTokenWithExpirationMonth:expirationMonth
-	                                                                      expirationYear:expirationYear
-				                                                              cardNumber:creditCardNumber
-							                                                         cvc:cvcNumber
-							                                                       error:&error];
-	NSLog(@"Card Token: %@", cardToken);
+	SIMCreditCardToken *cardToken = [self.creditCardNetwork createCardTokenWithExpirationMonth:expirationMonth
+																				expirationYear:expirationYear
+																					cardNumber:creditCardNumber
+																						   cvc:cvcNumber
+																						 error:&error];
+	return cardToken;
 }
 
 @end

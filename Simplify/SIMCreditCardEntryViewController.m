@@ -11,17 +11,20 @@
 
 @implementation SIMCreditCardEntryViewController
 
-- (id)init {
+- (id)initWithAddressView:(BOOL)showAddressView {
 	if (self = [super init]) {
 		SIMCreditCardNetwork *creditCardNetwork = [[SIMCreditCardNetwork alloc] init];
 		SIMLuhnValidator *luhnValidator = [[SIMLuhnValidator alloc] init];
 		SIMCurrentTimeProvider *timeProvider = [[SIMCurrentTimeProvider alloc] init];
 		SIMCreditCardValidator *creditCardValidator = [[SIMCreditCardValidator alloc] initWithLuhnValidator:luhnValidator timeProvider:timeProvider];
 		SIMCreditCardEntryModel *model = [[SIMCreditCardEntryModel alloc] initWithCreditCardNetwork:creditCardNetwork creditCardValidator:creditCardValidator];
-		SIMAddressEntryView *addressEntryView = [[SIMAddressEntryView alloc] init];
-		SIMAddressEntryModel *addressEntryModel = [[SIMAddressEntryModel alloc] init];
-		addressEntryView.stateTextField.options = addressEntryModel.stateOptions;
-
+		
+		SIMAddressEntryView *addressEntryView = nil;
+		if (showAddressView) {
+			addressEntryView = [[SIMAddressEntryView alloc] init];
+			SIMAddressEntryModel *addressEntryModel = [[SIMAddressEntryModel alloc] init];
+			addressEntryView.stateTextField.options = addressEntryModel.stateOptions;
+		}
 		SIMCreditCardEntryView *view = [[SIMCreditCardEntryView alloc] initWithAddressEntryView:addressEntryView];
 
 		self.model = model;
@@ -63,7 +66,8 @@
 }
 
 - (void)sendCreditCardButtonTapped {
-	[self.model sendCreditCard];
+	SIMCreditCardToken *creditCardToken = [self.model sendForCreditCardToken];
+	[self.delegate receivedCreditCardToken:creditCardToken];
 }
 
 @end

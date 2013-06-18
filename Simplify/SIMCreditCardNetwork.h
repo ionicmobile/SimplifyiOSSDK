@@ -1,8 +1,8 @@
-#import "SIMCardToken.h"
+#import "SIMCreditCardToken.h"
 
 @interface SIMCreditCardNetwork : NSObject
 
-- (SIMCardToken *)createCardTokenWithExpirationMonth:(NSString *)expirationMonth
+- (SIMCreditCardToken *)createCardTokenWithExpirationMonth:(NSString *)expirationMonth
                                       expirationYear:(NSString *)expirationYear
 			                              cardNumber:(NSString *)cardNumber
 						                         cvc:(NSString *)cvc

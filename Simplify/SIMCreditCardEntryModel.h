@@ -19,6 +19,6 @@ typedef enum {
 
 - (BOOL)canSendCreditCard;
 
-- (void)sendCreditCard;
+- (SIMCreditCardToken *)sendForCreditCardToken;
 
 @end

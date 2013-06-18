@@ -196,7 +196,7 @@
 }
 
 - (void)testSendCreditCard_UsesNetwork {
-	id cardToken = [OCMockObject niceMockForClass:SIMCardToken.class];
+	id cardToken = [OCMockObject niceMockForClass:SIMCreditCardToken.class];
 	[[[creditCardValidator stub] andReturn:@"11"] expirationMonth];
 	[[[creditCardValidator stub] andReturn:@"13"] expirationYear];
 	[[[creditCardValidator stub] andReturn:@"1111 2222 3333 4444"] formattedCardNumber];
@@ -208,7 +208,7 @@
 										   cvc:@"123"
 										 error:[OCMArg setTo:nil]];
 
-	[testObject sendCreditCard];
+	[testObject sendForCreditCardToken];
 
 	[creditCardNetwork verify];
 }
