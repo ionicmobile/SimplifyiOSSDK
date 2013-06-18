@@ -1,5 +1,4 @@
 #import <UIKit/UIKit.h>
-#import "SIMTextInputState.h"
 #import "SIMTextFieldWithPickerView.h"
 
 // NOTE: we currently assume a US address.

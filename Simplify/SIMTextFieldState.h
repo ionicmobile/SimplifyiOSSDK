@@ -1,4 +1,8 @@
-#include "SIMTextInputState.h"
+typedef enum {
+	SIMTextInputStateNormal,
+	SIMTextInputStateBad,
+	SIMTextInputStateGood
+} SIMTextInputState;
 
 @interface SIMTextFieldState : NSObject
 @property (nonatomic, readonly) NSString *text;

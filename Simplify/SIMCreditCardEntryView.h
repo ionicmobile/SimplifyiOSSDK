@@ -1,5 +1,4 @@
 #import <UIKit/UIKit.h>
-#import "SIMTextInputState.h"
 #import "SIMCreditCardType.h"
 #import "SIMAddressEntryView.h"
 #import "SIMCreditCardEntryControl.h"
