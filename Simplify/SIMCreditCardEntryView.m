@@ -6,7 +6,7 @@
 #import "SIMTextFieldFactory.h"
 
 @interface SIMCreditCardEntryView() <UITextFieldDelegate>
-@property (nonatomic) SIMAddressEntryView *addressEntryView;
+@property (nonatomic) UIView *extraView;
 @property (nonatomic) UILabel* titleLabel;
 @property (nonatomic) UIImageView* cardImageView;
 @property (nonatomic) UITextField* creditCardNumberTextField;
@@ -18,10 +18,10 @@
 @implementation SIMCreditCardEntryView
 
 - (id)init {
-	return [self initWithAddressEntryView:nil];
+	return [self initWithExtraView:nil];
 }
 
-- (id)initWithAddressEntryView:(SIMAddressEntryView*)addressEntryView {
+- (id)initWithExtraView:(UIView *)extraView {
 	if (self = [super init]) {
 		self.backgroundColor = [UIColor whiteColor];
 
@@ -60,9 +60,9 @@
 		self.expirationDateTextField = expirationDateTextField;
 		self.sendCreditCardButton = sendCreditCardButton;
 
-		if (addressEntryView) {
-			[self addSubview:addressEntryView];
-			self.addressEntryView = addressEntryView;
+		if (extraView) {
+			[self addSubview:extraView];
+			self.extraView = extraView;
 		}
 
 		[self addSubview:titleLabel];
@@ -90,10 +90,10 @@
 	self.expirationDateTextField.frame = CGRectMake(CGRectGetMaxX(self.CVCNumberTextField.frame) + innerMarginX, CGRectGetMaxY(self.creditCardNumberTextField.frame) + innerMarginY, (self.bounds.size.width - innerMarginX - 2 * outerMarginX)/2,textFieldHeight);
 
 	CGFloat nextY = CGRectGetMaxY(self.expirationDateTextField.frame) + innerMarginY;
-	if (self.addressEntryView) {
-		CGSize addressEntrySize = [self.addressEntryView sizeThatFits:self.bounds.size];
-		self.addressEntryView.frame = CGRectMake(0, nextY, CGRectGetWidth(self.bounds), addressEntrySize.height);
-		nextY = CGRectGetMaxY(self.addressEntryView.frame) + innerMarginY;
+	if (self.extraView) {
+		CGSize addressEntrySize = [self.extraView sizeThatFits:self.bounds.size];
+		self.extraView.frame = CGRectMake(0, nextY, CGRectGetWidth(self.bounds), addressEntrySize.height);
+		nextY = CGRectGetMaxY(self.extraView.frame) + innerMarginY;
 	}
 	[self.sendCreditCardButton centerHorizonallyAtY:nextY inBounds:self.bounds withSize:CGSizeMake(self.bounds.size.width - 2 * outerMarginX, 40)];
 }

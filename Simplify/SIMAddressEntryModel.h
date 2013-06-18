@@ -1,9 +1,13 @@
 #import "SIMTextFieldState.h"
-#import "SIMCreditCardEntryControl.h"
+#import "SIMAddressEntryControl.h"
+#import "SIMAddress.h"
 
 @interface SIMAddressEntryModel : NSObject
+
 @property (nonatomic, readonly) NSDictionary *stateOptions;
 
-- (SIMTextFieldState *)stateForControl:(SIMCreditCardEntryControl)control withInput:(NSString *)input;
+- (SIMTextFieldState *)stateForControl:(SIMAddressEntryControl)control withInput:(NSString *)input;
+
+- (SIMAddress *)createAddressFromInput;
 
 @end

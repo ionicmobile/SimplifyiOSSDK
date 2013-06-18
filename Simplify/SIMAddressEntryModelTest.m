@@ -96,4 +96,22 @@
 	GHAssertEquals(result.inputState, SIMTextInputStateGood, nil);
 }
 
+- (void)testCreateAddressFromInput_KeepsPreviousInput {
+	[testObject stateForControl:SIMAddressEntryControlName withInput:@"Billy Thorn"];
+	[testObject stateForControl:SIMAddressEntryControlLine1 withInput:@"Line 1"];
+	[testObject stateForControl:SIMAddressEntryControlLine2 withInput:@"Line 2"];
+	[testObject stateForControl:SIMAddressEntryControlCity withInput:@"Some City"];
+	[testObject stateForControl:SIMAddressEntryControlState withInput:@"MO"];
+	[testObject stateForControl:SIMAddressEntryControlZip withInput:@"12345"];
+	
+	SIMAddress *address = [testObject createAddressFromInput];
+	
+	GHAssertEqualStrings(address.name, @"Billy Thorn", nil);
+	GHAssertEqualStrings(address.addressLine1, @"Line 1", nil);
+	GHAssertEqualStrings(address.addressLine2, @"Line 2", nil);
+	GHAssertEqualStrings(address.city, @"Some City", nil);
+	GHAssertEqualStrings(address.state, @"MO", nil);
+	GHAssertEqualStrings(address.zip, @"12345", nil);
+}
+
 @end

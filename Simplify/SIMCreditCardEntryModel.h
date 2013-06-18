@@ -14,6 +14,6 @@
 
 - (BOOL)canSendCreditCard;
 
-- (SIMCreditCardToken *)sendForCreditCardToken;
+- (SIMCreditCardToken *)sendForCreditCardTokenUsingAddress:(SIMAddress *)address;
 
 @end

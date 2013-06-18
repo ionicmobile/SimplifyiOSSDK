@@ -1,7 +1,11 @@
 #import "SIMAddressEntryModel.h"
+#import "SIMMutableAddress.h"
 
 @interface SIMAddressEntryModel ()
+
 @property (nonatomic, readwrite) NSDictionary *stateOptions;
+@property (nonatomic) SIMMutableAddress *address;
+
 @end
 
 @implementation SIMAddressEntryModel
@@ -60,16 +64,43 @@
 			@"Wisconsin":@"WI",
 			@"Wyoming":@"WY"};
 
+		self.address = [[SIMMutableAddress alloc] init];
 	}
 	return self;
 }
 
-- (SIMTextFieldState *)stateForControl:(SIMCreditCardEntryControl)control withInput:(NSString *)input {
+- (SIMTextFieldState *)stateForControl:(SIMAddressEntryControl)control withInput:(NSString *)input {
+	switch (control) {
+		case SIMAddressEntryControlName:
+			self.address.name = input;
+			break;
+		case SIMAddressEntryControlLine1:
+			self.address.addressLine1 = input;
+			break;
+		case SIMAddressEntryControlLine2:
+			self.address.addressLine2 = input;
+			break;
+		case SIMAddressEntryControlCity:
+			self.address.city = input;
+			break;
+		case SIMAddressEntryControlState:
+			self.address.state = input;
+			break;
+		case SIMAddressEntryControlZip:
+			self.address.zip = input;
+			break;
+		default:
+			break;
+	}
 	if ([input isEqualToString:@""]) {
 		return [[SIMTextFieldState alloc] initWithText:input inputState:SIMTextInputStateNormal];
 	} else {
 		return [[SIMTextFieldState alloc] initWithText:input inputState:SIMTextInputStateGood];
 	}
+}
+
+- (SIMAddress *)createAddressFromInput {
+	return self.address;
 }
 
 @end

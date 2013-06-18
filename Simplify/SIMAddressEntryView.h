@@ -1,13 +1,21 @@
 #import <UIKit/UIKit.h>
 #import "SIMTextFieldWithPickerView.h"
+#import "SIMAddressEntryControl.h"
+#import "SIMTextFieldState.h"
+
+@protocol SIMAddressEntryViewDelegate
+
+- (void)control:(SIMAddressEntryControl)control setInput:(NSString *)input;
+- (void)sendCreditCardButtonTapped;
+
+@end
 
 // NOTE: we currently assume a US address.
 @interface SIMAddressEntryView : UIView
-@property (nonatomic, readonly) SIMTextField* nameTextField;
-@property (nonatomic, readonly) SIMTextField* line1TextField;
-@property (nonatomic, readonly) SIMTextField* line2TextField;
-@property (nonatomic, readonly) SIMTextField* cityTextField;
-@property (nonatomic, readonly) SIMTextFieldWithPickerView* stateTextField;
-@property (nonatomic, readonly) SIMTextField* zipTextField;
-@property (nonatomic, readonly) SIMTextField* countryTextField;
+
+@property (nonatomic, weak) id<SIMAddressEntryViewDelegate> delegate;
+
+- (void)setStateOptions:(NSDictionary *)stateOptions;
+- (void)setTextFieldState:(SIMTextFieldState *)textFieldState forControl:(SIMAddressEntryControl)control;
+
 @end

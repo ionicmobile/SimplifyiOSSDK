@@ -71,7 +71,7 @@
 	self.expirationDateInputState == SIMTextInputStateGood;
 }
 
-- (SIMCreditCardToken *)sendForCreditCardToken {
+- (SIMCreditCardToken *)sendForCreditCardTokenUsingAddress:(SIMAddress *)address {
 	NSError *error = nil;
 	NSString *creditCardNumber = [self.creditCardValidator.formattedCardNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
 	NSString *expirationMonth = self.creditCardValidator.expirationMonth;
@@ -81,12 +81,7 @@
 																				expirationYear:expirationYear
 																					cardNumber:creditCardNumber
 																						   cvc:cvcNumber
-																						  name:nil
-																				  addressLine1:nil
-																				  addressLine2:nil
-																						  city:nil
-																						 state:nil
-																						   zip:nil
+																					   address:address
 																						 error:&error];
 	return cardToken;
 }

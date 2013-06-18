@@ -79,4 +79,31 @@
 	return CGSizeMake(size.width, 30.0 + TextFieldHeight * textFieldCount + InnerMarginY * (textFieldCount + 1));
 }
 
+- (void)setStateOptions:(NSDictionary *)stateOptions {
+	self.stateTextField.options = stateOptions;
+}
+
+- (void)setTextFieldState:(SIMTextFieldState *)textFieldState forControl:(SIMAddressEntryControl)control {
+	
+}
+
+#pragma mark - Private methods
+
+- (UITextField *)textFieldForControl:(SIMAddressEntryControl)control {
+	return nil;
+}
+
+- (SIMAddressEntryControl)controlForTextField:(UITextField *)textField {
+	return 0;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)replacementString {
+	NSString *resultString = [textField.text stringByReplacingCharactersInRange:range withString:replacementString];
+	SIMAddressEntryControl control = [self controlForTextField:textField];
+	if (control) {
+		[self.delegate control:control setInput:resultString];
+	}
+	return NO;
+}
+
 @end

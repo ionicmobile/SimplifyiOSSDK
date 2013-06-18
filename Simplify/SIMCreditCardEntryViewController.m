@@ -2,14 +2,19 @@
 #import "SIMAddressEntryModel.h"
 #import "SIMCreditCardEntryModel.h"
 #import "SIMCreditCardEntryView.h"
+#import "SIMAddressEntryViewController.h"
 
 @interface SIMCreditCardEntryViewController() <SIMCreditCardEntryViewDelegate>
 @property (nonatomic) SIMCreditCardEntryModel *model;
 @property (nonatomic) SIMCreditCardEntryView *internalView;
-@property (nonatomic) SIMAddressEntryModel *addressModel;
+@property (nonatomic) SIMAddressEntryViewController *addressViewController;
 @end
 
 @implementation SIMCreditCardEntryViewController
+
+- (id)init {
+	return [self initWithAddressView:NO];
+}
 
 - (id)initWithAddressView:(BOOL)showAddressView {
 	if (self = [super init]) {
@@ -19,13 +24,14 @@
 		SIMCreditCardValidator *creditCardValidator = [[SIMCreditCardValidator alloc] initWithLuhnValidator:luhnValidator timeProvider:timeProvider];
 		SIMCreditCardEntryModel *model = [[SIMCreditCardEntryModel alloc] initWithCreditCardNetwork:creditCardNetwork creditCardValidator:creditCardValidator];
 		
-		SIMAddressEntryView *addressEntryView = nil;
+		UIView *extraView = nil;
 		if (showAddressView) {
-			addressEntryView = [[SIMAddressEntryView alloc] init];
-			SIMAddressEntryModel *addressEntryModel = [[SIMAddressEntryModel alloc] init];
-			addressEntryView.stateTextField.options = addressEntryModel.stateOptions;
+			self.addressViewController = [[SIMAddressEntryViewController alloc] init];
+			extraView = self.addressViewController.view;
+			
 		}
-		SIMCreditCardEntryView *view = [[SIMCreditCardEntryView alloc] initWithAddressEntryView:addressEntryView];
+		
+		SIMCreditCardEntryView *view = [[SIMCreditCardEntryView alloc] initWithExtraView:extraView];
 
 		self.model = model;
 		self.internalView = view;
@@ -54,7 +60,7 @@
 }
 
 - (void)sendCreditCardButtonTapped {
-	SIMCreditCardToken *creditCardToken = [self.model sendForCreditCardToken];
+	SIMCreditCardToken *creditCardToken = [self.model sendForCreditCardTokenUsingAddress:self.addressViewController.address];
 	[self.delegate receivedCreditCardToken:creditCardToken];
 }
 
