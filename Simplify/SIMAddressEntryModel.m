@@ -84,7 +84,11 @@
 			self.address.city = input;
 			break;
 		case SIMAddressEntryControlState:
-			self.address.state = input;
+			if ([self.stateOptions.allValues containsObject:input]) {
+				return [[SIMTextFieldState alloc] initWithText:input inputState:SIMTextInputStateGood];
+			} else {
+				return [[SIMTextFieldState alloc] initWithText:@"" inputState:SIMTextInputStateNormal];
+			}
 			break;
 		case SIMAddressEntryControlZip:
 			self.address.zip = input;

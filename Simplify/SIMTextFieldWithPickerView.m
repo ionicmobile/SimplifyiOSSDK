@@ -50,7 +50,8 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
 	NSString *selectedKey = [self pickerStringForRow:row];
-	self.text = self.options[selectedKey];
+	NSString *value = self.options[selectedKey];
+	[self.delegate textField:self shouldChangeCharactersInRange:NSMakeRange(0, self.text.length) replacementString:value];
 	[pickerView resignFirstResponder];
 }
 

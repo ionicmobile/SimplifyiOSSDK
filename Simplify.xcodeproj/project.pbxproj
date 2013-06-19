@@ -175,6 +175,7 @@
 		AA19F7F97941437514A8E86E /* SIMCreditCardEntryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19F2536322616010CF5EB9 /* SIMCreditCardEntryModel.m */; };
 		AA19F88E2A3D2D64C72A47BD /* SIMCreditCardNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19FC71F2316AF9B7318C56 /* SIMCreditCardNetwork.m */; };
 		AA19F8A0DE20E89B1B1F9542 /* SIMCardTokenTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19FD2437F397544AB75396 /* SIMCardTokenTest.m */; };
+		AA19F8D49947563A7656F240 /* SIMAddressValidationStrategy.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19FA488210A1175ADD518F /* SIMAddressValidationStrategy.h */; };
 		AA19F919CD16E5D0692F0C80 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19FF9556538FA870C970BF /* TPKeyboardAvoidingScrollView.m */; };
 		AA19F9E157AF700337AFCB5A /* SIMAddressEntryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19F06ACB980AC48707563E /* SIMAddressEntryModel.m */; };
 		AA19F9FEF1109B08DDE56661 /* SIMCreditCardEntryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19F2536322616010CF5EB9 /* SIMCreditCardEntryModel.m */; };
@@ -353,6 +354,7 @@
 		AA19F715A96A88492B1F7540 /* SIMAddressEntryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMAddressEntryView.h; sourceTree = "<group>"; };
 		AA19F96C175B77B3446C3903 /* SIMTextFieldFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMTextFieldFactory.h; sourceTree = "<group>"; };
 		AA19FA3D69C077E0D7ED6446 /* SIMCreditCardNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMCreditCardNetwork.h; sourceTree = "<group>"; };
+		AA19FA488210A1175ADD518F /* SIMAddressValidationStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMAddressValidationStrategy.h; sourceTree = "<group>"; };
 		AA19FAECF1A047A5247C9A3B /* SIMCreditCardEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMCreditCardEntryViewController.h; sourceTree = "<group>"; };
 		AA19FBC23A51F22829F56EAC /* SIMCreditCardTypeValidatorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMCreditCardTypeValidatorTest.m; sourceTree = "<group>"; };
 		AA19FBD7AC494D49C9C20A46 /* SIMCreditCardEntryModelTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMCreditCardEntryModelTest.m; sourceTree = "<group>"; };
@@ -668,6 +670,7 @@
 				747A1FDB177101810028E11E /* SIMAddressEntryViewController.h */,
 				747A1FDC177101810028E11E /* SIMAddressEntryViewController.m */,
 				747A1FDA177100250028E11E /* SIMAddressEntryControl.h */,
+				AA19FA193BB501C9E4DD215B /* Validation Strategies */,
 			);
 			name = AddressEntry;
 			sourceTree = "<group>";
@@ -704,6 +707,14 @@
 				AA19F3FDA406E9ECF360B7A3 /* TPKeyboardAvoidingScrollView.h */,
 			);
 			name = TPKeyboardAvoiding;
+			sourceTree = "<group>";
+		};
+		AA19FA193BB501C9E4DD215B /* Validation Strategies */ = {
+			isa = PBXGroup;
+			children = (
+				AA19FA488210A1175ADD518F /* SIMAddressValidationStrategy.h */,
+			);
+			name = "Validation Strategies";
 			sourceTree = "<group>";
 		};
 		AA19FAEE8DB314B7EDA6F37A /* CreditCardEntry */ = {
@@ -778,6 +789,7 @@
 				747A1FE3177102BF0028E11E /* SIMAddress.h in Headers */,
 				747A1FEB17710AEA0028E11E /* SIMMutableAddress.h in Headers */,
 				AA19F49B1E6EE7D0187679FA /* TPKeyboardAvoidingScrollView.h in Headers */,
+				AA19F8D49947563A7656F240 /* SIMAddressValidationStrategy.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
