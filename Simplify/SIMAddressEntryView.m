@@ -4,7 +4,7 @@
 #import "SimplifyPrivate.h"
 #import "SIMTextFieldFactory.h"
 
-@interface SIMAddressEntryView ()
+@interface SIMAddressEntryView () <UITextFieldDelegate>
 @property (nonatomic) UILabel* addressLabel;
 @property (nonatomic, readwrite) SIMTextField* nameTextField;
 @property (nonatomic, readwrite) SIMTextField* line1TextField;
@@ -30,7 +30,7 @@
 		SIMTextField* line1TextField = [factory createTextFieldWithPlaceholderText:@"Address Line 1" keyboardType:UIKeyboardTypeDefault];
 		SIMTextField* line2TextField = [factory createTextFieldWithPlaceholderText:@"Address Line 2" keyboardType:UIKeyboardTypeDefault];
 		SIMTextField* cityTextField = [factory createTextFieldWithPlaceholderText:@"City" keyboardType:UIKeyboardTypeDefault];
-		SIMTextFieldWithPickerView* stateTextField = [factory createTextFieldWithPickerViewAndPlaceholderText:@"State" keyboardType:UIKeyboardTypeAlphabet];
+		SIMTextFieldWithPickerView* stateTextField = [factory createTextFieldWithPickerViewAndPlaceholderText:@"State"];
 		SIMTextField* zipTextField = [factory createTextFieldWithPlaceholderText:@"Zip" keyboardType:UIKeyboardTypeNumberPad];
 
 		nameTextField.delegate = self;

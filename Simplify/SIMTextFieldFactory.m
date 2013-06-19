@@ -6,17 +6,16 @@
 
 @implementation SIMTextFieldFactory
 
-- (SIMTextField*)createTextFieldWithPlaceholderText:(NSString *)placeholderText
+- (SIMTextField *)createTextFieldWithPlaceholderText:(NSString *)placeholderText
                                        keyboardType:(UIKeyboardType)keyboardType {
-	SIMTextField*textField = [[SIMTextField alloc] init];
+	SIMTextField *textField = [[SIMTextField alloc] init];
 	[self setValuesForSIMTextField:textField usingKeyboardType:keyboardType placeholderText:placeholderText];
 	return textField;
 }
 
-- (SIMTextFieldWithPickerView*)createTextFieldWithPickerViewAndPlaceholderText:(NSString *)placeholderText
-																  keyboardType:(UIKeyboardType)keyboardType {
-	SIMTextFieldWithPickerView*textField = [[SIMTextFieldWithPickerView alloc] init];
-	[self setValuesForSIMTextField:textField usingKeyboardType:keyboardType placeholderText:placeholderText];
+- (SIMTextFieldWithPickerView *)createTextFieldWithPickerViewAndPlaceholderText:(NSString *)placeholderText {
+	SIMTextFieldWithPickerView *textField = [[SIMTextFieldWithPickerView alloc] init];
+	[self setValuesForSIMTextField:textField usingKeyboardType:UIKeyboardTypeDefault placeholderText:placeholderText];
 	return textField;
 }
 

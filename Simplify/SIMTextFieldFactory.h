@@ -6,7 +6,6 @@
 - (SIMTextField*)createTextFieldWithPlaceholderText:(NSString *)placeholderText
                                        keyboardType:(UIKeyboardType)keyboardType;
 
-- (SIMTextFieldWithPickerView*)createTextFieldWithPickerViewAndPlaceholderText:(NSString *)placeholderText
-																  keyboardType:(UIKeyboardType)keyboardType;
+- (SIMTextFieldWithPickerView *)createTextFieldWithPickerViewAndPlaceholderText:(NSString *)placeholderText;
 
 @end

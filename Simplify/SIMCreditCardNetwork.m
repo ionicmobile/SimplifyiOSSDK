@@ -38,7 +38,9 @@ NSString *kSimplifyCommerceDefaultAPIBaseLiveUrl = @"https://sandbox.simplify.co
 	if (address.zip.length) {
 		[parameters appendFormat:@"&%@=%@", [self urlEncoded:@"card[addressZip]"], [self urlEncoded:address.zip]];
 	}
-	[parameters appendFormat:@"&%@=%@", [self urlEncoded:@"card[addressCountry]"], [self urlEncoded:address.country]];
+	if (address.country.length) {
+		[parameters appendFormat:@"&%@=%@", [self urlEncoded:@"card[addressCountry]"], [self urlEncoded:address.country]];
+	}
 
 	url = [NSURL URLWithString:[[url absoluteString] stringByAppendingString:parameters]];
 	NSLog(@"url: %@", url);
