@@ -2,6 +2,12 @@
 #import "SIMAddressEntryModel.h"
 
 @interface SIMAddressEntryModelTest : SIMAbstractTestCase {
+	id nameValidator;
+	id addressLine1Validator;
+	id addressLine2Validator;
+	id cityValidator;
+	id stateValidator;
+	id zipValidator;
 	SIMAddressEntryModel *testObject;
 	NSDictionary *expectedStateEntries;
 }
@@ -11,7 +17,18 @@
 
 - (void)setUp {
 	[super setUp];
-	testObject = [[SIMAddressEntryModel alloc] init];
+	nameValidator = [OCMockObject niceMockForProtocol:@protocol(SIMGeneralValidationStrategy)];
+	addressLine1Validator = [OCMockObject niceMockForProtocol:@protocol(SIMGeneralValidationStrategy)];
+	addressLine2Validator = [OCMockObject niceMockForProtocol:@protocol(SIMGeneralValidationStrategy)];
+	cityValidator = [OCMockObject niceMockForProtocol:@protocol(SIMGeneralValidationStrategy)];
+	stateValidator = [OCMockObject niceMockForProtocol:@protocol(SIMGeneralValidationStrategy)];
+	zipValidator = [OCMockObject niceMockForProtocol:@protocol(SIMGeneralValidationStrategy)];
+	testObject = [[SIMAddressEntryModel alloc] initWithNameValidator:nameValidator
+	                                           addressLine1Validator:addressLine1Validator
+						                       addressLine2Validator:addressLine2Validator
+											           cityValidator:cityValidator
+													  stateValidator:stateValidator
+														zipValidator:zipValidator];
 	expectedStateEntries = @{
 		@"Alabama":@"AL",
 		@"Alaska":@"AK",
@@ -82,55 +99,76 @@
 	}
 }
 
-- (void)testStateForControl_ForSIMAddressEntryControlName_ReturnsBadStateForNoText {
-	SIMTextFieldState *result = [testObject stateForControl:SIMAddressEntryControlName withInput:@""];
+- (void)testStateForControl_WhenControlIsName_UsesNameValidator_AndSavesNameToAddress {
+	id expected = [OCMockObject mockForClass:SIMTextFieldState.class];
+	[[[expected stub] andReturn:@"cleaned up text"] text];
+	[[[nameValidator stub] andReturn:expected] stateForInput:@"blah!"];
 
-	GHAssertEqualStrings(result.text, @"", nil);
-	GHAssertEquals(result.inputState, SIMTextInputStateNormal, nil);
-}
+	SIMTextFieldState *result = [testObject stateForControl:SIMAddressEntryControlName withInput:@"blah!"];
 
-- (void)testStateForControl_ForSIMAddressEntryControlName_ReturnsGoodStateForAnyText {
-	SIMTextFieldState *result = [testObject stateForControl:SIMAddressEntryControlName withInput:@"a"];
-
-	GHAssertEqualStrings(result.text, @"a", nil);
-	GHAssertEquals(result.inputState, SIMTextInputStateGood, nil);
-}
-
-- (void)testCreateAddressFromInput_KeepsPreviousInput {
-	[testObject stateForControl:SIMAddressEntryControlName withInput:@"Billy Thorn"];
-	[testObject stateForControl:SIMAddressEntryControlLine1 withInput:@"Line 1"];
-	[testObject stateForControl:SIMAddressEntryControlLine2 withInput:@"Line 2"];
-	[testObject stateForControl:SIMAddressEntryControlCity withInput:@"Some City"];
-	[testObject stateForControl:SIMAddressEntryControlState withInput:@"MO"];
-	[testObject stateForControl:SIMAddressEntryControlZip withInput:@"12345"];
-
+	GHAssertEquals(result, expected, nil);
 	SIMAddress *address = [testObject createAddressFromInput];
-
-	GHAssertEqualStrings(address.name, @"Billy Thorn", nil);
-	GHAssertEqualStrings(address.addressLine1, @"Line 1", nil);
-	GHAssertEqualStrings(address.addressLine2, @"Line 2", nil);
-	GHAssertEqualStrings(address.city, @"Some City", nil);
-	GHAssertEqualStrings(address.state, @"MO", nil);
-	GHAssertEqualStrings(address.zip, @"12345", nil);
+	GHAssertEqualStrings(address.name, @"cleaned up text", nil);
 }
 
-- (void)assertStateInput:(NSString *)input hasText:(NSString *)text andInputState:(SIMTextInputState)inputState {
-	SIMTextFieldState *result = [testObject stateForControl:SIMAddressEntryControlState withInput:input];
-	GHAssertEqualStrings(result.text, text, nil);
-	GHAssertEquals(result.inputState, inputState, nil);
+- (void)testStateForControl_WhenControlIsAddressLine1_UsesAddressLine1Validator_AndSavesAddressLine1ToAddress {
+	id expected = [OCMockObject mockForClass:SIMTextFieldState.class];
+	[[[expected stub] andReturn:@"cleaned up text"] text];
+	[[[addressLine1Validator stub] andReturn:expected] stateForInput:@"blah!"];
+
+	SIMTextFieldState *result = [testObject stateForControl:SIMAddressEntryControlLine1 withInput:@"blah!"];
+
+	GHAssertEquals(result, expected, nil);
+	SIMAddress *address = [testObject createAddressFromInput];
+	GHAssertEqualStrings(address.addressLine1, @"cleaned up text", nil);
 }
 
-- (void)testStateForControl_WithSIMAddressEntryControlState_ValidStatesAreAllowed_AndEverythingElseReturnsEmptyString {
-	[self assertStateInput:@"" hasText:@"" andInputState:SIMTextInputStateNormal];
+- (void)testStateForControl_WhenControlIsAddressLine2_UsesAddressLine2Validator_AndSavesAddressLine2ToAddress {
+	id expected = [OCMockObject mockForClass:SIMTextFieldState.class];
+	[[[expected stub] andReturn:@"cleaned up text"] text];
+	[[[addressLine2Validator stub] andReturn:expected] stateForInput:@"blah!"];
 
-	for (NSString *stateAbbr in expectedStateEntries.allValues) {
-		[self assertStateInput:stateAbbr hasText:stateAbbr andInputState:SIMTextInputStateGood];
-	}
+	SIMTextFieldState *result = [testObject stateForControl:SIMAddressEntryControlLine2 withInput:@"blah!"];
 
-	[self assertStateInput:@"b" hasText:@"" andInputState:SIMTextInputStateNormal];
-	[self assertStateInput:@"A" hasText:@"" andInputState:SIMTextInputStateNormal];
-	[self assertStateInput:@"argh" hasText:@"" andInputState:SIMTextInputStateNormal];
-	[self assertStateInput:@"billy!" hasText:@"" andInputState:SIMTextInputStateNormal];
+	GHAssertEquals(result, expected, nil);
+	SIMAddress *address = [testObject createAddressFromInput];
+	GHAssertEqualStrings(address.addressLine2, @"cleaned up text", nil);
+}
+
+- (void)testStateForControl_WhenControlIsCity_UsesCityValidator_AndSavesCityToAddress {
+	id expected = [OCMockObject mockForClass:SIMTextFieldState.class];
+	[[[expected stub] andReturn:@"cleaned up text"] text];
+	[[[cityValidator stub] andReturn:expected] stateForInput:@"blah!"];
+
+	SIMTextFieldState *result = [testObject stateForControl:SIMAddressEntryControlCity withInput:@"blah!"];
+
+	GHAssertEquals(result, expected, nil);
+	SIMAddress *address = [testObject createAddressFromInput];
+	GHAssertEqualStrings(address.city, @"cleaned up text", nil);
+}
+
+- (void)testStateForControl_WhenControlIsState_UsesStateValidator_AndSavesStateToAddress {
+	id expected = [OCMockObject mockForClass:SIMTextFieldState.class];
+	[[[expected stub] andReturn:@"cleaned up text"] text];
+	[[[stateValidator stub] andReturn:expected] stateForInput:@"blah!"];
+
+	SIMTextFieldState *result = [testObject stateForControl:SIMAddressEntryControlState withInput:@"blah!"];
+
+	GHAssertEquals(result, expected, nil);
+	SIMAddress *address = [testObject createAddressFromInput];
+	GHAssertEqualStrings(address.state, @"cleaned up text", nil);
+}
+
+- (void)testStateForControl_WhenControlIsZip_UsesZipValidator_AndSavesZipToAddress {
+	id expected = [OCMockObject mockForClass:SIMTextFieldState.class];
+	[[[expected stub] andReturn:@"cleaned up text"] text];
+	[[[zipValidator stub] andReturn:expected] stateForInput:@"blah!"];
+
+	SIMTextFieldState *result = [testObject stateForControl:SIMAddressEntryControlZip withInput:@"blah!"];
+
+	GHAssertEquals(result, expected, nil);
+	SIMAddress *address = [testObject createAddressFromInput];
+	GHAssertEqualStrings(address.zip, @"cleaned up text", nil);
 }
 
 @end

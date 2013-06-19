@@ -154,13 +154,20 @@
 		74F8D8E21767CB21006FB417 /* SIMCreditCardNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19FC71F2316AF9B7318C56 /* SIMCreditCardNetwork.m */; };
 		AA19F0045DE487605FCA71B1 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19FF9556538FA870C970BF /* TPKeyboardAvoidingScrollView.m */; };
 		AA19F0154721DCEFDAA34FE9 /* SIMAddressEntryView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19FE6DD29159F71276F39E /* SIMAddressEntryView.m */; };
+		AA19F0BC7B13B931B1F2569F /* SIMSpecificValuesValidationStrategy.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19F3B3EB5D2D9A7325E4BA /* SIMSpecificValuesValidationStrategy.h */; };
+		AA19F112EE686B109A1E062F /* SIMSpecificValuesValidationStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19F4EE88FA5F61D07C5EB8 /* SIMSpecificValuesValidationStrategy.m */; };
 		AA19F145D0BAEEDBD5E868ED /* SIMCreditCardTypeValidatorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19FBC23A51F22829F56EAC /* SIMCreditCardTypeValidatorTest.m */; };
+		AA19F16BEF245BB5A83C3506 /* SIMStateValidationStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19F4D95931F84F156FF989 /* SIMStateValidationStrategy.m */; };
 		AA19F1791C3BD8726C9F4A5B /* SIMTextFieldFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19F96C175B77B3446C3903 /* SIMTextFieldFactory.h */; };
+		AA19F223B007152F180B02F1 /* SIMZipValidationStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19F9D891ED8C614BD8E437 /* SIMZipValidationStrategy.m */; };
+		AA19F26213873616E11D7869 /* SIMSpecificValuesValidationStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19F4EE88FA5F61D07C5EB8 /* SIMSpecificValuesValidationStrategy.m */; };
 		AA19F2808033E4E4589CCBD1 /* SIMCreditCardTypeValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19FD94680BF40E18938FBF /* SIMCreditCardTypeValidator.m */; };
 		AA19F299439DA26289976E68 /* SIMTextFieldFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19F656DD506ACF7F974373 /* SIMTextFieldFactory.m */; };
 		AA19F34B5137196DDC875436 /* SIMCreditCardTypeValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19FD94680BF40E18938FBF /* SIMCreditCardTypeValidator.m */; };
 		AA19F375C1D0F60195E6A651 /* SIMAddressEntryModel.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19FEF39A4733DB44BBFEB8 /* SIMAddressEntryModel.h */; };
+		AA19F3B9FC9421A4DDF4C696 /* SIMStateValidationStrategy.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19F7F840781B6D7A831726 /* SIMStateValidationStrategy.h */; };
 		AA19F415D0E73EE37A9E902B /* SIMCreditCardType.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19FEE9C596803724485548 /* SIMCreditCardType.h */; };
+		AA19F44803F877B3BE696954 /* SIMSpecificValuesValidationStrategyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19F193CB02BF3C0FDB15CA /* SIMSpecificValuesValidationStrategyTest.m */; };
 		AA19F4517F35363BE880860D /* SIMCreditCardEntryView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19F3B9CBBCD85315B55C2E /* SIMCreditCardEntryView.m */; };
 		AA19F49B1E6EE7D0187679FA /* TPKeyboardAvoidingScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19F3FDA406E9ECF360B7A3 /* TPKeyboardAvoidingScrollView.h */; };
 		AA19F4BB3414FC5DC3E38145 /* SIMCreditCardToken.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19F5E3C27389C64E973CC4 /* SIMCreditCardToken.m */; };
@@ -172,27 +179,40 @@
 		AA19F71EE68D071016BB8302 /* SIMCreditCardToken.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19F5E3C27389C64E973CC4 /* SIMCreditCardToken.m */; };
 		AA19F76C6B76753E05696437 /* SIMCreditCardEntryModel.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19F63EBC4D13AA78FFB07B /* SIMCreditCardEntryModel.h */; };
 		AA19F788006DC7FCC54C575D /* SIMAddressEntryView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19FE6DD29159F71276F39E /* SIMAddressEntryView.m */; };
+		AA19F7F4821E0419FF8A5207 /* SIMSpecificValuesValidationStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19F4EE88FA5F61D07C5EB8 /* SIMSpecificValuesValidationStrategy.m */; };
 		AA19F7F97941437514A8E86E /* SIMCreditCardEntryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19F2536322616010CF5EB9 /* SIMCreditCardEntryModel.m */; };
+		AA19F8247ACFBA0FC19E1D09 /* SIMStateValidationStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19F4D95931F84F156FF989 /* SIMStateValidationStrategy.m */; };
+		AA19F8564D3DF5AEA22F565A /* SIMZipValidationStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19F9D891ED8C614BD8E437 /* SIMZipValidationStrategy.m */; };
 		AA19F88E2A3D2D64C72A47BD /* SIMCreditCardNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19FC71F2316AF9B7318C56 /* SIMCreditCardNetwork.m */; };
 		AA19F8A0DE20E89B1B1F9542 /* SIMCardTokenTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19FD2437F397544AB75396 /* SIMCardTokenTest.m */; };
-		AA19F8D49947563A7656F240 /* SIMAddressValidationStrategy.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19FA488210A1175ADD518F /* SIMAddressValidationStrategy.h */; };
+		AA19F8D49947563A7656F240 /* SIMGeneralValidationStrategy.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19FA488210A1175ADD518F /* SIMGeneralValidationStrategy.h */; };
 		AA19F919CD16E5D0692F0C80 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19FF9556538FA870C970BF /* TPKeyboardAvoidingScrollView.m */; };
 		AA19F9E157AF700337AFCB5A /* SIMAddressEntryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19F06ACB980AC48707563E /* SIMAddressEntryModel.m */; };
 		AA19F9FEF1109B08DDE56661 /* SIMCreditCardEntryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19F2536322616010CF5EB9 /* SIMCreditCardEntryModel.m */; };
+		AA19FA1885394CA022244BC2 /* SIMTextRequiredValidationStrategyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19F096BE66FA194D897CC2 /* SIMTextRequiredValidationStrategyTest.m */; };
 		AA19FA91C1FECAEECFA91146 /* SIMCreditCardEntryView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19F3B9CBBCD85315B55C2E /* SIMCreditCardEntryView.m */; };
 		AA19FAC5F479E1A4A7893C47 /* SIMCreditCardTypeValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19F35F3BC86FD108A757EF /* SIMCreditCardTypeValidator.h */; };
 		AA19FAE66C043979BACAB978 /* SIMTextFieldFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19F656DD506ACF7F974373 /* SIMTextFieldFactory.m */; };
 		AA19FAF9BB10F2CBC2BF1807 /* SIMCreditCardEntryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19F2536322616010CF5EB9 /* SIMCreditCardEntryModel.m */; };
+		AA19FB278783BB8D86E62A7D /* SIMTextRequiredValidationStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19F6965AF37D216995A2C9 /* SIMTextRequiredValidationStrategy.m */; };
 		AA19FB86BEFE4D50126D6637 /* SIMCreditCardToken.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19F5EF15818C97187A267A /* SIMCreditCardToken.h */; };
 		AA19FBABED9287A93D2DD2EC /* SIMCreditCardEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19F1839EBCFFED1D5A0111 /* SIMCreditCardEntryViewController.m */; };
 		AA19FBB1C17683877BBB9C6A /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19FF9556538FA870C970BF /* TPKeyboardAvoidingScrollView.m */; };
+		AA19FC6603B9B753CA328F91 /* SIMTextRequiredValidationStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19F6965AF37D216995A2C9 /* SIMTextRequiredValidationStrategy.m */; };
+		AA19FC9B743CDEAB65985823 /* SIMTextRequiredValidationStrategy.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19FFB47FF3C852AD56CD41 /* SIMTextRequiredValidationStrategy.h */; };
+		AA19FCADF0A4DB0A25D6A7E9 /* SIMZipValidationStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19F9D891ED8C614BD8E437 /* SIMZipValidationStrategy.m */; };
 		AA19FCB5F06740B55134824C /* SIMCreditCardEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19F1839EBCFFED1D5A0111 /* SIMCreditCardEntryViewController.m */; };
 		AA19FCBC81533144EFC50009 /* SIMTextFieldFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19F656DD506ACF7F974373 /* SIMTextFieldFactory.m */; };
+		AA19FCC6B92C7B519AD4259E /* SIMStateValidationStrategyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19F5A41CB279794B852339 /* SIMStateValidationStrategyTest.m */; };
 		AA19FCCB77404A18BE9E412D /* SIMCreditCardEntryModelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19FBD7AC494D49C9C20A46 /* SIMCreditCardEntryModelTest.m */; };
+		AA19FD42F5503EA08F4E2ECB /* SIMZipValidationStrategyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19FA6FC9CA7599EAABA4C0 /* SIMZipValidationStrategyTest.m */; };
 		AA19FD78283E47D046D04B5B /* SIMCreditCardEntryViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19FAECF1A047A5247C9A3B /* SIMCreditCardEntryViewController.h */; };
 		AA19FDEE18D3B1967ED42191 /* SIMCreditCardTypeValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19FD94680BF40E18938FBF /* SIMCreditCardTypeValidator.m */; };
 		AA19FE5A6BF2524E1FAF2D2F /* SIMAddressEntryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19F06ACB980AC48707563E /* SIMAddressEntryModel.m */; };
+		AA19FED872C89A2EC5394594 /* SIMZipValidationStrategy.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19F5D865C6600E302AF045 /* SIMZipValidationStrategy.h */; };
 		AA19FF36C33E980DF641ADF1 /* SIMAddressEntryView.h in Headers */ = {isa = PBXBuildFile; fileRef = AA19F715A96A88492B1F7540 /* SIMAddressEntryView.h */; };
+		AA19FF5141A9E33D12946940 /* SIMTextRequiredValidationStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19F6965AF37D216995A2C9 /* SIMTextRequiredValidationStrategy.m */; };
+		AA19FF520226A0967E046F85 /* SIMStateValidationStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19F4D95931F84F156FF989 /* SIMStateValidationStrategy.m */; };
 		AA19FF652BF3E3D24DF36CC5 /* SIMCreditCardEntryView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA19F3B9CBBCD85315B55C2E /* SIMCreditCardEntryView.m */; };
 /* End PBXBuildFile section */
 
@@ -342,19 +362,30 @@
 		74EE0CF917709A35003152CC /* SIMTextFieldState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMTextFieldState.h; sourceTree = "<group>"; };
 		74EE0CFA17709A35003152CC /* SIMTextFieldState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMTextFieldState.m; sourceTree = "<group>"; };
 		AA19F06ACB980AC48707563E /* SIMAddressEntryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMAddressEntryModel.m; sourceTree = "<group>"; };
+		AA19F096BE66FA194D897CC2 /* SIMTextRequiredValidationStrategyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMTextRequiredValidationStrategyTest.m; sourceTree = "<group>"; };
 		AA19F1839EBCFFED1D5A0111 /* SIMCreditCardEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMCreditCardEntryViewController.m; sourceTree = "<group>"; };
+		AA19F193CB02BF3C0FDB15CA /* SIMSpecificValuesValidationStrategyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMSpecificValuesValidationStrategyTest.m; sourceTree = "<group>"; };
 		AA19F2536322616010CF5EB9 /* SIMCreditCardEntryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMCreditCardEntryModel.m; sourceTree = "<group>"; };
 		AA19F35F3BC86FD108A757EF /* SIMCreditCardTypeValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMCreditCardTypeValidator.h; sourceTree = "<group>"; };
+		AA19F3B3EB5D2D9A7325E4BA /* SIMSpecificValuesValidationStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMSpecificValuesValidationStrategy.h; sourceTree = "<group>"; };
 		AA19F3B9CBBCD85315B55C2E /* SIMCreditCardEntryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMCreditCardEntryView.m; sourceTree = "<group>"; };
 		AA19F3FDA406E9ECF360B7A3 /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
+		AA19F4D95931F84F156FF989 /* SIMStateValidationStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMStateValidationStrategy.m; sourceTree = "<group>"; };
+		AA19F4EE88FA5F61D07C5EB8 /* SIMSpecificValuesValidationStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMSpecificValuesValidationStrategy.m; sourceTree = "<group>"; };
+		AA19F5A41CB279794B852339 /* SIMStateValidationStrategyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMStateValidationStrategyTest.m; sourceTree = "<group>"; };
+		AA19F5D865C6600E302AF045 /* SIMZipValidationStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMZipValidationStrategy.h; sourceTree = "<group>"; };
 		AA19F5E3C27389C64E973CC4 /* SIMCreditCardToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMCreditCardToken.m; sourceTree = "<group>"; };
 		AA19F5EF15818C97187A267A /* SIMCreditCardToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMCreditCardToken.h; sourceTree = "<group>"; };
 		AA19F63EBC4D13AA78FFB07B /* SIMCreditCardEntryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMCreditCardEntryModel.h; sourceTree = "<group>"; };
 		AA19F656DD506ACF7F974373 /* SIMTextFieldFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMTextFieldFactory.m; sourceTree = "<group>"; };
+		AA19F6965AF37D216995A2C9 /* SIMTextRequiredValidationStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMTextRequiredValidationStrategy.m; sourceTree = "<group>"; };
 		AA19F715A96A88492B1F7540 /* SIMAddressEntryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMAddressEntryView.h; sourceTree = "<group>"; };
+		AA19F7F840781B6D7A831726 /* SIMStateValidationStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMStateValidationStrategy.h; sourceTree = "<group>"; };
 		AA19F96C175B77B3446C3903 /* SIMTextFieldFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMTextFieldFactory.h; sourceTree = "<group>"; };
+		AA19F9D891ED8C614BD8E437 /* SIMZipValidationStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMZipValidationStrategy.m; sourceTree = "<group>"; };
 		AA19FA3D69C077E0D7ED6446 /* SIMCreditCardNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMCreditCardNetwork.h; sourceTree = "<group>"; };
-		AA19FA488210A1175ADD518F /* SIMAddressValidationStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMAddressValidationStrategy.h; sourceTree = "<group>"; };
+		AA19FA488210A1175ADD518F /* SIMGeneralValidationStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMGeneralValidationStrategy.h; sourceTree = "<group>"; };
+		AA19FA6FC9CA7599EAABA4C0 /* SIMZipValidationStrategyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMZipValidationStrategyTest.m; sourceTree = "<group>"; };
 		AA19FAECF1A047A5247C9A3B /* SIMCreditCardEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMCreditCardEntryViewController.h; sourceTree = "<group>"; };
 		AA19FBC23A51F22829F56EAC /* SIMCreditCardTypeValidatorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMCreditCardTypeValidatorTest.m; sourceTree = "<group>"; };
 		AA19FBD7AC494D49C9C20A46 /* SIMCreditCardEntryModelTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMCreditCardEntryModelTest.m; sourceTree = "<group>"; };
@@ -366,6 +397,7 @@
 		AA19FEF39A4733DB44BBFEB8 /* SIMAddressEntryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMAddressEntryModel.h; sourceTree = "<group>"; };
 		AA19FF515AE939E976E115CA /* SIMCreditCardEntryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMCreditCardEntryView.h; sourceTree = "<group>"; };
 		AA19FF9556538FA870C970BF /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
+		AA19FFB47FF3C852AD56CD41 /* SIMTextRequiredValidationStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMTextRequiredValidationStrategy.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -670,7 +702,7 @@
 				747A1FDB177101810028E11E /* SIMAddressEntryViewController.h */,
 				747A1FDC177101810028E11E /* SIMAddressEntryViewController.m */,
 				747A1FDA177100250028E11E /* SIMAddressEntryControl.h */,
-				AA19FA193BB501C9E4DD215B /* Validation Strategies */,
+				AA19FA193BB501C9E4DD215B /* Validation */,
 			);
 			name = AddressEntry;
 			sourceTree = "<group>";
@@ -679,6 +711,17 @@
 			isa = PBXGroup;
 			children = (
 				74EE0CF1176F57E0003152CC /* SIMAddressEntryModelTest.m */,
+			);
+			name = Test;
+			sourceTree = "<group>";
+		};
+		AA19F00FD63A63DE42C6BBC8 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				AA19F096BE66FA194D897CC2 /* SIMTextRequiredValidationStrategyTest.m */,
+				AA19F5A41CB279794B852339 /* SIMStateValidationStrategyTest.m */,
+				AA19F193CB02BF3C0FDB15CA /* SIMSpecificValuesValidationStrategyTest.m */,
+				AA19FA6FC9CA7599EAABA4C0 /* SIMZipValidationStrategyTest.m */,
 			);
 			name = Test;
 			sourceTree = "<group>";
@@ -709,12 +752,21 @@
 			name = TPKeyboardAvoiding;
 			sourceTree = "<group>";
 		};
-		AA19FA193BB501C9E4DD215B /* Validation Strategies */ = {
+		AA19FA193BB501C9E4DD215B /* Validation */ = {
 			isa = PBXGroup;
 			children = (
-				AA19FA488210A1175ADD518F /* SIMAddressValidationStrategy.h */,
+				AA19FA488210A1175ADD518F /* SIMGeneralValidationStrategy.h */,
+				AA19F6965AF37D216995A2C9 /* SIMTextRequiredValidationStrategy.m */,
+				AA19FFB47FF3C852AD56CD41 /* SIMTextRequiredValidationStrategy.h */,
+				AA19F4EE88FA5F61D07C5EB8 /* SIMSpecificValuesValidationStrategy.m */,
+				AA19F3B3EB5D2D9A7325E4BA /* SIMSpecificValuesValidationStrategy.h */,
+				AA19F00FD63A63DE42C6BBC8 /* Test */,
+				AA19F4D95931F84F156FF989 /* SIMStateValidationStrategy.m */,
+				AA19F7F840781B6D7A831726 /* SIMStateValidationStrategy.h */,
+				AA19F9D891ED8C614BD8E437 /* SIMZipValidationStrategy.m */,
+				AA19F5D865C6600E302AF045 /* SIMZipValidationStrategy.h */,
 			);
-			name = "Validation Strategies";
+			name = Validation;
 			sourceTree = "<group>";
 		};
 		AA19FAEE8DB314B7EDA6F37A /* CreditCardEntry */ = {
@@ -789,7 +841,11 @@
 				747A1FE3177102BF0028E11E /* SIMAddress.h in Headers */,
 				747A1FEB17710AEA0028E11E /* SIMMutableAddress.h in Headers */,
 				AA19F49B1E6EE7D0187679FA /* TPKeyboardAvoidingScrollView.h in Headers */,
-				AA19F8D49947563A7656F240 /* SIMAddressValidationStrategy.h in Headers */,
+				AA19F8D49947563A7656F240 /* SIMGeneralValidationStrategy.h in Headers */,
+				AA19FC9B743CDEAB65985823 /* SIMTextRequiredValidationStrategy.h in Headers */,
+				AA19F0BC7B13B931B1F2569F /* SIMSpecificValuesValidationStrategy.h in Headers */,
+				AA19F3B9FC9421A4DDF4C696 /* SIMStateValidationStrategy.h in Headers */,
+				AA19FED872C89A2EC5394594 /* SIMZipValidationStrategy.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1022,6 +1078,10 @@
 				747A1FE5177102BF0028E11E /* SIMAddress.m in Sources */,
 				747A1FED17710AEA0028E11E /* SIMMutableAddress.m in Sources */,
 				AA19F0045DE487605FCA71B1 /* TPKeyboardAvoidingScrollView.m in Sources */,
+				AA19FF5141A9E33D12946940 /* SIMTextRequiredValidationStrategy.m in Sources */,
+				AA19F7F4821E0419FF8A5207 /* SIMSpecificValuesValidationStrategy.m in Sources */,
+				AA19F8247ACFBA0FC19E1D09 /* SIMStateValidationStrategy.m in Sources */,
+				AA19FCADF0A4DB0A25D6A7E9 /* SIMZipValidationStrategy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1068,6 +1128,14 @@
 				747A1FE8177103E90028E11E /* SIMAddressTest.m in Sources */,
 				747A1FEE17710AEA0028E11E /* SIMMutableAddress.m in Sources */,
 				AA19FBB1C17683877BBB9C6A /* TPKeyboardAvoidingScrollView.m in Sources */,
+				AA19FB278783BB8D86E62A7D /* SIMTextRequiredValidationStrategy.m in Sources */,
+				AA19F112EE686B109A1E062F /* SIMSpecificValuesValidationStrategy.m in Sources */,
+				AA19FF520226A0967E046F85 /* SIMStateValidationStrategy.m in Sources */,
+				AA19FA1885394CA022244BC2 /* SIMTextRequiredValidationStrategyTest.m in Sources */,
+				AA19FCC6B92C7B519AD4259E /* SIMStateValidationStrategyTest.m in Sources */,
+				AA19F44803F877B3BE696954 /* SIMSpecificValuesValidationStrategyTest.m in Sources */,
+				AA19F8564D3DF5AEA22F565A /* SIMZipValidationStrategy.m in Sources */,
+				AA19FD42F5503EA08F4E2ECB /* SIMZipValidationStrategyTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1103,6 +1171,10 @@
 				747A1FE4177102BF0028E11E /* SIMAddress.m in Sources */,
 				747A1FEC17710AEA0028E11E /* SIMMutableAddress.m in Sources */,
 				AA19F919CD16E5D0692F0C80 /* TPKeyboardAvoidingScrollView.m in Sources */,
+				AA19FC6603B9B753CA328F91 /* SIMTextRequiredValidationStrategy.m in Sources */,
+				AA19F26213873616E11D7869 /* SIMSpecificValuesValidationStrategy.m in Sources */,
+				AA19F16BEF245BB5A83C3506 /* SIMStateValidationStrategy.m in Sources */,
+				AA19F223B007152F180B02F1 /* SIMZipValidationStrategy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
