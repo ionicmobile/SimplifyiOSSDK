@@ -3,6 +3,7 @@
 #import "SIMCreditCardEntryModel.h"
 #import "SIMCreditCardEntryView.h"
 #import "SIMAddressEntryViewController.h"
+#import "TPKeyboardAvoidingScrollView.h"
 
 @interface SIMCreditCardEntryViewController() <SIMCreditCardEntryViewDelegate>
 @property (nonatomic) SIMCreditCardEntryModel *model;
@@ -23,14 +24,13 @@
 		SIMCurrentTimeProvider *timeProvider = [[SIMCurrentTimeProvider alloc] init];
 		SIMCreditCardValidator *creditCardValidator = [[SIMCreditCardValidator alloc] initWithLuhnValidator:luhnValidator timeProvider:timeProvider];
 		SIMCreditCardEntryModel *model = [[SIMCreditCardEntryModel alloc] initWithCreditCardNetwork:creditCardNetwork creditCardValidator:creditCardValidator];
-		
+
 		UIView *extraView = nil;
 		if (showAddressView) {
 			self.addressViewController = [[SIMAddressEntryViewController alloc] init];
 			extraView = self.addressViewController.view;
-			
 		}
-		
+
 		SIMCreditCardEntryView *view = [[SIMCreditCardEntryView alloc] initWithExtraView:extraView];
 
 		self.model = model;
@@ -41,6 +41,7 @@
 
 - (void)loadView {
 	[super loadView];
+	self.view = [[TPKeyboardAvoidingScrollView alloc] initWithFrame:self.view.bounds];
 	self.internalView.frame = self.view.bounds;
 	[self.view addSubview:self.internalView];
 	self.internalView.delegate = self;

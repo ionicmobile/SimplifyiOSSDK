@@ -6,7 +6,6 @@
 @protocol SIMAddressEntryViewDelegate
 
 - (void)control:(SIMAddressEntryControl)control setInput:(NSString *)input;
-- (void)sendCreditCardButtonTapped;
 
 @end
 

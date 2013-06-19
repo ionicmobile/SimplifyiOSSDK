@@ -1,5 +1,3 @@
-#import <QuartzCore/QuartzCore.h>
-#import <CoreGraphics/CoreGraphics.h>
 #import "SIMAddressEntryView.h"
 #import "UIView+Additions.h"
 #import "UIColor+Additions.h"
@@ -32,8 +30,15 @@
 		SIMTextField* line1TextField = [factory createTextFieldWithPlaceholderText:@"Address Line 1" keyboardType:UIKeyboardTypeDefault];
 		SIMTextField* line2TextField = [factory createTextFieldWithPlaceholderText:@"Address Line 2" keyboardType:UIKeyboardTypeDefault];
 		SIMTextField* cityTextField = [factory createTextFieldWithPlaceholderText:@"City" keyboardType:UIKeyboardTypeDefault];
-		SIMTextFieldWithPickerView* stateTextField = [factory createTextFieldWithPickerViewAndPlaceholderText:@"ST" keyboardType:UIKeyboardTypeAlphabet];
+		SIMTextFieldWithPickerView* stateTextField = [factory createTextFieldWithPickerViewAndPlaceholderText:@"State" keyboardType:UIKeyboardTypeAlphabet];
 		SIMTextField* zipTextField = [factory createTextFieldWithPlaceholderText:@"Zip" keyboardType:UIKeyboardTypeNumberPad];
+
+		nameTextField.delegate = self;
+		line1TextField.delegate = self;
+		line2TextField.delegate = self;
+		cityTextField.delegate = self;
+		stateTextField.delegate = self;
+		zipTextField.delegate = self;
 
 		[self addSubview:addressLabel];
 		[self addSubview:nameTextField];
@@ -68,15 +73,16 @@
 	self.nameTextField.frame = CGRectMake(outerMarginX, InnerMarginY + CGRectGetMaxY(self.addressLabel.frame),  fullWidth, TextFieldHeight);
 	self.line1TextField.frame = CGRectMake(outerMarginX, InnerMarginY + CGRectGetMaxY(self.nameTextField.frame),  fullWidth, TextFieldHeight);
 	self.line2TextField.frame = CGRectMake(outerMarginX, InnerMarginY + CGRectGetMaxY(self.line1TextField.frame),  fullWidth, TextFieldHeight);
-	CGFloat cityStateZipYOffset = InnerMarginY + CGRectGetMaxY(self.line2TextField.frame);
-	self.cityTextField.frame = CGRectMake(outerMarginX, cityStateZipYOffset, floorf(fullWidth * 0.55), TextFieldHeight);
-	self.stateTextField.frame = CGRectMake(CGRectGetMaxX(self.cityTextField.frame), cityStateZipYOffset, floorf(fullWidth * 0.2), TextFieldHeight);
-	self.zipTextField.frame = CGRectMake(CGRectGetMaxX(self.stateTextField.frame), cityStateZipYOffset, floorf(fullWidth * 0.25), TextFieldHeight);
+	self.cityTextField.frame = CGRectMake(outerMarginX, InnerMarginY + CGRectGetMaxY(self.line2TextField.frame), fullWidth, TextFieldHeight);
+	CGFloat stateZipYOffset = InnerMarginY + CGRectGetMaxY(self.cityTextField.frame);
+	CGFloat stateZipWidth = floorf(fullWidth * 0.45);
+	self.stateTextField.frame = CGRectMake(outerMarginX, stateZipYOffset, stateZipWidth, TextFieldHeight);
+	self.zipTextField.frame = CGRectMake(fullWidth + outerMarginX - stateZipWidth, stateZipYOffset, stateZipWidth, TextFieldHeight);
 }
 
 - (CGSize)sizeThatFits:(CGSize)size {
-	CGFloat textFieldCount = 4.0;
-	return CGSizeMake(size.width, 30.0 + TextFieldHeight * textFieldCount + InnerMarginY * (textFieldCount + 1));
+	CGFloat rows = 5.0;
+	return CGSizeMake(size.width, 30.0 + (TextFieldHeight * rows) + (InnerMarginY * (rows + 1)));
 }
 
 - (void)setStateOptions:(NSDictionary *)stateOptions {
@@ -84,17 +90,69 @@
 }
 
 - (void)setTextFieldState:(SIMTextFieldState *)textFieldState forControl:(SIMAddressEntryControl)control {
-	
+	UITextField *textField = [self textFieldForControl:control];
+	textField.text = textFieldState.text;
+	[self setTextField:textField inputState:textFieldState.inputState];
 }
 
 #pragma mark - Private methods
 
+- (void)setTextField:(UITextField *)textField inputState:(SIMTextInputState)inputState {
+	switch (inputState) {
+	case SIMTextInputStateBad:
+		textField.backgroundColor = [UIColor colorWithHexString:@"ffcccc"];
+		break;
+	case SIMTextInputStateGood:
+		textField.backgroundColor = [UIColor colorWithHexString:@"ccffcc"];
+		break;
+	case SIMTextInputStateNormal:
+	default:
+		textField.backgroundColor = [UIColor clearColor];
+		break;
+	}
+}
+
 - (UITextField *)textFieldForControl:(SIMAddressEntryControl)control {
-	return nil;
+	UITextField *result = nil;
+	switch (control) {
+	case SIMAddressEntryControlName:
+		result = self.nameTextField;
+		break;
+	case SIMAddressEntryControlLine1:
+		result = self.line1TextField;
+		break;
+	case SIMAddressEntryControlLine2:
+		result = self.line2TextField;
+		break;
+	case SIMAddressEntryControlCity:
+		result = self.cityTextField;
+		break;
+	case SIMAddressEntryControlState:
+		result = self.stateTextField;
+		break;
+	case SIMAddressEntryControlZip:
+		result = self.zipTextField;
+		break;
+	}
+	return result;
 }
 
 - (SIMAddressEntryControl)controlForTextField:(UITextField *)textField {
-	return 0;
+	SIMAddressEntryControl control = 0;
+	if (textField == self.nameTextField) {
+		control = SIMAddressEntryControlName;
+	} else if (textField == self.line1TextField) {
+		control = SIMAddressEntryControlLine1;
+	} else if (textField == self.line2TextField) {
+		control = SIMAddressEntryControlLine2;
+	} else if (textField == self.cityTextField) {
+		control = SIMAddressEntryControlCity;
+	} else if (textField == self.stateTextField) {
+		control = SIMAddressEntryControlState;
+	} else if (textField == self.zipTextField) {
+		control = SIMAddressEntryControlZip;
+	}
+	return control;
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)replacementString {

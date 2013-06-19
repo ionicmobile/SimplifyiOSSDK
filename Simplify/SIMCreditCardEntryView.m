@@ -40,11 +40,11 @@
 		[creditCardNumberTextField becomeFirstResponder];
 		creditCardNumberTextField.delegate = self;
 
-		SIMTextField* CVCNumberTextField = [factory createTextFieldWithPlaceholderText:@"CVC Code" keyboardType:UIKeyboardTypeNumberPad];
-		CVCNumberTextField.delegate = self;
-
 		SIMTextField* expirationDateTextField = [factory createTextFieldWithPlaceholderText:@"MM/YY" keyboardType:UIKeyboardTypeNumberPad];
 		expirationDateTextField.delegate = self;
+
+		SIMTextField* CVCNumberTextField = [factory createTextFieldWithPlaceholderText:@"CVC Code" keyboardType:UIKeyboardTypeNumberPad];
+		CVCNumberTextField.delegate = self;
 
 		SIMLayeredButton* sendCreditCardButton = [[SIMLayeredButton alloc] init];
 		[sendCreditCardButton setTitle:@"Send Card" forState:UIControlStateNormal];
@@ -83,11 +83,12 @@
 
 	[self.titleLabel setFrameAtOriginThatFitsUnbounded:CGPointMake(outerMarginX - 4.0f, 20.0f)];
 
-	self.creditCardNumberTextField.frame = CGRectMake(outerMarginX, innerMarginY + CGRectGetMaxY(self.titleLabel.frame),  self.bounds.size.width - 2 * outerMarginX, textFieldHeight);
+	CGFloat fullWidth = CGRectGetWidth(self.bounds) - 2 * outerMarginX;
 
-	self.CVCNumberTextField.frame = CGRectMake(outerMarginX, CGRectGetMaxY(self.creditCardNumberTextField.frame) + innerMarginY, (self.bounds.size.width - innerMarginX - 2 * outerMarginX)/2,textFieldHeight);
-
-	self.expirationDateTextField.frame = CGRectMake(CGRectGetMaxX(self.CVCNumberTextField.frame) + innerMarginX, CGRectGetMaxY(self.creditCardNumberTextField.frame) + innerMarginY, (self.bounds.size.width - innerMarginX - 2 * outerMarginX)/2,textFieldHeight);
+	self.creditCardNumberTextField.frame = CGRectMake(outerMarginX, innerMarginY + CGRectGetMaxY(self.titleLabel.frame),  fullWidth, textFieldHeight);
+	CGFloat expirationAndCVCWidth = floorf(fullWidth * 0.45);
+	self.expirationDateTextField.frame = CGRectMake(outerMarginX, CGRectGetMaxY(self.creditCardNumberTextField.frame) + innerMarginY, expirationAndCVCWidth, textFieldHeight);
+	self.CVCNumberTextField.frame = CGRectMake(fullWidth + outerMarginX - expirationAndCVCWidth, CGRectGetMaxY(self.creditCardNumberTextField.frame) + innerMarginY, expirationAndCVCWidth, textFieldHeight);
 
 	CGFloat nextY = CGRectGetMaxY(self.expirationDateTextField.frame) + innerMarginY;
 	if (self.extraView) {
@@ -179,7 +180,7 @@
 	} else if (textField == self.expirationDateTextField) {
 		control = SIMCreditCardEntryControlExpirationDate;
 	}
-	
+
 	if (control) {
 		[self.delegate control:control setInput:resultString];
 	}
