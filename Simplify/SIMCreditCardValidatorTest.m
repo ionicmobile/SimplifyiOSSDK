@@ -742,4 +742,12 @@
     [mockTimeProvider verify];
 }
 
+-(void)testWhenInvalidMonthIsEnteredThenTheDateIsExpired {
+    [testObject setExpirationAsString:@"13/11"];
+    GHAssertTrue(testObject.isExpired, nil);
+    
+    [testObject setExpirationAsString:@"00/11"];
+    GHAssertTrue(testObject.isExpired, nil);
+}
+
 @end

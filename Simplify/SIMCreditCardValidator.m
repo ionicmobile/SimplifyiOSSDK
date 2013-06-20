@@ -187,6 +187,11 @@
     NSNumber* expirationMonth = [numberFormatter numberFromString:self.expirationMonth];
     NSNumber* expirationYear = [numberFormatter numberFromString:self.expirationYear];
     NSDateComponents *expirationComponents = [[NSDateComponents alloc] init];
+    
+    if (expirationMonth.unsignedIntegerValue == 0 || expirationMonth.unsignedIntegerValue > 12 ) {
+        return YES;
+    }
+    
     [expirationComponents setMonth:expirationMonth.unsignedIntValue];
     [expirationComponents setDay:1];
     [expirationComponents setYear:2000 + expirationYear.unsignedIntValue];
