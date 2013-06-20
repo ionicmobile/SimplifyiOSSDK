@@ -76,8 +76,6 @@
 		4D67095117662A4400729623 /* NSString+Simplify.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D67094F17662A4400729623 /* NSString+Simplify.m */; };
 		4D67095217662A4400729623 /* NSString+Simplify.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D67094F17662A4400729623 /* NSString+Simplify.m */; };
 		4D67095317662A4400729623 /* NSString+Simplify.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D67094F17662A4400729623 /* NSString+Simplify.m */; };
-		4D67095417662A5A00729623 /* Simplify.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDB653D17623DD800871923 /* Simplify.m */; };
-		4D67095517662A5B00729623 /* Simplify.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDB653D17623DD800871923 /* Simplify.m */; };
 		4D67095617662A5D00729623 /* SimplifyPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D98BC9E17625D88004FA922 /* SimplifyPrivate.m */; };
 		4D67095717662A5E00729623 /* SimplifyPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D98BC9E17625D88004FA922 /* SimplifyPrivate.m */; };
 		4D6709771766634000729623 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D67096D1766634000729623 /* OpenSans-Bold.ttf */; };
@@ -114,7 +112,6 @@
 		4D98BCFA1762654C004FA922 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D98BCF91762654C004FA922 /* Default-568h@2x.png */; };
 		4DDB653717623DD800871923 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DDB653617623DD800871923 /* Foundation.framework */; };
 		4DDB653C17623DD800871923 /* Simplify.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4DDB653B17623DD800871923 /* Simplify.h */; };
-		4DDB653E17623DD800871923 /* Simplify.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDB653D17623DD800871923 /* Simplify.m */; };
 		4DDB65451762440800871923 /* Simplify.h in Headers */ = {isa = PBXBuildFile; fileRef = 4DDB653B17623DD800871923 /* Simplify.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4DDFADDB1767D90F0030CCD5 /* SIMLuhnValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D82A176766D90046E638 /* SIMLuhnValidator.m */; };
 		4DDFADDD1767DC000030CCD5 /* SIMLuhnValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D82A176766D90046E638 /* SIMLuhnValidator.m */; };
@@ -338,7 +335,6 @@
 		4DDB653617623DD800871923 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4DDB653A17623DD800871923 /* Simplify-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Simplify-Prefix.pch"; sourceTree = "<group>"; };
 		4DDB653B17623DD800871923 /* Simplify.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Simplify.h; sourceTree = "<group>"; };
-		4DDB653D17623DD800871923 /* Simplify.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Simplify.m; sourceTree = "<group>"; };
 		4DE8866817692DF200E60C81 /* SIMTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMTextField.h; sourceTree = "<group>"; };
 		4DE8866917692DF200E60C81 /* SIMTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMTextField.m; sourceTree = "<group>"; };
 		747A1FD01770DEA80028E11E /* SIMExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMExampleViewController.h; sourceTree = "<group>"; };
@@ -483,7 +479,6 @@
 			children = (
 				4D67094D17662A1600729623 /* Categories */,
 				4DDB653B17623DD800871923 /* Simplify.h */,
-				4DDB653D17623DD800871923 /* Simplify.m */,
 				4D98BC9D17625D88004FA922 /* SimplifyPrivate.h */,
 				4D98BC9E17625D88004FA922 /* SimplifyPrivate.m */,
 				4D49D83517676D9F0046E638 /* SIMCurrentTimeProvider.h */,
@@ -1045,7 +1040,6 @@
 				4D98BCB317626380004FA922 /* main.m in Sources */,
 				4D98BCB717626380004FA922 /* SIMAppDelegate.m in Sources */,
 				4D67095217662A4400729623 /* NSString+Simplify.m in Sources */,
-				4D67095417662A5A00729623 /* Simplify.m in Sources */,
 				4D67095617662A5D00729623 /* SimplifyPrivate.m in Sources */,
 				4D49D83917676D9F0046E638 /* SIMCurrentTimeProvider.m in Sources */,
 				4D49D8581767A63D0046E638 /* UIView+Additions.m in Sources */,
@@ -1091,7 +1085,6 @@
 				4D67092D17626BAE00729623 /* SIMAbstractTestCase.m in Sources */,
 				4D67094C17626D8300729623 /* SIMCreditCardValidatorTest.m in Sources */,
 				4D67095317662A4400729623 /* NSString+Simplify.m in Sources */,
-				4D67095517662A5B00729623 /* Simplify.m in Sources */,
 				4D67095717662A5E00729623 /* SimplifyPrivate.m in Sources */,
 				4D49D8341767671C0046E638 /* SIMLuhnValidatorTest.m in Sources */,
 				4D49D83A17676D9F0046E638 /* SIMCurrentTimeProvider.m in Sources */,
@@ -1139,7 +1132,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4DDB653E17623DD800871923 /* Simplify.m in Sources */,
 				4D98BCA017625D88004FA922 /* SimplifyPrivate.m in Sources */,
 				4D6709211762687800729623 /* SIMCreditCardValidator.m in Sources */,
 				4D67095117662A4400729623 /* NSString+Simplify.m in Sources */,
