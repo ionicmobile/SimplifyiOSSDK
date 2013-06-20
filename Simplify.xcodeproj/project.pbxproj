@@ -20,6 +20,17 @@
 			name = SimplifyFramework;
 			productName = SimplifyFramework;
 		};
+		74A832A717735B990000FB2A /* Documentation */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 74A832A817735B990000FB2A /* Build configuration list for PBXAggregateTarget "Documentation" */;
+			buildPhases = (
+				74A832AB177375300000FB2A /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = Documentation;
+			productName = Documentation;
+		};
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
@@ -350,6 +361,7 @@
 		747A1FE7177103410028E11E /* SIMAddressTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMAddressTest.m; sourceTree = "<group>"; };
 		747A1FE917710AEA0028E11E /* SIMMutableAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMMutableAddress.h; sourceTree = "<group>"; };
 		747A1FEA17710AEA0028E11E /* SIMMutableAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMMutableAddress.m; sourceTree = "<group>"; };
+		74A832AC177375BB0000FB2A /* AppledocSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppledocSettings.plist; sourceTree = "<group>"; };
 		74EE0CF1176F57E0003152CC /* SIMAddressEntryModelTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMAddressEntryModelTest.m; sourceTree = "<group>"; };
 		74EE0CF3176F5F2F003152CC /* SIMTextFieldWithPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMTextFieldWithPickerView.h; sourceTree = "<group>"; };
 		74EE0CF4176F5F2F003152CC /* SIMTextFieldWithPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMTextFieldWithPickerView.m; sourceTree = "<group>"; };
@@ -679,6 +691,7 @@
 		4DDB653917623DD800871923 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				74A832AC177375BB0000FB2A /* AppledocSettings.plist */,
 				4DDB653A17623DD800871923 /* Simplify-Prefix.pch */,
 			);
 			name = "Supporting Files";
@@ -940,6 +953,7 @@
 				4D98BC8D176258FE004FA922 /* SimplifyBundle */,
 				4D98BCA517626380004FA922 /* SimplifyExample */,
 				4D98BCE41762654C004FA922 /* SimplifyTests */,
+				74A832A717735B990000FB2A /* Documentation */,
 			);
 		};
 /* End PBXProject section */
@@ -1022,6 +1036,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nmkdir -p \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers\"\n/bin/ln -sfh A \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/Current\"\n/bin/ln -sfh Versions/Current/Headers \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Headers\"\n/bin/ln -sfh \"Versions/Current/${PRODUCT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/${PRODUCT_NAME}\"\n/bin/cp -a \"${TARGET_BUILD_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers\"\n";
+		};
+		74A832AB177375300000FB2A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Build an Xcode documentation\n$SRCROOT/Vendor/appledoc $SRCROOT/$PROJECT_NAME/AppledocSettings.plist $SOURCE_ROOT";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1423,6 +1450,20 @@
 			};
 			name = Release;
 		};
+		74A832A917735B990000FB2A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		74A832AA17735B990000FB2A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1479,6 +1520,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		74A832A817735B990000FB2A /* Build configuration list for PBXAggregateTarget "Documentation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				74A832A917735B990000FB2A /* Debug */,
+				74A832AA17735B990000FB2A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
