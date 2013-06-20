@@ -225,6 +225,7 @@
 }
 
 - (void)testSendCreditCard_UsesNetwork {
+    NSError* error = nil;
 	id address = [OCMockObject niceMockForClass:SIMAddress.class];
 	id cardToken = [OCMockObject niceMockForClass:SIMCreditCardToken.class];
 	[[[creditCardValidator stub] andReturn:@"11"] expirationMonth];
@@ -238,7 +239,7 @@
 																				 address:address
 																				   error:[OCMArg setTo:nil]];
 	
-	[testObject sendForCreditCardTokenUsingAddress:address];
+	[testObject sendForCreditCardTokenUsingAddress:address error:&error];
 	
 	[creditCardNetwork verify];
 }
