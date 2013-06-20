@@ -47,7 +47,10 @@ performs some (but not necessarily a full-proof) validation of the items entered
 
 ### SIMCreditCardToken
 The `SIMCreditCardToken` is issued to the user by `SIMCreditCardEntryViewController` to the assigned
-`SIMCreditCardEntryViewControllerDelegate` when credit card information has been successfully 
-processed and a token is generated, otherwise an NSError is returned.  To access the token, refer to the
-`token` member of the returned `SIMCreditCardToken` object.
+`SIMCreditCardEntryViewControllerDelegate` via `receivedCreditCardToken:error` when credit card information 
+has been successfully processed and a token is generated, otherwise an `NSError` is returned.  When a 
+user cancels entry, the delegate's `tokenGenerationCancelled` is invoked.
+
+To access the actual token value, for use in the server side API, refer to the `token` member of the
+returned `SIMCreditCardToken` object.
 
