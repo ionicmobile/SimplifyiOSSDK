@@ -62,4 +62,8 @@
 	[self.delegate receivedCreditCardToken:creditCardToken error:error];
 }
 
+- (void)cancelButtonTapped {
+	[self.delegate cancelled];
+}
+
 @end

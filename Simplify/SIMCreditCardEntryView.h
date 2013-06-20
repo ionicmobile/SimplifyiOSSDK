@@ -8,6 +8,7 @@
 
 - (void)control:(SIMCreditCardEntryControl)control setInput:(NSString *)input;
 - (void)sendCreditCardButtonTapped;
+- (void)cancelButtonTapped;
 
 @end
 
