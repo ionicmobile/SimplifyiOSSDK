@@ -3,6 +3,8 @@
 
 @interface SIMCreditCardNetwork : NSObject
 
+- (id)initWithPublicApiToken:(NSString *)publicApiToken;
+
 - (SIMCreditCardToken *)createCardTokenWithExpirationMonth:(NSString *)expirationMonth
 											expirationYear:(NSString *)expirationYear
 												cardNumber:(NSString *)cardNumber

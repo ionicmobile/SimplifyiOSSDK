@@ -13,13 +13,9 @@
 
 @implementation SIMCreditCardEntryViewController
 
-- (id)init {
-	return [self initWithAddressView:NO];
-}
-
-- (id)initWithAddressView:(BOOL)showAddressView {
+- (id)initWithPublicApiToken:(NSString *)publicApiToken addressView:(BOOL)showAddressView {
 	if (self = [super init]) {
-		SIMCreditCardNetwork *creditCardNetwork = [[SIMCreditCardNetwork alloc] init];
+		SIMCreditCardNetwork *creditCardNetwork = [[SIMCreditCardNetwork alloc] initWithPublicApiToken:publicApiToken];
 		SIMLuhnValidator *luhnValidator = [[SIMLuhnValidator alloc] init];
 		SIMCurrentTimeProvider *timeProvider = [[SIMCurrentTimeProvider alloc] init];
 		SIMCreditCardValidator *creditCardValidator = [[SIMCreditCardValidator alloc] initWithLuhnValidator:luhnValidator timeProvider:timeProvider];
@@ -61,8 +57,9 @@
 }
 
 - (void)sendCreditCardButtonTapped {
-	SIMCreditCardToken *creditCardToken = [self.model sendForCreditCardTokenUsingAddress:self.addressViewController.address];
-	[self.delegate receivedCreditCardToken:creditCardToken];
+	NSError *error = nil;
+	SIMCreditCardToken *creditCardToken = [self.model sendForCreditCardTokenUsingAddress:self.addressViewController.address error:&error];
+	[self.delegate receivedCreditCardToken:creditCardToken error:error];
 }
 
 @end

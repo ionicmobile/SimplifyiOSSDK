@@ -3,7 +3,7 @@
 
 @protocol SIMCreditCardEntryViewControllerDelegate <NSObject>
 
-- (void)receivedCreditCardToken:(SIMCreditCardToken *)creditCardToken;
+- (void)receivedCreditCardToken:(SIMCreditCardToken *)creditCardToken error:(NSError *)error;
 
 @end
 
@@ -11,6 +11,6 @@
 
 @property (nonatomic, weak) id<SIMCreditCardEntryViewControllerDelegate>delegate;
 
-- (id)initWithAddressView:(BOOL)showAddressView;
+- (id)initWithPublicApiToken:(NSString *)publicApiToken addressView:(BOOL)showAddressView;
 
 @end

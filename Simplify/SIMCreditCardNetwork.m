@@ -2,7 +2,20 @@
 
 NSString *kSimplifyCommerceDefaultAPIBaseLiveUrl = @"https://sandbox.simplify.com/v1/api/";
 
+@interface SIMCreditCardNetwork()
+
+@property (nonatomic) NSString *publicApiToken;
+
+@end
+
 @implementation SIMCreditCardNetwork
+
+- (id)initWithPublicApiToken:(NSString *)publicApiToken {
+	if (self = [super init]) {
+		self.publicApiToken = publicApiToken;
+	}
+	return self;
+}
 
 - (SIMCreditCardToken *)createCardTokenWithExpirationMonth:(NSString *)expirationMonth
 											expirationYear:(NSString *)expirationYear
@@ -10,12 +23,11 @@ NSString *kSimplifyCommerceDefaultAPIBaseLiveUrl = @"https://sandbox.simplify.co
 													   cvc:(NSString *)cvc
 												   address:(SIMAddress *)address
 													 error:(NSError **)error {
-	NSString *publicKey = @"sbpb_OTY1YmI4N2UtYTJiOS00ZWUzLTliMGItZTFmYzQ2OTRmYmQ3";
 	SIMCreditCardToken *cardToken = nil;
 
 	NSURL *url = [[[NSURL alloc] initWithString:kSimplifyCommerceDefaultAPIBaseLiveUrl] URLByAppendingPathComponent:@"payment/cardToken"];
 	// As GET, add parameters to URL
-	NSMutableString *parameters = [NSMutableString stringWithFormat:@"?key=%@", [self urlEncoded:publicKey]];
+	NSMutableString *parameters = [NSMutableString stringWithFormat:@"?key=%@", [self urlEncoded:self.publicApiToken]];
 	[parameters appendFormat:@"&%@=%@", [self urlEncoded:@"card[number]"], cardNumber];
 	[parameters appendFormat:@"&%@=%@", [self urlEncoded:@"card[expMonth]"], expirationMonth];
 	[parameters appendFormat:@"&%@=%@", [self urlEncoded:@"card[expYear]"], expirationYear];
@@ -53,32 +65,19 @@ NSString *kSimplifyCommerceDefaultAPIBaseLiveUrl = @"https://sandbox.simplify.co
 	// As GET, add parameters to URL
 	request.HTTPMethod = @"GET";
 
-	// As POST, add JSON to body
-//	request.HTTPMethod = @"POST";
-//	NSDictionary *requestJson = @{@"key" : publicKey,
-//								@"card[number]" : cardNumber,
-//								@"card[expMonth]" : expirationMonth,
-//								@"card[expYear]" : expirationYear,
-//								@"card[cvc]" : cvc,
-//								@"card[name]" : @"John Doe",
-//								};
-//	request.HTTPBody = [NSJSONSerialization dataWithJSONObject:requestJson options:0 error:error];
-
 	if (!*error) {
 		NSHTTPURLResponse *response = nil;
 		NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:error];
 		if (!*error) {
 			if (response.statusCode >= 200 && response.statusCode < 300) {
 				NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:error];
-				NSLog(@"json: %@", json);
 				cardToken = [SIMCreditCardToken cardTokenFromDictionary:json];
 			} else {
-				NSLog(@"statusCode: %i", response.statusCode);
+				NSString *errorMessage = [NSString stringWithFormat:@"Received bad status code of: %d. Expected between 200-299", response.statusCode];
+				NSError *newError = [NSError errorWithDomain:@"com.simplify.simplifyiossdk" code:1 userInfo:@{NSLocalizedDescriptionKey:errorMessage}];
+				*error = newError;
 			}
 		}
-	}
-	if (*error) {
-		NSLog(@"%@", *error);
 	}
 	return cardToken;
 }

@@ -8,12 +8,14 @@
 @property (nonatomic) SIMLayeredButton *showButton1;
 @property (nonatomic) SIMLayeredButton *showButton2;
 @property (nonatomic) SIMCreditCardTokenInformationView *infoView;
+@property (nonatomic) NSString *publicApiToken;
 @end
 
 @implementation SIMExampleViewController
 
 - (id)init {
     if (self = [super init]) {
+	    self.publicApiToken = @"sbpb_OTY1YmI4N2UtYTJiOS00ZWUzLTliMGItZTFmYzQ2OTRmYmQ3";
     }
     return self;
 }
@@ -30,7 +32,7 @@
 	[showButton1 addTarget:self action:@selector(showButton1Tapped) forControlEvents:UIControlEventTouchUpInside];
 	CGSize buttonSize = CGSizeMake(CGRectGetWidth(self.view.bounds) - 40.0, 40.0);
 	showButton1.frame = CGRectMake(CGRectGetMidX(self.view.bounds) - buttonSize.width / 2, 50.0, buttonSize.width, buttonSize.height);
-	
+
 	SIMLayeredButton* showButton2 = [[SIMLayeredButton alloc] init];
 	[showButton2 setTitle:@"Show Card Form (With Address)" forState:UIControlStateNormal];
 	showButton2.titleLabel.font = [UIFont systemFontOfSize:18.0f];
@@ -39,7 +41,7 @@
 	[showButton2 addTarget:self action:@selector(showButton2Tapped) forControlEvents:UIControlEventTouchUpInside];
 	buttonSize = CGSizeMake(CGRectGetWidth(self.view.bounds) - 40.0, 40.0);
 	showButton2.frame = CGRectMake(CGRectGetMidX(self.view.bounds) - buttonSize.width / 2, CGRectGetMaxY(showButton1.frame) + 10.0, buttonSize.width, buttonSize.height);
-	
+
 	self.showButton1 = showButton1;
 	self.showButton2 = showButton2;
 	[self.view addSubview:showButton1];
@@ -47,30 +49,34 @@
 }
 
 - (void)showButton1Tapped {
-	self.creditCardEntryViewController = [[SIMCreditCardEntryViewController alloc] initWithAddressView:NO];
+	self.creditCardEntryViewController = [[SIMCreditCardEntryViewController alloc] initWithPublicApiToken:self.publicApiToken addressView:NO];
 	self.creditCardEntryViewController.delegate = self;
 	[self presentViewController:self.creditCardEntryViewController animated:YES completion:nil];
 }
 
 - (void)showButton2Tapped {
-	self.creditCardEntryViewController = [[SIMCreditCardEntryViewController alloc] initWithAddressView:YES];
+	self.creditCardEntryViewController = [[SIMCreditCardEntryViewController alloc] initWithPublicApiToken:self.publicApiToken addressView:YES];
 	self.creditCardEntryViewController.delegate = self;
 	[self presentViewController:self.creditCardEntryViewController animated:YES completion:nil];
 }
 
 #pragma mark - SIMCreditCardEntryViewControllerDelegate methods
 
-- (void)receivedCreditCardToken:(SIMCreditCardToken *)creditCardToken {
-	NSLog(@"Token: %@", creditCardToken);
-	
+- (void)receivedCreditCardToken:(SIMCreditCardToken *)creditCardToken error:(NSError *)error {
+	if (error) {
+		NSLog(@"Error: %@", error);
+	} else {
+		NSLog(@"Token: %@", creditCardToken);
+	}
+
 	[self dismissViewControllerAnimated:YES completion:nil];
 	self.creditCardEntryViewController = nil;
-	
+
 	if (self.infoView) {
 		[self.infoView removeFromSuperview];
 		self.infoView = nil;
 	}
-	
+
 	CGFloat startY = CGRectGetMaxY(self.showButton2.frame) + 20.0;
 	CGRect infoFrame = CGRectMake(0, startY, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds) - startY);
 	self.infoView = [[SIMCreditCardTokenInformationView alloc] initWithFrame:CGRectInset(infoFrame, 10.0, 0.0) creditCardToken:creditCardToken];
