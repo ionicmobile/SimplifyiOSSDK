@@ -1,3 +1,6 @@
+/**
+ The SIMCreditCardToken represents a Simplify credit card that has been built by the user.
+ */
 @interface SIMCreditCardToken : NSObject
 
 @property (nonatomic, readonly) NSString *token;
