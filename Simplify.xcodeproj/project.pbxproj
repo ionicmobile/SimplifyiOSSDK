@@ -28,7 +28,7 @@
 		4D412DAA1767D77E002A20D7 /* SIMCreditCardValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D67091F1762687800729623 /* SIMCreditCardValidator.m */; };
 		4D49D82B176766D90046E638 /* SIMLuhnValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D49D829176766D90046E638 /* SIMLuhnValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4D49D8341767671C0046E638 /* SIMLuhnValidatorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D8301767671C0046E638 /* SIMLuhnValidatorTest.m */; };
-		4D49D83717676D9F0046E638 /* SIMCurrentTimeProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D49D83517676D9F0046E638 /* SIMCurrentTimeProvider.h */; };
+		4D49D83717676D9F0046E638 /* SIMCurrentTimeProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D49D83517676D9F0046E638 /* SIMCurrentTimeProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4D49D83817676D9F0046E638 /* SIMCurrentTimeProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D83617676D9F0046E638 /* SIMCurrentTimeProvider.m */; };
 		4D49D83917676D9F0046E638 /* SIMCurrentTimeProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D83617676D9F0046E638 /* SIMCurrentTimeProvider.m */; };
 		4D49D83A17676D9F0046E638 /* SIMCurrentTimeProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D83617676D9F0046E638 /* SIMCurrentTimeProvider.m */; };
@@ -40,12 +40,10 @@
 		4D49D849176788F10046E638 /* jcb_32.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D49D840176788F10046E638 /* jcb_32.png */; };
 		4D49D84B176788F10046E638 /* mastercard_32.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D49D842176788F10046E638 /* mastercard_32.png */; };
 		4D49D84C176788F10046E638 /* visa_32.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D49D843176788F10046E638 /* visa_32.png */; };
-		4D49D8561767A63D0046E638 /* UIView+Additions.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D49D8541767A63D0046E638 /* UIView+Additions.h */; };
 		4D49D8571767A63D0046E638 /* UIView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D8551767A63D0046E638 /* UIView+Additions.m */; };
 		4D49D8581767A63D0046E638 /* UIView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D8551767A63D0046E638 /* UIView+Additions.m */; };
 		4D49D8591767A63D0046E638 /* UIView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D8551767A63D0046E638 /* UIView+Additions.m */; };
 		4D49D8651767BB1E0046E638 /* Simplify.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4D98BC8E176258FE004FA922 /* Simplify.bundle */; };
-		4D49D8681767BE750046E638 /* UIColor+Additions.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D49D8661767BE750046E638 /* UIColor+Additions.h */; };
 		4D49D8691767BE750046E638 /* UIColor+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D8671767BE750046E638 /* UIColor+Additions.m */; };
 		4D49D86A1767BE750046E638 /* UIColor+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D8671767BE750046E638 /* UIColor+Additions.m */; };
 		4D49D86B1767BE750046E638 /* UIColor+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D8671767BE750046E638 /* UIColor+Additions.m */; };
@@ -814,22 +812,20 @@
 				4DDB65451762440800871923 /* Simplify.h in Headers */,
 				4D98BC9F17625D88004FA922 /* SimplifyPrivate.h in Headers */,
 				4D6709201762687800729623 /* SIMCreditCardValidator.h in Headers */,
+				4D49D83717676D9F0046E638 /* SIMCurrentTimeProvider.h in Headers */,
+				AA19F415D0E73EE37A9E902B /* SIMCreditCardType.h in Headers */,
+				AA19FB86BEFE4D50126D6637 /* SIMCreditCardToken.h in Headers */,
+				AA19FD78283E47D046D04B5B /* SIMCreditCardEntryViewController.h in Headers */,
 				4D67095017662A4400729623 /* NSString+Simplify.h in Headers */,
 				4D49D82B176766D90046E638 /* SIMLuhnValidator.h in Headers */,
-				4D49D83717676D9F0046E638 /* SIMCurrentTimeProvider.h in Headers */,
-				4D49D8561767A63D0046E638 /* UIView+Additions.h in Headers */,
 				AA19F52917C58865A4340EAF /* SIMCreditCardNetwork.h in Headers */,
-				4D49D8681767BE750046E638 /* UIColor+Additions.h in Headers */,
 				4D49D8721767C5840046E638 /* SIMGradientView.h in Headers */,
 				4D49D8761767C5840046E638 /* SIMHighlightView.h in Headers */,
-				AA19FB86BEFE4D50126D6637 /* SIMCreditCardToken.h in Headers */,
 				4D49D87A1767C5840046E638 /* SIMLayeredButton.h in Headers */,
 				4D49D8801767C82A0046E638 /* SIMShapeView.h in Headers */,
 				4DE8866A17692DF200E60C81 /* SIMTextField.h in Headers */,
 				AA19F76C6B76753E05696437 /* SIMCreditCardEntryModel.h in Headers */,
 				AA19F64D29BC1279B5D3D507 /* SIMCreditCardEntryView.h in Headers */,
-				AA19FD78283E47D046D04B5B /* SIMCreditCardEntryViewController.h in Headers */,
-				AA19F415D0E73EE37A9E902B /* SIMCreditCardType.h in Headers */,
 				AA19FF36C33E980DF641ADF1 /* SIMAddressEntryView.h in Headers */,
 				AA19F1791C3BD8726C9F4A5B /* SIMTextFieldFactory.h in Headers */,
 				AA19F375C1D0F60195E6A651 /* SIMAddressEntryModel.h in Headers */,
@@ -1017,7 +1013,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\nset +u\n# Avoid recursively calling this script.\nif [[ $SF_MASTER_SCRIPT_RUNNING ]]\nthen\nexit 0\nfi\nset -u\nexport SF_MASTER_SCRIPT_RUNNING=1\n\nSF_TARGET_NAME=${PROJECT_NAME}\nSF_EXECUTABLE_PATH=\"lib${SF_TARGET_NAME}.a\"\nSF_WRAPPER_NAME=\"${SF_TARGET_NAME}.framework\"\n\n# The following conditionals come from\n# https://github.com/kstenerud/iOS-Universal-Framework\n\nif [[ \"$SDK_NAME\" =~ ([A-Za-z]+) ]]\nthen\nSF_SDK_PLATFORM=${BASH_REMATCH[1]}\nelse\necho \"Could not find platform name from SDK_NAME: $SDK_NAME\"\nexit 1\nfi\n\nif [[ \"$SDK_NAME\" =~ ([0-9]+.*$) ]]\nthen\nSF_SDK_VERSION=${BASH_REMATCH[1]}\nelse\necho \"Could not find sdk version from SDK_NAME: $SDK_NAME\"\nexit 1\nfi\n\nif [[ \"$SF_SDK_PLATFORM\" = \"iphoneos\" ]]\nthen\nSF_OTHER_PLATFORM=iphonesimulator\nelse\nSF_OTHER_PLATFORM=iphoneos\nfi\n\nif [[ \"$BUILT_PRODUCTS_DIR\" =~ (.*)$SF_SDK_PLATFORM$ ]]\nthen\nSF_OTHER_BUILT_PRODUCTS_DIR=\"${BASH_REMATCH[1]}${SF_OTHER_PLATFORM}\"\nelse\necho \"Could not find platform name from build products directory: $BUILT_PRODUCTS_DIR\"\nexit 1\nfi\n\n# Build the other platform.\nxcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk ${SF_OTHER_PLATFORM}${SF_SDK_VERSION} BUILD_DIR=\"${BUILD_DIR}\" OBJROOT=\"${OBJROOT}\" BUILD_ROOT=\"${BUILD_ROOT}\" SYMROOT=\"${SYMROOT}\" $ACTION\n\n# Smash the two static libraries into one fat binary and store it in the .framework\nlipo -create \"${BUILT_PRODUCTS_DIR}/${SF_EXECUTABLE_PATH}\" \"${SF_OTHER_BUILT_PRODUCTS_DIR}/${SF_EXECUTABLE_PATH}\" -output \"${BUILT_PRODUCTS_DIR}/${SF_WRAPPER_NAME}/Versions/A/${SF_TARGET_NAME}\"\n\n# Copy the binary to the other architecture folder to have a complete framework in both.\ncp -a \"${BUILT_PRODUCTS_DIR}/${SF_WRAPPER_NAME}/Versions/A/${SF_TARGET_NAME}\" \"${SF_OTHER_BUILT_PRODUCTS_DIR}/${SF_WRAPPER_NAME}/Versions/A/${SF_TARGET_NAME}\"\n";
+			shellScript = "set -e\nset +u\n# Avoid recursively calling this script.\nif [[ $SF_MASTER_SCRIPT_RUNNING ]]\nthen\nexit 0\nfi\nset -u\nexport SF_MASTER_SCRIPT_RUNNING=1\n\nSF_TARGET_NAME=${PROJECT_NAME}\nSF_EXECUTABLE_PATH=\"lib${SF_TARGET_NAME}.a\"\nSF_WRAPPER_NAME=\"${SF_TARGET_NAME}.framework\"\n\n# The following conditionals come from\n# https://github.com/kstenerud/iOS-Universal-Framework\n\nif [[ \"$SDK_NAME\" =~ ([A-Za-z]+) ]]\nthen\nSF_SDK_PLATFORM=${BASH_REMATCH[1]}\nelse\necho \"Could not find platform name from SDK_NAME: $SDK_NAME\"\nexit 1\nfi\n\nif [[ \"$SDK_NAME\" =~ ([0-9]+.*$) ]]\nthen\nSF_SDK_VERSION=${BASH_REMATCH[1]}\nelse\necho \"Could not find sdk version from SDK_NAME: $SDK_NAME\"\nexit 1\nfi\n\nif [[ \"$SF_SDK_PLATFORM\" = \"iphoneos\" ]]\nthen\nSF_OTHER_PLATFORM=iphonesimulator\nelse\nSF_OTHER_PLATFORM=iphoneos\nfi\n\nif [[ \"$BUILT_PRODUCTS_DIR\" =~ (.*)$SF_SDK_PLATFORM$ ]]\nthen\nSF_OTHER_BUILT_PRODUCTS_DIR=\"${BASH_REMATCH[1]}${SF_OTHER_PLATFORM}\"\nelse\necho \"Could not find platform name from build products directory: $BUILT_PRODUCTS_DIR\"\nexit 1\nfi\n\n# Build the other platform.\nxcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk ${SF_OTHER_PLATFORM}${SF_SDK_VERSION} BUILD_DIR=\"${BUILD_DIR}\" OBJROOT=\"${OBJROOT}\" BUILD_ROOT=\"${BUILD_ROOT}\" SYMROOT=\"${SYMROOT}\" $ACTION\n\n# Smash the two static libraries into one fat binary and store it in the .framework\nlipo -create \"${BUILT_PRODUCTS_DIR}/${SF_EXECUTABLE_PATH}\" \"${SF_OTHER_BUILT_PRODUCTS_DIR}/${SF_EXECUTABLE_PATH}\" -output \"${BUILT_PRODUCTS_DIR}/${SF_WRAPPER_NAME}/Versions/A/${SF_TARGET_NAME}\"\n\n# Copy the binary to the other architecture folder to have a complete framework in both.\ncp -a \"${BUILT_PRODUCTS_DIR}/${SF_WRAPPER_NAME}/Versions/A/${SF_TARGET_NAME}\" \"${SF_OTHER_BUILT_PRODUCTS_DIR}/${SF_WRAPPER_NAME}/Versions/A/${SF_TARGET_NAME}\"\n\nopen ${BUILT_PRODUCTS_DIR}\n";
 		};
 		4DDB6546176244C100871923 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
