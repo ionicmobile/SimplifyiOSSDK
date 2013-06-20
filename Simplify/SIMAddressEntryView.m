@@ -51,7 +51,7 @@
 		UILabel* addressLabel = [[UILabel alloc] init];
 		addressLabel.font = [SimplifyPrivate boldFontOfSize:24.0f];
 		addressLabel.text = @"Address";
-		addressLabel.textColor = [UIColor colorWithHexString:@"4a4a4a"];
+		addressLabel.textColor = [UIColor simplifyDarkTextColor];
 
 		SIMTextFieldFactory* factory = [[SIMTextFieldFactory alloc] init];
 
@@ -129,10 +129,10 @@
 - (void)setTextField:(UITextField *)textField inputState:(SIMTextInputState)inputState {
 	switch (inputState) {
 	case SIMTextInputStateBad:
-		textField.backgroundColor = [UIColor colorWithHexString:@"ffcccc"];
+		textField.backgroundColor = [UIColor simplifyLightRedColor];
 		break;
 	case SIMTextInputStateGood:
-		textField.backgroundColor = [UIColor colorWithHexString:@"ccffcc"];
+		textField.backgroundColor = [UIColor simplifyLightGreenColor];
 		break;
 	case SIMTextInputStateNormal:
 	default:

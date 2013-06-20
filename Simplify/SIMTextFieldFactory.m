@@ -61,7 +61,7 @@
 	textField.placeholder = placeholderText;
 	textField.font = [SimplifyPrivate fontOfSize:16.0f];
 	textField.textOffset = CGSizeMake(10, 2);
-	textField.textColor = [UIColor colorWithHexString:@"4a4a4a"];
+	textField.textColor = [UIColor simplifyDarkTextColor];
 	textField.text = @"";
 }
 

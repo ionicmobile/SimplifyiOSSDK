@@ -44,14 +44,14 @@
 
 - (id)init {
     if (self = [super init]) {
-		self.backgroundColor = [UIColor colorWithHexString:@"#B42C10"];
+		self.backgroundColor = [UIColor simplifyDarkRedColor];
 		self.layer.cornerRadius = 10.0;
 		
 		self.mainBackgroundView = [[SIMGradientView alloc] init];
 		self.mainBackgroundView.layer.cornerRadius = self.layer.cornerRadius - 1.0;
 		self.mainBackgroundView.backgroundColor = [self fillColor];
 		self.mainBackgroundView.userInteractionEnabled = NO;
-		self.mainBackgroundView.gradientLayer.colors = @[(id)[UIColor colorWithHexString:@"#DDFF8057"].CGColor,(id)[UIColor colorWithHexString:@"#DDFC411D"].CGColor];
+		self.mainBackgroundView.gradientLayer.colors = @[(id)[UIColor simplifyLightOrangeColor].CGColor,(id)[UIColor simplifyDarkOrangeColor].CGColor];
 		self.mainBackgroundView.clipsToBounds = YES;
 		[self addSubview:self.mainBackgroundView];
 		
@@ -75,9 +75,7 @@
 - (UIColor *)fillColor {
 	UIColor *color = [UIColor colorWithWhite:0.353 alpha:1.0];
 	if (self.highlighted) {
-		color = [UIColor colorWithRed:1.0 green:0.471 blue:0.0 alpha:1.0];
-	} else if (self.selected) {
-		color = [UIColor colorWithRed:0.0 green:0.494 blue:1.0 alpha:1.0];
+		color = [UIColor simplifyOrangeColor];
 	}
 	return color;
 }

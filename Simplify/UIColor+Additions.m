@@ -14,6 +14,13 @@ return colorName; \
 @implementation UIColor (Additions)
 
 CREATE_HEX_COLOR(simplifyBorderColor, @"dddddd")
+CREATE_HEX_COLOR(simplifyDarkTextColor, @"4a4a4a")
+CREATE_HEX_COLOR(simplifyLightRedColor, @"ffcccc")
+CREATE_HEX_COLOR(simplifyLightGreenColor, @"ccffcc")
+CREATE_HEX_COLOR(simplifyDarkRedColor, @"b42c10")
+CREATE_HEX_COLOR(simplifyLightOrangeColor, @"ddff8057")
+CREATE_HEX_COLOR(simplifyDarkOrangeColor, @"ddfc411d")
+CREATE_HEX_COLOR(simplifyOrangeColor, @"ff7800")
 
 + (CGFloat)colorComponentFrom:(NSString *)string start:(NSUInteger)start length:(NSUInteger)length {
     NSString *substring = [string substringWithRange:NSMakeRange(start, length)];

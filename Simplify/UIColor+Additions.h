@@ -1,12 +1,15 @@
 #import <UIKit/UIKit.h>
 
-#define SIMColorNormal [UIColor clearColor]
-#define SIMColorBad [UIColor colorWithHexString:@"ffcccc"]
-#define SIMColorGood [UIColor colorWithHexString:@"ccffcc"]
-
 @interface UIColor (Additions)
 
 +(UIColor*)simplifyBorderColor;
++(UIColor*)simplifyDarkTextColor;
++(UIColor*)simplifyLightRedColor;
++(UIColor*)simplifyLightGreenColor;
++(UIColor*)simplifyDarkRedColor;
++(UIColor*)simplifyLightOrangeColor;
++(UIColor*)simplifyDarkOrangeColor;
++(UIColor*)simplifyOrangeColor;
 
 +(UIColor*)colorWithHexString:(NSString *)hexString;
 

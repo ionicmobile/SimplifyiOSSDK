@@ -80,7 +80,7 @@
 	UILabel* label = [[UILabel alloc] init];
 	label.font = [UIFont boldSystemFontOfSize:size];
 	label.text = text;
-	label.textColor = [UIColor colorWithHexString:@"4a4a4a"];
+	label.textColor = [UIColor simplifyDarkTextColor];
 	label.backgroundColor = UIColor.clearColor;
 	[label sizeToFit];
 	label.frame = CGRectMake(0, yOffset, CGRectGetWidth(self.frame), CGRectGetHeight(label.frame));

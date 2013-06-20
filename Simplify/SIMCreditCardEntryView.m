@@ -58,7 +58,7 @@
 		UILabel* titleLabel = [[UILabel alloc] init];
 		titleLabel.font = [SimplifyPrivate boldFontOfSize:26.0f];
 		titleLabel.text = @"Payment Details";
-		titleLabel.textColor = [UIColor colorWithHexString:@"4a4a4a"];
+		titleLabel.textColor = [UIColor simplifyDarkTextColor];
 
 		UIImageView* cardImageView = [[UIImageView alloc] initWithImage:[SimplifyPrivate imageNamed:@"card_back_32"]];
 
@@ -175,10 +175,10 @@
 - (void)setTextField:(UITextField *)textField inputState:(SIMTextInputState)inputState {
 	switch (inputState) {
 	case SIMTextInputStateBad:
-		textField.backgroundColor = [UIColor colorWithHexString:@"ffcccc"];
+		textField.backgroundColor = [UIColor simplifyLightRedColor];
 		break;
 	case SIMTextInputStateGood:
-		textField.backgroundColor = [UIColor colorWithHexString:@"ccffcc"];
+		textField.backgroundColor = [UIColor simplifyLightGreenColor];
 		break;
 	case SIMTextInputStateNormal:
 	default:
