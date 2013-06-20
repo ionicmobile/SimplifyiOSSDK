@@ -60,7 +60,7 @@
 		titleLabel.text = @"Payment Details";
 		titleLabel.textColor = [UIColor simplifyDarkTextColor];
 
-		UIImageView* cardImageView = [[UIImageView alloc] initWithImage:[SimplifyPrivate imageNamed:@"card_back_32"]];
+		UIImageView* cardImageView = [[UIImageView alloc] initWithImage:[SimplifyPrivate imageNamed:@"blank"]];
 
 		SIMTextFieldFactory* factory = [[SIMTextFieldFactory alloc] init];
 
@@ -144,28 +144,28 @@
 -(void)setCardType:(SIMCreditCardType)cardType {
 	switch (cardType) {
 	case SIMCreditCardType_AmericanExpress:
-		self.cardImageView.image = [SimplifyPrivate imageNamed:@"american_express_32"];
+		self.cardImageView.image = [SimplifyPrivate imageNamed:@"amex"];
 		break;
 	case SIMCreditCardType_ChinaUnionPay:
-		self.cardImageView.image = [SimplifyPrivate imageNamed:@"china_union_pay_32"];
+		self.cardImageView.image = [SimplifyPrivate imageNamed:@"china-union"];
 		break;
 	case SIMCreditCardType_DinersClub:
-		self.cardImageView.image = [SimplifyPrivate imageNamed:@"diners_club_32"];
+		self.cardImageView.image = [SimplifyPrivate imageNamed:@"diners"];
 		break;
 	case SIMCreditCardType_Discover:
-		self.cardImageView.image = [SimplifyPrivate imageNamed:@"discover_32"];
+		self.cardImageView.image = [SimplifyPrivate imageNamed:@"discover"];
 		break;
 	case SIMCreditCardType_JCB:
-		self.cardImageView.image = [SimplifyPrivate imageNamed:@"jcb_32"];
+		self.cardImageView.image = [SimplifyPrivate imageNamed:@"jcb"];
 		break;
 	case SIMCreditCardType_MasterCard:
-		self.cardImageView.image = [SimplifyPrivate imageNamed:@"mastercard_32"];
+		self.cardImageView.image = [SimplifyPrivate imageNamed:@"mastercard"];
 		break;
 	case SIMCreditCardType_Visa:
-		self.cardImageView.image = [SimplifyPrivate imageNamed:@"visa_32"];
+		self.cardImageView.image = [SimplifyPrivate imageNamed:@"visa"];
 		break;
 	case SIMCreditCardType_Unknown:
-		self.cardImageView.image = [SimplifyPrivate imageNamed:@"card_back_32"];
+		self.cardImageView.image = [SimplifyPrivate imageNamed:@"blank"];
 	default:
 		break;
 	}
