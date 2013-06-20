@@ -6,6 +6,8 @@ SimplifyiOSSDK
 To install the API in your app, copy the `Simplify.framework` and `Simplify.bundle` to your project.
 Add both to your app target.
 
+![ScreenShot](Docs/add_to_project.jpg)
+
 ## API
 
 The two main classes that are used are `SIMCreditCardEntryViewController` and `SIMCreditCardToken`.  
