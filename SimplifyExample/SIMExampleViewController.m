@@ -60,7 +60,23 @@
 	[self presentViewController:self.creditCardEntryViewController animated:YES completion:nil];
 }
 
+#pragma mark - Private methods
+
+- (void)dismissCreditCardEntryViewController {
+	[self dismissViewControllerAnimated:YES completion:nil];
+	self.creditCardEntryViewController = nil;
+
+	if (self.infoView) {
+		[self.infoView removeFromSuperview];
+		self.infoView = nil;
+	}
+}
+
 #pragma mark - SIMCreditCardEntryViewControllerDelegate methods
+
+- (void)cancelled {
+	[self dismissCreditCardEntryViewController];
+}
 
 - (void)receivedCreditCardToken:(SIMCreditCardToken *)creditCardToken error:(NSError *)error {
 	if (error) {
@@ -69,13 +85,7 @@
 		NSLog(@"Token: %@", creditCardToken);
 	}
 
-	[self dismissViewControllerAnimated:YES completion:nil];
-	self.creditCardEntryViewController = nil;
-
-	if (self.infoView) {
-		[self.infoView removeFromSuperview];
-		self.infoView = nil;
-	}
+	[self dismissCreditCardEntryViewController];
 
 	CGFloat startY = CGRectGetMaxY(self.showButton2.frame) + 20.0;
 	CGRect infoFrame = CGRectMake(0, startY, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds) - startY);

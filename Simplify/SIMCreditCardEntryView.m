@@ -12,6 +12,7 @@
 @property (nonatomic) UITextField* creditCardNumberTextField;
 @property (nonatomic) UITextField* CVCNumberTextField;
 @property (nonatomic) UITextField* expirationDateTextField;
+@property (nonatomic) UIButton* cancelButton;
 @property (nonatomic) UIButton* sendCreditCardButton;
 @end
 
@@ -46,6 +47,13 @@
 		SIMTextField* CVCNumberTextField = [factory createTextFieldWithPlaceholderText:@"CVC Code" keyboardType:UIKeyboardTypeNumberPad];
 		CVCNumberTextField.delegate = self;
 
+		SIMLayeredButton* cancelButton = [[SIMLayeredButton alloc] init];
+		[cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
+		cancelButton.titleLabel.font = [SimplifyPrivate boldFontOfSize:18.0f];
+		cancelButton.titleLabel.shadowColor = [UIColor blackColor];
+		cancelButton.titleLabel.shadowOffset = CGSizeMake(0, -1);
+		[cancelButton addTarget:self action:@selector(cancelButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+
 		SIMLayeredButton* sendCreditCardButton = [[SIMLayeredButton alloc] init];
 		[sendCreditCardButton setTitle:@"Send Card" forState:UIControlStateNormal];
 		sendCreditCardButton.titleLabel.font = [SimplifyPrivate boldFontOfSize:18.0f];
@@ -58,6 +66,7 @@
 		self.creditCardNumberTextField = creditCardNumberTextField;
 		self.CVCNumberTextField = CVCNumberTextField;
 		self.expirationDateTextField = expirationDateTextField;
+		self.cancelButton = cancelButton;
 		self.sendCreditCardButton = sendCreditCardButton;
 
 		if (extraView) {
@@ -69,6 +78,7 @@
 		[self addSubview:creditCardNumberTextField];
 		[self addSubview:CVCNumberTextField];
 		[self addSubview:expirationDateTextField];
+		[self addSubview:cancelButton];
 		[self addSubview:sendCreditCardButton];
 	}
 	return self;
@@ -96,7 +106,10 @@
 		self.extraView.frame = CGRectMake(0, nextY, CGRectGetWidth(self.bounds), addressEntrySize.height);
 		nextY = CGRectGetMaxY(self.extraView.frame) + innerMarginY;
 	}
-	[self.sendCreditCardButton centerHorizonallyAtY:nextY inBounds:self.bounds withSize:CGSizeMake(self.bounds.size.width - 2 * outerMarginX, 40)];
+
+	CGFloat buttonWidth = (fullWidth - innerMarginX) / 2;
+	self.cancelButton.frame = CGRectMake(outerMarginX, nextY, buttonWidth, 40);
+	self.sendCreditCardButton.frame = CGRectMake(CGRectGetMaxX(self.cancelButton.frame) + innerMarginX, nextY, buttonWidth, 40);
 }
 
 -(void)setCardType:(SIMCreditCardType)cardType {
@@ -187,8 +200,12 @@
 	return NO;
 }
 
--(void)sendCreditCardButtonTapped {
+- (void)sendCreditCardButtonTapped {
 	[self.delegate sendCreditCardButtonTapped];
+}
+
+- (void)cancelButtonTapped {
+	[self.delegate cancelButtonTapped];
 }
 
 @end
