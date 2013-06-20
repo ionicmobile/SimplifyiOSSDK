@@ -1,4 +1,4 @@
-SimplifyiOSSDK
+Simplify iOS SDK
 ==============
 
 ## Installation
@@ -36,10 +36,18 @@ end
 
 ### SIMCreditCardEntryViewController
 The `SIMCreditCardEntryViewController` can be used for entering credit card and user mailing address 
-details for a transaction.  
+details for a transaction.  Whether or not to include a mailing address form is controlled by the 
+view controller's initializer `showAddressView` parameter.  See below example screenshots of the 
+card entry interface with and without a mailing address form.  As a convenience, the view controller 
+performs some (but not necessarily a full-proof) validation of the items entered.
+
+![Screenshot](Docs/card_only.jpg)
+![Screenshot](Docs/card_address.jpg)
+
 
 ### SIMCreditCardToken
 The `SIMCreditCardToken` is issued to the user by `SIMCreditCardEntryViewController` to the assigned
 `SIMCreditCardEntryViewControllerDelegate` when credit card information has been successfully 
-processed and a token is generated.  
+processed and a token is generated, otherwise an NSError is returned.  To access the token, refer to the
+`token` member of the returned `SIMCreditCardToken` object.
 
