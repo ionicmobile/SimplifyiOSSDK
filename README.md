@@ -1,6 +1,29 @@
 Simplify iOS SDK
 ==============
 
+An iOS SDK that provides a ViewController for accessing the MasterCard Simplify Service.
+
+Project Organization
+--------------------
+
+* ```Simplify``` - iOS Library Project containing SDK code
+* ```SimplifyExample``` - an iOS Application utilizing the SDK
+* ```SimplifyTests``` - unit tests for the library
+
+## Building the Framework
+
+In order to build the Documentation, simply fun the SimplifyFramework Scheme from XCode. This will build a universal framework and bundle for use in your project.
+![Screenshot](Docs/build_framework.png)
+
+Once the script is done, a Finder window will open granting access to the built products.
+![Screenshot](Docs/finder_framework.png)
+
+## Building the Documentation
+
+In order to build the Documentation for the public API, simply run the Documentation Scheme from XCode. This will automatically install the docset, so that XCode can utilize it.
+![Screenshot](Docs/build_documentation.png)
+
+
 ## Installation
 
 To install the API in your app, copy the `Simplify.framework` and `Simplify.bundle` to your project.
