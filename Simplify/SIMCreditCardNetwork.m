@@ -55,44 +55,42 @@ NSString *kSimplifyCommerceDefaultAPIBaseLiveUrl = @"https://sandbox.simplify.co
 	SIMCreditCardToken *cardToken = nil;
 
 	NSURL *url = [[[NSURL alloc] initWithString:kSimplifyCommerceDefaultAPIBaseLiveUrl] URLByAppendingPathComponent:@"payment/cardToken"];
-	// As GET, add parameters to URL
-	NSMutableString *parameters = [NSMutableString stringWithFormat:@"?key=%@", [self urlEncoded:self.publicApiToken]];
-	[parameters appendFormat:@"&%@=%@", [self urlEncoded:@"card[number]"], cardNumber];
-	[parameters appendFormat:@"&%@=%@", [self urlEncoded:@"card[expMonth]"], expirationMonth];
-	[parameters appendFormat:@"&%@=%@", [self urlEncoded:@"card[expYear]"], expirationYear];
-	[parameters appendFormat:@"&%@=%@", [self urlEncoded:@"card[cvc]"], cvc];
-	if (address.name.length) {
-		[parameters appendFormat:@"&%@=%@", [self urlEncoded:@"card[name]"], [self urlEncoded:address.name]];
+    
+    NSMutableDictionary *addressData = [NSMutableDictionary dictionaryWithDictionary:@{@"number":[self urlEncoded:cardNumber], @"expMonth":[self urlEncoded:expirationMonth], @"expYear": [self urlEncoded:expirationYear], @"cvc": [self urlEncoded:cvc]}];
+    
+    if (address.name.length) {
+        addressData[@"name"] = address.name;
 	}
 	if (address.addressLine1.length) {
-		[parameters appendFormat:@"&%@=%@", [self urlEncoded:@"card[addressLine1]"], [self urlEncoded:address.addressLine1]];
+        addressData[@"addressLine1"] = address.addressLine1;
 	}
 	if (address.addressLine2.length) {
-		[parameters appendFormat:@"&%@=%@", [self urlEncoded:@"card[addressLine2]"], [self urlEncoded:address.addressLine2]];
+        addressData[@"addressLine2"] = address.addressLine2;
 	}
 	if (address.city.length) {
-		[parameters appendFormat:@"&%@=%@", [self urlEncoded:@"card[addressCity]"], [self urlEncoded:address.city]];
+        addressData[@"addressCity"] = address.city;
 	}
 	if (address.state.length) {
-		[parameters appendFormat:@"&%@=%@", [self urlEncoded:@"card[addressState]"], [self urlEncoded:address.state]];
-	}
+        addressData[@"addressState"] = address.state;
+    }
 	if (address.zip.length) {
-		[parameters appendFormat:@"&%@=%@", [self urlEncoded:@"card[addressZip]"], [self urlEncoded:address.zip]];
+        addressData[@"addressZip"] = address.zip;
 	}
 	if (address.country.length) {
-		[parameters appendFormat:@"&%@=%@", [self urlEncoded:@"card[addressCountry]"], [self urlEncoded:address.country]];
+        addressData[@"addressCountry"] = address.country;
 	}
 
-	url = [NSURL URLWithString:[[url absoluteString] stringByAppendingString:parameters]];
-	NSLog(@"url: %@", url);
+    NSDictionary *cardData = @{@"key": [self urlEncoded:self.publicApiToken], @"card":addressData};
+    
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:cardData options:0 error:error];
 
 	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:0];
 
-	[request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-	[request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
-
-	// As GET, add parameters to URL
-	request.HTTPMethod = @"GET";
+    [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    request.HTTPBody = jsonData;
+    
+	request.HTTPMethod = @"POST";
 
 	if (!*error) {
 		NSHTTPURLResponse *response = nil;
@@ -112,8 +110,7 @@ NSString *kSimplifyCommerceDefaultAPIBaseLiveUrl = @"https://sandbox.simplify.co
 }
 
 - (NSString *)urlEncoded:(NSString *)value {
-    return (__bridge_transfer NSString *) CFURLCreateStringByAddingPercentEscapes(NULL, (__bridge CFStringRef) value, NULL,
-                                                                                  (__bridge CFStringRef) @"!*'();:@&=+$,/?%#[]-.", kCFStringEncodingUTF8);
+    return (__bridge_transfer NSString *) CFURLCreateStringByAddingPercentEscapes(NULL, (__bridge CFStringRef) value, NULL, (__bridge CFStringRef) @"!*'();:@&=+$,/?%#[]-.", kCFStringEncodingUTF8);
 }
 
 @end
