@@ -1,7 +1,7 @@
 Simplify iOS SDK
 ==============
 
-An iOS SDK that provides a ViewController for accessing the MasterCard Simplify Service.  Download the framework [here](http://www.asynchrony.com/wp-content/themes/asynchrony3/simplify-iossdk.zip).
+An iOS SDK that provides a ViewController for accessing the MasterCard Simplify Service.  Download the framework [here](https://github.com/ionicmobile/SimplifyiOSSDK/archive/v1.1.0.zip).
 
 Project Organization
 --------------------
