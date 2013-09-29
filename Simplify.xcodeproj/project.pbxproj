@@ -50,15 +50,15 @@
 		4D49D8691767BE750046E638 /* UIColor+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D8671767BE750046E638 /* UIColor+Additions.m */; };
 		4D49D86A1767BE750046E638 /* UIColor+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D8671767BE750046E638 /* UIColor+Additions.m */; };
 		4D49D86B1767BE750046E638 /* UIColor+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D8671767BE750046E638 /* UIColor+Additions.m */; };
-		4D49D8721767C5840046E638 /* SIMGradientView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D49D86C1767C5840046E638 /* SIMGradientView.h */; };
+		4D49D8721767C5840046E638 /* SIMGradientView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D49D86C1767C5840046E638 /* SIMGradientView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4D49D8731767C5840046E638 /* SIMGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D86D1767C5840046E638 /* SIMGradientView.m */; };
 		4D49D8741767C5840046E638 /* SIMGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D86D1767C5840046E638 /* SIMGradientView.m */; };
 		4D49D8751767C5840046E638 /* SIMGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D86D1767C5840046E638 /* SIMGradientView.m */; };
-		4D49D8761767C5840046E638 /* SIMHighlightView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D49D86E1767C5840046E638 /* SIMHighlightView.h */; };
+		4D49D8761767C5840046E638 /* SIMHighlightView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D49D86E1767C5840046E638 /* SIMHighlightView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4D49D8771767C5840046E638 /* SIMHighlightView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D86F1767C5840046E638 /* SIMHighlightView.m */; };
 		4D49D8781767C5840046E638 /* SIMHighlightView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D86F1767C5840046E638 /* SIMHighlightView.m */; };
 		4D49D8791767C5840046E638 /* SIMHighlightView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D86F1767C5840046E638 /* SIMHighlightView.m */; };
-		4D49D87A1767C5840046E638 /* SIMLayeredButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D49D8701767C5840046E638 /* SIMLayeredButton.h */; };
+		4D49D87A1767C5840046E638 /* SIMLayeredButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D49D8701767C5840046E638 /* SIMLayeredButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4D49D87B1767C5840046E638 /* SIMLayeredButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D8711767C5840046E638 /* SIMLayeredButton.m */; };
 		4D49D87C1767C5840046E638 /* SIMLayeredButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D8711767C5840046E638 /* SIMLayeredButton.m */; };
 		4D49D87D1767C5840046E638 /* SIMLayeredButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D49D8711767C5840046E638 /* SIMLayeredButton.m */; };
@@ -138,6 +138,7 @@
 		4DE8866B17692DF200E60C81 /* SIMTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DE8866917692DF200E60C81 /* SIMTextField.m */; };
 		4DE8866C17692DF200E60C81 /* SIMTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DE8866917692DF200E60C81 /* SIMTextField.m */; };
 		4DE8866D17692DF200E60C81 /* SIMTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DE8866917692DF200E60C81 /* SIMTextField.m */; };
+		5ED6ED8217F8580A0062FB2F /* UIColor+Additions.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D49D8661767BE750046E638 /* UIColor+Additions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		747A1FD21770DEA80028E11E /* SIMExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 747A1FD11770DEA80028E11E /* SIMExampleViewController.m */; };
 		747A1FD51770E2C20028E11E /* SIMCreditCardTokenInformationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 747A1FD41770E2C20028E11E /* SIMCreditCardTokenInformationView.m */; };
 		747A1FD71770F7670028E11E /* SIMCreditCardEntryControl.h in Headers */ = {isa = PBXBuildFile; fileRef = 747A1FD61770F7670028E11E /* SIMCreditCardEntryControl.h */; };
@@ -844,14 +845,15 @@
 				4DDB65451762440800871923 /* Simplify.h in Headers */,
 				4D98BC9F17625D88004FA922 /* SimplifyPrivate.h in Headers */,
 				AA19FB86BEFE4D50126D6637 /* SIMCreditCardToken.h in Headers */,
+				4D49D8721767C5840046E638 /* SIMGradientView.h in Headers */,
+				4D49D8761767C5840046E638 /* SIMHighlightView.h in Headers */,
+				4D49D87A1767C5840046E638 /* SIMLayeredButton.h in Headers */,
+				5ED6ED8217F8580A0062FB2F /* UIColor+Additions.h in Headers */,
 				AA19FD78283E47D046D04B5B /* SIMCreditCardEntryViewController.h in Headers */,
 				AA19F415D0E73EE37A9E902B /* SIMCreditCardType.h in Headers */,
 				4D49D83717676D9F0046E638 /* SIMCurrentTimeProvider.h in Headers */,
 				4D67095017662A4400729623 /* NSString+Simplify.h in Headers */,
 				AA19F52917C58865A4340EAF /* SIMCreditCardNetwork.h in Headers */,
-				4D49D8721767C5840046E638 /* SIMGradientView.h in Headers */,
-				4D49D8761767C5840046E638 /* SIMHighlightView.h in Headers */,
-				4D49D87A1767C5840046E638 /* SIMLayeredButton.h in Headers */,
 				4D49D8801767C82A0046E638 /* SIMShapeView.h in Headers */,
 				4DE8866A17692DF200E60C81 /* SIMTextField.h in Headers */,
 				AA19F76C6B76753E05696437 /* SIMCreditCardEntryModel.h in Headers */,

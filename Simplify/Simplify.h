@@ -31,3 +31,8 @@
 
 #import <Simplify/SIMCreditCardToken.h>
 #import <Simplify/SIMCreditCardEntryViewController.h>
+#import <Simplify/SIMLayeredButton.h>
+#import <Simplify/SIMCreditCardTokenInformationView.h>
+#import <Simplify/SIMGradientView.h>
+#import <Simplify/SIMHighlightView.h>
+#import <Simplify/UIColor+Additions.h>
