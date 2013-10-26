@@ -41,6 +41,26 @@ to obtain a `SIMCreditCardToken`.  This token must be used in conjunction with o
 solutions documented on the [Simplify website](https://www.simplify.com/commerce/docs) to create
 and process a transaction.
 
+Here is a way to submit the token using POST to your server from the app.
+
+```ios
+  NSString *token = creditCardToken.token;
+        NSLog(@"Token: %@", token);
+        NSURL *url= [NSURL URLWithString:@"https://Your_server/charge.rb"];
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+                                                               cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                           timeoutInterval:10.0];
+        [request setHTTPMethod:@"POST"];
+        NSString *postString = @"simplifyToken=";
+        postString = [postString stringByAppendingString:token];
+        
+        [request setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+        NSURLConnection *connection= [[NSURLConnection alloc] initWithRequest:request
+                                                                     delegate:self];
+
+
+```
+
 For example, in ruby, this token might be used server-side in the following manner:
 
 ```ruby
